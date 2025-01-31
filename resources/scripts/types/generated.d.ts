@@ -1,3 +1,9 @@
+declare namespace Data.Item {
+export type ItemData = {
+name: string;
+slug: string;
+};
+}
 declare namespace Data.Shared {
 export type NotificationData = {
 type: Enums.NotificationType;
