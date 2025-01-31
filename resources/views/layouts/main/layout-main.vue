@@ -1,4 +1,5 @@
-<script lang="ts"></script>
+<script lang="ts">
+</script>
 
 <template>
     <div class="mx-auto w-[600px]">
@@ -11,6 +12,10 @@
         </div>
 
         <div class="bg-[url('@/img/assets/background2.jpg')] px-10">
+            <Link href="/">Home</Link>
+
+            <Link :href="route('listings.index')">Listings</Link>
+
             <slot />
         </div>
 
