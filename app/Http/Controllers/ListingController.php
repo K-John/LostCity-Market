@@ -9,6 +9,7 @@ class ListingController
 {
     public function index()
     {
+        return inertia('listings/index/page');
     }
 
     public function create()
