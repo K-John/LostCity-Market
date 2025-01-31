@@ -11,7 +11,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        config(['inertia.testing.page_paths' => [resource_path('views/pages')]]);
     }
 
     /**
