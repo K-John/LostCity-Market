@@ -26,6 +26,14 @@ class ItemSeeder extends Seeder
             ];
         }, $lines);
 
+        // Filter out items where slug contains "cert"
+        $items = array_filter($items, function ($item) {
+            return strpos($item['slug'], 'cert') === false;
+        });
+
+        // Re-index the array to prevent gaps
+        $items = array_values($items);
+
         // Find any items in $items array that have a matching id, slug, or name
         DB::table('items')->insert($items);
     }
