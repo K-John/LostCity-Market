@@ -13,5 +13,6 @@ email: string;
 };
 }
 declare namespace Enums {
+export type ListingType = 'buy' | 'sell';
 export type NotificationType = 'success' | 'error' | 'warning' | 'info' | 'default';
 }
