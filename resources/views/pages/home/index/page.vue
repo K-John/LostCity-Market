@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import VueSelect from "vue-select";
 import _ from "lodash";
+import 'vue-select/dist/vue-select.css';
 
-// selected type of item
 const selected = ref<Data.Item.ItemData | null>(null);
 const options = ref<Data.Item.ItemData[]>([]);
 const loading = ref(false);
@@ -21,15 +21,14 @@ const search = _.debounce((search: string, loading: (state: boolean) => void) =>
             loading(false);
             options.value = data;
         });
-}, 100);
+}, 200);
 
 watch(selected, (value) => {
     if (value) {
         loading.value = true;
-        window.location.href = route("items.show", { item: value.slug });
+        router.get(route("items.show", { item: value.slug }));
     }
 });
-
 </script>
 
 <template>
@@ -40,6 +39,7 @@ watch(selected, (value) => {
                 :options="options"
                 label="name"
                 :filterable="false"
+                class="bg-white text-black"
                 @search="onSearch"
             >
             </VueSelect>
