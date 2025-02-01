@@ -2,8 +2,10 @@
 import VueSelect from "vue-select";
 import _ from "lodash";
 
-const selected = ref(null);
-const options = ref([]);
+// selected type of item
+const selected = ref<Data.Item.ItemData | null>(null);
+const options = ref<Data.Item.ItemData[]>([]);
+const loading = ref(false);
 
 const onSearch = (searchTerm: string, loading: (state: boolean) => void) => {
     if (searchTerm.length > 2) {
@@ -20,6 +22,14 @@ const search = _.debounce((search: string, loading: (state: boolean) => void) =>
             options.value = data;
         });
 }, 100);
+
+watch(selected, (value) => {
+    if (value) {
+        loading.value = true;
+        window.location.href = route("items.show", { item: value.slug });
+    }
+});
+
 </script>
 
 <template>
@@ -34,5 +44,7 @@ const search = _.debounce((search: string, loading: (state: boolean) => void) =>
             >
             </VueSelect>
         </div>
+        
+        <span v-if="loading">Loading...</span>
     </LayoutMain>
 </template>
