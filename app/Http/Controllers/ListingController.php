@@ -22,7 +22,7 @@ class ListingController
 
         Listing::create($listingData);
 
-        return to_route('items.show', $data->item->slug)->with('success', 'Listing created successfully.');
+        return to_route('items.show', $data->item->slug)->success('The listing has been created');
     }
 
     public function show(Listing $listing) {}
