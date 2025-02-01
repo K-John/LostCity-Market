@@ -9,7 +9,10 @@ const form = useForm({
 
 const submit = () => {
     form.post(route("listings.store"), {
-        onFinish: () => form.reset(),
+        preserveScroll: true,
+        onSuccess: () => {
+            form.reset();
+        },
     });
 };
 </script>
