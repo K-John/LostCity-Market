@@ -1,5 +1,6 @@
 declare namespace Data.Item {
 export type ItemData = {
+id: number;
 name: string;
 slug: string;
 };
@@ -21,4 +22,10 @@ email: string;
 declare namespace Enums {
 export type ListingType = 'buy' | 'sell';
 export type NotificationType = 'success' | 'error' | 'warning' | 'info' | 'default';
+}
+declare namespace Pages.Items {
+export type ItemsShowPage = {
+item: Data.Item.ItemData;
+listingForm: any;
+};
 }
