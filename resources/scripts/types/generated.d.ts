@@ -5,6 +5,17 @@ name: string;
 slug: string;
 };
 }
+declare namespace Data.Listing {
+export type ListingFormData = {
+id: number | null;
+type: Enums.ListingType;
+price: string;
+quantity: number | null;
+notes: string | null;
+username: string;
+item: Data.Item.ItemData;
+};
+}
 declare namespace Data.Shared {
 export type NotificationData = {
 type: Enums.NotificationType;
@@ -26,6 +37,6 @@ export type NotificationType = 'success' | 'error' | 'warning' | 'info' | 'defau
 declare namespace Pages.Items {
 export type ItemsShowPage = {
 item: Data.Item.ItemData;
-listingForm: any;
+listingForm: Data.Listing.ListingFormData;
 };
 }

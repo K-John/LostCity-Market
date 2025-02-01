@@ -14,7 +14,8 @@ return new class extends Migration
             $table->integer('price');
             $table->integer('quantity');
             $table->uuid('token');
-            $table->string('notes');
+            $table->string('username');
+            $table->string('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

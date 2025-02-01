@@ -30,17 +30,20 @@ class ItemController
 
     public function store(Request $request) {}
 
-    public function show(Item $item) {
-        
+    public function show(Item $item) 
+    {
+        $itemData = ItemData::from($item);
+
         return inertia('items/show/page', new ItemsShowPage(
-            item: ItemData::from($item),
+            item: $itemData,
             listingForm: new ListingFormData(
                 id: null,
                 type: ListingType::Buy,
                 price: '',
-                quantity: 1,
+                quantity: null,
                 notes: '',
-                item_id: $item->id,
+                username: '',
+                item: $itemData,
             ),
         ));
     }

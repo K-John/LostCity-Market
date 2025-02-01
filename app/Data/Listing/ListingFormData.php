@@ -2,18 +2,20 @@
 
 namespace App\Data\Listing;
 
-use App\Models\Item;
+use App\Data\Item\ItemData;
 use App\Enums\ListingType;
+use Spatie\LaravelData\Data;
 
-class ListingFormData
+class ListingFormData extends Data
 {
     public function __construct(
         public ?int $id,
         public ListingType $type,
         public string $price,
-        public int $quantity,
-        public string $notes,
-        public int $item_id,
+        public ?int $quantity,
+        public ?string $notes,
+        public string $username,
+        public ItemData $item,
     ) {
     }
 
@@ -23,8 +25,9 @@ class ListingFormData
             'type' => ['required', 'string', 'in:buy,sell'],
             'price' => ['required', 'integer', 'min:1'],
             'quantity' => ['required', 'integer', 'min:1'],
+            'username' => ['required', 'string'],
             'notes' => ['nullable', 'string'],
-            'item_id' => ['required', 'integer', 'exists:items,id'],
+            'item.id' => ['required', 'integer', 'exists:items,id'],
         ];
     }
 }
