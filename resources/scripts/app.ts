@@ -7,7 +7,6 @@ import { trail } from "momentum-trail"
 import Toast from "vue-toastification"
 import { notifications } from "./plugins/notifications"
 import routes from "./routes/routes.json"
-import vSelect from "vue-select"
 
 const appName = window.document.getElementsByTagName("title")[0]?.innerText || "Lost City Market"
 
