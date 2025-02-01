@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Data\Item\ItemData;
+use App\Pages\Items\ItemsShowPage;
 use App\Models\Item;
+use App\Data\Listing\ListingFormData;
+use App\Enums\ListingType;
 use Illuminate\Http\Request;
 
 class ItemController
@@ -27,7 +30,20 @@ class ItemController
 
     public function store(Request $request) {}
 
-    public function show(Item $item) {}
+    public function show(Item $item) {
+        
+        return inertia('items/show/page', new ItemsShowPage(
+            item: ItemData::from($item),
+            listingForm: new ListingFormData(
+                id: null,
+                type: ListingType::Buy,
+                price: '',
+                quantity: 1,
+                notes: '',
+                item_id: $item->id,
+            ),
+        ));
+    }
 
     public function edit(Item $item) {}
 
