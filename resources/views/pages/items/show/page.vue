@@ -98,6 +98,37 @@ const submit = () => {
                     </button>
                 </div>
             </form>
+
+            <div class="flex flex-col gap-4">
+                <h2 class="font-bold">Listings</h2>
+
+                <div class="flex flex-col gap-2">
+                    <div
+                        v-for="listing in listings"
+                        :key="listing.id"
+                        class="flex items-center gap-2"
+                    >
+                        <p>
+                            {{ listing.username }}
+                        </p>
+
+                        <p>
+                            {{
+                                listing.type.charAt(0).toUpperCase() +
+                                listing.type.slice(1)
+                            }}
+                        </p>
+
+                        <p>
+                            {{ listing.quantity }}
+                        </p>
+
+                        <p>
+                            {{ listing.price }}
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </LayoutMain>
 </template>
