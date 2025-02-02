@@ -50,6 +50,7 @@
         "@vue/server-renderer": "^3.4.5",
         "@vueuse/core": "^10.7.1",
         "dayjs": "^1.11.10",
+        "floating-vue": "^5.2.2",
         "lodash": "^4.17.21",
         "momentum-lock": "^0.1.2",
         "momentum-paginator": "^1.0.7",

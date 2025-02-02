@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Data\Listing\ListingData;
-use App\Models\Item;
 use App\Models\Listing;
 use App\Pages\HomeIndexPage;
 use Illuminate\Http\Request;

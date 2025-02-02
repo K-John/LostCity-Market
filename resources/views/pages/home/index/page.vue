@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import VueSelect from "vue-select";
-import _ from "lodash";
 import "vue-select/dist/vue-select.css";
+import { Tooltip } from "floating-vue";
+import "floating-vue/dist/style.css";
+import _ from "lodash";
 
 const props = defineProps<Pages.HomeIndexPage>();
 
@@ -73,28 +75,70 @@ watch(selected, (value) => {
                 <tbody>
                     <tr v-for="listing in listings.data" :key="listing.id">
                         <td>
-                            <img
-                                v-if="listing.item"
-                                :src="`/img/items/${listing.item.slug}.png`"
-                                :alt="`${listing.item.name} Icon`"
-                                width="32"
-                                height="32"
-                            />
+                            <Tooltip>
+                                <Link
+                                    v-if="listing.item"
+                                    :href="
+                                        route('items.show', {
+                                            item: listing.item.slug,
+                                        })
+                                    "
+                                >
+                                    <img
+                                        :src="`/img/items/${listing.item.slug}.png`"
+                                        :alt="`${listing.item.name} Icon`"
+                                        width="32"
+                                        height="32"
+                                    />
+                                </Link>
+
+                                <template #popper>
+                                    {{
+                                        listing.item
+                                            ? listing.item.name
+                                            : "Unknown Item"
+                                    }}
+                                </template>
+                            </Tooltip>
                         </td>
 
                         <td>
-                            <span :class="listing.type === 'buy' ? 'text-red-500' : 'text-green-500'" class="font-bold">
+                            <span
+                                :class="
+                                    listing.type === 'buy'
+                                        ? 'text-red-500'
+                                        : 'text-green-500'
+                                "
+                                class="font-bold"
+                            >
                                 [{{ listing.type.charAt(0).toUpperCase() }}]
                             </span>
-                             {{ listing.quantity }} for {{ listing.price }}GP ea.
+                            {{ listing.quantity.toLocaleString() }} for {{ listing.price.toLocaleString() }}GP ea.
                         </td>
 
                         <td class="text-stone-400">
-                            {{ listing.username.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ') }}
+                            {{
+                                listing.username
+                                    .split(" ")
+                                    .map(
+                                        (word) =>
+                                            word.charAt(0).toUpperCase() +
+                                            word.slice(1).toLowerCase(),
+                                    )
+                                    .join(" ")
+                            }}
                         </td>
 
                         <td>
-                            {{ fromNow(listing.createdAt) }}
+                            <Tooltip>
+                                <p>{{ fromNow(listing.createdAt) }}</p>
+
+                                <template #popper>
+                                    {{
+                                        formatTime(listing.createdAt)
+                                    }}
+                                </template>
+                            </Tooltip>
                         </td>
 
                         <td>
