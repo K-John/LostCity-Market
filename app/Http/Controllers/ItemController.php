@@ -37,7 +37,11 @@ class ItemController
     {
         $itemData = ItemData::from($item);
 
-        $listings = $item->listings()->latest()->paginate(1);
+        $listings = $item->listings()
+            ->whereNull('deleted_at')
+            ->where('updated_at', '>=', now()->subDays(2))
+            ->latest()
+            ->paginate(1);
 
         return inertia('items/show/page', new ItemsShowPage(
             item: $itemData,
