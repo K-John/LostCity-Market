@@ -12,7 +12,7 @@ class ListingData extends Data
     public function __construct(
         public int $id,
         public ListingType $type,
-        public string $price,
+        public int $price,
         public int $quantity,
         public ?string $notes,
         public string $username,

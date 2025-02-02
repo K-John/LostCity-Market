@@ -9,7 +9,7 @@ declare namespace Data.Listing {
 export type ListingData = {
 id: number;
 type: Enums.ListingType;
-price: string;
+price: number;
 quantity: number;
 notes: string | null;
 username: string;
