@@ -41,6 +41,12 @@ const submit = () => {
             >
                 <h2 class="font-bold">Post a Listing</h2>
 
+                <div class="text-red-500">
+                    <p v-for="error in form.errors" :key="error">
+                        {{ error }}
+                    </p>
+                </div>
+
                 <div class="flex flex-col gap-3">
                     <div class="flex items-center gap-2">
                         <p>I want to</p>
