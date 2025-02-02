@@ -110,7 +110,7 @@ const submit = () => {
 
                 <div class="flex flex-col gap-2">
                     <div
-                        v-for="listing in listings"
+                        v-for="listing in listings.data"
                         :key="listing.id"
                         class="flex items-center gap-2"
                     >
@@ -135,6 +135,8 @@ const submit = () => {
                     </div>
                 </div>
             </div>
+
+            <Pagination :data="listings" />
         </div>
     </LayoutMain>
 </template>

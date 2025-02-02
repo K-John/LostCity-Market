@@ -9,5 +9,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     LayoutMain: typeof import('@/views/layouts/main/layout-main.vue')['default']
     Link: typeof import('@inertiajs/vue3')['Link']
+    Pagination: typeof import('./../../views/components/pagination.vue')['default']
   }
 }

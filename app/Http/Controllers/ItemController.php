@@ -9,7 +9,7 @@ use App\Models\Item;
 use App\Data\Listing\ListingFormData;
 use App\Enums\ListingType;
 use Illuminate\Http\Request;
-use Spatie\LaravelData\DataCollection;
+use Spatie\LaravelData\PaginatedDataCollection;
 
 class ItemController
 {
@@ -37,6 +37,8 @@ class ItemController
     {
         $itemData = ItemData::from($item);
 
+        $listings = $item->listings()->latest()->paginate(1);
+
         return inertia('items/show/page', new ItemsShowPage(
             item: $itemData,
             listingForm: new ListingFormData(
@@ -48,7 +50,7 @@ class ItemController
                 username: '',
                 item: $itemData,
             ),
-            listings: ListingData::collect($item->listings, DataCollection::class),
+            listings: ListingData::collect($listings, PaginatedDataCollection::class),
         ));
     }
 

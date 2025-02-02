@@ -13,7 +13,7 @@ price: string;
 quantity: number;
 notes: string | null;
 username: string;
-item: Data.Item.ItemData;
+item: Data.Item.ItemData | null;
 createdAt: string;
 };
 export type ListingFormData = {
@@ -48,6 +48,6 @@ declare namespace Pages.Items {
 export type ItemsShowPage = {
 item: Data.Item.ItemData;
 listingForm: Data.Listing.ListingFormData;
-listings: Array<any>;
+listings: {data:Array<Data.Listing.ListingData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
 };
 }
