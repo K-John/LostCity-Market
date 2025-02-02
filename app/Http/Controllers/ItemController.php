@@ -20,6 +20,7 @@ class ItemController
         }
 
         $items = Item::where('name', 'LIKE', "%{$search}%")
+            ->orderByRaw('CHAR_LENGTH(name)')
             ->take(5)
             ->get();
 
