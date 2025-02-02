@@ -29,10 +29,6 @@ class ItemController
         return response()->json(ItemData::collect($items));
     }
 
-    public function create() {}
-
-    public function store(Request $request) {}
-
     public function show(Item $item) 
     {
         $itemData = ItemData::from($item);
@@ -57,10 +53,4 @@ class ItemController
             listings: ListingData::collect($listings, PaginatedDataCollection::class),
         ));
     }
-
-    public function edit(Item $item) {}
-
-    public function update(Request $request, Item $item) {}
-
-    public function destroy(Item $item) {}
 }
