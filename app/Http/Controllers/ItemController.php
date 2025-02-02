@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Data\Item\ItemData;
 use App\Data\Listing\ListingData;
-use App\Pages\Items\ItemsShowPage;
+use App\Pages\ItemsShowPage;
 use App\Models\Item;
 use App\Data\Listing\ListingFormData;
 use App\Enums\ListingType;
@@ -41,7 +41,7 @@ class ItemController
             ->whereNull('deleted_at')
             ->where('updated_at', '>=', now()->subDays(2))
             ->latest()
-            ->paginate(1);
+            ->paginate(20);
 
         return inertia('items/show/page', new ItemsShowPage(
             item: $itemData,

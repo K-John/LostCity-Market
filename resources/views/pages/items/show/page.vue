@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const props = defineProps<Pages.Items.ItemsShowPage>();
+const props = defineProps<Pages.ItemsShowPage>();
 
 const listingTypes = computed((): Enums.ListingType[] => ["buy", "sell"]);
 
