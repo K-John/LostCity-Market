@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Data\Listing\ListingData;
+use App\Models\Item;
 use App\Models\Listing;
 use App\Pages\HomeIndexPage;
 use Illuminate\Http\Request;
@@ -12,7 +13,8 @@ class HomeController
 {
     public function __invoke()
     {
-        $listings = Listing::whereNull('deleted_at')
+        $listings = Listing::with('item')
+            ->whereNull('deleted_at')
             ->where('updated_at', '>=', now()->subDays(2))
             ->latest()
             ->paginate(20);
