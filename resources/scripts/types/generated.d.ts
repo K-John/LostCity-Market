@@ -6,6 +6,16 @@ slug: string;
 };
 }
 declare namespace Data.Listing {
+export type ListingData = {
+id: number;
+type: Enums.ListingType;
+price: string;
+quantity: number;
+notes: string | null;
+username: string;
+item: Data.Item.ItemData;
+createdAt: string;
+};
 export type ListingFormData = {
 id: number | null;
 type: Enums.ListingType;
@@ -38,5 +48,6 @@ declare namespace Pages.Items {
 export type ItemsShowPage = {
 item: Data.Item.ItemData;
 listingForm: Data.Listing.ListingFormData;
+listings: Array<any>;
 };
 }

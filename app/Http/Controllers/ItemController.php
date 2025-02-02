@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Data\Item\ItemData;
+use App\Data\Listing\ListingData;
 use App\Pages\Items\ItemsShowPage;
 use App\Models\Item;
 use App\Data\Listing\ListingFormData;
 use App\Enums\ListingType;
 use Illuminate\Http\Request;
+use Spatie\LaravelData\DataCollection;
 
 class ItemController
 {
@@ -46,6 +48,7 @@ class ItemController
                 username: '',
                 item: $itemData,
             ),
+            listings: ListingData::collect($item->listings, DataCollection::class),
         ));
     }
 
