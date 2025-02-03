@@ -5,33 +5,15 @@ import _ from "lodash";
 
 const props = defineProps<Pages.ListingsCreatePage>();
 
-const selected = ref<Data.Item.ItemData | null>(null);
-const options = ref<Data.Item.ItemData[]>([]);
-
-const onSearch = (searchTerm: string, loading: (state: boolean) => void) => {
-    if (searchTerm.length > 2) {
-        loading(true);
-        search(searchTerm, loading);
-    }
-};
-
-const search = _.debounce(
-    (search: string, loading: (state: boolean) => void) => {
-        fetch(`${route("items.index")}?q=${search}`)
-            .then((response) => response.json())
-            .then((data) => {
-                loading(false);
-                options.value = data;
-            });
-    },
-    200,
-);
-
 const listingTypes = computed((): Enums.ListingType[] => ["buy", "sell"]);
 
 const form = useForm({
     ...props.listingForm,
 });
+
+const setItem = (item: Data.Item.ItemData) => {
+    form.item = item;
+};
 
 const submit = () => {
     form.post(route("listings.store"), {
@@ -63,15 +45,7 @@ const submit = () => {
             <div>
                 <p>Search for an item:</p>
 
-                <VueSelect
-                    v-model="form.item"
-                    :options="options"
-                    label="name"
-                    :filterable="false"
-                    class="grow bg-white text-black"
-                    @search="onSearch"
-                >
-                </VueSelect>
+                <ItemSelect @item-selected="setItem" />
             </div>
 
             <div class="flex flex-col gap-3">
