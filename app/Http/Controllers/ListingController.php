@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Data\Item\ItemData;
 use App\Data\Listing\ListingData;
 use App\Data\Listing\ListingFormData;
+use App\Data\Token\TokenFormData;
 use App\Models\Listing;
 use App\Pages\ListingsEditPage;
 use App\Pages\ListingsIndexPage;
@@ -30,15 +31,14 @@ class ListingController
                 ->orderBy('updated_at', 'desc')
                 ->paginate(20);
 
-        $maskedToken = $token ? substr($token, 0, 4) . str_repeat('*', strlen($token) - 8) . substr($token, -4) : null;
+        $maskedToken = $token ? substr($token, 0, 4) . str_repeat('*', strlen($token) - 8) . substr($token, -4) : "";
 
         return inertia('listings/index/page', new ListingsIndexPage(
             listings: ListingData::collect($listings, PaginatedDataCollection::class),
-            token: $maskedToken
+            token: $maskedToken,
+            tokenForm: new TokenFormData(token: ''),
         ));
     }
-
-    public function create() {}
 
     public function store(ListingFormData $data)
     {

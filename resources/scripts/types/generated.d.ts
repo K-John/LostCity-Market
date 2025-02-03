@@ -40,6 +40,11 @@ name: string;
 email: string;
 };
 }
+declare namespace Data.Token {
+export type TokenFormData = {
+token: string;
+};
+}
 declare namespace Enums {
 export type ListingType = 'buy' | 'sell';
 export type NotificationType = 'success' | 'error' | 'warning' | 'info' | 'default';
@@ -59,5 +64,6 @@ listingForm: Data.Listing.ListingFormData;
 export type ListingsIndexPage = {
 listings: {data:Array<Data.Listing.ListingData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
 token: string;
+tokenForm: Data.Token.TokenFormData;
 };
 }
