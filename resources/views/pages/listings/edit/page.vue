@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Head } from '@inertiajs/vue3';
 const props = defineProps<Pages.ListingsEditPage>();
 
 const listingTypes = computed((): Enums.ListingType[] => ["buy", "sell"]);
@@ -19,6 +20,8 @@ const submit = () => {
 
 <template>
     <LayoutMain>
+        <Head title="Update Listing" />
+
         <form
             class="flex flex-col gap-4 border-2 border-[#382418] bg-black p-3"
             @submit.prevent="submit"

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Head } from "@inertiajs/vue3";
 import VueSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 import _ from "lodash";
@@ -27,6 +28,8 @@ const submit = () => {
 
 <template>
     <LayoutMain>
+        <Head title="Create Listing" />
+
         <form
             class="flex flex-col gap-4 border-2 border-[#382418] bg-black p-3"
             @submit.prevent="submit"

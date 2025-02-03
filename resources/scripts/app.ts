@@ -8,10 +8,10 @@ import Toast from "vue-toastification"
 import { notifications } from "./plugins/notifications"
 import routes from "./routes/routes.json"
 
-const appName = window.document.getElementsByTagName("title")[0]?.innerText || "Lost City Market"
+const appName = "Lost City Markets"
 
 createInertiaApp({
-  title: (title: string) => (title ? `${appName} — ${title}` : `${appName}`),
+  title: (title: string) => (title ? `${title} — ${appName}` : `${appName}`),
   resolve: (name: string) => {
     return resolvePageComponent(
       `../views/pages/${name}.vue`,

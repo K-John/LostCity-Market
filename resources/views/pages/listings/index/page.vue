@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { router } from "@inertiajs/vue3";
+import { router, Head } from "@inertiajs/vue3";
 import { Tooltip } from "floating-vue";
 import "floating-vue/dist/style.css";
 import {
@@ -31,6 +31,8 @@ const destroy = (id: number) => {
 
 <template>
     <LayoutMain>
+        <Head title="My Listings" />
+
         <div
             v-if="!props.token"
             class="mb-4 flex flex-col gap-4 border-2 border-amber-800 bg-amber-950 p-3"

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Head } from "@inertiajs/vue3";
 import { Tooltip } from "floating-vue";
 import "floating-vue/dist/style.css";
 import {
@@ -32,6 +33,8 @@ const destroy = (id: number) => {
 
 <template>
     <LayoutMain>
+        <Head :title="item.name" />
+
         <ItemSearch />
 
         <div class="flex flex-col gap-6">
