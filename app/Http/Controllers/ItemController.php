@@ -11,9 +11,12 @@ use App\Enums\ListingType;
 use Illuminate\Http\Request;
 use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\PaginatedDataCollection;
+use App\Http\Traits\HandlesListingType;
 
 class ItemController
 {
+    use HandlesListingType;
+    
     public function index(Request $request)
     {
         $search = $request->query('q');
@@ -30,15 +33,18 @@ class ItemController
         return response()->json(ItemData::collect($items));
     }
 
-    public function show(Item $item) 
+    public function show(Request $request, Item $item) 
     {
+        $listingType = $this->getListingType($request);
+
         $itemData = ItemData::from($item);
 
         $listings = $item->listings()
             ->whereNull('deleted_at')
+            ->where('type', $listingType)
             ->where('updated_at', '>=', now()->subDays(2))
             ->orderBy('updated_at', 'desc')
-            ->paginate(20);
+        ->paginate(20);
 
         $deletedListings = $item->listings()
             ->whereNotNull('deleted_at')
@@ -47,6 +53,7 @@ class ItemController
             ->get();
 
         return inertia('items/show/page', new ItemsShowPage(
+            listingType: $listingType,
             item: $itemData,
             listingForm: new ListingFormData(
                 id: null,

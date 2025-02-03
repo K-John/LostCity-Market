@@ -98,6 +98,12 @@ const destroy = (id: number) => {
 
             <table class="border-separate border-spacing-2">
                 <tbody>
+                    <tr v-if="!listings.data.length">
+                        <td class="text-center" colspan="4">
+                            No listings found.
+                        </td>
+                    </tr>
+
                     <tr v-for="listing in listings.data" :key="listing.id">
                         <td>
                             <Tooltip>
@@ -181,7 +187,7 @@ const destroy = (id: number) => {
                 </tbody>
             </table>
 
-            <div class="px-3">
+            <div v-if="listings.data.length" class="px-3">
                 <Pagination class="mt-0" :data="listings" />
             </div>
         </div>

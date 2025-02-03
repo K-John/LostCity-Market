@@ -54,9 +54,11 @@ export type NotificationType = 'success' | 'error' | 'warning' | 'info' | 'defau
 }
 declare namespace Pages {
 export type HomeIndexPage = {
+listingType: Enums.ListingType;
 listings: {data:Array<Data.Listing.ListingData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
 };
 export type ItemsShowPage = {
+listingType: Enums.ListingType;
 item: Data.Item.ItemData;
 listingForm: Data.Listing.ListingFormData;
 listings: {data:Array<Data.Listing.ListingData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};

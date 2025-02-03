@@ -10,6 +10,7 @@ import {
 } from "@heroicons/vue/24/outline/index.js";
 
 const props = defineProps<Pages.HomeIndexPage>();
+const listingTypes = computed((): Enums.ListingType[] => ["buy", "sell"]);
 
 const selected = ref<Data.Item.ItemData | null>(null);
 const options = ref<Data.Item.ItemData[]>([]);
@@ -52,13 +53,41 @@ const destroy = (id: number) => {
     <LayoutMain>
         <ItemSearch />
 
-        <div class="flex flex-col gap-2 border-2 border-[#382418] bg-black">
-            <div class="px-3 pt-3">
-                <h2 class="text-lg font-bold">Recent Listings:</h2>
-            </div>
+        <div class="relative z-10 mb-[-2px] flex flex-row">
+            <Link
+                :href="route('home', { type: listingTypes[0] })"
+                preserve-scroll
+                class="px-4 py-3 font-bold"
+                :class="{
+                    'border-2 border-b-0 border-[#382418] bg-black':
+                        props.listingType === listingTypes[0],
+                }"
+            >
+                Buy Listings
+            </Link>
 
+            <Link
+                :href="route('home', { type: listingTypes[1] })"
+                preserve-scroll
+                class="px-4 py-3 font-bold"
+                :class="{
+                    'border-2 border-b-0 border-[#382418] bg-black':
+                        props.listingType === listingTypes[1],
+                }"
+            >
+                Sell Listings
+            </Link>
+        </div>
+
+        <div class="flex flex-col border-2 border-[#382418] bg-black">
             <table class="border-separate border-spacing-2">
                 <tbody>
+                    <tr v-if="!listings.data.length">
+                        <td class="text-center" colspan="4">
+                            No listings found.
+                        </td>
+                    </tr>
+
                     <tr v-for="listing in listings.data" :key="listing.id">
                         <td>
                             <Tooltip>
@@ -127,7 +156,10 @@ const destroy = (id: number) => {
                         </td>
 
                         <td class="max-w-[110px]">
-                            <div v-if="listing.canManage" class="flex flex-nowrap justify-end gap-1">
+                            <div
+                                v-if="listing.canManage"
+                                class="flex flex-nowrap justify-end gap-1"
+                            >
                                 <Link
                                     :href="route('listings.edit', { listing })"
                                     class="w-fit rounded-md bg-amber-300 px-2 py-1 text-amber-900 hover:bg-amber-400"
@@ -146,7 +178,7 @@ const destroy = (id: number) => {
                             <template v-else>
                                 <Tooltip>
                                     <p class="truncate">{{ listing.notes }}</p>
-                                    
+
                                     <template #popper>
                                         {{ listing.notes }}
                                     </template>
@@ -157,8 +189,8 @@ const destroy = (id: number) => {
                 </tbody>
             </table>
 
-            <div class="px-3">
-                <Pagination class="mt-0" :data="listings" />
+            <div v-if="listings.data.length" class="px-3">
+                <Pagination :data="listings" />
             </div>
         </div>
     </LayoutMain>

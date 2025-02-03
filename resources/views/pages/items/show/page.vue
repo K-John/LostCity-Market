@@ -33,7 +33,7 @@ const destroy = (id: number) => {
 <template>
     <LayoutMain>
         <ItemSearch />
-        
+
         <div class="flex flex-col gap-6">
             <div class="flex gap-4">
                 <div class="h-fit border-2 border-[#382418] bg-black p-1">
@@ -57,7 +57,11 @@ const destroy = (id: number) => {
                             <u>Gen. Store:</u>
 
                             <p>
-                                ~{{ Math.floor(item.cost * 0.4).toLocaleString() }}GP
+                                ~{{
+                                    Math.floor(
+                                        item.cost * 0.4,
+                                    ).toLocaleString()
+                                }}GP
                             </p>
                         </div>
 
@@ -65,7 +69,11 @@ const destroy = (id: number) => {
                             <u>High Alch:</u>
 
                             <p>
-                                {{ Math.floor(item.cost * 0.6).toLocaleString() }}GP
+                                {{
+                                    Math.floor(
+                                        item.cost * 0.6,
+                                    ).toLocaleString()
+                                }}GP
                             </p>
                         </div>
 
@@ -73,9 +81,153 @@ const destroy = (id: number) => {
                             <u>Low Alch:</u>
 
                             <p>
-                                {{ Math.floor(item.cost * 0.4).toLocaleString() }}GP
+                                {{
+                                    Math.floor(
+                                        item.cost * 0.4,
+                                    ).toLocaleString()
+                                }}GP
                             </p>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="relative z-10 mb-[-2px] flex flex-row">
+                    <Link
+                        :href="
+                            route('items.show', {
+                                item: item,
+                                type: listingTypes[0],
+                            })
+                        "
+                        preserve-scroll
+                        class="px-4 py-3 font-bold"
+                        :class="{
+                            'border-2 border-b-0 border-[#382418] bg-black':
+                                props.listingType === listingTypes[0],
+                        }"
+                    >
+                        Buy Listings
+                    </Link>
+
+                    <Link
+                        :href="
+                            route('items.show', {
+                                item: item,
+                                type: listingTypes[1],
+                            })
+                        "
+                        preserve-scroll
+                        class="px-4 py-3 font-bold"
+                        :class="{
+                            'border-2 border-b-0 border-[#382418] bg-black':
+                                props.listingType === listingTypes[1],
+                        }"
+                    >
+                        Sell Listings
+                    </Link>
+                </div>
+
+                <div class="flex flex-col border-2 border-[#382418] bg-black">
+                    <table class="border-separate border-spacing-2">
+                        <tbody>
+                            <tr v-if="!listings.data.length">
+                                <td class="text-center" colspan="4">
+                                    No listings found.
+                                </td>
+                            </tr>
+
+                            <tr
+                                v-for="listing in listings.data"
+                                :key="listing.id"
+                            >
+                                <td>
+                                    <span
+                                        :class="
+                                            listing.type === 'buy'
+                                                ? 'text-red-500'
+                                                : 'text-green-500'
+                                        "
+                                        class="font-bold"
+                                    >
+                                        [{{
+                                            listing.type
+                                                .charAt(0)
+                                                .toUpperCase()
+                                        }}]
+                                    </span>
+                                    {{ listing.quantity.toLocaleString() }} for
+                                    {{ listing.price.toLocaleString() }}GP ea.
+                                </td>
+
+                                <td class="text-stone-400">
+                                    {{
+                                        listing.username
+                                            .split(" ")
+                                            .map(
+                                                (word) =>
+                                                    word
+                                                        .charAt(0)
+                                                        .toUpperCase() +
+                                                    word.slice(1).toLowerCase(),
+                                            )
+                                            .join(" ")
+                                    }}
+                                </td>
+
+                                <td>
+                                    <Tooltip>
+                                        <p>{{ fromNow(listing.updatedAt) }}</p>
+
+                                        <template #popper>
+                                            {{ formatTime(listing.updatedAt) }}
+                                        </template>
+                                    </Tooltip>
+                                </td>
+
+                                <td class="max-w-[110px]">
+                                    <div
+                                        v-if="listing.canManage"
+                                        class="flex flex-nowrap justify-end gap-1"
+                                    >
+                                        <Link
+                                            :href="
+                                                route('listings.edit', {
+                                                    listing,
+                                                })
+                                            "
+                                            class="w-fit rounded-md bg-amber-300 px-2 py-1 text-amber-900 hover:bg-amber-400"
+                                        >
+                                            <PencilSquareIcon class="size-5" />
+                                        </Link>
+
+                                        <button
+                                            class="w-fit rounded-md bg-red-300 px-2 py-1 text-red-900 hover:bg-red-400"
+                                            @click="destroy(listing.id)"
+                                        >
+                                            <TrashIcon class="size-5" />
+                                        </button>
+                                    </div>
+
+                                    <template v-else>
+                                        <Tooltip>
+                                            <p class="truncate">
+                                                {{ listing.notes }}
+                                            </p>
+
+                                            <template #popper>
+                                                {{ listing.notes }}
+                                            </template>
+                                        </Tooltip>
+                                    </template>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div v-if="listings.data.length" class="px-3">
+                        <Pagination class="mt-0" :data="listings" />
                     </div>
                 </div>
             </div>
@@ -161,95 +313,6 @@ const destroy = (id: number) => {
                     </button>
                 </div>
             </form>
-
-            <div class="flex flex-col gap-2 border-2 border-[#382418] bg-black">
-                <div class="px-3 pt-3">
-                    <h2 class="text-lg font-bold">Current Listings:</h2>
-                </div>
-
-                <table class="border-separate border-spacing-2">
-                    <tbody>
-                        <tr v-for="listing in listings.data" :key="listing.id">
-                            <td>
-                                <span
-                                    :class="
-                                        listing.type === 'buy'
-                                            ? 'text-red-500'
-                                            : 'text-green-500'
-                                    "
-                                    class="font-bold"
-                                >
-                                    [{{ listing.type.charAt(0).toUpperCase() }}]
-                                </span>
-                                {{ listing.quantity.toLocaleString() }} for
-                                {{ listing.price.toLocaleString() }}GP ea.
-                            </td>
-
-                            <td class="text-stone-400">
-                                {{
-                                    listing.username
-                                        .split(" ")
-                                        .map(
-                                            (word) =>
-                                                word.charAt(0).toUpperCase() +
-                                                word.slice(1).toLowerCase(),
-                                        )
-                                        .join(" ")
-                                }}
-                            </td>
-
-                            <td>
-                                <Tooltip>
-                                    <p>{{ fromNow(listing.updatedAt) }}</p>
-
-                                    <template #popper>
-                                        {{ formatTime(listing.updatedAt) }}
-                                    </template>
-                                </Tooltip>
-                            </td>
-
-                            <td class="max-w-[110px]">
-                                <div
-                                    v-if="listing.canManage"
-                                    class="flex flex-nowrap justify-end gap-1"
-                                >
-                                    <Link
-                                        :href="
-                                            route('listings.edit', { listing })
-                                        "
-                                        class="w-fit rounded-md bg-amber-300 px-2 py-1 text-amber-900 hover:bg-amber-400"
-                                    >
-                                        <PencilSquareIcon class="size-5" />
-                                    </Link>
-
-                                    <button
-                                        class="w-fit rounded-md bg-red-300 px-2 py-1 text-red-900 hover:bg-red-400"
-                                        @click="destroy(listing.id)"
-                                    >
-                                        <TrashIcon class="size-5" />
-                                    </button>
-                                </div>
-
-                                <template v-else>
-                                    <Tooltip>
-                                        <p class="truncate">
-                                            {{ listing.notes }}
-                                        </p>
-
-                                        <template #popper>
-                                            {{ listing.notes }}
-                                        </template>
-                                    </Tooltip>
-                                </template>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="px-3">
-                    <Pagination class="mt-0" :data="listings" />
-                </div>
-            </div>
 
             <div class="flex flex-col gap-2 border-2 border-[#382418] bg-black">
                 <div class="px-3 pt-3">

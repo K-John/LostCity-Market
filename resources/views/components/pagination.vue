@@ -59,7 +59,7 @@ const filteredPages = computed(() => {
 <template>
     <nav
         v-if="props.data.data.length"
-        class="-mx-4 mt-4 flex items-center justify-between px-4 sm:mx-0 sm:px-0"
+        class="-mx-4 flex items-center justify-between px-4 sm:mx-0 sm:px-0"
     >
         <div class="group">
             <div
