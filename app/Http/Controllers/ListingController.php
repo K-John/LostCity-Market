@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\Item\ItemData;
 use App\Data\Listing\ListingData;
 use App\Data\Listing\ListingFormData;
 use App\Models\Listing;
+use App\Pages\ListingsEditPage;
 use App\Pages\ListingsIndexPage;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -14,6 +17,8 @@ use Spatie\LaravelData\PaginatedDataCollection;
 
 class ListingController
 {
+    use AuthorizesRequests;
+
     public function index()
     {
         $token = Session::get('listing_token');
@@ -38,11 +43,11 @@ class ListingController
     public function store(ListingFormData $data)
     {
         $key = Session::get('listing_token');
-        
+
         if (RateLimiter::tooManyAttempts($key, 1)) {
             throw new ThrottleRequestsException('Too many requests. Please wait a few seconds before submitting again.');
         }
-    
+
         // Allow only 1 attempt per 3 seconds
         RateLimiter::hit($key, 3);
 
@@ -56,9 +61,30 @@ class ListingController
 
     public function show(Listing $listing) {}
 
-    public function edit(Listing $listing) {}
+    public function edit(Listing $listing) 
+    {
+        return inertia('listings/edit/page', new ListingsEditPage(
+            listingForm: new ListingFormData(
+                id: $listing->id,
+                type: \App\Enums\ListingType::from($listing->type),
+                price: $listing->price,
+                quantity: $listing->quantity,
+                notes: $listing->notes,
+                username: $listing->username,
+                item: ItemData::from($listing->item),
+            ),
+        ));
+    }
 
-    public function update(Request $request, Listing $listing) {}
+    public function update(ListingFormData $data, Listing $listing) 
+    {
+        $this->authorize('update', $listing);
+
+        /** @var Listing $listing */
+        $listing->update($data->getListingData());
+
+        return to_route('listings.index')->success('The listing has been updated');
+    }
 
     public function destroy(Listing $listing) {}
 }

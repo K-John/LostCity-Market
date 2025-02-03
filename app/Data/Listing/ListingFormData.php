@@ -30,4 +30,9 @@ class ListingFormData extends Data
             'item.id' => ['required', 'integer', 'exists:items,id'],
         ];
     }
+
+    public function getListingData(): array
+    {
+        return $this->except('item', 'id')->toArray();
+    }
 }
