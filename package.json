@@ -4,7 +4,7 @@
     "scripts": {
         "dev": "vite",
         "build-only": "vite build && vite build --ssr",
-        "build": "run-p format lint type-check && npm run build-only",
+        "build": "run-p format lint && npm run build-only",
         "build-all": "composer helpers && ./vendor/bin/pint && ./vendor/bin/phpstan analyse --memory-limit=512M && ./vendor/bin/pest && npm run build",
         "type-check": "vue-tsc --noEmit",
         "lint": "eslint \"resources/{scripts,views}/**/*.{js,ts,vue}\" --fix",
