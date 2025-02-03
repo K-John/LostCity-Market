@@ -27,12 +27,12 @@ class ListingPolicy
 
     public function update(?User $user, Listing $listing): bool
     {
-        return $listing->token === session('listing_token');
+        return $listing->token === session('listing_token') && is_null($listing->deleted_at);
     }
 
     public function delete(?User $user, Listing $listing): bool
     {
-        return $listing->token === session('listing_token');
+        return $listing->token === session('listing_token') && is_null($listing->deleted_at);
     }
 
     public function restore(?User $user, Listing $listing): bool
