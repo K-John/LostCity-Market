@@ -3,6 +3,7 @@ export type ItemData = {
 id: number;
 name: string;
 slug: string;
+cost: number;
 };
 }
 declare namespace Data.Listing {

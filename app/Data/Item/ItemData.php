@@ -10,5 +10,6 @@ class ItemData extends Data
         public int $id,
         public string $name,
         public string $slug,
+        public int $cost
     ) {}
 }
