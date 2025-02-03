@@ -10,7 +10,7 @@ import {
 const props = defineProps<Pages.ListingsIndexPage>();
 
 const form = useForm({
-    ...props.tokenForm
+    ...props.tokenForm,
 });
 
 const submit = () => {
@@ -23,7 +23,7 @@ const submit = () => {
 };
 
 const destroy = (id: number) => {
-    router.delete(route('listings.destroy', { listing: id }), {
+    router.delete(route("listings.destroy", { listing: id }), {
         preserveScroll: true,
     });
 };
@@ -35,12 +35,14 @@ const destroy = (id: number) => {
             v-if="!props.token"
             class="mb-4 flex flex-col gap-4 border-2 border-amber-800 bg-amber-950 p-3"
         >
-            <h2 class="font-bold">Sign In With Token</h2>
-
             <p>
-                You are not signed in with a token. If you have one, you can
-                sign in with it here. Otherwise, a token will be created for you
-                when you create a listing.
+                A token will be created for you when you
+                <Link
+                    :href="route('listings.create')"
+                    class="text-[#90c040] hover:underline"
+                    >create a listing</Link
+                >
+                . If you have an existing token, you can sign in with it here.
             </p>
 
             <form class="flex flex-col gap-4" @submit.prevent="submit">
