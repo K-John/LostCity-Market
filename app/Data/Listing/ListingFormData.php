@@ -34,6 +34,7 @@ class ListingFormData extends Data
                 'in:buy,sell',
                 function ($attribute, $value, $fail) {
                     $existingListing = Listing::where('type', $value)
+                        ->whereNull('deleted_at')
                         ->where('item_id', request('item.id'))
                         ->where('token', session('listing_token'))
                         ->where('id', '!=', request('id'))
