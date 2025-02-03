@@ -88,13 +88,12 @@ watch(selected, (newValue) => {
 
 <style>
 .vs__search::placeholder,
-.vs__dropdown-toggle,
-.vs__dropdown-menu {
-    background: #3e342e;
+.vs__dropdown-toggle {
+    background: #44403c;
 }
 
 .vs__dropdown-menu {
-    background: #352b26;
+    background: #292524;
 }
 
 .vs__clear,

@@ -253,7 +253,7 @@ const destroy = (id: number) => {
 
                         <select
                             v-model="form.type"
-                            class="py-0 pl-2 text-black"
+                            class="border-slate-900 bg-stone-700 py-0 pl-2 placeholder:text-stone-400"
                         >
                             <option
                                 v-for="type in listingTypes"
@@ -269,7 +269,7 @@ const destroy = (id: number) => {
                         <input
                             v-model="form.quantity"
                             type="text"
-                            class="w-16 py-0 pl-1 pr-0 text-black"
+                            class="w-16 border-slate-900 bg-stone-700 py-0 pl-1 pr-0 placeholder:text-stone-400"
                             placeholder="Qty"
                         />
 
@@ -278,7 +278,7 @@ const destroy = (id: number) => {
                         <input
                             v-model="form.price"
                             type="number"
-                            class="w-28 py-0 pl-1 pr-0 text-black"
+                            class="w-28 border-slate-900 bg-stone-700 py-0 pl-1 pr-0 placeholder:text-stone-400"
                             placeholder="Price"
                         />
 
@@ -291,7 +291,7 @@ const destroy = (id: number) => {
                         <input
                             v-model="form.username"
                             type="text"
-                            class="w-28 py-0 pl-1 pr-0 text-black"
+                            class="w-28 border-slate-900 bg-stone-700 py-0 pl-1 pr-0 placeholder:text-stone-400"
                             placeholder="Username"
                         />
 
@@ -300,14 +300,14 @@ const destroy = (id: number) => {
                         <input
                             v-model="form.notes"
                             type="text"
-                            class="w-48 py-0 pl-1 pr-0 text-black"
+                            class="w-48 border-slate-900 bg-stone-700 py-0 pl-1 pr-0 placeholder:text-stone-400"
                             placeholder="Optional, ex: w1 varrock"
                         />
                     </div>
 
                     <button
                         type="submit"
-                        class="w-fit bg-white px-3 text-black hover:bg-slate-200"
+                        class="w-fit rounded-sm bg-green-800 px-3 py-1 text-white hover:bg-green-700"
                     >
                         Submit
                     </button>
