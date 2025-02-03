@@ -6,7 +6,9 @@ use App\Data\Item\ItemData;
 use App\Data\Listing\ListingData;
 use App\Data\Listing\ListingFormData;
 use App\Data\Token\TokenFormData;
+use App\Enums\ListingType;
 use App\Models\Listing;
+use App\Pages\ListingsCreatePage;
 use App\Pages\ListingsEditPage;
 use App\Pages\ListingsIndexPage;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -37,6 +39,21 @@ class ListingController
             listings: ListingData::collect($listings, PaginatedDataCollection::class),
             token: $maskedToken,
             tokenForm: new TokenFormData(token: ''),
+        ));
+    }
+
+    public function create()
+    {
+        return inertia('listings/create/page', new ListingsCreatePage(
+            listingForm: new ListingFormData(
+                id: null,
+                type: ListingType::Buy,
+                price: '',
+                quantity: null,
+                notes: '',
+                username: '',
+                item: null,
+            )
         ));
     }
 
@@ -89,7 +106,7 @@ class ListingController
     {
         $this->authorize('delete', $listing);
 
-        $listing->delete();
+        $listing->update(['deleted_at' => now()]);
 
         return to_route('listings.index')->success('The listing has been deleted');
     }

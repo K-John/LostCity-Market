@@ -16,7 +16,7 @@ class ListingFormData extends Data
         public ?int $quantity,
         public ?string $notes,
         public string $username,
-        public ItemData $item,
+        public ?ItemData $item,
     ) {
     }
 

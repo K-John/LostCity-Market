@@ -26,6 +26,14 @@ import { HeartIcon } from "@heroicons/vue/24/solid/index.js";
                     -
 
                     <Link
+                        :href="route('listings.create')"
+                        class="text-[#90c040] hover:underline"
+                        >Create Listing</Link
+                    >
+
+                    -
+
+                    <Link
                         :href="route('listings.index')"
                         class="text-[#90c040] hover:underline"
                         >My Listings</Link
