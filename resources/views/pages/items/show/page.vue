@@ -94,6 +94,15 @@ const submit = () => {
                             class="w-28 py-0 pl-1 pr-0 text-black"
                             placeholder="Username"
                         />
+
+                        <p> Notes: </p>
+
+                        <input
+                            v-model="form.notes"
+                            type="text"
+                            class="w-48 py-0 pl-1 pr-0 text-black"
+                            placeholder="Optional, ex: w1 varrock"
+                        />
                     </div>
 
                     <button
