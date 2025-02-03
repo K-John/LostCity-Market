@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { Tooltip } from "floating-vue";
+import "floating-vue/dist/style.css";
+
 const props = defineProps<Pages.ItemsShowPage>();
 
 const listingTypes = computed((): Enums.ListingType[] => ["buy", "sell"]);
@@ -41,7 +44,7 @@ const submit = () => {
             >
                 <h2 class="font-bold">Post a Listing</h2>
 
-                <div class="text-red-500">
+                <div v-if="Object.keys(form.errors).length !== 0" class="text-red-500">
                     <p v-for="error in form.errors" :key="error">
                         {{ error }}
                     </p>
@@ -95,7 +98,7 @@ const submit = () => {
                             placeholder="Username"
                         />
 
-                        <p> Notes: </p>
+                        <p>Notes:</p>
 
                         <input
                             v-model="form.notes"
@@ -114,38 +117,69 @@ const submit = () => {
                 </div>
             </form>
 
-            <div class="flex flex-col gap-4">
-                <h2 class="font-bold">Listings</h2>
+            <div class="flex flex-col gap-2 border-2 border-[#382418] bg-black">
+                <div class="px-3 pt-3">
+                    <h2 class="text-lg font-bold">Recent Listings:</h2>
+                </div>
 
-                <div class="flex flex-col gap-2">
-                    <div
-                        v-for="listing in listings.data"
-                        :key="listing.id"
-                        class="flex items-center gap-2"
-                    >
-                        <p>
-                            {{ listing.username }}
-                        </p>
+                <table class="border-separate border-spacing-2">
+                    <tbody>
+                        <tr v-for="listing in listings.data" :key="listing.id">
+                            <td>
+                                <span
+                                    :class="
+                                        listing.type === 'buy'
+                                            ? 'text-red-500'
+                                            : 'text-green-500'
+                                    "
+                                    class="font-bold"
+                                >
+                                    [{{ listing.type.charAt(0).toUpperCase() }}]
+                                </span>
+                                {{ listing.quantity.toLocaleString() }} for
+                                {{ listing.price.toLocaleString() }}GP ea.
+                            </td>
 
-                        <p>
-                            {{
-                                listing.type.charAt(0).toUpperCase() +
-                                listing.type.slice(1)
-                            }}
-                        </p>
+                            <td class="text-stone-400">
+                                {{
+                                    listing.username
+                                        .split(" ")
+                                        .map(
+                                            (word) =>
+                                                word.charAt(0).toUpperCase() +
+                                                word.slice(1).toLowerCase(),
+                                        )
+                                        .join(" ")
+                                }}
+                            </td>
 
-                        <p>
-                            {{ listing.quantity }}
-                        </p>
+                            <td>
+                                <Tooltip>
+                                    <p>{{ fromNow(listing.createdAt) }}</p>
 
-                        <p>
-                            {{ listing.price }}
-                        </p>
-                    </div>
+                                    <template #popper>
+                                        {{ formatTime(listing.createdAt) }}
+                                    </template>
+                                </Tooltip>
+                            </td>
+
+                            <td class="max-w-[110px]">
+                                <Tooltip>
+                                    <p class="truncate">{{ listing.notes }}</p>
+
+                                    <template #popper>
+                                        {{ listing.notes }}
+                                    </template>
+                                </Tooltip>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="px-3">
+                    <Pagination class="mt-0" :data="listings" />
                 </div>
             </div>
-
-            <Pagination :data="listings" />
         </div>
     </LayoutMain>
 </template>
