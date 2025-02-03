@@ -13,37 +13,25 @@ import { HeartIcon } from "@heroicons/vue/24/solid/index.js";
         </div>
 
         <div class="bg-[url('@/img/assets/background2.jpg')] px-10">
-            <table
-                width="250"
-                bgcolor="black"
-                cellpadding="4"
-                class="mx-auto mb-5"
+            <div
+                class="mx-auto mb-5 w-fit min-w-[250px] border-2 border-[#382418] bg-black p-1 text-center"
             >
-                <tbody>
-                    <tr>
-                        <td class="border-2 border-[#382418] leading-tight">
-                            <center>
-                                <h1 class="inline-block font-bold">Lost City Markets</h1>
+                <h1 class="font-bold">Lost City Markets</h1>
 
-                                <br />
+                <div class="flex flex-row items-center justify-center gap-1">
+                    <Link href="/" class="text-[#90c040] hover:underline"
+                        >Main menu</Link
+                    >
 
-                                <Link
-                                    href="/"
-                                    class="text-[#90c040] hover:underline"
-                                    >Main menu</Link
-                                >
+                    -
 
-                                -
-                                <Link
-                                    :href="route('listings.index')"
-                                    class="text-[#90c040] hover:underline"
-                                    >My Listings</Link
-                                >
-                            </center>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                    <Link
+                        :href="route('listings.index')"
+                        class="text-[#90c040] hover:underline"
+                        >My Listings</Link
+                    >
+                </div>
+            </div>
 
             <slot />
 
