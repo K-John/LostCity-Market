@@ -56,7 +56,7 @@ class ListingController
 
         Listing::create($listingData);
 
-        return to_route('items.show', $data->item->slug)->success('The listing has been created');
+        return to_route('items.show', $data->item->slug)->success('The listing has been created and will expire in 48 hours');
     }
 
     public function edit(Listing $listing) 
