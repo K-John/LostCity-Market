@@ -7,6 +7,7 @@ slug: string;
 }
 declare namespace Data.Listing {
 export type ListingData = {
+canManage: boolean;
 id: number;
 type: Enums.ListingType;
 price: number;
