@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { HeartIcon } from "@heroicons/vue/24/solid/index.js";
+import { HeartIcon } from "@heroicons/vue/24/solid/index.js";
 </script>
 
 <template>
@@ -23,7 +23,7 @@
                     <tr>
                         <td class="border-2 border-[#382418] leading-tight">
                             <center>
-                                <b>Lost City Markets</b>
+                                <h1 class="inline-block font-bold">Lost City Markets</h1>
 
                                 <br />
 
@@ -70,13 +70,7 @@
 
                     <p class="flex gap-1">
                         Made by
-                        <a
-                            href="https://github.com/K-John"
-                            target="_blank"
-                            class="text-[#90c040] hover:underline"
-                        >
-                            BigShot
-                        </a>
+                        <span class="text-[#90c040]"> BigShot </span>
                         with love
                         <HeartIcon class="size-5 text-red-500" />
                     </p>

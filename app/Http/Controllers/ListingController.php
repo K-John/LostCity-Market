@@ -2,18 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\Listing\ListingData;
 use App\Data\Listing\ListingFormData;
 use App\Models\Listing;
+use App\Pages\ListingsIndexPage;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Session;
+use Spatie\LaravelData\PaginatedDataCollection;
 
 class ListingController
 {
     public function index()
     {
-        return inertia('listings/index/page');
+        $token = Session::get('listing_token');
+
+        $listings = Listing::with('item')
+                ->where('token', $token)
+                ->whereNull('deleted_at')
+                ->where('updated_at', '>=', now()->subDays(2))
+                ->orderBy('updated_at', 'desc')
+                ->paginate(20);
+
+        $maskedToken = $token ? substr($token, 0, 4) . str_repeat('*', strlen($token) - 8) . substr($token, -4) : null;
+
+        return inertia('listings/index/page', new ListingsIndexPage(
+            listings: ListingData::collect($listings, PaginatedDataCollection::class),
+            token: $maskedToken
+        ));
     }
 
     public function create() {}
