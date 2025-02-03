@@ -50,21 +50,7 @@ const destroy = (id: number) => {
 
 <template>
     <LayoutMain>
-        <div
-            class="mb-4 flex flex-row gap-4 border-2 border-[#382418] bg-black p-3"
-        >
-            <h2 class="text-lg font-bold">Search for an item:</h2>
-
-            <VueSelect
-                v-model="selected"
-                :options="options"
-                label="name"
-                :filterable="false"
-                class="grow bg-white text-black"
-                @search="onSearch"
-            >
-            </VueSelect>
-        </div>
+        <ItemSearch />
 
         <div class="flex flex-col gap-2 border-2 border-[#382418] bg-black">
             <div class="px-3 pt-3">

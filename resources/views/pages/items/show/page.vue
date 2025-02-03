@@ -32,6 +32,8 @@ const destroy = (id: number) => {
 
 <template>
     <LayoutMain>
+        <ItemSearch />
+        
         <div class="flex flex-col gap-6">
             <div class="flex gap-4">
                 <div class="h-fit border-2 border-[#382418] bg-black p-1">
