@@ -36,6 +36,7 @@ class ListingFormData extends Data
                     $existingListing = Listing::where('type', $value)
                         ->where('item_id', request('item.id'))
                         ->where('token', session('listing_token'))
+                        ->where('id', '!=', request('id'))
                         ->first();
                     if ($existingListing) {
                         $fail('You cannot have multiple listings of the same type. Please update the existing listing instead.');
