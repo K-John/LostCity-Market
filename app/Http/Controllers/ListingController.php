@@ -59,10 +59,10 @@ class ListingController
         return to_route('items.show', $data->item->slug)->success('The listing has been created');
     }
 
-    public function show(Listing $listing) {}
-
     public function edit(Listing $listing) 
     {
+        $this->authorize('update', $listing);
+
         return inertia('listings/edit/page', new ListingsEditPage(
             listingForm: new ListingFormData(
                 id: $listing->id,
@@ -80,11 +80,17 @@ class ListingController
     {
         $this->authorize('update', $listing);
 
-        /** @var Listing $listing */
         $listing->update($data->getListingData());
 
         return to_route('listings.index')->success('The listing has been updated');
     }
 
-    public function destroy(Listing $listing) {}
+    public function destroy(Listing $listing) 
+    {
+        $this->authorize('delete', $listing);
+
+        $listing->delete();
+
+        return to_route('listings.index')->success('The listing has been deleted');
+    }
 }

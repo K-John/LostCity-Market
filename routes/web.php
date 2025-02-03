@@ -11,5 +11,4 @@ Route::get('items/{item:slug}', [ItemController::class, 'show'])
     ->name('items.show');
 
 Route::resource('listings', ListingController::class)
-    ->only(['index', 'create', 'store', 'edit', 'update', 'destroy'])
     ->names('listings');
