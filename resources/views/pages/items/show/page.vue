@@ -145,7 +145,7 @@ const destroy = (id: number) => {
                                 v-for="listing in listings.data"
                                 :key="listing.id"
                             >
-                                <td>
+                                <td class="flex gap-1">
                                     <span
                                         :class="
                                             listing.type === 'buy'
@@ -160,8 +160,24 @@ const destroy = (id: number) => {
                                                 .toUpperCase()
                                         }}]
                                     </span>
-                                    {{ listing.quantity.toLocaleString() }} for
-                                    {{ listing.price.toLocaleString() }}GP ea.
+
+                                    <Tooltip>
+                                        <p>{{ formatGold(listing.quantity) }}</p>
+
+                                        <template #popper>
+                                            {{ listing.quantity.toLocaleString() }}
+                                        </template>
+                                    </Tooltip>
+
+                                     for
+
+                                     <Tooltip>
+                                        <p>{{ formatGold(listing.price) }}GP ea.</p>
+
+                                        <template #popper>
+                                            {{ listing.price.toLocaleString() }}
+                                        </template>
+                                    </Tooltip>
                                 </td>
 
                                 <td class="text-stone-400">
