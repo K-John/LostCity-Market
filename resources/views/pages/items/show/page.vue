@@ -24,7 +24,7 @@ const submit = () => {
 };
 
 const destroy = (id: number) => {
-    router.delete(route('listings.destroy', { listing: id }), {
+    router.delete(route("listings.destroy", { listing: id }), {
         preserveScroll: true,
     });
 };
@@ -54,7 +54,10 @@ const destroy = (id: number) => {
             >
                 <h2 class="font-bold">Post a Listing</h2>
 
-                <div v-if="Object.keys(form.errors).length !== 0" class="text-red-500">
+                <div
+                    v-if="Object.keys(form.errors).length !== 0"
+                    class="text-red-500"
+                >
                     <p v-for="error in form.errors" :key="error">
                         {{ error }}
                     </p>
@@ -129,7 +132,7 @@ const destroy = (id: number) => {
 
             <div class="flex flex-col gap-2 border-2 border-[#382418] bg-black">
                 <div class="px-3 pt-3">
-                    <h2 class="text-lg font-bold">Recent Listings:</h2>
+                    <h2 class="text-lg font-bold">Current Listings:</h2>
                 </div>
 
                 <table class="border-separate border-spacing-2">
@@ -174,31 +177,38 @@ const destroy = (id: number) => {
                             </td>
 
                             <td class="max-w-[110px]">
-                                <div v-if="listing.canManage" class="flex flex-nowrap justify-end gap-1">
-                                <Link
-                                    :href="route('listings.edit', { listing })"
-                                    class="w-fit rounded-md bg-amber-300 px-2 py-1 text-amber-900 hover:bg-amber-400"
+                                <div
+                                    v-if="listing.canManage"
+                                    class="flex flex-nowrap justify-end gap-1"
                                 >
-                                    <PencilSquareIcon class="size-5" />
-                                </Link>
+                                    <Link
+                                        :href="
+                                            route('listings.edit', { listing })
+                                        "
+                                        class="w-fit rounded-md bg-amber-300 px-2 py-1 text-amber-900 hover:bg-amber-400"
+                                    >
+                                        <PencilSquareIcon class="size-5" />
+                                    </Link>
 
-                                <button
-                                    class="w-fit rounded-md bg-red-300 px-2 py-1 text-red-900 hover:bg-red-400"
-                                    @click="destroy(listing.id)"
-                                >
-                                    <TrashIcon class="size-5" />
-                                </button>
-                            </div>
+                                    <button
+                                        class="w-fit rounded-md bg-red-300 px-2 py-1 text-red-900 hover:bg-red-400"
+                                        @click="destroy(listing.id)"
+                                    >
+                                        <TrashIcon class="size-5" />
+                                    </button>
+                                </div>
 
-                            <template v-else>
-                                <Tooltip>
-                                    <p class="truncate">{{ listing.notes }}</p>
-                                    
-                                    <template #popper>
-                                        {{ listing.notes }}
-                                    </template>
-                                </Tooltip>
-                            </template>
+                                <template v-else>
+                                    <Tooltip>
+                                        <p class="truncate">
+                                            {{ listing.notes }}
+                                        </p>
+
+                                        <template #popper>
+                                            {{ listing.notes }}
+                                        </template>
+                                    </Tooltip>
+                                </template>
                             </td>
                         </tr>
                     </tbody>
@@ -207,6 +217,56 @@ const destroy = (id: number) => {
                 <div class="px-3">
                     <Pagination class="mt-0" :data="listings" />
                 </div>
+            </div>
+
+            <div class="flex flex-col gap-2 border-2 border-[#382418] bg-black">
+                <div class="px-3 pt-3">
+                    <h2 class="text-lg font-bold">Previous Listings:</h2>
+                </div>
+
+                <table class="border-separate border-spacing-2">
+                    <tbody>
+                        <tr v-for="listing in deletedListings" :key="listing.id">
+                            <td class="text-stone-500">
+                                <span
+                                    :class="
+                                        listing.type === 'buy'
+                                            ? 'text-red-800'
+                                            : 'text-green-800'
+                                    "
+                                    class="font-bold"
+                                >
+                                    [{{ listing.type.charAt(0).toUpperCase() }}]
+                                </span>
+                                {{ listing.quantity.toLocaleString() }} for
+                                {{ listing.price.toLocaleString() }}GP ea.
+                            </td>
+
+                            <td class="text-stone-500">
+                                {{
+                                    listing.username
+                                        .split(" ")
+                                        .map(
+                                            (word) =>
+                                                word.charAt(0).toUpperCase() +
+                                                word.slice(1).toLowerCase(),
+                                        )
+                                        .join(" ")
+                                }}
+                            </td>
+
+                            <td>
+                                <Tooltip v-if="listing.deletedAt">
+                                    <p>{{ fromNow(listing.deletedAt) }} ago</p>
+
+                                    <template #popper>
+                                        {{ formatTime(listing.deletedAt) }}
+                                    </template>
+                                </Tooltip>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </LayoutMain>

@@ -9,6 +9,7 @@ use App\Models\Item;
 use App\Data\Listing\ListingFormData;
 use App\Enums\ListingType;
 use Illuminate\Http\Request;
+use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\PaginatedDataCollection;
 
 class ItemController
@@ -39,6 +40,12 @@ class ItemController
             ->orderBy('updated_at', 'desc')
             ->paginate(20);
 
+        $deletedListings = $item->listings()
+            ->whereNotNull('deleted_at')
+            ->orderBy('deleted_at', 'desc')
+            ->take(10)
+            ->get();
+
         return inertia('items/show/page', new ItemsShowPage(
             item: $itemData,
             listingForm: new ListingFormData(
@@ -51,6 +58,10 @@ class ItemController
                 item: $itemData,
             ),
             listings: ListingData::collect($listings, PaginatedDataCollection::class),
+            deletedListings: ListingData::collect($deletedListings->map(function ($listing) {
+                $listing->deleted_at = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $listing->deleted_at);
+                return $listing;
+            }), DataCollection::class),
         ));
     }
 }

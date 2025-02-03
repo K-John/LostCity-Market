@@ -24,6 +24,7 @@ class ListingData extends Data
         public string $username,
         public ?ItemData $item,
         public DateTime $updatedAt,
+        public ?DateTime $deletedAt
     ) {
             $listingToken = Listing::where('id', $this->id)
                 ->value('token');
