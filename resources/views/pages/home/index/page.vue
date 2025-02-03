@@ -40,38 +40,26 @@ watch(selected, (value) => {
 
 <template>
     <LayoutMain>
-        <div>
-            <div>
-                <VueSelect
-                    v-model="selected"
-                    :options="options"
-                    label="name"
-                    :filterable="false"
-                    class="bg-white text-black"
-                    @search="onSearch"
-                >
-                </VueSelect>
-            </div>
+        <div class="mb-4 flex flex-row gap-4 border-2 border-[#382418] bg-black p-3">
+            <h2 class="text-lg font-bold">Search for an item:</h2>
 
-            <span v-if="loading">Loading...</span>
+            <VueSelect
+                v-model="selected"
+                :options="options"
+                label="name"
+                :filterable="false"
+                class="grow bg-white text-black"
+                @search="onSearch"
+            >
+            </VueSelect>
         </div>
 
-        <div class="border-2 border-[#382418] bg-black">
+        <div class="flex flex-col gap-2 border-2 border-[#382418] bg-black">
+            <div class="px-3 pt-3">
+                <h2 class="text-lg font-bold">Recent Listings:</h2>
+            </div>
+
             <table class="border-separate border-spacing-2">
-                <thead>
-                    <tr>
-                        <th></th>
-
-                        <th>Listing</th>
-
-                        <th>Username</th>
-
-                        <th>Timestamp</th>
-
-                        <th>Notes</th>
-                    </tr>
-                </thead>
-
                 <tbody>
                     <tr v-for="listing in listings.data" :key="listing.id">
                         <td>
@@ -113,7 +101,8 @@ watch(selected, (value) => {
                             >
                                 [{{ listing.type.charAt(0).toUpperCase() }}]
                             </span>
-                            {{ listing.quantity.toLocaleString() }} for {{ listing.price.toLocaleString() }}GP ea.
+                            {{ listing.quantity.toLocaleString() }} for
+                            {{ listing.price.toLocaleString() }}GP ea.
                         </td>
 
                         <td class="text-stone-400">
@@ -134,19 +123,27 @@ watch(selected, (value) => {
                                 <p>{{ fromNow(listing.createdAt) }}</p>
 
                                 <template #popper>
-                                    {{
-                                        formatTime(listing.createdAt)
-                                    }}
+                                    {{ formatTime(listing.createdAt) }}
                                 </template>
                             </Tooltip>
                         </td>
 
-                        <td>
-                            {{ listing.notes }}
+                        <td class="max-w-[110px]">
+                            <Tooltip>
+                                <p class="truncate">{{ listing.notes }}</p>
+
+                                <template #popper>
+                                    {{ listing.notes }}
+                                </template>
+                            </Tooltip>
                         </td>
                     </tr>
                 </tbody>
             </table>
+
+            <div class="px-3">
+                <Pagination class="mt-0" :data="listings" />
+            </div>
         </div>
     </LayoutMain>
 </template>
