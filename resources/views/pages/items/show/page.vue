@@ -33,8 +33,8 @@ const destroy = (id: number) => {
 <template>
     <LayoutMain>
         <div class="flex flex-col gap-6">
-            <div class="flex items-center gap-4">
-                <div class="border-2 border-[#382418] bg-black p-1">
+            <div class="flex gap-4">
+                <div class="h-fit border-2 border-[#382418] bg-black p-1">
                     <img
                         :src="`/img/items/${item.slug}.png`"
                         :alt="`${item.name} Icon`"
@@ -43,9 +43,39 @@ const destroy = (id: number) => {
                     />
                 </div>
 
-                <h1 class="text-lg font-bold">
-                    {{ item.name }}
-                </h1>
+                <div class="flex flex-col gap-1">
+                    <h1 class="text-2xl font-bold">
+                        {{ item.name }}
+                    </h1>
+
+                    <div class="flex flex-row gap-4">
+                        <h2 class="font-bold">Prices:</h2>
+
+                        <div>
+                            <u>Gen. Store:</u>
+
+                            <p>
+                                ~{{ Math.floor(item.cost * 0.4).toLocaleString() }}GP
+                            </p>
+                        </div>
+
+                        <div>
+                            <u>High Alch:</u>
+
+                            <p>
+                                {{ Math.floor(item.cost * 0.6).toLocaleString() }}GP
+                            </p>
+                        </div>
+
+                        <div>
+                            <u>Low Alch:</u>
+
+                            <p>
+                                {{ Math.floor(item.cost * 0.4).toLocaleString() }}GP
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <form
@@ -226,7 +256,10 @@ const destroy = (id: number) => {
 
                 <table class="border-separate border-spacing-2">
                     <tbody>
-                        <tr v-for="listing in deletedListings" :key="listing.id">
+                        <tr
+                            v-for="listing in deletedListings"
+                            :key="listing.id"
+                        >
                             <td class="text-stone-500">
                                 <span
                                     :class="
