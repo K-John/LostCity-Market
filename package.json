@@ -45,7 +45,7 @@
     },
     "dependencies": {
         "@headlessui/vue": "^1.7.16",
-        "@heroicons/vue": "^2.1.1",
+        "@heroicons/vue": "^2.1.5",
         "@inertiajs/vue3": "^1.0.14",
         "@vue/server-renderer": "^3.4.5",
         "@vueuse/core": "^10.7.1",
