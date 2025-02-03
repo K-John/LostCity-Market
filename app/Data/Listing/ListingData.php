@@ -17,7 +17,7 @@ class ListingData extends Data
         public ?string $notes,
         public string $username,
         public ?ItemData $item,
-        public DateTime $createdAt,
+        public DateTime $updatedAt,
     ) {
     }
 }

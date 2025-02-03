@@ -120,10 +120,10 @@ watch(selected, (value) => {
 
                         <td>
                             <Tooltip>
-                                <p>{{ fromNow(listing.createdAt) }}</p>
+                                <p>{{ fromNow(listing.updatedAt) }}</p>
 
                                 <template #popper>
-                                    {{ formatTime(listing.createdAt) }}
+                                    {{ formatTime(listing.updatedAt) }}
                                 </template>
                             </Tooltip>
                         </td>

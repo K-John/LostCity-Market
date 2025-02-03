@@ -2,8 +2,6 @@
 
 namespace App\Pages;
 
-use App\Data\Item\ItemData;
-use App\Data\Listing\ListingFormData;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\PaginatedDataCollection;
 

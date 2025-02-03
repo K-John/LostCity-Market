@@ -15,7 +15,7 @@ class HomeController
         $listings = Listing::with('item')
             ->whereNull('deleted_at')
             ->where('updated_at', '>=', now()->subDays(2))
-            ->latest()
+            ->orderBy('updated_at', 'desc')
             ->paginate(20);
 
         return inertia('home/index/page', new HomeIndexPage(
