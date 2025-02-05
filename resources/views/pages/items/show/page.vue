@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { Head, usePoll } from "@inertiajs/vue3";
-import { Tooltip } from "floating-vue";
-import "floating-vue/dist/style.css";
 
 const props = defineProps<Pages.ItemsShowPage>();
 
