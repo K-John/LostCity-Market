@@ -11,6 +11,7 @@ use App\Models\Listing;
 use App\Pages\ListingsCreatePage;
 use App\Pages\ListingsEditPage;
 use App\Pages\ListingsIndexPage;
+use ConsoleTVs\Profanity\Facades\Profanity;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\Request;
@@ -27,11 +28,11 @@ class ListingController
         $token = Session::get('listing_token');
 
         $listings = Listing::with('item')
-                ->where('token', $token)
-                ->whereNull('deleted_at')
-                ->where('updated_at', '>=', now()->subDays(2))
-                ->orderBy('updated_at', 'desc')
-                ->paginate(20);
+            ->where('token', $token)
+            ->whereNull('deleted_at')
+            ->where('updated_at', '>=', now()->subDays(2))
+            ->orderBy('updated_at', 'desc')
+            ->paginate(20);
 
         $maskedToken = $token ? substr($token, 0, 4) . str_repeat('*', strlen($token) - 8) . substr($token, -4) : "";
 
@@ -70,13 +71,14 @@ class ListingController
 
         $listingData = collect($data->toArray())->except('item')->toArray();
         $listingData['item_id'] = $data->item->id;
+        $listingData['username'] = Profanity::blocker($listingData['username'])->filter();
 
         Listing::create($listingData);
 
         return to_route('items.show', $data->item->slug)->success('The listing has been created and will expire in 48 hours');
     }
 
-    public function edit(Listing $listing) 
+    public function edit(Listing $listing)
     {
         $this->authorize('update', $listing);
 
@@ -93,7 +95,7 @@ class ListingController
         ));
     }
 
-    public function update(ListingFormData $data, Listing $listing) 
+    public function update(ListingFormData $data, Listing $listing)
     {
         $this->authorize('update', $listing);
 
@@ -102,7 +104,7 @@ class ListingController
         return to_route('listings.index')->success('The listing has been updated');
     }
 
-    public function destroy(Listing $listing) 
+    public function destroy(Listing $listing)
     {
         $this->authorize('delete', $listing);
 
