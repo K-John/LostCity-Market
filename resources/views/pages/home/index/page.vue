@@ -7,18 +7,27 @@ const listingTypes = computed((): Enums.ListingType[] => ["buy", "sell"]);
 usePoll(5000);
 
 const mostRecentUpdateDate = computed(() => {
+    if (!props.listings.data.length) return null;
+
     return props.listings.data.reduce((latest, listing) => {
-        return new Date(listing.updatedAt) > new Date(latest) ? listing.updatedAt : latest;
+        const listingDate = new Date(listing.updatedAt);
+        return listing.updatedAt && listingDate > new Date(latest)
+            ? listing.updatedAt
+            : latest;
     }, props.listings.data[0].updatedAt);
 });
 
 watch(mostRecentUpdateDate, (newValue, oldValue) => {
     if (newValue !== oldValue) {
-        highlightedIds.value.push(
-            ...props.listings.data
-                .filter((listing) => new Date(listing.updatedAt) > new Date(oldValue))
-                .map((listing) => listing.id)
-        );
+        const newHighlightIds = props.listings.data
+            .filter(
+                (listing) =>
+                    listing.updatedAt &&
+                    new Date(listing.updatedAt) > new Date(oldValue as string),
+            )
+            .map((listing) => listing.id);
+
+        highlightedIds.value.push(...newHighlightIds);
     }
 });
 
