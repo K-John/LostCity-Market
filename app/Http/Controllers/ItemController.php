@@ -7,7 +7,6 @@ use App\Data\Listing\ListingData;
 use App\Pages\ItemsShowPage;
 use App\Models\Item;
 use App\Data\Listing\ListingFormData;
-use App\Enums\ListingType;
 use Illuminate\Http\Request;
 use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\PaginatedDataCollection;
@@ -16,22 +15,6 @@ use App\Http\Traits\HandlesListingType;
 class ItemController
 {
     use HandlesListingType;
-    
-    public function index(Request $request)
-    {
-        $search = $request->query('q');
-
-        if (!$search) {
-            return response()->json([]);
-        }
-
-        $items = Item::where('name', 'LIKE', "%{$search}%")
-            ->orderByRaw('CHAR_LENGTH(name)')
-            ->take(5)
-            ->get();
-
-        return response()->json(ItemData::collect($items));
-    }
 
     public function show(Request $request, Item $item) 
     {
