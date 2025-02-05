@@ -14,11 +14,11 @@ const options = ref<Data.Item.ItemData[]>([]);
 const onSearch = (searchTerm: string, loading: (state: boolean) => void) => {
     if (searchTerm.length > 2) {
         loading(true);
-        search(searchTerm, loading);
+        fetchItems(searchTerm, loading);
     }
 };
 
-const search = _.debounce(
+const fetchItems = _.debounce(
     (search: string, loading: (state: boolean) => void) => {
         fetch(`${route("items.index")}?q=${search}`)
             .then((response) => response.json())
