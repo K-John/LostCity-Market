@@ -104,12 +104,26 @@ class ListingController
         return to_route('listings.index')->success('The listing has been updated');
     }
 
-    public function destroy(Listing $listing)
+    public function destroy(Listing $listing, Request $request)
     {
         $this->authorize('delete', $listing);
 
+        if ($request->has('force')) {
+            $listing->delete();
+            return back()->success('The listing has been permanently deleted');
+        }
+
         $listing->update(['deleted_at' => now()]);
 
-        return to_route('listings.index')->success('The listing has been deleted');
+        return back()->success('The listing has been marked as sold');
+    }
+
+    public function bump(Listing $listing)
+    {
+        $this->authorize('update', $listing);
+
+        $listing->touch();
+
+        return back()->success('Listing bumped successfully');
     }
 }

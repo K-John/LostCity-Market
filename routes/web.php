@@ -14,6 +14,9 @@ Route::get('items/{item:slug}', [ItemController::class, 'show'])
 Route::resource('listings', ListingController::class)
     ->names('listings');
 
+Route::patch('listings/{listing}/bump', [ListingController::class, 'bump'])
+    ->name('listings.bump');
+
 Route::post('token', [TokenController::class, 'store'])
     ->name('tokens.store');
 
