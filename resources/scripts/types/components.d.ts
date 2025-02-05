@@ -7,6 +7,8 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    DropdownItem: typeof import('./../../views/components/DropdownItem.vue')['default']
+    DropdownMenu: typeof import('./../../views/components/DropdownMenu.vue')['default']
     EmptyTableRow: typeof import('./../../views/components/listings-table/empty-table-row.vue')['default']
     GithubLogo: typeof import('./../../views/components/github-logo.vue')['default']
     ItemSearch: typeof import('./../../views/components/item-search.vue')['default']
