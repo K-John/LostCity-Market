@@ -57,7 +57,7 @@ class ItemController
             item: $itemData,
             listingForm: new ListingFormData(
                 id: null,
-                type: ListingType::Buy,
+                type: $listingType,
                 price: '',
                 quantity: null,
                 notes: '',

@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import { Head } from "@inertiajs/vue3";
+import { Head, usePoll } from "@inertiajs/vue3";
 import { Tooltip } from "floating-vue";
 import "floating-vue/dist/style.css";
-import {
-    PencilSquareIcon,
-    TrashIcon,
-} from "@heroicons/vue/24/outline/index.js";
 
 const props = defineProps<Pages.ItemsShowPage>();
 
@@ -24,11 +20,34 @@ const submit = () => {
     });
 };
 
-const destroy = (id: number) => {
-    router.delete(route("listings.destroy", { listing: id }), {
-        preserveScroll: true,
-    });
-};
+usePoll(5000);
+
+const mostRecentUpdateDate = computed(() => {
+    if (!props.listings.data.length) return null;
+
+    return props.listings.data.reduce((latest, listing) => {
+        const listingDate = new Date(listing.updatedAt);
+        return listing.updatedAt && listingDate > new Date(latest)
+            ? listing.updatedAt
+            : latest;
+    }, props.listings.data[0].updatedAt);
+});
+
+watch(mostRecentUpdateDate, (newValue, oldValue) => {
+    if (newValue !== oldValue) {
+        const newHighlightIds = props.listings.data
+            .filter(
+                (listing) =>
+                    listing.updatedAt &&
+                    new Date(listing.updatedAt) > new Date(oldValue as string),
+            )
+            .map((listing) => listing.id);
+
+        highlightedIds.value.push(...newHighlightIds);
+    }
+});
+
+const highlightedIds = ref<number[]>([]);
 </script>
 
 <template>
@@ -132,123 +151,32 @@ const destroy = (id: number) => {
                     </Link>
                 </div>
 
-                <div class="flex flex-col border-2 border-[#382418] bg-black">
-                    <table class="border-separate border-spacing-2">
-                        <tbody>
-                            <tr v-if="!listings.data.length">
-                                <td class="text-center" colspan="4">
-                                    No listings found.
-                                </td>
-                            </tr>
+                <ListingTable @mouseenter="highlightedIds = []">
+                    <EmptyTableRow v-if="!props.listings.data.length" />
 
-                            <tr
-                                v-for="listing in listings.data"
-                                :key="listing.id"
-                            >
-                                <td class="flex gap-1">
-                                    <span
-                                        :class="
-                                            listing.type === 'buy'
-                                                ? 'text-red-500'
-                                                : 'text-green-500'
-                                        "
-                                        class="font-bold"
-                                    >
-                                        [{{
-                                            listing.type
-                                                .charAt(0)
-                                                .toUpperCase()
-                                        }}]
-                                    </span>
+                    <ListingTableRow
+                        v-for="l in listings.data"
+                        :key="l.id"
+                        :listing="l"
+                        :highlighted="highlightedIds.includes(l.id)"
+                    >
+                        <template #default="{ listing }">
+                            <PriceTableData :listing="listing" />
 
-                                    <Tooltip>
-                                        <p>{{ formatGold(listing.quantity) }}</p>
+                            <UsernameTableData :username="listing.username" />
 
-                                        <template #popper>
-                                            {{ listing.quantity.toLocaleString() }}
-                                        </template>
-                                    </Tooltip>
+                            <TimestampTableData
+                                :timestamp="listing.updatedAt"
+                            />
 
-                                     for
+                            <NoteTableData :listing="listing" />
+                        </template>
+                    </ListingTableRow>
 
-                                     <Tooltip>
-                                        <p>{{ formatGold(listing.price) }}GP ea.</p>
-
-                                        <template #popper>
-                                            {{ listing.price.toLocaleString() }}
-                                        </template>
-                                    </Tooltip>
-                                </td>
-
-                                <td class="text-stone-400">
-                                    {{
-                                        listing.username
-                                            .split(" ")
-                                            .map(
-                                                (word) =>
-                                                    word
-                                                        .charAt(0)
-                                                        .toUpperCase() +
-                                                    word.slice(1).toLowerCase(),
-                                            )
-                                            .join(" ")
-                                    }}
-                                </td>
-
-                                <td>
-                                    <Tooltip>
-                                        <p>{{ fromNow(listing.updatedAt) }}</p>
-
-                                        <template #popper>
-                                            {{ formatTime(listing.updatedAt) }}
-                                        </template>
-                                    </Tooltip>
-                                </td>
-
-                                <td class="max-w-[110px]">
-                                    <div
-                                        v-if="listing.canManage"
-                                        class="flex flex-nowrap justify-end gap-1"
-                                    >
-                                        <Link
-                                            :href="
-                                                route('listings.edit', {
-                                                    listing,
-                                                })
-                                            "
-                                            class="w-fit rounded-md bg-amber-300 px-2 py-1 text-amber-900 hover:bg-amber-400"
-                                        >
-                                            <PencilSquareIcon class="size-5" />
-                                        </Link>
-
-                                        <button
-                                            class="w-fit rounded-md bg-red-300 px-2 py-1 text-red-900 hover:bg-red-400"
-                                            @click="destroy(listing.id)"
-                                        >
-                                            <TrashIcon class="size-5" />
-                                        </button>
-                                    </div>
-
-                                    <template v-else>
-                                        <Tooltip>
-                                            <p class="truncate">
-                                                {{ listing.notes }}
-                                            </p>
-
-                                            <template #popper>
-                                                {{ listing.notes }}
-                                            </template>
-                                        </Tooltip>
-                                    </template>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div v-if="listings.data.length" class="px-3">
-                        <Pagination class="mt-0" :data="listings" />
-                    </div>
-                </div>
+                    <template v-if="listings.data.length" #footer>
+                        <Pagination :data="listings" />
+                    </template>
+                </ListingTable>
             </div>
 
             <form
@@ -333,58 +261,35 @@ const destroy = (id: number) => {
                 </div>
             </form>
 
-            <div class="flex flex-col gap-2 border-2 border-[#382418] bg-black">
-                <div class="px-3 pt-3">
+            <ListingTable>
+                <template #header>
                     <h2 class="text-lg font-bold">Previous Listings:</h2>
-                </div>
+                </template>
 
-                <table class="border-separate border-spacing-2">
-                    <tbody>
-                        <tr
-                            v-for="listing in deletedListings"
-                            :key="listing.id"
-                        >
-                            <td class="text-stone-500">
-                                <span
-                                    :class="
-                                        listing.type === 'buy'
-                                            ? 'text-red-800'
-                                            : 'text-green-800'
-                                    "
-                                    class="font-bold"
-                                >
-                                    [{{ listing.type.charAt(0).toUpperCase() }}]
-                                </span>
-                                {{ listing.quantity.toLocaleString() }} for
-                                {{ listing.price.toLocaleString() }}GP ea.
-                            </td>
+                <EmptyTableRow v-if="!deletedListings.length" />
 
-                            <td class="text-stone-500">
-                                {{
-                                    listing.username
-                                        .split(" ")
-                                        .map(
-                                            (word) =>
-                                                word.charAt(0).toUpperCase() +
-                                                word.slice(1).toLowerCase(),
-                                        )
-                                        .join(" ")
-                                }}
-                            </td>
+                <ListingTableRow
+                    v-for="l in deletedListings"
+                    :key="l.id"
+                    :listing="l"
+                >
+                    <template #default="{ listing }">
+                        <PriceTableData
+                            :listing="listing"
+                            class="text-stone-500"
+                        />
 
-                            <td>
-                                <Tooltip v-if="listing.deletedAt">
-                                    <p>{{ fromNow(listing.deletedAt) }} ago</p>
+                        <UsernameTableData
+                            :username="listing.username"
+                            class="text-stone-500"
+                        />
 
-                                    <template #popper>
-                                        {{ formatTime(listing.deletedAt) }}
-                                    </template>
-                                </Tooltip>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                        <TimestampTableData
+                            :timestamp="listing.deletedAt || ''"
+                        />
+                    </template>
+                </ListingTableRow>
+            </ListingTable>
         </div>
     </LayoutMain>
 </template>
