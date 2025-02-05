@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import VueSelect from "vue-select";
-import "vue-select/dist/vue-select.css";
 import { Tooltip } from "floating-vue";
 import "floating-vue/dist/style.css";
-import _ from "lodash";
 import {
     PencilSquareIcon,
     TrashIcon,
@@ -11,36 +8,6 @@ import {
 
 const props = defineProps<Pages.HomeIndexPage>();
 const listingTypes = computed((): Enums.ListingType[] => ["buy", "sell"]);
-
-const selected = ref<Data.Item.ItemData | null>(null);
-const options = ref<Data.Item.ItemData[]>([]);
-const loading = ref(false);
-
-const onSearch = (searchTerm: string, loading: (state: boolean) => void) => {
-    if (searchTerm.length > 2) {
-        loading(true);
-        search(searchTerm, loading);
-    }
-};
-
-const search = _.debounce(
-    (search: string, loading: (state: boolean) => void) => {
-        fetch(`${route("items.index")}?q=${search}`)
-            .then((response) => response.json())
-            .then((data) => {
-                loading(false);
-                options.value = data;
-            });
-    },
-    200,
-);
-
-watch(selected, (value) => {
-    if (value) {
-        loading.value = true;
-        router.get(route("items.show", { item: value.slug }));
-    }
-});
 
 const destroy = (id: number) => {
     router.delete(route("listings.destroy", { listing: id }), {
