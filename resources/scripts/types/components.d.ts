@@ -7,11 +7,19 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    EmptyTableRow: typeof import('./../../views/components/listings/empty-table-row.vue')['default']
     GithubLogo: typeof import('./../../views/components/github-logo.vue')['default']
     ItemSearch: typeof import('./../../views/components/item-search.vue')['default']
     ItemSelect: typeof import('./../../views/components/item-select.vue')['default']
+    ItemTableData: typeof import('./../../views/components/listings/item-table-data.vue')['default']
     LayoutMain: typeof import('@/views/layouts/main/layout-main.vue')['default']
     Link: typeof import('@inertiajs/vue3')['Link']
+    ListingTable: typeof import('./../../views/components/listings/listing-table.vue')['default']
+    ListingTableRow: typeof import('./../../views/components/listings/listing-table-row.vue')['default']
+    NoteTableData: typeof import('./../../views/components/listings/note-table-data.vue')['default']
     Pagination: typeof import('./../../views/components/pagination.vue')['default']
+    PriceTableData: typeof import('./../../views/components/listings/price-table-data.vue')['default']
+    TimestampTableData: typeof import('./../../views/components/listings/timestamp-table-data.vue')['default']
+    UsernameTableData: typeof import('./../../views/components/listings/username-table-data.vue')['default']
   }
 }
