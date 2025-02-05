@@ -2,6 +2,12 @@
 
 <template>
     <div class="flex flex-col border-2 border-[#382418] bg-black p-1">
+        <template v-if="$slots.header">
+            <div class="px-2 pt-2">
+                <slot name="header" />
+            </div>
+        </template>
+
         <table>
             <tbody>
                 <slot />

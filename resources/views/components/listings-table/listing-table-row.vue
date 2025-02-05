@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
     listing: Data.Listing.ListingData;
-    highlighted: boolean;
+    highlighted?: boolean;
 }>();
 </script>
 
