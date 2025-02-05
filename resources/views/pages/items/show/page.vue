@@ -20,7 +20,7 @@ const submit = () => {
     });
 };
 
-usePoll(5000);
+usePoll(20_000);
 
 const mostRecentUpdateDate = computed(() => {
     if (!props.listings.data.length) return null;

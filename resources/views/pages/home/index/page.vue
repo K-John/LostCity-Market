@@ -4,7 +4,7 @@ import { usePoll } from "@inertiajs/vue3";
 const props = defineProps<Pages.HomeIndexPage>();
 const listingTypes = computed((): Enums.ListingType[] => ["buy", "sell"]);
 
-usePoll(5000);
+usePoll(20_000);
 
 const mostRecentUpdateDate = computed(() => {
     if (!props.listings.data.length) return null;
