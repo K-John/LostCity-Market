@@ -5,6 +5,7 @@ import {
     PencilSquareIcon,
     TrashIcon,
 } from "@heroicons/vue/24/outline/index.js";
+import { usePoll } from "@inertiajs/vue3";
 
 const props = defineProps<Pages.HomeIndexPage>();
 const listingTypes = computed((): Enums.ListingType[] => ["buy", "sell"]);
@@ -14,6 +15,25 @@ const destroy = (id: number) => {
         preserveScroll: true,
     });
 };
+usePoll(5000);
+
+const mostRecentUpdateDate = computed(() => {
+    return props.listings.data.reduce((latest, listing) => {
+        return new Date(listing.updatedAt) > new Date(latest) ? listing.updatedAt : latest;
+    }, props.listings.data[0].updatedAt);
+});
+
+watch(mostRecentUpdateDate, (newValue, oldValue) => {
+    if (newValue !== oldValue) {
+        highlightedIds.value.push(
+            ...props.listings.data
+                .filter((listing) => new Date(listing.updatedAt) > new Date(oldValue))
+                .map((listing) => listing.id)
+        );
+    }
+});
+
+const highlightedIds = ref<number[]>([]);
 </script>
 
 <template>
