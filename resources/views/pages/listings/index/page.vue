@@ -4,7 +4,9 @@ import { Tooltip } from "floating-vue";
 import "floating-vue/dist/style.css";
 import {
     PencilSquareIcon,
-    TrashIcon,
+    CheckIcon,
+    ArrowTrendingUpIcon,
+    XMarkIcon,
 } from "@heroicons/vue/24/outline/index.js";
 
 const props = defineProps<Pages.ListingsIndexPage>();
@@ -19,12 +21,6 @@ const submit = () => {
         onSuccess: () => {
             form.reset();
         },
-    });
-};
-
-const destroy = (id: number) => {
-    router.delete(route("listings.destroy", { listing: id }), {
-        preserveScroll: true,
     });
 };
 </script>
@@ -186,20 +182,62 @@ const destroy = (id: number) => {
                             </Tooltip>
                         </td>
 
-                        <td class="flex flex-nowrap gap-1">
-                            <Link
-                                :href="route('listings.edit', { listing })"
-                                class="w-fit rounded-md bg-amber-300 px-2 py-1 text-amber-900 hover:bg-amber-400"
-                            >
-                                <PencilSquareIcon class="size-5" />
-                            </Link>
+                        <td>
+                            <DropdownMenu>
+                                <DropdownItem
+                                    :icon="ArrowTrendingUpIcon"
+                                    text-color="text-amber-400"
+                                    @click="
+                                        router.patch(
+                                            route('listings.bump', {
+                                                listing: listing,
+                                            }),
+                                            { preserveScroll: true },
+                                        )
+                                    "
+                                >
+                                    Bump
+                                </DropdownItem>
 
-                            <button
-                                class="w-fit rounded-md bg-red-300 px-2 py-1 text-red-900 hover:bg-red-400"
-                                @click="destroy(listing.id)"
-                            >
-                                <TrashIcon class="size-5" />
-                            </button>
+                                <DropdownItem
+                                    :icon="CheckIcon"
+                                    text-color="text-green-500"
+                                    @click="
+                                        router.delete(
+                                            route('listings.destroy', {
+                                                listing: listing.id,
+                                            }),
+                                            { preserveScroll: true },
+                                        )
+                                    "
+                                >
+                                    Mark Sold
+                                </DropdownItem>
+
+                                <DropdownItem
+                                    :icon="PencilSquareIcon"
+                                    text-color="text-amber-500"
+                                    :href="route('listings.edit', { listing })"
+                                >
+                                    Edit
+                                </DropdownItem>
+
+                                <DropdownItem
+                                    :icon="XMarkIcon"
+                                    text-color="text-red-500"
+                                    @click="
+                                        router.delete(
+                                            route('listings.destroy', {
+                                                listing: listing.id,
+                                                force: true,
+                                            }),
+                                            { preserveScroll: true },
+                                        )
+                                    "
+                                >
+                                    Remove
+                                </DropdownItem>
+                            </DropdownMenu>
                         </td>
                     </tr>
                 </tbody>
