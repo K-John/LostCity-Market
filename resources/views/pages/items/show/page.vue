@@ -274,12 +274,10 @@ const highlightedIds = ref<number[]>([]);
                     <template #default="{ listing }">
                         <PriceTableData
                             :listing="listing"
-                            class="text-stone-500"
                         />
 
                         <UsernameTableData
                             :username="listing.username"
-                            class="text-stone-500"
                         />
 
                         <TimestampTableData
