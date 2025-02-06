@@ -72,7 +72,9 @@ class ListingController
         $listingData = collect($data->toArray())->except('item')->toArray();
         $listingData['item_id'] = $data->item->id;
         $listingData['username'] = Profanity::blocker($listingData['username'])->filter();
-        $listingData['note'] = Profanity::blocker($listingData['note'])->filter();
+        if (!empty($listingData['notes'])) {
+            $listingData['notes'] = Profanity::blocker($listingData['notes'])->filter();
+        }
 
         Listing::create($listingData);
 
