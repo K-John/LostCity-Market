@@ -15,6 +15,7 @@ price: number;
 quantity: number;
 notes: string | null;
 username: string;
+token: string;
 item: Data.Item.ItemData | null;
 updatedAt: string;
 deletedAt: string | null;
