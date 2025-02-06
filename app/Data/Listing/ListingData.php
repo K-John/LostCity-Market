@@ -22,27 +22,28 @@ class ListingData extends Data
         public int $quantity,
         public ?string $notes,
         public string $username,
-        public string $token,
         public ?ItemData $item,
         public DateTime $updatedAt,
         public ?DateTime $deletedAt
     ) {
-            $this->canManage = $token === session('listing_token');
     }
 
     public static function fromModel(Listing $listing): self
     {
-        return new self(
+        $instance = new self(
             $listing->id,
             ListingType::from($listing->type),
             $listing->price,
             $listing->quantity,
             $listing->notes,
             $listing->username,
-            '', // Exclude $listing->token
             $listing->item ? ItemData::from($listing->item) : null,
             $listing->updated_at,
             $listing->deleted_at
         );
+
+        $instance->canManage = $listing->token === session('listing_token');
+
+        return $instance;
     }
 }

@@ -102,6 +102,11 @@ class ListingController
     {
         $this->authorize('update', $listing);
 
+        $data->username = Profanity::blocker($data->username)->filter();
+        if (!empty($data->notes)) {
+            $data->notes = Profanity::blocker($data->notes)->filter();
+        }
+
         $listing->update($data->getListingData());
 
         return to_route('listings.index')->success('The listing has been updated');
