@@ -38,6 +38,7 @@ class ListingFormData extends Data
                         ->where('item_id', request('item.id'))
                         ->where('token', session('listing_token'))
                         ->where('id', '!=', request('id'))
+                        ->where('updated_at', '>=', now()->subDays(2))
                         ->first();
                     if ($existingListing) {
                         $fail('You cannot have multiple listings of the same type. Please update the existing listing instead.');
