@@ -11,6 +11,7 @@ declare module 'vue' {
     DropdownMenu: typeof import('./../../views/components/DropdownMenu.vue')['default']
     EmptyTableRow: typeof import('./../../views/components/listings-table/empty-table-row.vue')['default']
     GithubLogo: typeof import('./../../views/components/github-logo.vue')['default']
+    Head: typeof import('@inertiajs/vue3')['Head']
     ItemSearch: typeof import('./../../views/components/item-search.vue')['default']
     ItemSelect: typeof import('./../../views/components/item-select.vue')['default']
     ItemTableData: typeof import('./../../views/components/listings-table/item-table-data.vue')['default']

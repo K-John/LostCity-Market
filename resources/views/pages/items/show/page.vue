@@ -161,7 +161,7 @@ const highlightedIds = ref<number[]>([]);
                         <template #default="{ listing }">
                             <PriceTableData :listing="listing" />
 
-                            <UsernameTableData :username="listing.username" />
+                            <UsernameTableData :listing="listing" />
 
                             <TimestampTableData
                                 :timestamp="listing.updatedAt"
@@ -272,13 +272,9 @@ const highlightedIds = ref<number[]>([]);
                     :listing="l"
                 >
                     <template #default="{ listing }">
-                        <PriceTableData
-                            :listing="listing"
-                        />
+                        <PriceTableData :listing="listing" />
 
-                        <UsernameTableData
-                            :username="listing.username"
-                        />
+                        <UsernameTableData :listing="listing" />
 
                         <TimestampTableData
                             :timestamp="listing.deletedAt || ''"

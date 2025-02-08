@@ -78,7 +78,7 @@ const highlightedIds = ref<number[]>([]);
 
                     <PriceTableData :listing="listing" />
 
-                    <UsernameTableData :username="listing.username" />
+                    <UsernameTableData :listing="listing" />
 
                     <TimestampTableData :timestamp="listing.updatedAt" />
                     

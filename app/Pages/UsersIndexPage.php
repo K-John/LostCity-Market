@@ -2,15 +2,14 @@
 
 namespace App\Pages;
 
-use App\Data\Token\TokenFormData;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\PaginatedDataCollection;
 
-class ListingsIndexPage extends Data
+class UsersIndexPage extends Data
 {
     public function __construct(
+        public string $username,
         /** @var PaginatedDataCollection<\App\Data\Listing\ListingData> */
         public PaginatedDataCollection $listings,
-        public TokenFormData $tokenForm
     ) {}
 }
