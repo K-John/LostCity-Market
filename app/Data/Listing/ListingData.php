@@ -23,6 +23,7 @@ class ListingData extends Data
         public ?string $notes,
         public string $username,
         public ?ItemData $item,
+        public string $tokenPrefix,
         public DateTime $updatedAt,
         public ?DateTime $deletedAt
     ) {
@@ -38,8 +39,9 @@ class ListingData extends Data
             $listing->notes,
             $listing->username,
             $listing->item ? ItemData::from($listing->item) : null,
+            substr($listing->token, 0, 4),
             $listing->updated_at,
-            $listing->deleted_at
+            $listing->deleted_at ? \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $listing->deleted_at) : null
         );
 
         $instance->canManage = $listing->token === session('listing_token');
