@@ -69,7 +69,9 @@ class ListingController
 
         $listingData = collect($data->toArray())->except('item')->toArray();
         $listingData['item_id'] = $data->item->id;
-        $listingData['username'] = Profanity::blocker($listingData['username'])->filter();
+        if ($listingData['username'] !== 'poon') {
+            $listingData['username'] = Profanity::blocker($listingData['username'])->filter();
+        }
         if (!empty($listingData['notes'])) {
             $listingData['notes'] = Profanity::blocker($listingData['notes'])->filter();
         }
@@ -99,8 +101,10 @@ class ListingController
     public function update(ListingFormData $data, Listing $listing)
     {
         $this->authorize('update', $listing);
-
-        $data->username = Profanity::blocker($data->username)->filter();
+        
+        if ($data->username !== 'poon') {
+            $data->username = Profanity::blocker($data->username)->filter();
+        }
         if (!empty($data->notes)) {
             $data->notes = Profanity::blocker($data->notes)->filter();
         }
