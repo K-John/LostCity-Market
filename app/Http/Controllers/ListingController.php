@@ -101,12 +101,17 @@ class ListingController
     public function update(ListingFormData $data, Listing $listing)
     {
         $this->authorize('update', $listing);
-        
+
         if ($data->username !== 'poon') {
             $data->username = Profanity::blocker($data->username)->filter();
         }
         if (!empty($data->notes)) {
             $data->notes = Profanity::blocker($data->notes)->filter();
+        }
+
+        // Only bump if the listing was last updated more than 30 minutes ago
+        if ($listing->updated_at->diffInMinutes(now()) < 30) {
+            $listing->timestamps = false;
         }
 
         $listing->update($data->getListingData());
@@ -131,6 +136,10 @@ class ListingController
     public function bump(Listing $listing)
     {
         $this->authorize('update', $listing);
+
+        if ($listing->updated_at->diffInMinutes(now()) < 30) {
+            return back()->error('You can only bump a listing every 30 minutes');
+        }
 
         $listing->touch();
 
