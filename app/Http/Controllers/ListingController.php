@@ -36,6 +36,7 @@ class ListingController
 
         return inertia('listings/index/page', new ListingsIndexPage(
             listings: ListingData::collect($listings, PaginatedDataCollection::class),
+            token: $token ? substr($token, 0, 4) . str_repeat('*', strlen($token) - 8) . substr($token, -4) : "",
             tokenForm: new TokenFormData(token: ''),
         ));
     }
