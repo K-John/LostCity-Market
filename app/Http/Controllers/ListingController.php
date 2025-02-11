@@ -58,6 +58,13 @@ class ListingController
 
     public function store(ListingFormData $data, Request $request)
     {
+        $blockedIps = explode(',', env('BLOCKED_IPS', ''));
+        $blockedIps = array_map('trim', $blockedIps);
+
+        if (in_array($request->ip(), $blockedIps)) {
+            return back()->error('You are not allowed to create listings');
+        }
+
         $key = Session::get('listing_token');
 
         if (RateLimiter::tooManyAttempts($key, 1)) {
