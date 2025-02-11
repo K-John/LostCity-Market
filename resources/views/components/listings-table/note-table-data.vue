@@ -16,7 +16,7 @@ defineProps<{
 <template>
     <td class="max-w-[110px] px-1">
         <div
-            v-if="listing.canManage"
+            v-if="listing.canManage && !listing.deletedAt"
             class="flex flex-nowrap justify-end gap-1"
         >
             <DropdownMenu>
