@@ -33,6 +33,17 @@ class ListingFormData extends Data
                 'string',
                 'in:buy,sell',
                 function ($attribute, $value, $fail) {
+                    $existingListings = Listing::where('type', $value)
+                        ->whereNull('deleted_at')
+                        ->where('token', session('listing_token'))
+                        ->where('id', '!=', request('id'))
+                        ->where('updated_at', '>=', now()->subDays(2))
+                        ->count();
+                    if ($existingListings >= 3) {
+                        $fail('You cannot have more than three active listings of the same type.');
+                    }
+                },
+                function ($attribute, $value, $fail) {
                     $existingListing = Listing::where('type', $value)
                         ->whereNull('deleted_at')
                         ->where('item_id', request('item.id'))
@@ -41,7 +52,7 @@ class ListingFormData extends Data
                         ->where('updated_at', '>=', now()->subDays(2))
                         ->first();
                     if ($existingListing) {
-                        $fail('You cannot have multiple listings of the same type. Please update the existing listing instead.');
+                        $fail('You cannot have multiple listings of the same item and type. Please update the existing listing instead.');
                     }
                 },
             ],
