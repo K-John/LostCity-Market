@@ -56,7 +56,7 @@ class ListingController
         ));
     }
 
-    public function store(ListingFormData $data)
+    public function store(ListingFormData $data, Request $request)
     {
         $key = Session::get('listing_token');
 
@@ -76,6 +76,7 @@ class ListingController
             $listingData['notes'] = Profanity::blocker($listingData['notes'])->filter();
         }
 
+        $listingData['ip'] = $request->ip();
         Listing::create($listingData);
 
         return to_route('items.show', $data->item->slug)->success('The listing has been created and will expire in 48 hours');
