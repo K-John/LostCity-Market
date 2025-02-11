@@ -17,15 +17,20 @@ class ListingFormData extends Data
         public ?string $notes,
         public string $username,
         public ?ItemData $item,
-    ) {
-    }
+    ) {}
 
     public static function rules(): array
     {
         return [
             'price' => ['required', 'integer', 'min:1'],
             'quantity' => ['required', 'integer', 'min:1'],
-            'username' => ['required', 'string'],
+            'username' => [
+                'required',
+                'string',
+                'max:13',
+                'regex:/^(?! )[A-Za-z0-9]+(?: [A-Za-z0-9]+)*(?<! )$/'
+            ],
+
             'notes' => ['nullable', 'string'],
             'item.id' => ['required', 'integer', 'exists:items,id'],
             'type' => [
