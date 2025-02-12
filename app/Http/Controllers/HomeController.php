@@ -10,6 +10,7 @@ use App\Pages\HomeIndexPage;
 use Illuminate\Http\Request;
 use Spatie\LaravelData\PaginatedDataCollection;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class HomeController
 {
@@ -22,10 +23,17 @@ class HomeController
 
         // Cache only the query results
         $listings = Cache::remember($cacheKey, 30, function () use ($listingType) {
-            return Listing::with('item')
+            $subQuery = Listing::select('listings.id')
+                ->selectRaw('ROW_NUMBER() OVER (PARTITION BY username ORDER BY updated_at DESC) as row_num')
                 ->whereNull('deleted_at')
                 ->where('updated_at', '>=', now()->subDays(2))
-                ->where('type', $listingType)
+                ->where('type', $listingType);
+
+            return Listing::with('item') // Eager load the related item model
+                ->joinSub($subQuery, 'filtered_listings', function ($join) {
+                    $join->on('listings.id', '=', 'filtered_listings.id');
+                })
+                ->where('row_num', '<=', 3)
                 ->orderBy('updated_at', 'desc')
                 ->paginate(20);
         });
