@@ -44,8 +44,8 @@ class ListingFormData extends Data
                         ->where('id', '!=', request('id'))
                         ->where('updated_at', '>=', now()->subDays(2))
                         ->count();
-                    if ($existingListings >= 3) {
-                        $fail('You cannot have more than three active listings of the same type.');
+                    if ($existingListings >= 8) {
+                        $fail('You cannot have more than eight active listings of the same type.');
                     }
                 },
                 function ($attribute, $value, $fail) {
