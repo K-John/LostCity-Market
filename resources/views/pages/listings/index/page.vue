@@ -23,6 +23,13 @@ const submit = () => {
         },
     });
 };
+
+const canBumpListings = computed(() =>
+    props.listings.data.some(
+        (listing) =>
+            new Date(listing.updatedAt) < new Date(Date.now() - 30 * 60 * 1000),
+    ),
+);
 </script>
 
 <template>
@@ -90,8 +97,37 @@ const submit = () => {
         </div>
 
         <div class="flex flex-col gap-2 border-2 border-[#382418] bg-black">
-            <div class="px-3 pt-3">
+            <div class="flex justify-between px-3 pt-3">
                 <h2 class="text-lg font-bold">My Listings:</h2>
+
+                <Tooltip>
+                    <button
+                        type="button"
+                        class="flex items-center gap-2 rounded-sm bg-stone-800 px-2 py-1 text-amber-400"
+                        :class="{
+                            'hover:bg-stone-900': canBumpListings,
+                            'cursor-not-allowed opacity-50': !canBumpListings,
+                        }"
+                        :disabled="!canBumpListings"
+                        @click="
+                            router.patch(route('bump'), {
+                                preserveScroll: true,
+                            })
+                        "
+                    >
+                        <ArrowTrendingUpIcon class="size-5" /> Bump All
+                    </button>
+
+                    <template #popper>
+                        <template v-if="!canBumpListings">
+                            You have no listings eligible for bumping
+                        </template>
+
+                        <template v-else>
+                            Listings can be bumped every 30 mins
+                        </template>
+                    </template>
+                </Tooltip>
             </div>
 
             <table class="border-separate border-spacing-2">

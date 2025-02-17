@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BumpController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ListingController;
@@ -17,6 +18,9 @@ Route::resource('listings', ListingController::class)
 
 Route::patch('listings/{listing}/bump', [ListingController::class, 'bump'])
     ->name('listings.bump');
+
+Route::patch('bump', BumpController::class)
+    ->name('bump');
 
 Route::post('token', [TokenController::class, 'store'])
     ->name('tokens.store');
