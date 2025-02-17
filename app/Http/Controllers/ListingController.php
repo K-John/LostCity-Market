@@ -23,6 +23,8 @@ class ListingController
 {
     use AuthorizesRequests;
 
+    protected array $exceptionUsernames = ['poon', 'gol d', 'five pot'];
+
     public function index()
     {
         $token = Session::get('listing_token');
@@ -76,7 +78,8 @@ class ListingController
 
         $listingData = collect($data->toArray())->except('item')->toArray();
         $listingData['item_id'] = $data->item->id;
-        if ($listingData['username'] !== 'poon') {
+
+        if (!in_array(strtolower($listingData['username']), $this->exceptionUsernames)) {
             $listingData['username'] = Profanity::blocker($listingData['username'])->filter();
         }
         if (!empty($listingData['notes'])) {
@@ -110,7 +113,7 @@ class ListingController
     {
         $this->authorize('update', $listing);
 
-        if ($data->username !== 'poon') {
+        if (!in_array(strtolower($data->username), $this->exceptionUsernames)) {
             $data->username = Profanity::blocker($data->username)->filter();
         }
         if (!empty($data->notes)) {
@@ -152,5 +155,25 @@ class ListingController
         $listing->touch();
 
         return back()->success('Listing bumped successfully');
+    }
+
+    public function boop(Request $request)
+    {
+        dd("Test");
+        $token = Session::get('listing_token');
+
+        $listings = Listing::where('token', $token)
+            ->whereNull('deleted_at')
+            ->where('updated_at', '<', now()->subMinutes(30))
+            ->where('updated_at', '>=', now()->subDays(2))
+            ->get();
+
+        if ($listings->isEmpty()) {
+            return back()->error('No listings were found to bump');
+        }
+
+        $listings->each->touch();
+
+        return back()->success('Listings bumped successfully');
     }
 }
