@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Username;
+use App\Services\UsernameService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
@@ -30,7 +32,11 @@ class DiscordController extends Controller
 
             Auth::login($user);
 
-            // Make API call to LostCity to get user's usernames
+            try {
+                UsernameService::updateUsernamesForUser($user);
+            } catch (\Exception $e) {
+                return back()->error('An error occurred while updating your usernames');
+            }
 
             return to_route('home')->success('You have successfully logged in');
 

@@ -33,8 +33,9 @@ Route::get('token', [TokenController::class, 'download'])
 Route::get('token/{listing}', [TokenController::class, 'show'])
     ->name('tokens.show');
 
-Route::get('users/{username}', UsernameController::class)
-    ->name('users');
+Route::resource('users', UsernameController::class)
+    ->only(['show', 'update'])
+    ->names('usernames');
 
 Route::get('/auth/discord', [DiscordController::class, 'redirectToDiscord'])
     ->name('auth.discord');
