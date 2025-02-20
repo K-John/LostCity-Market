@@ -36,6 +36,7 @@ declare global {
   const extendRef: typeof import('@vueuse/core')['extendRef']
   const formatGold: typeof import('../utils/formatGold')['default']
   const formatTime: typeof import('../utils/formatTime')['formatTime']
+  const fromBase37: typeof import('../utils/jString')['fromBase37']
   const fromNow: typeof import('../utils/fromNow')['fromNow']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
@@ -98,10 +99,14 @@ declare global {
   const templateRef: typeof import('@vueuse/core')['templateRef']
   const throttledRef: typeof import('@vueuse/core')['throttledRef']
   const throttledWatch: typeof import('@vueuse/core')['throttledWatch']
+  const toBase37: typeof import('../utils/jString')['toBase37']
+  const toDisplayName: typeof import('../utils/jString')['toDisplayName']
   const toRaw: typeof import('vue')['toRaw']
   const toReactive: typeof import('@vueuse/core')['toReactive']
   const toRef: typeof import('vue')['toRef']
   const toRefs: typeof import('vue')['toRefs']
+  const toSafeName: typeof import('../utils/jString')['toSafeName']
+  const toTitleCase: typeof import('../utils/jString')['toTitleCase']
   const toValue: typeof import('vue')['toValue']
   const triggerRef: typeof import('vue')['triggerRef']
   const tryOnBeforeMount: typeof import('@vueuse/core')['tryOnBeforeMount']
@@ -336,6 +341,7 @@ declare module 'vue' {
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly formatGold: UnwrapRef<typeof import('../utils/formatGold')['default']>
     readonly formatTime: UnwrapRef<typeof import('../utils/formatTime')['formatTime']>
+    readonly fromBase37: UnwrapRef<typeof import('../utils/jString')['fromBase37']>
     readonly fromNow: UnwrapRef<typeof import('../utils/fromNow')['fromNow']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
@@ -398,10 +404,14 @@ declare module 'vue' {
     readonly templateRef: UnwrapRef<typeof import('@vueuse/core')['templateRef']>
     readonly throttledRef: UnwrapRef<typeof import('@vueuse/core')['throttledRef']>
     readonly throttledWatch: UnwrapRef<typeof import('@vueuse/core')['throttledWatch']>
+    readonly toBase37: UnwrapRef<typeof import('../utils/jString')['toBase37']>
+    readonly toDisplayName: UnwrapRef<typeof import('../utils/jString')['toDisplayName']>
     readonly toRaw: UnwrapRef<typeof import('vue')['toRaw']>
     readonly toReactive: UnwrapRef<typeof import('@vueuse/core')['toReactive']>
     readonly toRef: UnwrapRef<typeof import('vue')['toRef']>
     readonly toRefs: UnwrapRef<typeof import('vue')['toRefs']>
+    readonly toSafeName: UnwrapRef<typeof import('../utils/jString')['toSafeName']>
+    readonly toTitleCase: UnwrapRef<typeof import('../utils/jString')['toTitleCase']>
     readonly toValue: UnwrapRef<typeof import('vue')['toValue']>
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly tryOnBeforeMount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeMount']>
