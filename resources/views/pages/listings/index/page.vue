@@ -9,7 +9,6 @@ import {
     XMarkIcon,
 } from "@heroicons/vue/24/outline/index.js";
 
-
 const props = defineProps<Pages.ListingsIndexPage>();
 
 const auth = useAuth();
@@ -38,12 +37,16 @@ const canBumpListings = computed(() =>
     <LayoutMain>
         <Head title="My Listings" />
 
-        <Alert
-            v-if="!auth && !props.token"
-            type="info"
-        >
+        <Alert v-if="!auth && !props.token" type="info">
             <p>
-                If you have an existing token, you can sign in with it here. Otherwise, you should <Link :href="route('login.index')" class="text-[#90c040] hover:underline">login with Discord</Link> to manage your listings.
+                If you have an existing token, you can sign in with it here.
+                Otherwise, you should
+                <Link
+                    :href="route('login.index')"
+                    class="text-[#90c040] hover:underline"
+                    >login with Discord</Link
+                >
+                to manage your listings.
             </p>
 
             <form class="flex flex-col gap-4" @submit.prevent="submit">
@@ -80,7 +83,12 @@ const canBumpListings = computed(() =>
 
             <p>
                 Your are signed in with a token. You can save this token to
-                restore access to your listings, or you can <Link :href="route('login.index')" class="text-[#90c040] hover:underline">login with Discord</Link>.
+                restore access to your listings, or you can
+                <Link
+                    :href="route('login.index')"
+                    class="text-[#90c040] hover:underline"
+                    >login with Discord</Link
+                >.
             </p>
 
             <a
@@ -90,6 +98,39 @@ const canBumpListings = computed(() =>
             >
                 Download Token
             </a>
+        </Alert>
+
+        <Alert v-if="auth">
+            <div class="flex items-center gap-2">
+                <h2 class="font-bold text-stone-200">My Usernames:</h2>
+
+                <span v-if="usernames.length" class="whitespace-pre text-stone-300">
+                    {{ usernames.map(toDisplayName).join(", ") }}
+                </span>
+
+                <span v-else class="text-stone-400">None</span>
+            </div>
+
+            <hr class="border-stone-700" />
+
+            <p class="text-stone-400">
+                Usernames not accurate?
+                <button
+                    type="button"
+                    class="text-[#90c040] hover:underline"
+                    @click="
+                        router.patch(
+                            route('usernames.update', {
+                                user: auth.email,
+                                preserveScroll: true,
+                            }),
+                        )
+                    "
+                >
+                    Click here
+                </button>
+                to get your latest usernames from Lost City.
+            </p>
         </Alert>
 
         <div class="flex flex-col gap-2 border-2 border-[#382418] bg-black">
