@@ -43,5 +43,5 @@ Route::get('/auth/discord/callback', [DiscordController::class, 'handleDiscordCa
     ->name('auth.discord.callback');
 
 Route::resource('login', LoginController::class)
-    ->only(['index', 'store', 'destory'])
+    ->only(['index', 'destroy'])
     ->names('login');

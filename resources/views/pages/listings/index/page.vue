@@ -9,8 +9,10 @@ import {
     XMarkIcon,
 } from "@heroicons/vue/24/outline/index.js";
 
+
 const props = defineProps<Pages.ListingsIndexPage>();
 
+const auth = useAuth();
 const form = useForm({
     ...props.tokenForm,
 });
@@ -36,18 +38,12 @@ const canBumpListings = computed(() =>
     <LayoutMain>
         <Head title="My Listings" />
 
-        <div
-            v-if="!props.token"
-            class="mb-4 flex flex-col gap-4 border-2 border-amber-800 bg-amber-950 p-3"
+        <Alert
+            v-if="!auth && !props.token"
+            type="info"
         >
             <p>
-                A token will be created for you when you
-                <Link
-                    :href="route('listings.create')"
-                    class="text-[#90c040] hover:underline"
-                    >create a listing</Link
-                >
-                . If you have an existing token, you can sign in with it here.
+                If you have an existing token, you can sign in with it here. Otherwise, you should <Link :href="route('login.index')" class="text-[#90c040] hover:underline">login with Discord</Link> to manage your listings.
             </p>
 
             <form class="flex flex-col gap-4" @submit.prevent="submit">
@@ -73,18 +69,18 @@ const canBumpListings = computed(() =>
                     Submit
                 </button>
             </form>
-        </div>
+        </Alert>
 
-        <div
-            v-else
-            class="mb-4 flex flex-col gap-2 border-2 border-green-800 bg-green-950 p-3"
+        <Alert
+            v-if="!auth && props.token"
+            id="token-save-notice"
+            type="success"
         >
             <h2 class="font-bold">Save Your Token</h2>
 
             <p>
                 Your are signed in with a token. You can save this token to
-                restore access to your listings incase your browser cache is
-                reset and you lose the cookie.
+                restore access to your listings, or you can <Link :href="route('login.index')" class="text-[#90c040] hover:underline">login with Discord</Link>.
             </p>
 
             <a
@@ -94,7 +90,7 @@ const canBumpListings = computed(() =>
             >
                 Download Token
             </a>
-        </div>
+        </Alert>
 
         <div class="flex flex-col gap-2 border-2 border-[#382418] bg-black">
             <div class="flex justify-between px-3 pt-3">
