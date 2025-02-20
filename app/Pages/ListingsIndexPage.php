@@ -12,6 +12,7 @@ class ListingsIndexPage extends Data
         /** @var PaginatedDataCollection<\App\Data\Listing\ListingData> */
         public PaginatedDataCollection $listings,
         public string $token,
-        public TokenFormData $tokenForm
+        public TokenFormData $tokenForm,
+        public array $usernames
     ) {}
 }
