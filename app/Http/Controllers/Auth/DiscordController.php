@@ -35,13 +35,13 @@ class DiscordController extends Controller
             try {
                 UsernameService::updateUsernamesForUser($user);
             } catch (\Exception $e) {
-                return back()->error('An error occurred while updating your usernames');
+                return to_route('listings.index')->error('An error occurred while updating your usernames');
             }
 
-            return to_route('home')->success('You have successfully logged in');
+            return to_route('listings.index')->success('You have successfully logged in');
 
         } catch (\Exception $e) {
-            return to_route('home')->error('An error occurred while logging in with Discord');
+            return to_route('login.index')->error('An error occurred while logging in with Discord');
         }
     }
 }
