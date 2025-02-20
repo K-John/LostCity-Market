@@ -5,15 +5,25 @@ namespace App\Services;
 use App\Models\User;
 use App\Models\Username;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UsernameService
 {
     public static function updateUsernamesForUser(User $user): void
     {
-        // Get the user's usernames from Lost City
-        $usernames = [];
+        $jwtToken = JWTAuth::fromUser($user);
 
-        // Update the user's usernames
+        $response = Http::withToken($jwtToken)
+            ->get(config('services.username_api.url'), [
+                'email' => $user->email
+            ]);
+
+        if ($response->failed()) {
+            throw new \Exception('Failed to fetch usernames');
+        }
+        $usernames = $response->json('usernames');
+
         $existingUsernames = Username::where('user_id', $user->id)->pluck('username')->toArray();
         $newUsernames = array_diff($usernames, $existingUsernames);
         $usernamesToDelete = array_diff($existingUsernames, $usernames);
@@ -24,13 +34,6 @@ class UsernameService
             Username::create([
                 'user_id' => $user->id,
                 'username' => $username,
-            ]);
-        }
-
-        // For now, let's make 1-3 fake usernames
-        if (empty($existingUsernames)) {
-            Username::factory(rand(1, 3))->create([
-                'user_id' => $user->id,
             ]);
         }
     }
