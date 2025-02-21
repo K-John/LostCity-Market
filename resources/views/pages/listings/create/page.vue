@@ -87,12 +87,22 @@ const submit = () => {
                 <div class="flex items-center gap-2">
                     <p>My username is</p>
 
-                    <input
-                        v-model="form.username"
-                        type="text"
-                        class="w-28 border-slate-900 bg-stone-700 py-0 pl-1 pr-0 placeholder:text-stone-400"
-                        placeholder="Username"
-                    />
+                    <template v-if="form.usernames && form.usernames.length">
+                        <select v-model="form.username" class="w-28 border-slate-900 bg-stone-700 py-0 pl-1 pr-0 placeholder:text-stone-400">
+                            <option v-for="username in form.usernames" :key="username" :value="username">
+                                {{ toDisplayName(username) }}
+                            </option>
+                        </select>
+                    </template>
+
+                    <template v-else>
+                        <input
+                            v-model="form.username"
+                            type="text"
+                            class="w-28 border-slate-900 bg-stone-700 py-0 pl-1 pr-0 placeholder:text-stone-400"
+                            placeholder="Username"
+                        />
+                    </template>
 
                     <p>Notes:</p>
 

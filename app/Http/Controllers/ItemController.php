@@ -11,23 +11,25 @@ use Illuminate\Http\Request;
 use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\PaginatedDataCollection;
 use App\Http\Traits\HandlesListingType;
+use App\Services\UsernameService;
+use Illuminate\Support\Facades\Auth;
 
 class ItemController
 {
     use HandlesListingType;
 
-    public function show(Request $request, Item $item) 
+    public function show(Request $request, Item $item)
     {
         $listingType = $this->getListingType($request);
 
         $itemData = ItemData::from($item);
 
+        $latestUsername = Auth::user()?->listings()->latest()->value('username');
+
         $listings = $item->listings()
-            ->whereNull('deleted_at')
+            ->active()
             ->where('type', $listingType)
-            ->where('updated_at', '>=', now()->subDays(2))
-            ->orderBy('updated_at', 'desc')
-        ->paginate(20);
+            ->paginate(20);
 
         $deletedListings = $item->listings()
             ->whereNotNull('deleted_at')
@@ -44,8 +46,9 @@ class ItemController
                 price: '',
                 quantity: null,
                 notes: '',
-                username: '',
+                username: $latestUsername ?? '',
                 item: $itemData,
+                usernames: UsernameService::getAuthenticatedUsernames(),
             ),
             listings: ListingData::collect($listings, PaginatedDataCollection::class),
             deletedListings: ListingData::collect($deletedListings->map(function ($listing) {

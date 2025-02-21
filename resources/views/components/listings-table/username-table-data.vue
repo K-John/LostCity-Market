@@ -7,20 +7,13 @@ defineProps<{
 <template>
     <td class="px-1 text-stone-400">
         <div class="d-flex">
-            <Link :href="route('users', { username: listing.username })">
+            <Link :href="route('usernames.show', { user: listing.username })" class="whitespace-pre">
                 {{
-                    listing.username
-                        .split(" ")
-                        .map(
-                            (word) =>
-                                word.charAt(0).toUpperCase() +
-                                word.slice(1).toLowerCase(),
-                        )
-                        .join(" ")
+                    toDisplayName(listing.username)
                 }}
             </Link>
 
-            <Link :href="route('tokens.show', { listing: listing })" class="align-super text-[x-small] text-white">
+            <Link v-if="!listing.userId" :href="route('tokens.show', { listing: listing })" class="align-super text-[x-small] text-white">
                 #{{ listing.tokenPrefix }}
             </Link>
         </div>

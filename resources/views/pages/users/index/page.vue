@@ -1,27 +1,18 @@
 <script setup lang="ts">
 const props = defineProps<Pages.UsersIndexPage>();
-
-const displayName = (username: string) =>
-    username
-        .split(" ")
-        .map(
-            (word) =>
-                word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
-        )
-        .join(" ");
 </script>
 
 <template>
     <LayoutMain>
-        <Head :title="`${displayName(username)}'s Listings'`" />
+        <Head :title="`${toDisplayName(username)}'s Listings'`" />
 
         <ListingTable>
             <EmptyTableRow v-if="!props.listings.data.length" />
 
             <template #header>
                 <h2 class="text-lg font-bold">
-                    <span class="text-stone-500">{{
-                        displayName(username)
+                    <span class="whitespace-pre text-stone-500">{{
+                        toDisplayName(username)
                     }}</span
                     >'s listings
                 </h2>

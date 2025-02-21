@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\DiscordController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BumpController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
@@ -31,5 +33,16 @@ Route::get('token', [TokenController::class, 'download'])
 Route::get('token/{listing}', [TokenController::class, 'show'])
     ->name('tokens.show');
 
-Route::get('users/{username}', UsernameController::class)
-    ->name('users');
+Route::resource('users', UsernameController::class)
+    ->only(['show', 'update'])
+    ->names('usernames');
+
+Route::get('/auth/discord', [DiscordController::class, 'redirectToDiscord'])
+    ->name('auth.discord');
+
+Route::get('/auth/discord/callback', [DiscordController::class, 'handleDiscordCallback'])
+    ->name('auth.discord.callback');
+
+Route::resource('login', LoginController::class)
+    ->only(['index', 'destroy'])
+    ->names('login');

@@ -19,6 +19,7 @@ item: Data.Item.ItemData | null;
 tokenPrefix: string;
 updatedAt: string;
 deletedAt: string | null;
+userId: number | null;
 };
 export type ListingFormData = {
 id: number | null;
@@ -28,6 +29,7 @@ quantity: number | null;
 notes: string | null;
 username: string;
 item: Data.Item.ItemData | null;
+usernames: Array<any> | null;
 };
 }
 declare namespace Data.Shared {
@@ -75,6 +77,7 @@ export type ListingsIndexPage = {
 listings: {data:Array<Data.Listing.ListingData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
 token: string;
 tokenForm: Data.Token.TokenFormData;
+usernames: Array<any>;
 };
 export type TokensShowPage = {
 token: string;

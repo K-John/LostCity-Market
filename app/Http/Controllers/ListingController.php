@@ -11,10 +11,12 @@ use App\Models\Listing;
 use App\Pages\ListingsCreatePage;
 use App\Pages\ListingsEditPage;
 use App\Pages\ListingsIndexPage;
+use App\Services\UsernameService;
 use ConsoleTVs\Profanity\Facades\Profanity;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Session;
 use Spatie\LaravelData\PaginatedDataCollection;
@@ -23,28 +25,34 @@ class ListingController
 {
     use AuthorizesRequests;
 
-    protected array $exceptionUsernames = ['poon', 'gol d', 'five pot'];
-
     public function index()
     {
+        $usernames = UsernameService::getAuthenticatedUsernames();
         $token = Session::get('listing_token');
 
-        $listings = Listing::with('item')
-            ->where('token', $token)
-            ->whereNull('deleted_at')
-            ->where('updated_at', '>=', now()->subDays(2))
-            ->orderBy('updated_at', 'desc')
+        if (!empty($usernames)) {
+            $listings = Listing::active()->with('item')
+            ->whereIn('username', $usernames)
             ->paginate(20);
+        } else {
+            $listings = Listing::active()->with('item')
+            ->where('token', $token)
+            ->paginate(20);
+        }
 
         return inertia('listings/index/page', new ListingsIndexPage(
             listings: ListingData::collect($listings, PaginatedDataCollection::class),
             token: $token ? substr($token, 0, 4) . str_repeat('*', strlen($token) - 8) . substr($token, -4) : "",
             tokenForm: new TokenFormData(token: ''),
+            usernames: $usernames,
         ));
     }
 
     public function create()
     {
+        $usernames = UsernameService::getAuthenticatedUsernames();
+        $latestUsername = Auth::user()?->listings()->latest()->value('username');
+
         return inertia('listings/create/page', new ListingsCreatePage(
             listingForm: new ListingFormData(
                 id: null,
@@ -52,8 +60,9 @@ class ListingController
                 price: '',
                 quantity: null,
                 notes: '',
-                username: '',
+                username: $latestUsername ?? '',
                 item: null,
+                usernames: $usernames
             )
         ));
     }
@@ -68,25 +77,20 @@ class ListingController
         }
 
         $key = Session::get('listing_token');
-
         if (RateLimiter::tooManyAttempts($key, 1)) {
             throw new ThrottleRequestsException('Too many requests. Please wait a few seconds before submitting again.');
         }
-
         // Allow only 1 attempt per 3 seconds
         RateLimiter::hit($key, 3);
 
-        $listingData = collect($data->toArray())->except('item')->toArray();
+        $listingData = collect($data->toArray())->except(['item', 'usernames'])->toArray();
         $listingData['item_id'] = $data->item->id;
 
-        if (!in_array(strtolower($listingData['username']), $this->exceptionUsernames)) {
-            $listingData['username'] = Profanity::blocker($listingData['username'])->filter();
-        }
-        if (!empty($listingData['notes'])) {
-            $listingData['notes'] = Profanity::blocker($listingData['notes'])->filter();
-        }
-
         $listingData['ip'] = $request->ip();
+
+        // Trim spaces and underscores from start and end of username
+        $data->username = trim($data->username, ' _');
+
         Listing::create($listingData);
 
         return to_route('items.show', $data->item->slug)->success('The listing has been created and will expire in 48 hours');
@@ -104,6 +108,7 @@ class ListingController
                 quantity: $listing->quantity,
                 notes: $listing->notes,
                 username: $listing->username,
+                usernames: UsernameService::getAuthenticatedUsernames(),
                 item: ItemData::from($listing->item),
             ),
         ));
@@ -113,17 +118,13 @@ class ListingController
     {
         $this->authorize('update', $listing);
 
-        if (!in_array(strtolower($data->username), $this->exceptionUsernames)) {
-            $data->username = Profanity::blocker($data->username)->filter();
-        }
-        if (!empty($data->notes)) {
-            $data->notes = Profanity::blocker($data->notes)->filter();
-        }
-
         // Only bump if the listing was last updated more than 30 minutes ago
         if ($listing->updated_at->diffInMinutes(now()) < 30) {
             $listing->timestamps = false;
         }
+
+        // Trim spaces and underscores from start and end of username
+        $data->username = trim($data->username, ' _');
 
         $listing->update($data->getListingData());
 
@@ -155,25 +156,5 @@ class ListingController
         $listing->touch();
 
         return back()->success('Listing bumped successfully');
-    }
-
-    public function boop(Request $request)
-    {
-        dd("Test");
-        $token = Session::get('listing_token');
-
-        $listings = Listing::where('token', $token)
-            ->whereNull('deleted_at')
-            ->where('updated_at', '<', now()->subMinutes(30))
-            ->where('updated_at', '>=', now()->subDays(2))
-            ->get();
-
-        if ($listings->isEmpty()) {
-            return back()->error('No listings were found to bump');
-        }
-
-        $listings->each->touch();
-
-        return back()->success('Listings bumped successfully');
     }
 }

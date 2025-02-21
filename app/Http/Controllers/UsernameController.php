@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Data\Listing\ListingData;
 use App\Models\Listing;
 use App\Pages\UsersIndexPage;
-use Illuminate\Http\Request;
+use App\Services\UsernameService;
+use Illuminate\Support\Facades\Auth;
 use Spatie\LaravelData\PaginatedDataCollection;
 
 class UsernameController
 {
-    public function __invoke(String $username, Request $request)
+    public function show(String $username)
     {
         $listings = Listing::with('item')
             ->where('username', $username)
@@ -22,5 +23,27 @@ class UsernameController
             username: $username,
             listings: ListingData::collect($listings, PaginatedDataCollection::class)
         ));
+    }
+
+    public function update()
+    {
+        if (!Auth::check()) {
+            return back()->error('You must be logged in to update your usernames');
+        }
+
+        $user = Auth::user();
+
+        if ($user instanceof \App\Models\User) {
+            try {
+                UsernameService::updateUsernamesForUser($user);
+                return back()->success('Usernames updated from Lost City');
+
+            } catch (\Exception $e) {
+                dd($e);
+                return back()->error('An error occurred while updating your usernames');
+            }
+        } else {
+            return back()->error('User not found');
+        }
     }
 }

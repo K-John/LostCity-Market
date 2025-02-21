@@ -11,6 +11,7 @@ import {
 
 const props = defineProps<Pages.ListingsIndexPage>();
 
+const auth = useAuth();
 const form = useForm({
     ...props.tokenForm,
 });
@@ -36,18 +37,16 @@ const canBumpListings = computed(() =>
     <LayoutMain>
         <Head title="My Listings" />
 
-        <div
-            v-if="!props.token"
-            class="mb-4 flex flex-col gap-4 border-2 border-amber-800 bg-amber-950 p-3"
-        >
+        <Alert v-if="!auth && !props.token" type="info">
             <p>
-                A token will be created for you when you
+                If you have an existing token, you can sign in with it here.
+                Otherwise, you should
                 <Link
-                    :href="route('listings.create')"
+                    :href="route('login.index')"
                     class="text-[#90c040] hover:underline"
-                    >create a listing</Link
+                    >login with Discord</Link
                 >
-                . If you have an existing token, you can sign in with it here.
+                to manage your listings.
             </p>
 
             <form class="flex flex-col gap-4" @submit.prevent="submit">
@@ -73,18 +72,23 @@ const canBumpListings = computed(() =>
                     Submit
                 </button>
             </form>
-        </div>
+        </Alert>
 
-        <div
-            v-else
-            class="mb-4 flex flex-col gap-2 border-2 border-green-800 bg-green-950 p-3"
+        <Alert
+            v-if="!auth && props.token"
+            id="token-save-notice"
+            type="success"
         >
             <h2 class="font-bold">Save Your Token</h2>
 
             <p>
                 Your are signed in with a token. You can save this token to
-                restore access to your listings incase your browser cache is
-                reset and you lose the cookie.
+                restore access to your listings, or you can
+                <Link
+                    :href="route('login.index')"
+                    class="text-[#90c040] hover:underline"
+                    >login with Discord</Link
+                >.
             </p>
 
             <a
@@ -94,7 +98,40 @@ const canBumpListings = computed(() =>
             >
                 Download Token
             </a>
-        </div>
+        </Alert>
+
+        <Alert v-if="auth">
+            <div class="flex items-center gap-2">
+                <h2 class="font-bold text-stone-200">My Usernames:</h2>
+
+                <span v-if="usernames.length" class="whitespace-pre text-stone-300">
+                    {{ usernames.map(toDisplayName).join(", ") }}
+                </span>
+
+                <span v-else class="text-stone-400">None</span>
+            </div>
+
+            <hr class="border-stone-700" />
+
+            <p class="text-stone-400">
+                Usernames not accurate?
+                <button
+                    type="button"
+                    class="text-[#90c040] hover:underline"
+                    @click="
+                        router.patch(
+                            route('usernames.update', {
+                                user: auth.email,
+                                preserveScroll: true,
+                            }),
+                        )
+                    "
+                >
+                    Click here
+                </button>
+                to get your latest usernames from Lost City.
+            </p>
+        </Alert>
 
         <div class="flex flex-col gap-2 border-2 border-[#382418] bg-black">
             <div class="flex justify-between px-3 pt-3">

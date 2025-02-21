@@ -13,9 +13,12 @@
         "inertiajs/inertia-laravel": "2.0",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
+        "laravel/socialite": "^5.18",
         "laravel/tinker": "^2.10",
+        "socialiteproviders/discord": "^4.2",
         "spatie/laravel-data": "^4.0",
-        "spatie/laravel-typescript-transformer": "^2.5"
+        "spatie/laravel-typescript-transformer": "^2.5",
+        "tymon/jwt-auth": "^2.1"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.5",
