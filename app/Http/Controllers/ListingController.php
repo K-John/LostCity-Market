@@ -25,8 +25,6 @@ class ListingController
 {
     use AuthorizesRequests;
 
-    protected array $exceptionUsernames = ['poon', 'gol d', 'five pot'];
-
     public function index()
     {
         $usernames = UsernameService::getAuthenticatedUsernames();
@@ -88,17 +86,7 @@ class ListingController
         $listingData = collect($data->toArray())->except(['item', 'usernames'])->toArray();
         $listingData['item_id'] = $data->item->id;
 
-        if (!in_array(strtolower($listingData['username']), $this->exceptionUsernames)) {
-            $listingData['username'] = Profanity::blocker($listingData['username'])->filter();
-        }
-        if (!empty($listingData['notes'])) {
-            $listingData['notes'] = Profanity::blocker($listingData['notes'])->filter();
-        }
-
         $listingData['ip'] = $request->ip();
-        if (Auth::check()) {
-            $listingData['user_id'] = Auth::id();
-        }
 
         // Trim spaces and underscores from start and end of username
         $data->username = trim($data->username, ' _');
@@ -129,13 +117,6 @@ class ListingController
     public function update(ListingFormData $data, Listing $listing)
     {
         $this->authorize('update', $listing);
-
-        if (!in_array(strtolower($data->username), $this->exceptionUsernames)) {
-            $data->username = Profanity::blocker($data->username)->filter();
-        }
-        if (!empty($data->notes)) {
-            $data->notes = Profanity::blocker($data->notes)->filter();
-        }
 
         // Only bump if the listing was last updated more than 30 minutes ago
         if ($listing->updated_at->diffInMinutes(now()) < 30) {

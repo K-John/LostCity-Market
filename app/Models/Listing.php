@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use ConsoleTVs\Profanity\Facades\Profanity;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
@@ -46,6 +46,13 @@ class Listing extends Model
 
             // Assign token to the listing
             $listing->token = $token;
+
+            $listing->filterProfanity();
+
+        });
+
+        static::updating(function ($listing) {
+            $listing->filterProfanity();
         });
     }
 
@@ -58,5 +65,19 @@ class Listing extends Model
             ->whereNull('deleted_at')
             ->where('updated_at', '>=', now()->subDays(2))
             ->orderBy('updated_at', 'desc');
+    }
+
+    protected array $exceptionUsernames = ['poon', 'gol d', 'five pot'];
+
+    /**
+     * Filter profanity from the listing's attributes.
+     */
+    public function filterProfanity()
+    {
+        if (!$this->user_id && !in_array(strtolower($this->username), $this->exceptionUsernames)) {
+            $this->username = Profanity::blocker($this->username)->filter();
+        }
+        
+        $this->notes = Profanity::blocker($this->notes)->filter();
     }
 }
