@@ -30,15 +30,15 @@ class ListingController
         $usernames = UsernameService::getAuthenticatedUsernames();
         $token = Session::get('listing_token');
 
-        if (!empty($usernames)) {
-            $listings = Listing::active()->with('item')
-            ->whereIn('username', $usernames)
+        $listings = Listing::active()->with('item')
+            ->when(Auth::check(), function ($query) {
+                $query->whereIn('username', Auth::user()->usernames->pluck('username')->toArray() ?? [])
+                    ->orWhere('token', session('listing_token'))
+                    ->orWhere('user_id', Auth::id());
+            }, function ($query) {
+                $query->where('token', session('listing_token'));
+            })
             ->paginate(20);
-        } else {
-            $listings = Listing::active()->with('item')
-            ->where('token', $token)
-            ->paginate(20);
-        }
 
         return inertia('listings/index/page', new ListingsIndexPage(
             listings: ListingData::collect($listings, PaginatedDataCollection::class),

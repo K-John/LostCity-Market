@@ -30,7 +30,9 @@ class Listing extends Model
         static::creating(function ($listing) {
             // Get the authenticated user
             $user = Auth::user();
-            if ($user) {
+
+            // Add listing user_id if the authenticated user has the same username
+            if ($user && $user->usernames->contains('username', $listing->username)) {
                 $listing->user_id = $user->id;
             }
             

@@ -40,6 +40,6 @@ class UsernameService
 
     public static function getAuthenticatedUsernames(): array
     {
-        return Auth::check() ? Auth::user()->usernames->pluck('username')->toArray() ?? [] : [];
+        return Auth::user()?->usernames->pluck('username')->toArray() ?? [];
     }
 }
