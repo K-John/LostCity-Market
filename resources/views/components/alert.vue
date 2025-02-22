@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { XMarkIcon } from '@heroicons/vue/24/outline';
 
-type AlertType = "success" | "warning" | "info" | "default";
+type AlertType = "error" | "success" | "warning" | "info" | "default";
 
 interface AlertProps {
     type?: AlertType;
@@ -31,6 +31,7 @@ const closeAlert = () => {
 
 const alertClasses = computed(() => {
     const styles: Record<AlertType, string> = {
+        error: "border-red-800 bg-red-950 text-white",
         success: "border-green-800 bg-green-950 text-white",
         warning: "border-amber-800 bg-amber-950 text-white",
         info: "border-sky-800 bg-sky-950 text-white",
