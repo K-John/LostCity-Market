@@ -5,6 +5,7 @@ const props = defineProps<Pages.ItemsShowPage>();
 
 const listingTypes = computed((): Enums.ListingType[] => ["buy", "sell"]);
 
+const auth = useAuth();
 const form = useForm({
     ...props.listingForm,
 });
@@ -176,6 +177,8 @@ const highlightedIds = ref<number[]>([]);
                     </template>
                 </ListingTable>
             </div>
+
+            <UsernamesAlert v-if="auth && !listingForm?.usernames?.length" />
 
             <form
                 class="flex flex-col gap-4 border-2 border-[#382418] bg-black p-3"

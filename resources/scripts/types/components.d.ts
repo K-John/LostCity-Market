@@ -25,6 +25,7 @@ declare module 'vue' {
     Pagination: typeof import('./../../views/components/pagination.vue')['default']
     PriceTableData: typeof import('./../../views/components/listings-table/price-table-data.vue')['default']
     TimestampTableData: typeof import('./../../views/components/listings-table/timestamp-table-data.vue')['default']
+    UsernamesAlert: typeof import('./../../views/components/usernames-alert.vue')['default']
     UsernameTableData: typeof import('./../../views/components/listings-table/username-table-data.vue')['default']
   }
 }

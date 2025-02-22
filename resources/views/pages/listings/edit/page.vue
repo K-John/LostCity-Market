@@ -4,6 +4,7 @@ const props = defineProps<Pages.ListingsEditPage>();
 
 const listingTypes = computed((): Enums.ListingType[] => ["buy", "sell"]);
 
+const auth = useAuth();
 const form = useForm({
     ...props.listingForm,
 });
@@ -21,6 +22,8 @@ const submit = () => {
 <template>
     <LayoutMain>
         <Head title="Update Listing" />
+
+        <UsernamesAlert v-if="auth && !listingForm?.usernames?.length" />
 
         <form
             class="flex flex-col gap-4 border-2 border-[#382418] bg-black p-3"

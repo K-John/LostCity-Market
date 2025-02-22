@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { Head } from "@inertiajs/vue3";
-import VueSelect from "vue-select";
-import "vue-select/dist/vue-select.css";
 import _ from "lodash";
 
 const props = defineProps<Pages.ListingsCreatePage>();
 
 const listingTypes = computed((): Enums.ListingType[] => ["buy", "sell"]);
 
+const auth = useAuth();
 const form = useForm({
     ...props.listingForm,
 });
@@ -29,6 +28,8 @@ const submit = () => {
 <template>
     <LayoutMain>
         <Head title="Create Listing" />
+
+        <UsernamesAlert v-if="auth && !listingForm?.usernames?.length" />
 
         <form
             class="flex flex-col gap-4 border-2 border-[#382418] bg-black p-3"
@@ -55,7 +56,10 @@ const submit = () => {
                 <div class="flex items-center gap-2">
                     <p>I want to</p>
 
-                    <select v-model="form.type" class="border-slate-900 bg-stone-700 py-0 pl-2 placeholder:text-stone-400">
+                    <select
+                        v-model="form.type"
+                        class="border-slate-900 bg-stone-700 py-0 pl-2 placeholder:text-stone-400"
+                    >
                         <option
                             v-for="type in listingTypes"
                             :key="type"
@@ -88,8 +92,15 @@ const submit = () => {
                     <p>My username is</p>
 
                     <template v-if="form.usernames && form.usernames.length">
-                        <select v-model="form.username" class="w-28 border-slate-900 bg-stone-700 py-0 pl-1 pr-0 placeholder:text-stone-400">
-                            <option v-for="username in form.usernames" :key="username" :value="username">
+                        <select
+                            v-model="form.username"
+                            class="w-28 border-slate-900 bg-stone-700 py-0 pl-1 pr-0 placeholder:text-stone-400"
+                        >
+                            <option
+                                v-for="username in form.usernames"
+                                :key="username"
+                                :value="username"
+                            >
                                 {{ toDisplayName(username) }}
                             </option>
                         </select>

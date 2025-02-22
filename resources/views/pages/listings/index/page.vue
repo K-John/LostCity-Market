@@ -100,6 +100,8 @@ const canBumpListings = computed(() =>
             </a>
         </Alert>
 
+        <UsernamesAlert v-if="auth && !usernames?.length" />
+
         <Alert v-if="auth">
             <div class="flex items-center gap-2">
                 <h2 class="font-bold text-stone-200">My Usernames:</h2>
