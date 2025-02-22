@@ -46,3 +46,7 @@ Route::get('/auth/discord/callback', [DiscordController::class, 'handleDiscordCa
 Route::resource('login', LoginController::class)
     ->only(['index', 'destroy'])
     ->names('login');
+
+Route::get('docs/adopt-legacy-accounts', function () {
+    return inertia('docs/adopt/page');
+})->name('docs.adopt');
