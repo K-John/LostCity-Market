@@ -32,9 +32,11 @@ class ListingController
 
         $listings = Listing::active()->with('item')
             ->when(Auth::check(), function ($query) {
-                $query->whereIn('username', Auth::user()->usernames->pluck('username')->toArray() ?? [])
-                    ->orWhere('token', session('listing_token'))
-                    ->orWhere('user_id', Auth::id());
+                $query->where(function ($query) {
+                    $query->whereIn('username', Auth::user()->usernames->pluck('username')->toArray() ?? [])
+                        ->orWhere('token', session('listing_token'))
+                        ->orWhere('user_id', Auth::id());
+                });
             }, function ($query) {
                 $query->where('token', session('listing_token'));
             })
