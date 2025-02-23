@@ -115,7 +115,7 @@ const canBumpListings = computed(() =>
 
             <hr class="border-stone-700" />
 
-            <p class="text-stone-400">
+            <p class="text-sm text-stone-400">
                 Usernames not accurate?
                 <button
                     type="button"
