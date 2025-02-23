@@ -47,7 +47,7 @@ class ListingData extends Data
             $listing->user_id
         );
 
-        $instance->canManage = $listing->token === session('listing_token') || (Auth::user() && Auth::user()->id === $listing->user_id);
+        $instance->canManage = $listing->token === session('listing_token') || (Auth::user() && (Auth::user()->id === $listing->user_id || in_array($listing->username, Auth::user()->usernames->pluck('username')->toArray())));
 
         return $instance;
     }

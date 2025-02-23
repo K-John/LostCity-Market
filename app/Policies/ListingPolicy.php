@@ -31,7 +31,7 @@ class ListingPolicy
             return false;
         }
 
-        return $listing->token === session('listing_token') || ($user && $user->id === $listing->user_id);
+        return $listing->token === session('listing_token') || ($user && ($user->id === $listing->user_id || in_array($listing->username, $user->usernames->pluck('username')->toArray())));
     }
 
     public function delete(?User $user, Listing $listing): bool
@@ -40,7 +40,7 @@ class ListingPolicy
             return false;
         }
 
-        return $listing->token === session('listing_token') || ($user && $user->id === $listing->user_id);
+        return $listing->token === session('listing_token') || ($user && ($user->id === $listing->user_id || in_array($listing->username, $user->usernames->pluck('username')->toArray())));
     }
 
     public function restore(?User $user, Listing $listing): bool

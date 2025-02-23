@@ -50,10 +50,14 @@ class Listing extends Model
             $listing->token = $token;
 
             $listing->filterProfanity();
-
         });
 
         static::updating(function ($listing) {
+            // Set the authenticated user
+            if (!$listing->user_id && Auth::check()) {
+                $listing->user_id = Auth::id();
+            }
+
             $listing->filterProfanity();
         });
     }
