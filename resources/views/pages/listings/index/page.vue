@@ -189,7 +189,7 @@ const canBumpListings = computed(() =>
                                     "
                                 >
                                     <img
-                                        :src="`/img/items/${listing.item.slug}.png`"
+                                        :src="`/img/items/${listing.item.slug}.webp`"
                                         :alt="`${listing.item.name} Icon`"
                                         width="32"
                                         height="32"

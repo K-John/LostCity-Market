@@ -60,7 +60,7 @@ watch(selected, (newValue) => {
             <div class="flex items-center gap-2">
                 <img
                     class="border-2 border-[#382418]"
-                    :src="`/img/items/${option.slug}.png`"
+                    :src="`/img/items/${option.slug}.webp`"
                     :alt="`${option.name} Icon`"
                     width="32"
                     height="32"
@@ -74,7 +74,7 @@ watch(selected, (newValue) => {
             <div class="flex items-center gap-2 text-white">
                 <img
                     class="border-2 border-[#382418]"
-                    :src="`/img/items/${option.slug}.png`"
+                    :src="`/img/items/${option.slug}.webp`"
                     :alt="`${option.name} Icon`"
                     width="32"
                     height="32"

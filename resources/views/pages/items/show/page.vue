@@ -59,7 +59,7 @@ const highlightedIds = ref<number[]>([]);
             <div class="flex gap-4">
                 <div class="h-fit border-2 border-[#382418] bg-black p-1">
                     <img
-                        :src="`/img/items/${item.slug}.png`"
+                        :src="`/img/items/${item.slug}.webp`"
                         :alt="`${item.name} Icon`"
                         width="32"
                         height="32"

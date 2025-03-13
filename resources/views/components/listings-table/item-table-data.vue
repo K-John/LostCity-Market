@@ -19,7 +19,7 @@ defineProps<{
                 "
             >
                 <img
-                    :src="`/img/items/${item.slug}.png`"
+                    :src="`/img/items/${item.slug}.webp`"
                     :alt="`${item.name} Icon`"
                     width="32"
                     height="32"
