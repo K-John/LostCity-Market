@@ -57,6 +57,26 @@ onMounted(async () => {
 onBeforeUnmount(() => {
     window.removeEventListener("resize", updateChainLinks);
 });
+
+const links = computed(() => [
+    { label: "Main Menu", href: "/" },
+    { label: "Create Listing", href: route("listings.create") },
+    { label: "My Listings", href: route("listings.index") },
+    ...(auth.value
+        ? [
+              {
+                  label: "Logout",
+                  action: () =>
+                      router.delete(
+                          route("login.destroy", {
+                              login: auth.value.email,
+                              preserveScroll: true,
+                          }),
+                      ),
+              },
+          ]
+        : [{ label: "Login", href: route("login.index") }]),
+]);
 </script>
 
 <template>
@@ -109,59 +129,36 @@ onBeforeUnmount(() => {
                     <h1 class="font-bold">Lost City Markets</h1>
 
                     <div
-                        class="flex flex-row items-center justify-center gap-1"
+                        class="flex flex-row flex-wrap items-center justify-center gap-1"
                     >
-                        <Link href="/" class="text-[#90c040] hover:underline"
-                            >Main menu</Link
-                        >
+                        <template v-for="(link, index) in links" :key="index">
+                            <Link
+                                v-if="link.href"
+                                :href="link.href"
+                                class="text-[#90c040] hover:underline"
+                            >
+                                {{ link.label }}
+                            </Link>
 
-                        -
+                            <button
+                                v-else
+                                type="button"
+                                class="text-[#90c040] hover:underline"
+                                @click="link.action"
+                            >
+                                {{ link.label }}
+                            </button>
 
-                        <Link
-                            :href="route('listings.create')"
-                            class="text-[#90c040] hover:underline"
-                            >Create Listing</Link
-                        >
-
-                        -
-
-                        <Link
-                            :href="route('listings.index')"
-                            class="text-[#90c040] hover:underline"
-                            >My Listings</Link
-                        >
-
-                        -
-
-                        <Link
-                            v-if="!auth"
-                            :href="route('login.index')"
-                            class="text-[#90c040] hover:underline"
-                            >Login</Link
-                        >
-
-                        <button
-                            v-else
-                            type="button"
-                            class="text-[#90c040] hover:underline"
-                            @click="
-                                router.delete(
-                                    route('login.destroy', {
-                                        login: auth.email,
-                                        preserveScroll: true,
-                                    }),
-                                )
-                            "
-                        >
-                            Logout
-                        </button>
+                            <!-- Add a hyphen unless it's the last link -->
+                            <span v-if="index < links.length - 1">-</span>
+                        </template>
                     </div>
                 </div>
 
                 <slot />
 
                 <div
-                    class="mt-4 flex flex-row items-center justify-between gap-4 border-2 border-[#382418] bg-black p-3 text-sm"
+                    class="mt-4 flex flex-col items-center justify-between gap-4 border-2 border-[#382418] bg-black p-3 text-sm sm:flex-row"
                 >
                     <p>
                         Fan project. Not affiliated with
