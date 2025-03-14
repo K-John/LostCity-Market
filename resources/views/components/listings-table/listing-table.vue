@@ -8,7 +8,7 @@
             </div>
         </template>
 
-        <table>
+        <table class="w-full">
             <tbody>
                 <slot />
             </tbody>

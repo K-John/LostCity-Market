@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ActionTableData: typeof import('./../../views/components/listings-table/action-table-data.vue')['default']
     Alert: typeof import('./../../views/components/alert.vue')['default']
     DiscordLogo: typeof import('./../../views/components/discord-logo.vue')['default']
     DropdownItem: typeof import('./../../views/components/DropdownItem.vue')['default']

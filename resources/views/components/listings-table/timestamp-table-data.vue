@@ -13,7 +13,7 @@ let interval: ReturnType<typeof setInterval> | null = null;
 onMounted(() => {
     interval = setInterval(() => {
         timeAgo.value = fromNow(props.timestamp);
-    }, 60000); // 60,000ms = 1 minute
+    }, 5_000);
 });
 
 onUnmounted(() => {
@@ -22,9 +22,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <td class="px-1">
+    <td class="sm:px-1">
         <Tooltip>
-            <p>{{ timeAgo }}</p>
+            <p class="text-sm sm:text-[medium]">{{ timeAgo }}</p>
 
             <template #popper>
                 {{ formatTime(timestamp) }}

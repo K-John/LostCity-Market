@@ -5,15 +5,15 @@ defineProps<{
 </script>
 
 <template>
-    <td class="px-1 text-stone-400">
+    <td class="text-stone-400 sm:px-1">
         <div class="d-flex">
-            <Link :href="route('usernames.show', { user: listing.username })" class="whitespace-pre">
+            <Link :href="route('usernames.show', { user: listing.username })" class="whitespace-pre text-sm sm:text-[medium]">
                 {{
                     toDisplayName(listing.username)
                 }}
             </Link>
 
-            <Link v-if="!listing.userId" :href="route('tokens.show', { listing: listing })" class="align-super text-[x-small] text-white">
+            <Link v-if="!listing.userId" :href="route('tokens.show', { listing: listing })" class="hidden align-super text-[x-small] text-white sm:inline">
                 #{{ listing.tokenPrefix }}
             </Link>
         </div>

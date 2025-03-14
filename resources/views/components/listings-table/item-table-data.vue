@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-    <td class="px-1">
+    <td class="sm:px-1">
         <Tooltip>
             <Link
                 v-if="item"
@@ -21,6 +21,7 @@ defineProps<{
                 <img
                     :src="`/img/items/${item.slug}.webp`"
                     :alt="`${item.name} Icon`"
+                    class="min-h-[24px] min-w-[24px]"
                     width="32"
                     height="32"
                 />

@@ -83,6 +83,8 @@ const highlightedIds = ref<number[]>([]);
                     <TimestampTableData :timestamp="listing.updatedAt" />
                     
                     <NoteTableData :listing="listing" />
+
+                    <ActionTableData :listing="listing" />
                 </template>
             </ListingTableRow>
 
