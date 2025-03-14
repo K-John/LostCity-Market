@@ -2,12 +2,7 @@
 import { router, Head } from "@inertiajs/vue3";
 import { Tooltip } from "floating-vue";
 import "floating-vue/dist/style.css";
-import {
-    PencilSquareIcon,
-    CheckIcon,
-    ArrowTrendingUpIcon,
-    XMarkIcon,
-} from "@heroicons/vue/24/outline/index.js";
+import { ArrowTrendingUpIcon } from "@heroicons/vue/24/outline/index.js";
 
 const props = defineProps<Pages.ListingsIndexPage>();
 
@@ -106,9 +101,16 @@ const canBumpListings = computed(() =>
             <div class="flex items-center gap-2">
                 <h2 class="font-bold text-stone-200">My Usernames:</h2>
 
-                <span v-if="usernames.length" class="whitespace-pre text-stone-300">
-                    {{ usernames.map(toDisplayName).join(", ") }}
-                </span>
+                <div v-if="usernames.length" class="flex flex-wrap">
+                    <span
+                        v-for="(username, index) in usernames"
+                        :key="username"
+                        class="whitespace-pre text-stone-300"
+                    >
+                        {{ toDisplayName(username)
+                        }}<span v-if="index < usernames.length - 1">, </span>
+                    </span>
+                </div>
 
                 <span v-else class="text-stone-400">None</span>
             </div>
@@ -135,192 +137,66 @@ const canBumpListings = computed(() =>
             </p>
         </Alert>
 
-        <div class="flex flex-col gap-2 border-2 border-[#382418] bg-black">
-            <div class="flex justify-between px-3 pt-3">
-                <h2 class="text-lg font-bold">My Listings:</h2>
+        <ListingTable>
+            <template #header>
+                <div class="flex justify-between">
+                    <h2 class="text-lg font-bold">My Listings:</h2>
 
-                <Tooltip>
-                    <button
-                        type="button"
-                        class="flex items-center gap-2 rounded-sm bg-stone-800 px-2 py-1 text-amber-400"
-                        :class="{
-                            'hover:bg-stone-900': canBumpListings,
-                            'cursor-not-allowed opacity-50': !canBumpListings,
-                        }"
-                        :disabled="!canBumpListings"
-                        @click="
-                            router.patch(route('bump'), {
-                                preserveScroll: true,
-                            })
-                        "
-                    >
-                        <ArrowTrendingUpIcon class="size-5" /> Bump All
-                    </button>
+                    <Tooltip>
+                        <button
+                            type="button"
+                            class="flex items-center gap-2 rounded-sm bg-stone-800 px-2 py-1 text-amber-400"
+                            :class="{
+                                'hover:bg-stone-900': canBumpListings,
+                                'cursor-not-allowed opacity-50':
+                                    !canBumpListings,
+                            }"
+                            :disabled="!canBumpListings"
+                            @click="
+                                router.patch(route('bump'), {
+                                    preserveScroll: true,
+                                })
+                            "
+                        >
+                            <ArrowTrendingUpIcon class="size-5" /> Bump All
+                        </button>
 
-                    <template #popper>
-                        <template v-if="!canBumpListings">
-                            You have no listings eligible for bumping
+                        <template #popper>
+                            <template v-if="!canBumpListings">
+                                You have no listings eligible for bumping
+                            </template>
+
+                            <template v-else>
+                                Listings can be bumped every 30 mins
+                            </template>
                         </template>
+                    </Tooltip>
+                </div>
+            </template>
 
-                        <template v-else>
-                            Listings can be bumped every 30 mins
-                        </template>
-                    </template>
-                </Tooltip>
-            </div>
+            <EmptyTableRow v-if="!props.listings.data.length" />
 
-            <table class="border-separate border-spacing-2">
-                <tbody>
-                    <tr v-if="!listings.data.length">
-                        <td class="text-center" colspan="4">
-                            No listings found.
-                        </td>
-                    </tr>
+            <ListingTableRow
+                v-for="l in listings.data"
+                :key="l.id"
+                :listing="l"
+            >
+                <template #default="{ listing }">
+                    <ItemTableData :item="listing.item" />
 
-                    <tr v-for="listing in listings.data" :key="listing.id">
-                        <td>
-                            <Tooltip>
-                                <Link
-                                    v-if="listing.item"
-                                    :href="
-                                        route('items.show', {
-                                            item: listing.item.slug,
-                                        })
-                                    "
-                                >
-                                    <img
-                                        :src="`/img/items/${listing.item.slug}.webp`"
-                                        :alt="`${listing.item.name} Icon`"
-                                        width="32"
-                                        height="32"
-                                    />
-                                </Link>
+                    <PriceTableData :listing="listing" />
 
-                                <template #popper>
-                                    {{
-                                        listing.item
-                                            ? listing.item.name
-                                            : "Unknown Item"
-                                    }}
-                                </template>
-                            </Tooltip>
-                        </td>
+                    <TimestampTableData :timestamp="listing.updatedAt" />
 
-                        <td class="flex gap-1">
-                            <span
-                                :class="
-                                    listing.type === 'buy'
-                                        ? 'text-red-500'
-                                        : 'text-green-500'
-                                "
-                                class="font-bold"
-                            >
-                                [{{ listing.type.charAt(0).toUpperCase() }}]
-                            </span>
+                    <NoteTableData :listing="listing" />
 
-                            <Tooltip>
-                                <p>{{ formatGold(listing.quantity) }}</p>
+                    <ActionTableData :listing="listing" />
+                </template>
+            </ListingTableRow>
 
-                                <template #popper>
-                                    {{ listing.quantity.toLocaleString() }}
-                                </template>
-                            </Tooltip>
-
-                            for
-
-                            <Tooltip>
-                                <p>{{ formatGold(listing.price) }}GP ea.</p>
-
-                                <template #popper>
-                                    {{ listing.price.toLocaleString() }}
-                                </template>
-                            </Tooltip>
-                        </td>
-
-                        <td>
-                            <Tooltip>
-                                <p>{{ fromNow(listing.updatedAt) }}</p>
-
-                                <template #popper>
-                                    {{ formatTime(listing.updatedAt) }}
-                                </template>
-                            </Tooltip>
-                        </td>
-
-                        <td class="max-w-[110px]">
-                            <Tooltip>
-                                <p class="truncate">{{ listing.notes }}</p>
-
-                                <template #popper>
-                                    {{ listing.notes }}
-                                </template>
-                            </Tooltip>
-                        </td>
-
-                        <td>
-                            <DropdownMenu>
-                                <DropdownItem
-                                    :icon="ArrowTrendingUpIcon"
-                                    text-color="text-amber-400"
-                                    @click="
-                                        router.patch(
-                                            route('listings.bump', {
-                                                listing: listing,
-                                            }),
-                                            { preserveScroll: true },
-                                        )
-                                    "
-                                >
-                                    Bump
-                                </DropdownItem>
-
-                                <DropdownItem
-                                    :icon="CheckIcon"
-                                    text-color="text-green-500"
-                                    @click="
-                                        router.delete(
-                                            route('listings.destroy', {
-                                                listing: listing.id,
-                                            }),
-                                            { preserveScroll: true },
-                                        )
-                                    "
-                                >
-                                    Mark Sold
-                                </DropdownItem>
-
-                                <DropdownItem
-                                    :icon="PencilSquareIcon"
-                                    text-color="text-amber-500"
-                                    :href="route('listings.edit', { listing })"
-                                >
-                                    Edit
-                                </DropdownItem>
-
-                                <DropdownItem
-                                    :icon="XMarkIcon"
-                                    text-color="text-red-500"
-                                    @click="
-                                        router.delete(
-                                            route('listings.destroy', {
-                                                listing: listing.id,
-                                                force: true,
-                                            }),
-                                            { preserveScroll: true },
-                                        )
-                                    "
-                                >
-                                    Remove
-                                </DropdownItem>
-                            </DropdownMenu>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div v-if="listings.data.length" class="px-3">
-                <Pagination class="mt-0" :data="listings" />
-            </div>
-        </div>
+            <template v-if="listings.data.length" #footer>
+                <Pagination :data="listings" />
+            </template>
+        </ListingTable>
     </LayoutMain>
 </template>

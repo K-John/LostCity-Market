@@ -8,8 +8,8 @@ defineProps<{
 </script>
 
 <template>
-    <td class="flex flex-col gap-x-1 pb-1 sm:flex-row sm:px-1 sm:pb-0">
-        <div class="flex gap-1 leading-none sm:leading-[normal]">
+    <td class="flex flex-col gap-x-1 pb-1 sm:flex-row sm:items-center sm:px-1 sm:pb-0">
+        <div class="flex gap-1 leading-none sm:items-center">
             <span
                 :class="
                     listing.type === 'buy' ? 'text-red-500' : 'text-green-500'

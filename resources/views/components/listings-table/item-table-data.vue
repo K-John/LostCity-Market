@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-    <td class="sm:px-1">
+    <td class="sm:w-[42px] sm:px-1">
         <Tooltip>
             <Link
                 v-if="item"
