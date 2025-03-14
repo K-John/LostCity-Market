@@ -174,7 +174,7 @@ const links = computed(() => [
                         <a
                             href="https://github.com/K-John/LostCity-Market"
                             target="_blank"
-                            class="flex justify-end gap-2 text-[#90c040] hover:underline"
+                            class="flex justify-center gap-2 text-[#90c040] hover:underline sm:justify-end"
                             ><GithubLogo class="size-5" /> Source Code</a
                         >
 

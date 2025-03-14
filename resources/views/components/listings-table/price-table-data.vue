@@ -31,7 +31,7 @@ defineProps<{
         <span class="hidden sm:inline">for</span>
 
         <Tooltip>
-            <p class="text-sm sm:text-[medium]">{{ formatGold(listing.price) }}GP <span class="hidden sm:inline">ea.</span></p>
+            <p class="text-sm sm:text-[medium]">{{ formatGold(listing.price) }}GP <span class="text-xs sm:text-[medium]">ea.</span></p>
 
             <template #popper>
                 {{ listing.price.toLocaleString() }}
