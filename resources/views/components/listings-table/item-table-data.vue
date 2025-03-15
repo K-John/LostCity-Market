@@ -8,8 +8,8 @@ defineProps<{
 </script>
 
 <template>
-    <td class="sm:w-[42px] sm:px-1">
-        <Tooltip>
+    <td class="sm:w-[52px] sm:px-1">
+        <Tooltip class="w-fit p-1 sm:border-2 sm:border-stone-600 sm:bg-stone-800">
             <Link
                 v-if="item"
                 :href="
