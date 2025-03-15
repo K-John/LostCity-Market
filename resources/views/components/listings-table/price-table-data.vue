@@ -8,34 +8,43 @@ defineProps<{
 </script>
 
 <template>
-    <td class="flex flex-col gap-x-1 pb-1 sm:flex-row sm:items-center sm:px-1 sm:pb-0">
-        <div class="flex gap-1 leading-none sm:items-center">
-            <span
-                :class="
-                    listing.type === 'buy' ? 'text-red-500' : 'text-green-500'
-                "
-                class="font-bold"
-            >
-                [{{ listing.type.charAt(0).toUpperCase() }}]
-            </span>
+    <td class="pb-1 sm:px-1 sm:pb-0">
+        <div class="flex flex-col gap-x-1 sm:flex-row sm:items-center">
+            <div class="flex gap-1 leading-none sm:items-center">
+                <span
+                    :class="
+                        listing.type === 'buy'
+                            ? 'text-red-500'
+                            : 'text-green-500'
+                    "
+                    class="font-bold"
+                >
+                    [{{ listing.type.charAt(0).toUpperCase() }}]
+                </span>
+
+                <Tooltip>
+                    <p class="text-sm sm:text-[medium]">
+                        {{ formatGold(listing.quantity) }}
+                    </p>
+
+                    <template #popper>
+                        {{ listing.quantity.toLocaleString() }}
+                    </template>
+                </Tooltip>
+            </div>
+
+            <span class="hidden sm:inline">for</span>
 
             <Tooltip>
-                <p class="text-sm sm:text-[medium]">{{ formatGold(listing.quantity) }}</p>
+                <p class="text-sm sm:text-[medium]">
+                    {{ formatGold(listing.price) }}GP
+                    <span class="text-xs sm:text-[medium]">ea.</span>
+                </p>
 
                 <template #popper>
-                    {{ listing.quantity.toLocaleString() }}
+                    {{ listing.price.toLocaleString() }}
                 </template>
             </Tooltip>
         </div>
-
-        <span class="hidden sm:inline">for</span>
-
-        <Tooltip>
-            <p class="text-sm sm:text-[medium]">{{ formatGold(listing.price) }}GP <span class="text-xs sm:text-[medium]">ea.</span></p>
-
-            <template #popper>
-                {{ listing.price.toLocaleString() }}
-            </template>
-        </Tooltip>
     </td>
 </template>
