@@ -23,7 +23,5 @@ defineProps<{
                 {{ listing.notes }}
             </template>
         </Tooltip>
-
-        <span v-else>-</span>
     </td>
 </template>
