@@ -20,6 +20,7 @@ declare module 'vue' {
     ItemTableData: typeof import('./../../views/components/listings-table/item-table-data.vue')['default']
     LayoutMain: typeof import('@/views/layouts/main/layout-main.vue')['default']
     Link: typeof import('@inertiajs/vue3')['Link']
+    ListingForm: typeof import('./../../views/components/listing-form.vue')['default']
     ListingTable: typeof import('./../../views/components/listings-table/listing-table.vue')['default']
     ListingTableRow: typeof import('./../../views/components/listings-table/listing-table-row.vue')['default']
     NoteTableData: typeof import('./../../views/components/listings-table/note-table-data.vue')['default']
