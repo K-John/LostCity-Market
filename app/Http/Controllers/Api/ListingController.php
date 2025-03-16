@@ -15,13 +15,17 @@ class ListingController
     public function index(Request $request)
     {
         $listingType = $this->getListingType($request);
+        $since = $request->query('since');
 
-        $cacheKey = 'listings_api_' . $listingType->name;
+        $cacheKey = 'listings_api_' . $listingType->name . ($since ? '_since_' . $since : '');
 
-        $listings = cache()->remember($cacheKey, 30, function () use ($listingType) {
+        $listings = cache()->remember($cacheKey, 30, function () use ($listingType, $since) {
             return Listing::active()
                 ->with('item')
                 ->where('type', $listingType)
+                ->when($since, function ($query, $since) {
+                    return $query->where('created_at', '>', $since);
+                })
                 ->get();
         });
 
