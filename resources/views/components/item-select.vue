@@ -58,13 +58,15 @@ watch(selected, (newValue) => {
 
         <template #option="option: Data.Item.ItemData">
             <div class="flex items-center gap-2">
-                <img
-                    class="border-2 sm:border-stone-600 sm:bg-stone-800"
-                    :src="`/img/items/${option.slug}.webp`"
-                    :alt="`${option.name} Icon`"
-                    width="32"
-                    height="32"
-                />
+                <div class="border-2 sm:border-stone-600 sm:bg-stone-800">
+                    <img
+                        class="min-h-[32px] min-w-[32px]"
+                        :src="`/img/items/${option.slug}.webp`"
+                        :alt="`${option.name} Icon`"
+                        width="32"
+                        height="32"
+                    />
+                </div>
 
                 <p>{{ option.name }}</p>
             </div>
@@ -72,13 +74,15 @@ watch(selected, (newValue) => {
 
         <template #selected-option="option: Data.Item.ItemData">
             <div class="flex items-center gap-2 text-white">
-                <img
-                    class="border-2 sm:border-stone-600 sm:bg-stone-800"
-                    :src="`/img/items/${option.slug}.webp`"
-                    :alt="`${option.name} Icon`"
-                    width="32"
-                    height="32"
-                />
+                <div class="border-2 sm:border-stone-600 sm:bg-stone-800">
+                    <img
+                        class="min-h-[32px] min-w-[32px]"
+                        :src="`/img/items/${option.slug}.webp`"
+                        :alt="`${option.name} Icon`"
+                        width="32"
+                        height="32"
+                    />
+                </div>
 
                 <p>{{ option.name }}</p>
             </div>

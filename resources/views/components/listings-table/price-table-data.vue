@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-    <td class="pb-1 sm:px-1 sm:pb-0">
+    <td class="w-0 px-1 pb-1 sm:pb-0">
         <div class="flex flex-col gap-x-1 sm:flex-row sm:items-center">
             <div class="flex gap-1 leading-none sm:items-center">
                 <span
@@ -35,11 +35,12 @@ defineProps<{
 
             <span class="hidden sm:inline">for</span>
 
-            <Tooltip>
+            <Tooltip class="flex items-center gap-1">
                 <p class="text-sm sm:text-[medium]">
                     {{ formatGold(listing.price) }}GP
-                    <span class="text-xs sm:text-[medium]">ea.</span>
                 </p>
+                
+                <p class="text-xs sm:text-[medium]">ea.</p>
 
                 <template #popper>
                     {{ listing.price.toLocaleString() }}

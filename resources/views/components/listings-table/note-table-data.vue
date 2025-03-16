@@ -10,7 +10,7 @@ defineProps<{
 </script>
 
 <template>
-    <td :colspan="listing.canManage ? 1 : 2" class="max-w-[110px] sm:px-1">
+    <td :colspan="listing.canManage ? 1 : 2" class="max-w-[200px] sm:px-1">
         <template v-if="listing.notes">
             <Tooltip class="hidden sm:block">
                 <p class="truncate">

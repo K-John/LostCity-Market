@@ -32,7 +32,9 @@ const submit = () => {
         class="flex flex-col gap-4 border-2 border-[#382418] bg-black p-3"
         @submit.prevent="submit"
     >
-        <h2 class="font-bold">Post a Listing</h2>
+        <h2 class="font-bold">
+            {{ props.submitMethod === "patch" ? "Edit" : "Post" }} a Listing
+        </h2>
 
         <div v-if="Object.keys(form.errors).length !== 0" class="text-red-500">
             <p v-for="(error, key) in form.errors" :key="key">
@@ -46,7 +48,7 @@ const submit = () => {
             class="flex flex-col gap-x-2 sm:flex-row sm:items-center"
         >
             <p>Search for an item:</p>
-            
+
             <ItemSelect @item-selected="setItem" />
         </div>
 
