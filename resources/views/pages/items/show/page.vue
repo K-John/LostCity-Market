@@ -200,6 +200,7 @@ const highlightedIds = ref<number[]>([]);
 
                         <TimestampTableData
                             :timestamp="listing.soldAt || ''"
+                            :use-color="false"
                         />
                     </template>
                 </ListingTableRow>

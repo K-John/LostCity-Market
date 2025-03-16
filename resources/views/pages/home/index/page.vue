@@ -80,7 +80,7 @@ const highlightedIds = ref<number[]>([]);
 
                     <UsernameTableData :listing="listing" />
 
-                    <TimestampTableData :timestamp="listing.updatedAt" />
+                    <TimestampTableData :timestamp="listing.updatedAt" :use-color="false" />
                     
                     <NoteTableData :listing="listing" />
 
