@@ -186,10 +186,10 @@ const highlightedIds = ref<number[]>([]);
                     <h2 class="text-lg font-bold">Previous Listings:</h2>
                 </template>
 
-                <EmptyTableRow v-if="!deletedListings.length" />
+                <EmptyTableRow v-if="!soldListings.length" />
 
                 <ListingTableRow
-                    v-for="l in deletedListings"
+                    v-for="l in soldListings"
                     :key="l.id"
                     :listing="l"
                 >
@@ -199,7 +199,7 @@ const highlightedIds = ref<number[]>([]);
                         <UsernameTableData :listing="listing" />
 
                         <TimestampTableData
-                            :timestamp="listing.deletedAt || ''"
+                            :timestamp="listing.soldAt || ''"
                         />
                     </template>
                 </ListingTableRow>

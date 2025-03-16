@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
@@ -14,7 +15,7 @@ use Illuminate\Support\Str;
 
 class Listing extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public $guarded = [];
 
@@ -68,7 +69,7 @@ class Listing extends Model
     public function scopeActive(Builder $query): Builder
     {
         return $query
-            ->whereNull('deleted_at')
+            ->whereNull('sold_at')
             ->where('updated_at', '>=', now()->subDays(1))
             ->orderBy('updated_at', 'desc');
     }

@@ -142,7 +142,7 @@ class ListingController
             return back()->success('The listing has been permanently deleted');
         }
 
-        $listing->update(['deleted_at' => now()]);
+        $listing->update(['sold_at' => now()]);
 
         return back()->success('The listing has been marked as sold');
     }

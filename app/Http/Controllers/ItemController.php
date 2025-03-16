@@ -31,9 +31,9 @@ class ItemController
             ->where('type', $listingType)
             ->paginate(20);
 
-        $deletedListings = $item->listings()
-            ->whereNotNull('deleted_at')
-            ->orderBy('deleted_at', 'desc')
+        $soldListings = $item->listings()
+            ->whereNotNull('sold_at')
+            ->orderBy('sold_at', 'desc')
             ->take(10)
             ->get();
 
@@ -51,8 +51,8 @@ class ItemController
                 usernames: UsernameService::getAuthenticatedUsernames(),
             ),
             listings: ListingData::collect($listings, PaginatedDataCollection::class),
-            deletedListings: ListingData::collect($deletedListings->map(function ($listing) {
-                $listing->deleted_at = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $listing->deleted_at);
+            soldListings: ListingData::collect($soldListings->map(function ($listing) {
+                $listing->sold_at = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $listing->sold_at);
                 return $listing;
             }), DataCollection::class),
         ));

@@ -34,10 +34,8 @@ class ItemController
         $listingType = $this->getListingType($request);
 
         $listings = $item->listings()
-            ->whereNull('deleted_at')
+            ->active()
             ->where('type', $listingType)
-            ->where('updated_at', '>=', now()->subDays(1))
-            ->orderBy('updated_at', 'desc')
             ->paginate(20);
 
         return response()->json(ListingData::collect($listings, PaginatedDataCollection::class));

@@ -26,6 +26,7 @@ class ListingData extends Data
         public ?ItemData $item,
         public string $tokenPrefix,
         public DateTime $updatedAt,
+        public ?DateTime $soldAt,
         public ?DateTime $deletedAt,
         public ?int $userId
     ) {
@@ -43,6 +44,7 @@ class ListingData extends Data
             $listing->item ? ItemData::from($listing->item) : null,
             substr($listing->token, 0, 4),
             $listing->updated_at,
+            $listing->sold_at ? \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $listing->sold_at) : null,
             $listing->deleted_at ? \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $listing->deleted_at) : null,
             $listing->user_id
         );

@@ -27,7 +27,7 @@ class ListingPolicy
 
     public function update(?User $user, Listing $listing): bool
     {
-        if (!is_null($listing->deleted_at)) {
+        if (!is_null($listing->sold_at)) {
             return false;
         }
 
@@ -42,7 +42,7 @@ class ListingPolicy
 
     public function delete(?User $user, Listing $listing): bool
     {
-        if (!is_null($listing->deleted_at)) {
+        if (!is_null($listing->sold_at)) {
             return false;
         }
 

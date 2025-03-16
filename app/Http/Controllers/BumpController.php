@@ -16,7 +16,7 @@ class BumpController
             }, function ($query) {
                 $query->where('token', session('listing_token'));
             })
-            ->whereNull('deleted_at')
+            ->whereNull('sold_at')
             ->where('updated_at', '<', now()->subMinutes(30))
             ->where('updated_at', '>=', now()->subDays(1))
             ->get();
