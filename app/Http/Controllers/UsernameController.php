@@ -15,7 +15,7 @@ class UsernameController
     {
         $listings = Listing::with('item')
             ->where('username', $username)
-            ->where('updated_at', '>=', now()->subDays(2))
+            ->where('updated_at', '>=', now()->subDays(1))
             ->orderBy('updated_at', 'desc')
             ->paginate(20);
 

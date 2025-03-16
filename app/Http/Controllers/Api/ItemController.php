@@ -36,7 +36,7 @@ class ItemController
         $listings = $item->listings()
             ->whereNull('deleted_at')
             ->where('type', $listingType)
-            ->where('updated_at', '>=', now()->subDays(2))
+            ->where('updated_at', '>=', now()->subDays(1))
             ->orderBy('updated_at', 'desc')
             ->paginate(20);
 

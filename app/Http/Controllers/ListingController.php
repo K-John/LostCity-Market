@@ -31,9 +31,9 @@ class ListingController
         $token = Session::get('listing_token');
 
         $listings = Listing::active()->with('item')
-            ->when(Auth::check(), function ($query) {
-                $query->where(function ($query) {
-                    $query->whereIn('username', Auth::user()->usernames->pluck('username')->toArray() ?? [])
+            ->when(Auth::check(), function ($query) use ($usernames) {
+                $query->where(function ($query) use ($usernames) {
+                    $query->whereIn('username', $usernames)
                         ->orWhere('token', session('listing_token'))
                         ->orWhere('user_id', Auth::id());
                 });
@@ -95,7 +95,7 @@ class ListingController
 
         Listing::create($listingData);
 
-        return to_route('items.show', $data->item->slug)->success('The listing has been created and will expire in 48 hours');
+        return to_route('items.show', $data->item->slug)->success('The listing has been created and will expire in 24 hours');
     }
 
     public function edit(Listing $listing)

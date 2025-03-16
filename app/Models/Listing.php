@@ -69,7 +69,7 @@ class Listing extends Model
     {
         return $query
             ->whereNull('deleted_at')
-            ->where('updated_at', '>=', now()->subDays(2))
+            ->where('updated_at', '>=', now()->subDays(1))
             ->orderBy('updated_at', 'desc');
     }
 

@@ -18,7 +18,7 @@ class BumpController
             })
             ->whereNull('deleted_at')
             ->where('updated_at', '<', now()->subMinutes(30))
-            ->where('updated_at', '>=', now()->subDays(2))
+            ->where('updated_at', '>=', now()->subDays(1))
             ->get();
 
         if ($listings->isEmpty()) {

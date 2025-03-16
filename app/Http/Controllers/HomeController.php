@@ -23,10 +23,9 @@ class HomeController
 
         // Cache only the query results
         $listings = Cache::remember($cacheKey, 30, function () use ($listingType) {
-            $subQuery = Listing::select('listings.id')
+            $subQuery = Listing::active()
+                ->select('listings.id')
                 ->selectRaw('ROW_NUMBER() OVER (PARTITION BY username ORDER BY updated_at DESC) as row_num')
-                ->whereNull('deleted_at')
-                ->where('updated_at', '>=', now()->subDays(2))
                 ->where('type', $listingType);
 
             return Listing::with('item') // Eager load the related item model
