@@ -6,7 +6,7 @@ const navigateToItem = (item: Data.Item.ItemData) => {
 
 <template>
     <div
-        class="mb-4 flex flex-col gap-4 border-2 border-[#382418] bg-black p-3 sm:flex-row"
+        class="mb-4 flex flex-col gap-4 border-2 border-stone-800 bg-stone-950 p-3 sm:flex-row"
     >
         <h2 class="flex items-center text-lg font-bold">Search for an item:</h2>
 

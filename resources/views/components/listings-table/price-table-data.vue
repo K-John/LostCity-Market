@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-    <td class="w-0 px-1 pb-1 sm:pb-0">
+    <td class="w-0 px-1">
         <div class="flex flex-col gap-x-1 sm:flex-row sm:items-center">
             <div class="flex gap-1 leading-none sm:items-center">
                 <span

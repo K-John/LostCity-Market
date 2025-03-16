@@ -158,7 +158,7 @@ const links = computed(() => [
                 <slot />
 
                 <div
-                    class="mt-4 flex flex-col items-center justify-between gap-4 border-2 border-[#382418] bg-black p-3 text-sm sm:flex-row"
+                    class="mt-4 flex flex-col items-center justify-between gap-4 border-2 border-stone-800 bg-stone-950 p-3 text-sm sm:flex-row"
                 >
                     <p>
                         Fan project. Not affiliated with
