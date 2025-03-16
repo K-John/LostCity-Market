@@ -6,7 +6,7 @@ use App\Data\Listing\ListingData;
 use App\Http\Traits\HandlesListingType;
 use App\Models\Listing;
 use Illuminate\Http\Request;
-use Spatie\LaravelData\PaginatedDataCollection;
+use Spatie\LaravelData\DataCollection;
 
 class ListingController
 {
@@ -16,14 +16,16 @@ class ListingController
     {
         $listingType = $this->getListingType($request);
 
-        $listings = Listing::with('item')
-            ->whereNull('deleted_at')
-            ->where('updated_at', '>=', now()->subDays(1))
-            ->where('type', $listingType)
-            ->orderBy('updated_at', 'desc')
-            ->paginate(20);
+        $cacheKey = 'listings_api_' . $listingType->name;
 
-        return response()->json(ListingData::collect($listings, PaginatedDataCollection::class));
+        $listings = cache()->remember($cacheKey, 30, function () use ($listingType) {
+            return Listing::active()
+                ->with('item')
+                ->where('type', $listingType)
+                ->get();
+        });
+
+        return response()->json(ListingData::collect($listings));
     }
 
     public function show($id)
