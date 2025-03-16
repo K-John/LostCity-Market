@@ -82,7 +82,7 @@ const links = computed(() => [
 <template>
     <div class="mx-auto max-w-4xl">
         <div class="flex w-full">
-            <img class="h-[43px] w-[100px]" src="@/img/assets/edge_a.jpg" />
+            <img class="h-[43px] w-[62px]" src="@/img/assets/edge_a.jpg" />
 
             <div
                 ref="topLeftChainContainer"
@@ -99,7 +99,7 @@ const links = computed(() => [
                 class="mt-[5px] flex grow justify-center"
             ></div>
 
-            <img class="h-[43px] w-[100px]" src="@/img/assets/edge_d.jpg" />
+            <img class="h-[43px] w-[62px]" src="@/img/assets/edge_d.jpg" />
         </div>
 
         <div class="relative flex w-full">
