@@ -54,7 +54,7 @@ class Listing extends Model
 
         static::updating(function ($listing) {
             // Set the authenticated user
-            if (!$listing->user_id && Auth::check()) {
+            if (Auth::check() && !$listing->user_id && Auth::user()->usernames->contains('username', $listing->username)) {
                 $listing->user_id = Auth::id();
             }
 
