@@ -9,7 +9,7 @@ defineProps<{
     <tr
         :class="{
             'animate-pulse bg-green-950': highlighted,
-            'text-stone-500 line-through opacity-70': listing.deletedAt,
+            'text-stone-500 line-through opacity-70': listing.soldAt,
         }"
     >
         <slot :listing="listing"></slot>
