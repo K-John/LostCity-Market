@@ -31,7 +31,13 @@ class ListingPolicy
             return false;
         }
 
-        return $listing->token === session('listing_token') || ($user && ($user->id === $listing->user_id || in_array($listing->username, $user->usernames->pluck('username')->toArray())));
+        $listingUsername = strtolower($listing->username);
+        $listingUsername = str_replace(' ', '_', $listingUsername);
+        $listingUsername = trim($listingUsername, ' _');
+
+        return $listing->token === session('listing_token') || // If the listing's token matches the session token
+            ($user && ($user->id === $listing->user_id || // If the user is the listing's owner
+            in_array($listingUsername, $user->usernames->pluck('username')->toArray()))); // If the user owns the listing's username
     }
 
     public function delete(?User $user, Listing $listing): bool
@@ -40,7 +46,13 @@ class ListingPolicy
             return false;
         }
 
-        return $listing->token === session('listing_token') || ($user && ($user->id === $listing->user_id || in_array($listing->username, $user->usernames->pluck('username')->toArray())));
+        $listingUsername = strtolower($listing->username);
+        $listingUsername = str_replace(' ', '_', $listingUsername);
+        $listingUsername = trim($listingUsername, ' _');
+
+        return $listing->token === session('listing_token') || // If the listing's token matches the session token
+            ($user && ($user->id === $listing->user_id || // If the user is the listing's owner
+            in_array($listingUsername, $user->usernames->pluck('username')->toArray()))); // If the user owns the listing's username
     }
 
     public function restore(?User $user, Listing $listing): bool
