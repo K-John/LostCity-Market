@@ -74,6 +74,17 @@ class Listing extends Model
             ->orderBy('updated_at', 'desc');
     }
 
+    /**
+     * Scope to filter listings where updated_at is older than a day but younger than 2 days.
+     */
+    public function scopeExpired(Builder $query): Builder
+    {
+        return $query
+            ->whereNull('sold_at')
+            ->whereBetween('updated_at', [now()->subDays(2), now()->subDay()])
+            ->orderBy('updated_at', 'desc');
+    }
+
     protected array $exceptionUsernames = ['poon', 'gol d', 'five pot'];
 
     /**

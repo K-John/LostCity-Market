@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Session;
+use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\PaginatedDataCollection;
 
 class ListingController
@@ -42,8 +43,20 @@ class ListingController
             })
             ->paginate(20);
 
+        $expiredListings = Listing::expired()->with('item')
+            ->when(Auth::check(), function ($query) use ($usernames) {
+                $query->where(function ($query) use ($usernames) {
+                    $query->whereIn('username', $usernames)
+                        ->orWhere('token', session('listing_token'))
+                        ->orWhere('user_id', Auth::id());
+                });
+            }, function ($query) {
+                $query->where('token', session('listing_token'));
+            });
+
         return inertia('listings/index/page', new ListingsIndexPage(
             listings: ListingData::collect($listings, PaginatedDataCollection::class),
+            expiredListings: ListingData::collect($expiredListings->paginate(20), DataCollection::class),
             token: $token ? substr($token, 0, 4) . str_repeat('*', strlen($token) - 8) . substr($token, -4) : "",
             tokenForm: new TokenFormData(token: ''),
             usernames: $usernames,

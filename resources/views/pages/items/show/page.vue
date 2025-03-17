@@ -181,9 +181,9 @@ const highlightedIds = ref<number[]>([]);
                 submit-method="post"
             />
 
-            <ListingTable>
+            <ListingTable class="border-zinc-900 bg-zinc-950">
                 <template #header>
-                    <h2 class="text-lg font-bold">Previous Listings:</h2>
+                    <h2 class="text-lg font-bold">Recently Sold:</h2>
                 </template>
 
                 <EmptyTableRow v-if="!soldListings.length" />

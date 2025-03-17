@@ -137,7 +137,7 @@ const canBumpListings = computed(() =>
             </p>
         </Alert>
 
-        <ListingTable>
+        <ListingTable class="mb-4">
             <template #header>
                 <div class="flex justify-between">
                     <h2 class="text-lg font-bold">My Listings:</h2>
@@ -197,6 +197,34 @@ const canBumpListings = computed(() =>
             <template v-if="listings.data.length" #footer>
                 <Pagination :data="listings" />
             </template>
+        </ListingTable>
+
+        <ListingTable class="border-yellow-800 bg-stone-950">
+            <template #header>
+                <h2 class="text-lg font-bold">Recently Expired:</h2>
+                
+                <p>If you'd like to re-active a listing, you can bump or edit it's information.</p>
+            </template>
+
+            <EmptyTableRow v-if="!expiredListings.length" />
+
+            <ListingTableRow
+                v-for="l in expiredListings"
+                :key="l.id"
+                :listing="l"
+            >
+                <template #default="{ listing }">
+                    <ItemTableData :item="listing.item" />
+
+                    <PriceTableData :listing="listing" />
+
+                    <TimestampTableData :timestamp="listing.updatedAt" />
+
+                    <NoteTableData :listing="listing" />
+
+                    <ActionTableData :listing="listing" />
+                </template>
+            </ListingTableRow>
         </ListingTable>
     </LayoutMain>
 </template>
