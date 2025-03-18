@@ -6,7 +6,7 @@ const auth = useAuth();
     <LayoutMain>
         <Head title="Adopt Accounts to Discord" />
 
-        <div class="flex flex-col gap-y-4">
+        <div class="mx-auto flex max-w-[620px] flex-col gap-y-4">
             <div>
                 <p class="text-xl font-bold text-stone-500">How To:</p>
 

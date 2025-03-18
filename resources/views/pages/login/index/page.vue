@@ -12,8 +12,8 @@
                     target="_blank"
                     class="text-[#90c040] hover:underline"
                     >Lost City</a
-                >. 
-                If you created your
+                >. If you created your
+                
                 <a
                     href="https://2004.lostcity.rs/"
                     target="_blank"
@@ -26,11 +26,10 @@
 
             <p>
                 You can find instructions for adopting accounts to Discord by
-                <a
-                    href="https://2004.lostcity.rs/docs/adopt"
-                    target="_blank"
+                <Link
+                    :href="route('docs.adopt')"
                     class="text-[#90c040] hover:underline"
-                    >clicking here</a
+                    >clicking here</Link
                 >.
             </p>
         </Alert>
