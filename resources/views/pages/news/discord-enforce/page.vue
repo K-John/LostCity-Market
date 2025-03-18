@@ -101,11 +101,10 @@
                     City account, you just need to log in. If you haven't linked
                     your accounts yet, you can find instructions for adopting
                     accounts to Discord by
-                    <a
-                        href="https://2004.lostcity.rs/docs/adopt"
-                        target="_blank"
+                    <Link
+                        :href="route('docs.adopt')"
                         class="text-[#90c040] hover:underline"
-                        >clicking here</a
+                        >clicking here</Link
                     >.
                 </p>
 
