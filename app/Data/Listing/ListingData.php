@@ -46,7 +46,7 @@ class ListingData extends Data
             $listing->user_id
         );
 
-        $instance->canManage = Auth::check() && Auth::user()->id === $listing->user_id;
+        $instance->canManage = Auth::check() && (Auth::user()->id === $listing->user_id || Auth::user()->is_admin);
 
         return $instance;
     }

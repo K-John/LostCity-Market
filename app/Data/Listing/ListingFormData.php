@@ -32,6 +32,10 @@ class ListingFormData extends Data
                 'max:12',
                 'regex:/^(?! )[A-Za-z0-9 _]+(?<! )$/',
                 function ($attribute, $value, $fail) {
+                    if (Auth::user()->is_admin) {
+                        return;
+                    }
+                    
                     if (!in_array($value, Auth::user()->usernames->pluck('username')->toArray())) {
                         $fail('The selected username is invalid.');
                     }
@@ -44,17 +48,25 @@ class ListingFormData extends Data
                 'string',
                 'in:buy,sell',
                 function ($attribute, $value, $fail) {
+                    if (Auth::user()->is_admin) {
+                        return;
+                    }
+
                     $existingListings = Listing::active()
                         ->where('user_id', Auth::id())
                         ->where('type', $value)
                         ->where('id', '!=', request('id'))
                         ->count();
-                        
+
                     if ($existingListings >= 8) {
                         $fail('You cannot have more than eight active listings of the same type.');
                     }
                 },
                 function ($attribute, $value, $fail) {
+                    if (Auth::user()->is_admin) {
+                        return;
+                    }
+
                     $existingListing = Listing::active()->where('type', $value)
                         ->where('user_id', Auth::id())
                         ->where('item_id', request('item.id'))

@@ -90,6 +90,8 @@ class ListingController
     {
         $this->authorize('update', $listing);
 
+        $usernames = User::find($listing->user_id)->usernames->pluck('username')->toArray();
+
         return inertia('listings/edit/page', new ListingsEditPage(
             listingForm: new ListingFormData(
                 id: $listing->id,
@@ -98,7 +100,7 @@ class ListingController
                 quantity: $listing->quantity,
                 notes: $listing->notes,
                 username: $listing->username,
-                usernames: UsernameService::getAuthenticatedUsernames(),
+                usernames: $usernames,
                 item: ItemData::from($listing->item),
             ),
         ));

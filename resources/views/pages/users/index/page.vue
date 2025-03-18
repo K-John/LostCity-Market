@@ -33,6 +33,8 @@ const props = defineProps<Pages.UsersIndexPage>();
                     <TimestampTableData :timestamp="listing.updatedAt" />
 
                     <NoteTableData :listing="listing" />
+
+                    <ActionTableData :listing="listing" />
                 </template>
             </ListingTableRow>
 
