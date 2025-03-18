@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { HeartIcon } from "@heroicons/vue/24/solid/index.js";
+import {
+    HeartIcon,
+    ExclamationTriangleIcon,
+} from "@heroicons/vue/24/solid/index.js";
 import { ref, onMounted, onBeforeUnmount, nextTick } from "vue";
 import chainImage from "@/img/assets/edge_chain.jpg";
 
@@ -112,16 +115,30 @@ const links = computed(() => [
             <div
                 class="flex-1 bg-[url('@/img/assets/background-middle.jpg')] bg-contain bg-repeat-y"
             >
-                <Alert id="discord-integration-notice" type="warning">
-                    <p class="text-sm">
-                        Official username integration is now supported with
+                <Alert id="discord-enforced-notice" type="error">
+                    <h2 class="flex gap-2 font-bold">
+                        <ExclamationTriangleIcon class="size-6 text-red-300" />
+
+                        Discord Login Required
+                    </h2>
+
+                    <p>
+                        As of March 18th, official username integration is now
+                        enforced. In order to create listings, you must
                         <Link
-                            :href="route('login.index')"
+                            :href="route('login')"
                             class="text-[#90c040] hover:underline"
-                            >Discord Login</Link
-                        >. This will prevent people from creating listings with
-                        your username. It is optional for now, but it will be
-                        <strong>required on March 1</strong>.
+                            >login with Discord</Link
+                        >.
+                    </p>
+
+                    <p>
+                        Read more about in
+                        <Link
+                            :href="route('news.discord-enforce')"
+                            class="text-[#90c040] hover:underline"
+                            >the news article here</Link
+                        >
                     </p>
                 </Alert>
 

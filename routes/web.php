@@ -44,3 +44,7 @@ Route::get('logout', [LoginController::class, 'destroy'])
 Route::get('docs/adopt-legacy-accounts', function () {
     return inertia('docs/adopt/page');
 })->name('docs.adopt');
+
+Route::get('news/discord-enforcement', function () {
+    return inertia('news/discord-enforce/page');
+})->name('news.discord-enforce');
