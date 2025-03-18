@@ -13,18 +13,15 @@ defineProps<{
 </script>
 
 <template>
-    <td class="sm:px-1">
-        <div
-            v-if="listing.canManage && !listing.soldAt"
-            class="flex flex-nowrap justify-end gap-1"
-        >
+    <td v-if="listing.canManage && !listing.soldAt" class="sm:px-1">
+        <div class="flex flex-nowrap justify-end gap-1">
             <DropdownMenu>
                 <DropdownItem
                     :icon="ArrowTrendingUpIcon"
                     text-color="text-amber-400"
                     @click="
                         router.patch(
-                            route('listings.bump', {
+                            route('listing.bump', {
                                 listing: listing,
                             }),
                             { preserveScroll: true },

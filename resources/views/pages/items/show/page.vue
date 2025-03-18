@@ -176,6 +176,7 @@ const highlightedIds = ref<number[]>([]);
             <UsernamesAlert v-if="auth && !listingForm?.usernames?.length" />
 
             <ListingForm
+                v-if="auth"
                 :listing-form="form"
                 :submit-route="route('listings.store')"
                 submit-method="post"

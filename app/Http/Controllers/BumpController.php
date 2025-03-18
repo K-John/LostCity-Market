@@ -3,19 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Listing;
-use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class BumpController
 {
-    public function __invoke(Request $request)
+    use AuthorizesRequests;
+
+    protected User $user;
+
+    public function __construct()
     {
-        $listings = Listing::when(Auth::check(), function ($query) {
-                $query->whereIn('username', Auth::user()->usernames->pluck('username')->toArray() ?? []);
-            }, function ($query) {
-                $query->where('token', session('listing_token'));
-            })
+        $this->user = Auth::user();
+    }
+
+    public function index()
+    {
+        $listings = $this->user->listings()
             ->whereNull('sold_at')
             ->where('updated_at', '<', now()->subMinutes(30))
             ->where('updated_at', '>=', now()->subDays(1))
@@ -28,5 +33,18 @@ class BumpController
         $listings->each->touch();
 
         return back()->success('Listings bumped successfully');
+    }
+
+    public function update(Listing $listing)
+    {
+        $this->authorize('update', $listing);
+
+        if ($listing->updated_at->diffInMinutes(now()) < 30) {
+            return back()->error('You can only bump a listing every 30 minutes');
+        }
+
+        $listing->touch();
+
+        return back()->success('Listing bumped successfully');
     }
 }

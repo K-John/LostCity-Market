@@ -12,10 +12,6 @@ defineProps<{
                     toDisplayName(listing.username)
                 }}
             </Link>
-
-            <Link v-if="!listing.userId" :href="route('tokens.show', { listing: listing })" class="hidden align-super text-[x-small] text-white sm:inline">
-                #{{ listing.tokenPrefix }}
-            </Link>
         </div>
     </td>
 </template>

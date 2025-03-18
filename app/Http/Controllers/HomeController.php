@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Traits\HandlesListingType;
 use App\Data\Listing\ListingData;
-use App\Enums\ListingType;
 use App\Models\Listing;
 use App\Pages\HomeIndexPage;
 use Illuminate\Http\Request;
 use Spatie\LaravelData\PaginatedDataCollection;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
 
 class HomeController
 {

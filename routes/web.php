@@ -6,32 +6,24 @@ use App\Http\Controllers\BumpController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ListingController;
-use App\Http\Controllers\TokenController;
 use App\Http\Controllers\UsernameController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
 
+Route::middleware('auth')->group(function () {
+    Route::resource('listings', ListingController::class)
+        ->names('listings');
+
+    Route::patch('bump', [BumpController::class, 'index'])
+        ->name('listings.bump');
+
+    Route::patch('/bump/{listing}', [BumpController::class, 'update'])
+        ->name('listing.bump');
+});
+
 Route::get('items/{item:slug}', [ItemController::class, 'show'])
     ->name('items.show');
-
-Route::resource('listings', ListingController::class)
-    ->names('listings');
-
-Route::patch('listings/{listing}/bump', [ListingController::class, 'bump'])
-    ->name('listings.bump');
-
-Route::patch('bump', BumpController::class)
-    ->name('bump');
-
-Route::post('token', [TokenController::class, 'store'])
-    ->name('tokens.store');
-
-Route::get('token', [TokenController::class, 'download'])
-    ->name('tokens.download');
-
-Route::get('token/{listing}', [TokenController::class, 'show'])
-    ->name('tokens.show');
 
 Route::resource('users', UsernameController::class)
     ->only(['show', 'update'])
@@ -43,9 +35,11 @@ Route::get('/auth/discord', [DiscordController::class, 'redirectToDiscord'])
 Route::get('/auth/discord/callback', [DiscordController::class, 'handleDiscordCallback'])
     ->name('auth.discord.callback');
 
-Route::resource('login', LoginController::class)
-    ->only(['index', 'destroy'])
-    ->names('login');
+Route::get('login', [LoginController::class, 'index'])
+    ->name('login');
+
+Route::get('logout', [LoginController::class, 'destroy'])
+    ->name('logout');
 
 Route::get('docs/adopt-legacy-accounts', function () {
     return inertia('docs/adopt/page');

@@ -5,20 +5,18 @@ namespace App\Http\Controllers;
 use App\Data\Item\ItemData;
 use App\Data\Listing\ListingData;
 use App\Data\Listing\ListingFormData;
-use App\Data\Token\TokenFormData;
 use App\Enums\ListingType;
 use App\Models\Listing;
+use App\Models\User;
 use App\Pages\ListingsCreatePage;
 use App\Pages\ListingsEditPage;
 use App\Pages\ListingsIndexPage;
 use App\Services\UsernameService;
-use ConsoleTVs\Profanity\Facades\Profanity;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Support\Facades\Session;
 use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\PaginatedDataCollection;
 
@@ -26,47 +24,28 @@ class ListingController
 {
     use AuthorizesRequests;
 
-    public function index()
+    protected User $user;
+
+    public function __construct()
     {
-        $usernames = UsernameService::getAuthenticatedUsernames();
-        $token = Session::get('listing_token');
+        $this->user = Auth::user();
+    }
 
-        $listings = Listing::active()->with('item')
-            ->when(Auth::check(), function ($query) use ($usernames) {
-                $query->where(function ($query) use ($usernames) {
-                    $query->whereIn('username', $usernames)
-                        ->orWhere('token', session('listing_token'))
-                        ->orWhere('user_id', Auth::id());
-                });
-            }, function ($query) {
-                $query->where('token', session('listing_token'));
-            })
-            ->paginate(20);
-
-        $expiredListings = Listing::expired()->with('item')
-            ->when(Auth::check(), function ($query) use ($usernames) {
-                $query->where(function ($query) use ($usernames) {
-                    $query->whereIn('username', $usernames)
-                        ->orWhere('token', session('listing_token'))
-                        ->orWhere('user_id', Auth::id());
-                });
-            }, function ($query) {
-                $query->where('token', session('listing_token'));
-            });
+    public function index(Request $request)
+    {
+        $listings = $this->user->listings()->active()->with('item')->paginate(20);
+        $expiredListings = $this->user->listings()->expired()->with('item');
 
         return inertia('listings/index/page', new ListingsIndexPage(
             listings: ListingData::collect($listings, PaginatedDataCollection::class),
-            expiredListings: ListingData::collect($expiredListings->paginate(20), DataCollection::class),
-            token: $token ? substr($token, 0, 4) . str_repeat('*', strlen($token) - 8) . substr($token, -4) : "",
-            tokenForm: new TokenFormData(token: ''),
-            usernames: $usernames,
+            expiredListings: ListingData::collect($expiredListings->get(), DataCollection::class),
+            usernames: UsernameService::getAuthenticatedUsernames(),
         ));
     }
 
     public function create()
     {
-        $usernames = UsernameService::getAuthenticatedUsernames();
-        $latestUsername = Auth::user()?->listings()->latest()->value('username');
+        $latestUsername = $this->user->listings()->latest()->value('username');
 
         return inertia('listings/create/page', new ListingsCreatePage(
             listingForm: new ListingFormData(
@@ -77,7 +56,7 @@ class ListingController
                 notes: '',
                 username: $latestUsername ?? '',
                 item: null,
-                usernames: $usernames
+                usernames: UsernameService::getAuthenticatedUsernames()
             )
         ));
     }
@@ -91,20 +70,16 @@ class ListingController
             return back()->error('You are not allowed to create listings');
         }
 
-        $key = Session::get('listing_token');
+        // Allow only 1 attempt per 3 seconds
+        $key = $this->user->id;
         if (RateLimiter::tooManyAttempts($key, 1)) {
             throw new ThrottleRequestsException('Too many requests. Please wait a few seconds before submitting again.');
         }
-        // Allow only 1 attempt per 3 seconds
         RateLimiter::hit($key, 3);
 
         $listingData = collect($data->toArray())->except(['item', 'usernames'])->toArray();
         $listingData['item_id'] = $data->item->id;
-
         $listingData['ip'] = $request->ip();
-
-        // Trim spaces and underscores from start and end of username
-        $data->username = trim($data->username, ' _');
 
         Listing::create($listingData);
 
@@ -138,9 +113,6 @@ class ListingController
             $listing->timestamps = false;
         }
 
-        // Trim spaces and underscores from start and end of username
-        $data->username = trim($data->username, ' _');
-
         $listing->update($data->getListingData());
 
         return to_route('listings.index')->success('The listing has been updated');
@@ -158,18 +130,5 @@ class ListingController
         $listing->update(['sold_at' => now()]);
 
         return back()->success('The listing has been marked as sold');
-    }
-
-    public function bump(Listing $listing)
-    {
-        $this->authorize('update', $listing);
-
-        if ($listing->updated_at->diffInMinutes(now()) < 30) {
-            return back()->error('You can only bump a listing every 30 minutes');
-        }
-
-        $listing->touch();
-
-        return back()->success('Listing bumped successfully');
     }
 }

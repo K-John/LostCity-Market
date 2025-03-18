@@ -14,8 +14,9 @@ const auth = useAuth();
 
         <p>
             You are successfully logged in with Discord, but you have no Lost
-            City accounts imported. You can still post listings, but your
-            usernames will not be reserved. This is likely one of two reasons:
+            City accounts imported. You will not be able to post listings until
+            your Lost City accounts are imported. The issue may be due to one of
+            two reasons:
         </p>
 
         <hr class="border-red-700" />

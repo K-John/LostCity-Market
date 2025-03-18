@@ -115,7 +115,7 @@ const auth = useAuth();
                     All done! You can now set your Markets usernames by
                     <Link
                         v-if="!auth"
-                        :href="route('login.index')"
+                        :href="route('login')"
                         class="text-[#90c040] hover:underline"
                         >logging in with Discord</Link
                     >

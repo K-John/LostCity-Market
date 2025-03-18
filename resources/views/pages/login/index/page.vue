@@ -4,27 +4,41 @@
     <LayoutMain>
         <Head title="Login" />
 
-        <Alert title="Login with Discord" type="info">
+        <Alert title="You must login with Discord to use Markets">
             <p>
-                You can login with Discord to reserve and prevent others from
-                using your username(s).
+                We integrate directly with
+                <a
+                    href="https://2004.lostcity.rs/"
+                    target="_blank"
+                    class="text-[#90c040] hover:underline"
+                    >Lost City</a
+                >. 
+                If you created your
+                <a
+                    href="https://2004.lostcity.rs/"
+                    target="_blank"
+                    class="text-[#90c040] hover:underline"
+                    >Lost City</a
+                >
+                account before Discord login was required, you must link your
+                accounts to continue using Markets.
             </p>
 
             <p>
-                In order for this to work, you must have already
+                You can find instructions for adopting accounts to Discord by
                 <a
-                    href="https://2004.lostcity.rs/account"
+                    href="https://2004.lostcity.rs/docs/adopt"
                     target="_blank"
                     class="text-[#90c040] hover:underline"
-                    >logged in with Discord on Lost City</a
-                > and adopted your accounts.
+                    >clicking here</a
+                >.
             </p>
         </Alert>
 
-        <div class="mb-8 flex justify-center">
+        <div class="my-8 flex justify-center">
             <a
                 :href="route('auth.discord')"
-                class="flex w-fit items-center gap-2 rounded-sm bg-[#5865F2] px-3 py-2 text-white hover:bg-[#8891f2]"
+                class="flex w-fit items-center gap-2 rounded-md bg-[#5865F2] px-4 py-3 text-xl text-white hover:bg-[#8891f2]"
             >
                 <DiscordLogo class="size-5" />
                 Login with Discord

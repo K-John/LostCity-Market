@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { useForm } from "@inertiajs/vue3";
+import { Tooltip } from "floating-vue";
+import "floating-vue/dist/style.css";
 
 const props = defineProps<{
     listingForm: any;
@@ -112,12 +114,9 @@ const submit = () => {
                     </template>
 
                     <template v-else>
-                        <input
-                            v-model="form.username"
-                            type="text"
-                            class="w-28 border-slate-900 bg-stone-700 py-0 pl-1"
-                            placeholder="Username"
-                        />
+                        <p class="bg-red-900 px-1 py-0 text-red-200">
+                            ERROR: No usernames found
+                        </p>
                     </template>
                 </div>
 

@@ -7,18 +7,6 @@ import { ArrowTrendingUpIcon } from "@heroicons/vue/24/outline/index.js";
 const props = defineProps<Pages.ListingsIndexPage>();
 
 const auth = useAuth();
-const form = useForm({
-    ...props.tokenForm,
-});
-
-const submit = () => {
-    form.post(route("tokens.store"), {
-        preserveScroll: true,
-        onSuccess: () => {
-            form.reset();
-        },
-    });
-};
 
 const canBumpListings = computed(() =>
     props.listings.data.some(
@@ -31,69 +19,6 @@ const canBumpListings = computed(() =>
 <template>
     <LayoutMain>
         <Head title="My Listings" />
-
-        <Alert v-if="!auth && !props.token" type="info">
-            <p>
-                If you have an existing token, you can sign in with it here.
-                Otherwise, you should
-                <Link
-                    :href="route('login.index')"
-                    class="text-[#90c040] hover:underline"
-                    >login with Discord</Link
-                >
-                to manage your listings.
-            </p>
-
-            <form class="flex flex-col gap-4" @submit.prevent="submit">
-                <div
-                    v-if="Object.keys(form.errors).length !== 0"
-                    class="text-white"
-                >
-                    <p v-for="error in form.errors" :key="error">
-                        {{ error }}
-                    </p>
-                </div>
-
-                <input
-                    v-model="form.token"
-                    type="text"
-                    class="w-full py-0 pl-1 pr-0 text-black"
-                />
-
-                <button
-                    type="submit"
-                    class="w-fit bg-white px-3 text-black hover:bg-slate-200"
-                >
-                    Submit
-                </button>
-            </form>
-        </Alert>
-
-        <Alert
-            v-if="!auth && props.token"
-            id="token-save-notice"
-            type="success"
-        >
-            <h2 class="font-bold">Save Your Token</h2>
-
-            <p>
-                Your are signed in with a token. You can save this token to
-                restore access to your listings, or you can
-                <Link
-                    :href="route('login.index')"
-                    class="text-[#90c040] hover:underline"
-                    >login with Discord</Link
-                >.
-            </p>
-
-            <a
-                :href="route('tokens.download')"
-                target="_blank"
-                class="w-fit bg-white px-3 text-black hover:bg-slate-200"
-            >
-                Download Token
-            </a>
-        </Alert>
 
         <UsernamesAlert v-if="auth && !usernames?.length" />
 
@@ -153,7 +78,7 @@ const canBumpListings = computed(() =>
                             }"
                             :disabled="!canBumpListings"
                             @click="
-                                router.patch(route('bump'), {
+                                router.patch(route('listings.bump'), {
                                     preserveScroll: true,
                                 })
                             "
@@ -186,6 +111,8 @@ const canBumpListings = computed(() =>
 
                     <PriceTableData :listing="listing" />
 
+                    <UsernameTableData :listing="listing" />
+
                     <TimestampTableData :timestamp="listing.updatedAt" />
 
                     <NoteTableData :listing="listing" />
@@ -217,6 +144,8 @@ const canBumpListings = computed(() =>
                     <ItemTableData :item="listing.item" />
 
                     <PriceTableData :listing="listing" />
+
+                    <UsernameTableData :listing="listing" />
 
                     <TimestampTableData :timestamp="listing.updatedAt" />
 

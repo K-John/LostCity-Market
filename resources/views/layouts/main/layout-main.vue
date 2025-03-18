@@ -61,21 +61,23 @@ onBeforeUnmount(() => {
 const links = computed(() => [
     { label: "Main Menu", href: "/" },
     { label: "Create Listing", href: route("listings.create") },
-    { label: "My Listings", href: route("listings.index") },
+    ...(auth.value
+        ? [{ label: "My Listings", href: route("listings.index") }]
+        : []),
     ...(auth.value
         ? [
               {
                   label: "Logout",
                   action: () =>
                       router.delete(
-                          route("login.destroy", {
+                          route("logout", {
                               login: auth.value.email,
                               preserveScroll: true,
                           }),
                       ),
               },
           ]
-        : [{ label: "Login", href: route("login.index") }]),
+        : [{ label: "Login", href: route("login") }]),
 ]);
 </script>
 

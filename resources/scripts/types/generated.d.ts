@@ -16,7 +16,6 @@ quantity: number;
 notes: string | null;
 username: string;
 item: Data.Item.ItemData | null;
-tokenPrefix: string;
 updatedAt: string;
 soldAt: string | null;
 deletedAt: string | null;
@@ -47,11 +46,6 @@ name: string;
 email: string;
 };
 }
-declare namespace Data.Token {
-export type TokenFormData = {
-token: string;
-};
-}
 declare namespace Enums {
 export type ListingType = 'buy' | 'sell';
 export type NotificationType = 'success' | 'error' | 'warning' | 'info' | 'default';
@@ -77,13 +71,7 @@ listingForm: Data.Listing.ListingFormData;
 export type ListingsIndexPage = {
 listings: {data:Array<Data.Listing.ListingData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
 expiredListings: Array<Data.Listing.ListingData>;
-token: string;
-tokenForm: Data.Token.TokenFormData;
 usernames: Array<any>;
-};
-export type TokensShowPage = {
-token: string;
-listings: {data:Array<Data.Listing.ListingData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
 };
 export type UsersIndexPage = {
 username: string;

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Listing;
 use App\Models\User;
 use App\Models\Username;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +36,11 @@ class UsernameService
                 'user_id' => $user->id,
                 'username' => $username,
             ]);
+
+            // Update old listings with new user_id
+            Listing::withoutTimestamps(function() use ($username, $user) {
+                Listing::whereRaw("LOWER(REPLACE(username, ' ', '_')) = LOWER(?)", [$username])->update(['user_id' => $user->id, 'username' => $username]);
+            });
         }
     }
 
