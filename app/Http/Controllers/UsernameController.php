@@ -13,10 +13,9 @@ class UsernameController
 {
     public function show(String $username)
     {
-        $listings = Listing::with('item')
+        $listings = Listing::active()
+            ->with('item')
             ->where('username', $username)
-            ->where('updated_at', '>=', now()->subDays(1))
-            ->orderBy('updated_at', 'desc')
             ->paginate(20);
 
         return inertia('users/index/page', new UsersIndexPage(

@@ -6,7 +6,6 @@ use App\Data\Listing\ListingData;
 use App\Http\Traits\HandlesListingType;
 use App\Models\Listing;
 use Illuminate\Http\Request;
-use Spatie\LaravelData\DataCollection;
 
 class ListingController
 {
