@@ -7,6 +7,7 @@ use App\Enums\ListingType;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Spatie\LaravelData\Attributes\Computed;
+use Spatie\LaravelData\Attributes\Hidden;
 use Spatie\LaravelData\Data;
 
 class ListingData extends Data
@@ -24,6 +25,7 @@ class ListingData extends Data
         public ?ItemData $item,
         public DateTime $updatedAt,
         public ?DateTime $soldAt,
+        #[Hidden]
         public ?int $userId
     ) {
         $this->canManage = self::determineCanManage($userId);
