@@ -25,6 +25,7 @@ class ListingController
                 ->when($since, function ($query, $since) {
                     return $query->where('created_at', '>', $since);
                 })
+                ->limit(100)
                 ->get();
         });
 
