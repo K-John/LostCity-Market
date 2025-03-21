@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { XMarkIcon, ArrowUturnLeftIcon } from "@heroicons/vue/24/outline";
+
 const props = defineProps<Pages.UsersIndexPage>();
+const auth = useAuth();
 </script>
 
 <template>
@@ -10,12 +13,46 @@ const props = defineProps<Pages.UsersIndexPage>();
             <EmptyTableRow v-if="!props.listings.data.length" />
 
             <template #header>
-                <h2 class="text-lg font-bold">
-                    <span class="whitespace-pre text-stone-500">{{
-                        toDisplayName(username)
-                    }}</span
-                    >'s listings
-                </h2>
+                <div class="flex justify-between">
+                    <h2 class="text-lg font-bold">
+                        <span class="whitespace-pre text-stone-500">{{
+                            toDisplayName(username)
+                        }}</span
+                        >'s listings
+                    </h2>
+
+                    <template v-if="auth.is_admin && !is_banned">
+                        <button
+                            type="button"
+                            class="flex items-center gap-2 rounded-sm bg-stone-800 px-2 py-1 text-red-500 hover:bg-stone-900"
+                            @click="
+                                router.post(
+                                    route('ban.store', { username: username }),
+                                    { preserveScroll: true },
+                                )
+                            "
+                        >
+                            <XMarkIcon class="size-5" /> Ban User
+                        </button>
+                    </template>
+
+                    <template v-if="auth.is_admin && is_banned">
+                        <button
+                            type="button"
+                            class="flex items-center gap-2 rounded-sm bg-stone-800 px-2 py-1 text-green-500 hover:bg-stone-900"
+                            @click="
+                                router.delete(
+                                    route('ban.destroy', {
+                                        username,
+                                    }),
+                                    { preserveScroll: true },
+                                )
+                            "
+                        >
+                            <ArrowUturnLeftIcon class="size-5" /> Unban User
+                        </button>
+                    </template>
+                </div>
             </template>
 
             <ListingTableRow

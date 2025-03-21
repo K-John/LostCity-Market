@@ -5,6 +5,7 @@ namespace App\Data\Listing;
 use App\Data\Item\ItemData;
 use App\Enums\ListingType;
 use App\Models\Listing;
+use App\Models\Username;
 use Illuminate\Support\Facades\Auth;
 use Spatie\LaravelData\Data;
 
@@ -40,6 +41,13 @@ class ListingFormData extends Data
                         $fail('The selected username is invalid.');
                     }
                 },
+                function ($attribute, $value, $fail) {
+                    $user = Username::where('username', $value)->first()?->user;
+
+                    if ($user && $user->is_banned) {
+                        $fail('You\'re banned.');
+                    }
+                }
             ],
             'notes' => ['nullable', 'string'],
             'item.id' => ['required', 'integer', 'exists:items,id'],

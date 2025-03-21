@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\Auth\DiscordController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BanController;
 use App\Http\Controllers\BumpController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\UsernameController;
+use App\Http\Middleware\AuthorizeAdmin;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
@@ -20,6 +22,11 @@ Route::middleware('auth')->group(function () {
 
     Route::patch('/bump/{listing}', [BumpController::class, 'update'])
         ->name('listing.bump');
+
+    Route::middleware(AuthorizeAdmin::class)->group(function () {
+        Route::post('/ban/{username:username}', [BanController::class, 'store'])->name('ban.store');
+        Route::delete('/ban/{username:username}', [BanController::class, 'destroy'])->name('ban.destroy');
+    });
 });
 
 Route::get('items/{item:slug}', [ItemController::class, 'show'])

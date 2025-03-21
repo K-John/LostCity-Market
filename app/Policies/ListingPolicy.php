@@ -23,6 +23,10 @@ class ListingPolicy
 
     public function create(User $user): bool
     {
+        if ($user->is_banned) {
+            return false;
+        }
+        
         return $user !== null;
     }
 
@@ -30,6 +34,10 @@ class ListingPolicy
     {
         if ($user->is_admin) {
             return true;
+        }
+
+        if ($user->is_banned) {
+            return false;
         }
 
         if (!is_null($listing->sold_at)) {
@@ -44,7 +52,7 @@ class ListingPolicy
         if ($user->is_admin) {
             return true;
         }
-        
+
         if (!is_null($listing->sold_at)) {
             return false;
         }

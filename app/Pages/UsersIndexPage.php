@@ -9,6 +9,7 @@ class UsersIndexPage extends Data
 {
     public function __construct(
         public string $username,
+        public bool $is_banned,
         /** @var PaginatedDataCollection<\App\Data\Listing\ListingData> */
         public PaginatedDataCollection $listings,
     ) {}
