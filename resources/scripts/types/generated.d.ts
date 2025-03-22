@@ -28,7 +28,7 @@ price: string;
 quantity: number | null;
 notes: string | null;
 username: string;
-item: Data.Item.ItemData | null;
+item_id: number | null;
 usernames: Array<any> | null;
 };
 }

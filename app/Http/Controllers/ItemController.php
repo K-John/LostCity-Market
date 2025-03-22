@@ -22,8 +22,6 @@ class ItemController
     {
         $listingType = $this->getListingType($request);
 
-        $itemData = ItemData::from($item);
-
         $latestUsername = Auth::user()?->listings()->latest()->value('username');
 
         $listings = $item->listings()
@@ -39,7 +37,7 @@ class ItemController
 
         return inertia('items/show/page', new ItemsShowPage(
             listingType: $listingType,
-            item: $itemData,
+            item: ItemData::from($item),
             listingForm: new ListingFormData(
                 id: null,
                 type: $listingType,
@@ -47,7 +45,7 @@ class ItemController
                 quantity: null,
                 notes: '',
                 username: $latestUsername ?? '',
-                item: $itemData,
+                item_id: $item->id,
                 usernames: UsernameService::getAuthenticatedUsernames(),
             ),
             listings: ListingData::collect($listings, PaginatedDataCollection::class),

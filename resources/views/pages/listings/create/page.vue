@@ -4,8 +4,6 @@ import _ from "lodash";
 
 const props = defineProps<Pages.ListingsCreatePage>();
 
-const listingTypes = computed((): Enums.ListingType[] => ["buy", "sell"]);
-
 const auth = useAuth();
 const form = useForm({
     ...props.listingForm,
