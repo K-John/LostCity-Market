@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { Head, usePoll } from "@inertiajs/vue3";
+import { BookmarkSlashIcon, BookmarkIcon } from "@heroicons/vue/24/solid";
+import { Tooltip } from "floating-vue";
+import "floating-vue/dist/style.css";
 
 const props = defineProps<Pages.ItemsShowPage>();
 
@@ -48,7 +51,9 @@ const highlightedIds = ref<number[]>([]);
 
         <div class="flex flex-col gap-6">
             <div class="flex flex-row gap-x-4">
-                <div class="size-fit border-2 border-stone-600 bg-stone-800 p-1">
+                <div
+                    class="size-fit border-2 border-stone-600 bg-stone-800 p-1"
+                >
                     <img
                         :src="`/img/items/${item.slug}.webp`"
                         :alt="`${item.name} Icon`"
@@ -57,15 +62,69 @@ const highlightedIds = ref<number[]>([]);
                     />
                 </div>
 
-                <div class="flex flex-col gap-1">
-                    <h1 class="text-2xl font-bold">
-                        {{ item.name }}
-                    </h1>
+                <div class="flex grow flex-col gap-1">
+                    <div
+                        class="flex items-end justify-between gap-4 sm:justify-normal"
+                    >
+                        <h1 class="text-2xl font-bold">
+                            {{ item.name }}
+                        </h1>
+
+                        <template v-if="auth">
+                            <Tooltip>
+                                <button
+                                    v-if="!item.isFavorite"
+                                    class="inline-flex justify-center rounded-sm bg-emerald-800 p-2 text-emerald-200 hover:bg-emerald-700 sm:p-1"
+                                    @click="
+                                        router.post(
+                                            route('favorites.store', {
+                                                item_id: item.id,
+                                                preserveScroll: true,
+                                            }),
+                                        )
+                                    "
+                                >
+                                    <BookmarkIcon
+                                        class="size-5"
+                                        aria-hidden="true"
+                                    />
+                                </button>
+
+                                <button
+                                    v-if="item.isFavorite"
+                                    class="inline-flex justify-center rounded-sm bg-red-800 p-2 text-red-200 hover:bg-red-700 sm:p-1"
+                                    @click="
+                                        router.delete(
+                                            route('favorites.destroy', {
+                                                favorite: item.id,
+                                                preserveScroll: true,
+                                            }),
+                                        )
+                                    "
+                                >
+                                    <BookmarkSlashIcon
+                                        class="size-5"
+                                        aria-hidden="true"
+                                    />
+                                </button>
+
+                                <template #popper>
+                                    <template v-if="!item.isFavorite">
+                                        Add to Favorites
+                                    </template>
+
+                                    <template v-else>
+                                        Remove from Favorites
+                                    </template>
+                                </template>
+                            </Tooltip>
+                        </template>
+                    </div>
 
                     <div class="flex flex-col gap-x-4 sm:flex-row">
                         <h2 class="font-bold">Prices:</h2>
 
-                        <div class="flex flex-row  gap-2 sm:gap-4">
+                        <div class="flex flex-row gap-2 sm:gap-4">
                             <div>
                                 <u>Gen. Store:</u>
 

@@ -1,5 +1,6 @@
 declare namespace Data.Item {
 export type ItemData = {
+isFavorite: boolean;
 id: number;
 name: string;
 slug: string;
@@ -50,6 +51,9 @@ export type ListingType = 'buy' | 'sell';
 export type NotificationType = 'success' | 'error' | 'warning' | 'info' | 'default';
 }
 declare namespace Pages {
+export type FavoritesIndexPage = {
+items: {data:Array<Data.Item.ItemData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
+};
 export type HomeIndexPage = {
 listingType: Enums.ListingType;
 listings: {data:Array<Data.Listing.ListingData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
