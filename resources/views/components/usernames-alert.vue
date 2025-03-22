@@ -41,7 +41,6 @@ const auth = useAuth();
                     @click="
                         router.patch(
                             route('usernames.update', {
-                                user: auth.email,
                                 preserveScroll: true,
                             }),
                         )

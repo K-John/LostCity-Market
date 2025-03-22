@@ -7,7 +7,7 @@ defineProps<{
 <template>
     <td class="text-stone-400 sm:px-1">
         <div class="d-flex">
-            <Link :href="route('usernames.show', { user: listing.username })" class="whitespace-pre text-sm sm:text-[medium]">
+            <Link :href="route('usernames.show', { username: listing.username })" class="whitespace-pre text-sm sm:text-[medium]">
                 {{
                     toDisplayName(listing.username)
                 }}

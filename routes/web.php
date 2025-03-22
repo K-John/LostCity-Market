@@ -23,6 +23,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/bump/{listing}', [BumpController::class, 'update'])
         ->name('listing.bump');
 
+    Route::patch('usernames/update', [UsernameController::class, 'update'])
+        ->name('usernames.update');
+
     Route::middleware(AuthorizeAdmin::class)->group(function () {
         Route::post('/ban/{username:username}', [BanController::class, 'store'])->name('ban.store');
         Route::delete('/ban/{username:username}', [BanController::class, 'destroy'])->name('ban.destroy');
@@ -32,9 +35,8 @@ Route::middleware('auth')->group(function () {
 Route::get('items/{item:slug}', [ItemController::class, 'show'])
     ->name('items.show');
 
-Route::resource('users', UsernameController::class)
-    ->only(['show', 'update'])
-    ->names('usernames');
+Route::get('users/{username:username}', [UsernameController::class, 'show'])
+    ->name('usernames.show');
 
 Route::get('/auth/discord', [DiscordController::class, 'redirectToDiscord'])
     ->name('auth.discord');
