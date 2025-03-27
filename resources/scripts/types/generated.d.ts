@@ -47,6 +47,8 @@ is_admin: boolean;
 };
 }
 declare namespace Enums {
+export type FavoritesListingType = 'all' | 'buy' | 'sell';
+export type HomeTabType = 'buy' | 'sell' | 'favorites';
 export type ListingType = 'buy' | 'sell';
 export type NotificationType = 'success' | 'error' | 'warning' | 'info' | 'default';
 }
@@ -55,8 +57,10 @@ export type FavoritesIndexPage = {
 items: {data:Array<Data.Item.ItemData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
 };
 export type HomeIndexPage = {
-listingType: Enums.ListingType;
+tab: Enums.HomeTabType;
+listingType: Enums.FavoritesListingType;
 listings: {data:Array<Data.Listing.ListingData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
+favorites: Array<Data.Item.ItemData> | null;
 };
 export type ItemsShowPage = {
 listingType: Enums.ListingType;
