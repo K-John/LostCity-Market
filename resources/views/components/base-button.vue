@@ -6,28 +6,34 @@ const props = defineProps<{
     href?: string;
     type?: "button" | "submit" | "reset";
     as?: "button" | "link";
-    variant?: "success" | "danger" | "secondary" | "warning" | "default" | "custom";
+    variant?:
+        | "success"
+        | "danger"
+        | "secondary"
+        | "warning"
+        | "default"
+        | "custom";
     class?: string;
     forceFocus?: boolean;
 }>();
 
 const focusClasses = computed(() => {
-  if (props.forceFocus) {
-    switch (props.variant) {
-        case "success":
-            return "ring-2 ring-green-600";
-        case "danger":
-            return "ring-2 ring-red-600";
-        case "warning":
-            return "ring-2 ring-yellow-400";
-        case "secondary":
-            return "ring-2 ring-stone-700";
-        case "default":
-            return "ring-2 ring-stone-500";
+    if (props.forceFocus) {
+        switch (props.variant) {
+            case "success":
+                return "ring-2 ring-green-600";
+            case "danger":
+                return "ring-2 ring-red-600";
+            case "warning":
+                return "ring-2 ring-yellow-400";
+            case "secondary":
+                return "ring-2 ring-stone-700";
+            case "default":
+                return "ring-2 ring-stone-500";
+        }
     }
-  }
 
-  return '';
+    return "";
 });
 
 const isLink = computed(() => props.as === "link" && props.href);
@@ -49,7 +55,8 @@ const variantClasses = computed(() => {
     }
 });
 
-const baseClasses = "w-fit rounded-sm px-3 py-2 sm:py-1 sm:px-2 transition focus:outline-none focus:ring-2";
+const baseClasses =
+    "w-fit rounded-sm px-3 py-2 sm:py-1 sm:px-2 transition focus:outline-none focus:ring-2";
 </script>
 
 <template>

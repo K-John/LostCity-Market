@@ -1,8 +1,8 @@
-import dayjs from "dayjs"
-import LocalizedFormat from "dayjs/plugin/localizedFormat"
+import dayjs from "dayjs";
+import LocalizedFormat from "dayjs/plugin/localizedFormat";
 
-dayjs.extend(LocalizedFormat)
+dayjs.extend(LocalizedFormat);
 
 export const formatTime = (date: string) => {
-  return dayjs(date).format('lll');
-}
+    return dayjs(date).format("lll");
+};

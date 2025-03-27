@@ -32,11 +32,11 @@ const BASE37_LOOKUP: string[] = [
 export function fromBase37(value: bigint): string {
     // >= 37 to the 12th power
     if (value < 0n || value >= 6582952005840035281n) {
-        return 'invalid_name';
+        return "invalid_name";
     }
 
     if (value % 37n === 0n) {
-        return 'invalid_name';
+        return "invalid_name";
     }
 
     let len: number = 0;
@@ -47,11 +47,15 @@ export function fromBase37(value: bigint): string {
         chars[11 - len++] = BASE37_LOOKUP[Number(l1 - value * 37n)];
     }
 
-    return chars.slice(12 - len).join('');
+    return chars.slice(12 - len).join("");
 }
 
 export function toTitleCase(str: string): string {
-    return str.replace(/\w\S*/g, (txt: string): string => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+    return str.replace(
+        /\w\S*/g,
+        (txt: string): string =>
+            txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(),
+    );
 }
 
 export function toSafeName(name: string): string {
@@ -59,5 +63,5 @@ export function toSafeName(name: string): string {
 }
 
 export function toDisplayName(name: string): string {
-    return toTitleCase(toSafeName(name).replaceAll('_', ' '));
+    return toTitleCase(toSafeName(name).replaceAll("_", " "));
 }

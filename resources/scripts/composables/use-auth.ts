@@ -1,4 +1,3 @@
 export const useAuth = () => {
-    return computed(() => usePage().props.user)
-  }
-  
+    return computed(() => usePage().props.user);
+};

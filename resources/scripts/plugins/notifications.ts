@@ -1,14 +1,16 @@
-import { TYPE as NotificationType, useToast } from "vue-toastification"
-import "vue-toastification/dist/index.css"
+import { TYPE as NotificationType, useToast } from "vue-toastification";
+import "vue-toastification/dist/index.css";
 
-const toast = useToast()
+const toast = useToast();
 
 export const notifications = () => {
-  router.on("finish", () => {
-    const notification = usePage().props.notification
+    router.on("finish", () => {
+        const notification = usePage().props.notification;
 
-    if (notification) {
-      toast(notification.body, { type: notification.type as NotificationType })
-    }
-  })
-}
+        if (notification) {
+            toast(notification.body, {
+                type: notification.type as NotificationType,
+            });
+        }
+    });
+};

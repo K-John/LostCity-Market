@@ -128,8 +128,11 @@ const canBumpListings = computed(() =>
         <ListingTable class="border-yellow-800 bg-stone-950">
             <template #header>
                 <h2 class="text-lg font-bold">Recently Expired:</h2>
-                
-                <p>If you'd like to re-active a listing, you can bump or edit it's information.</p>
+
+                <p>
+                    If you'd like to re-active a listing, you can bump or edit
+                    it's information.
+                </p>
             </template>
 
             <EmptyTableRow v-if="!expiredListings.length" />

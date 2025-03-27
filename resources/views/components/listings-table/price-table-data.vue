@@ -39,7 +39,7 @@ defineProps<{
                 <p class="text-sm sm:text-[medium]">
                     {{ formatGold(listing.price) }}GP
                 </p>
-                
+
                 <p class="text-xs sm:text-[medium]">ea.</p>
 
                 <template #popper>
