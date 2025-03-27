@@ -148,7 +148,7 @@ const highlightedIds = ref<number[]>([]);
                 </div>
             </template>
 
-            <div
+            <td
                 v-if="!auth && props.tab === 'favorites'"
                 class="flex flex-col items-center justify-center gap-2 px-2 py-6 sm:flex-row"
             >
@@ -166,9 +166,9 @@ const highlightedIds = ref<number[]>([]);
                         Sign in here
                     </Link>
                 </div>
-            </div>
+            </td>
 
-            <div
+            <td
                 v-else-if="
                     auth &&
                     props.tab === 'favorites' &&
@@ -188,7 +188,7 @@ const highlightedIds = ref<number[]>([]);
                         icon on a listing.
                     </p>
                 </div>
-            </div>
+            </td>
 
             <EmptyTableRow v-else-if="!props.listings.data.length" />
 
@@ -207,7 +207,7 @@ const highlightedIds = ref<number[]>([]);
 
                     <TimestampTableData
                         :timestamp="listing.updatedAt"
-                        :use-color="false"
+                        :use-color="props.tab === 'favorites'"
                     />
 
                     <NoteTableData :listing="listing" />
