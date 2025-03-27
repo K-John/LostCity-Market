@@ -62,9 +62,9 @@ const highlightedIds = ref<number[]>([]);
                     />
                 </div>
 
-                <div class="flex grow flex-col gap-1">
+                <div class="flex grow flex-col gap-1 sm:grow-0">
                     <div
-                        class="flex items-end justify-between gap-4 sm:justify-normal"
+                        class="flex items-end justify-between gap-4"
                     >
                         <h1 class="text-2xl font-bold">
                             {{ item.name }}
