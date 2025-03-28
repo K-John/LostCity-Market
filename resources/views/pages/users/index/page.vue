@@ -21,7 +21,7 @@ const auth = useAuth();
                         >'s listings
                     </h2>
 
-                    <template v-if="auth.is_admin && !is_banned">
+                    <template v-if="auth?.is_admin && !is_banned">
                         <button
                             type="button"
                             class="flex items-center gap-2 rounded-sm bg-stone-800 px-2 py-1 text-red-500 hover:bg-stone-900"
@@ -36,7 +36,7 @@ const auth = useAuth();
                         </button>
                     </template>
 
-                    <template v-if="auth.is_admin && is_banned">
+                    <template v-if="auth?.is_admin && is_banned">
                         <button
                             type="button"
                             class="flex items-center gap-2 rounded-sm bg-stone-800 px-2 py-1 text-green-500 hover:bg-stone-900"
