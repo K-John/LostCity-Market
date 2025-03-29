@@ -53,6 +53,7 @@ class ItemController
                 $listing->sold_at = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $listing->sold_at);
                 return $listing;
             }), DataCollection::class),
+            usernames: UsernameService::getAuthenticatedUsernames()
         ));
     }
 }

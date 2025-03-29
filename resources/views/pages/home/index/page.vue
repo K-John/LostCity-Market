@@ -1,14 +1,20 @@
 <script setup lang="ts">
-import { usePoll } from "@inertiajs/vue3";
 import {
     ArrowLeftEndOnRectangleIcon,
     BookmarkSlashIcon,
 } from "@heroicons/vue/24/outline";
 
 const props = defineProps<Pages.HomeIndexPage>();
-const auth = useAuth();
-
 const listings = ref<Data.Listing.ListingData[]>([...props.listings.data]);
+
+watch(
+    () => props.listings.data,
+    (newListings) => {
+        listings.value = [...newListings];
+    },
+);
+
+const auth = useAuth();
 
 const tabTypes = computed((): Enums.HomeTabType[] => [
     "buy",
@@ -27,81 +33,72 @@ const highlightedIds = ref<number[]>([]);
 onMounted(() => {
     const channel = window.Echo.channel("listings");
 
-    channel.listen(
-        "ListingEvent",
-        (listingsEvent: Data.Listing.ListingData[]) => {
-            let listingEvent = listingsEvent[0];
+    channel.listen("ListingEvent", (listingEvent: Data.Listing.ListingData) => {
+        if (auth) {
+            listingEvent.canManage =
+                props.usernames?.includes(listingEvent.username) || false;
+        }
 
-            if (auth) {
-                listingEvent.canManage =
-                    auth.value?.usernames
-                        ?.map((u) => u.username)
-                        .includes(listingEvent.username) || false;
+        // If the listing event is not for the current item or the listing type doesn't match, ignore it.
+        if (
+            !listingEvent.item ||
+            ((props.tab === "buy" || props.tab === "sell") &&
+                listingEvent.type !== props.tab) ||
+            (props.tab === "favorites" &&
+                (!props.favorites
+                    ?.map((f) => f.id)
+                    .includes(listingEvent.item.id) ||
+                    (props.listingType !== "all" &&
+                        listingEvent.type !== props.listingType)))
+        ) {
+            return;
+        }
+
+        // If the listingEvent has a sold or deleted timestamp, remove the listing from the list if it exists.
+        if (listingEvent.soldAt || listingEvent.deletedAt) {
+            const index = listings.value.findIndex(
+                (l) => l.id === listingEvent.id,
+            );
+
+            if (index !== -1) {
+                listings.value.splice(index, 1);
             }
+        } else {
+            // Check if the listing already exists in the list.
+            const index = listings.value.findIndex(
+                (l) => l.id === listingEvent.id,
+            );
 
-            // If the listing event is not for the current item or the listing type doesn't match, ignore it.
-            if (
-                !listingEvent.item ||
-                ((props.tab === "buy" || props.tab === "sell") &&
-                    listingEvent.type !== props.tab) ||
-                (props.tab === "favorites" &&
-                    (!props.favorites
-                        ?.map((f) => f.id)
-                        .includes(listingEvent.item.id) ||
-                        (props.listingType !== "all" &&
-                            listingEvent.type !== props.listingType)))
-            ) {
-                return;
-            }
+            if (index === -1) {
+                // If it doesn't exist, add it to the front of the list.
+                const usernameCount = listings.value
+                    .slice(0, 20)
+                    .filter((l) => l.username === listingEvent.username).length;
+                if (usernameCount < 3) {
+                    listings.value.unshift(listingEvent);
+                    // Add the id to the highlightedIds to highlight the new listing.
+                    highlightedIds.value.push(listingEvent.id);
+                }
 
-            // If the listingEvent has a sold or deleted timestamp, remove the listing from the list if it exists.
-            if (listingEvent.soldAt || listingEvent.deletedAt) {
-                const index = listings.value.findIndex(
-                    (l) => l.id === listingEvent.id,
-                );
-
-                if (index !== -1) {
-                    listings.value.splice(index, 1);
+                // If the list is too long, remove the last listing.
+                if (listings.value.length > 30) {
+                    listings.value.pop();
                 }
             } else {
-                // Check if the listing already exists in the list.
-                const index = listings.value.findIndex(
-                    (l) => l.id === listingEvent.id,
-                );
+                // If it exists, update the listing.
+                const existingListing = listings.value[index];
+                listings.value[index] = listingEvent;
 
-                if (index === -1) {
-                    // If it doesn't exist, add it to the front of the list.
-                    const usernameCount = listings.value
-                        .slice(0, 20)
-                        .filter(
-                            (l) => l.username === listingEvent.username,
-                        ).length;
-                    if (usernameCount < 3) {
-                        listings.value.unshift(listingEvent);
-                        // Add the id to the highlightedIds to highlight the new listing.
-                        highlightedIds.value.push(listingEvent.id);
-                    }
-
-                    // If the list is too long, remove the last listing.
-                    if (listings.value.length > 30) {
-                        listings.value.pop();
-                    }
-                } else {
-                    // If it exists, update the listing.
-                    const existingListing = listings.value[index];
-                    listings.value[index] = listingEvent;
-
-                    // If the updatedAt timestamp changed, move it to the front of the list.
-                    if (existingListing.updatedAt !== listingEvent.updatedAt) {
-                        listings.value.splice(index, 1);
-                        listings.value.unshift(listingEvent);
-                        // Add the id to the highlightedIds to highlight the updated listing.
-                        highlightedIds.value.push(listingEvent.id);
-                    }
+                // If the updatedAt timestamp changed, move it to the front of the list.
+                if (existingListing.updatedAt !== listingEvent.updatedAt) {
+                    listings.value.splice(index, 1);
+                    listings.value.unshift(listingEvent);
+                    // Add the id to the highlightedIds to highlight the updated listing.
+                    highlightedIds.value.push(listingEvent.id);
                 }
             }
-        },
-    );
+        }
+    });
 });
 
 // Cleanup the subscription when the component is unmounted.

@@ -18,6 +18,7 @@ class ItemsShowPage extends Data
         /** @var PaginatedDataCollection<\App\Data\Listing\ListingData> */
         public PaginatedDataCollection $listings,
         /** @var DataCollection<\App\Data\Listing\ListingData> */
-        public DataCollection $soldListings
+        public DataCollection $soldListings,
+        public array $usernames
     ) {}
 }
