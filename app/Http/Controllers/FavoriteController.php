@@ -6,6 +6,7 @@ use App\Data\Item\ItemData;
 use App\Models\Item;
 use App\Pages\FavoritesIndexPage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Spatie\LaravelData\PaginatedDataCollection;
 
 class FavoriteController
@@ -29,12 +30,18 @@ class FavoriteController
 
         $request->user()->favorites()->syncWithoutDetaching([$item->id]);
 
+        // Clear the cache for the user's favorites
+        Cache::tags('user_favorites')->forget("user_" . request()->user()->id . "_favorites");
+
         return back()->success("{$item->name} has been added to your favorites.");
     }
 
     public function destroy(Item $favorite)
     {
         request()->user()->favorites()->detach($favorite->id);
+
+        // Clear the cache for the user's favorites
+        Cache::tags('user_favorites')->forget("user_" . request()->user()->id . "_favorites");
 
         return back()->success("{$favorite->name} has been removed from your favorites.");
     }
