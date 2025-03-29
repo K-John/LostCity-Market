@@ -24,14 +24,14 @@ class ItemController
 
         $latestUsername = Auth::user()?->listings()->latest()->value('username');
 
-        $listings = cache()->rememberForever("item_{$item->id}_listings_{$listingType->value}", function () use ($item, $listingType) {
+        $listings = cache()->remember("item_{$item->id}_listings_{$listingType->value}", now()->addMinutes(30), function () use ($item, $listingType) {
             return $item->listings()
                 ->active()
                 ->where('type', $listingType)
                 ->paginate(20);
         });
 
-        $soldListings = cache()->rememberForever("item_{$item->id}_sold_listings", function () use ($item) {
+        $soldListings = cache()->remember("item_{$item->id}_sold_listings", now()->addMinutes(30), function () use ($item) {
             return $item->listings()
                 ->whereNotNull('sold_at')
                 ->orderBy('sold_at', 'desc')
