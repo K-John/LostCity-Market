@@ -19,6 +19,7 @@ username: string;
 item: Data.Item.ItemData | null;
 updatedAt: string;
 soldAt: string | null;
+deletedAt: string | null;
 userId: number | null;
 };
 export type ListingFormData = {
