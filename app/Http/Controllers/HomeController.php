@@ -23,7 +23,7 @@ class HomeController
         $tab = $this->getTabType($request);
         $type = $this->getFavoritesListingType($request);
         $page = (int) $request->query('page', 1);
-        $cacheKey = "home_page_{$tab->value}_{$tab?->value}_page_{$page}";
+        $cacheKey = "home_page_{$tab->value}_page_{$page}";
 
         if (in_array($tab, [HomeTabType::Buy, HomeTabType::Sell])) {
             $listings = Cache::tags('home_listings')->rememberForever($cacheKey, function () use ($service, $tab, $type, $page) {
