@@ -24,16 +24,20 @@ class ItemController
 
         $latestUsername = Auth::user()?->listings()->latest()->value('username');
 
-        $listings = $item->listings()
-            ->active()
-            ->where('type', $listingType)
-            ->paginate(20);
+        $listings = cache()->rememberForever("item_{$item->id}_listings_{$listingType->value}", function () use ($item, $listingType) {
+            return $item->listings()
+                ->active()
+                ->where('type', $listingType)
+                ->paginate(20);
+        });
 
-        $soldListings = $item->listings()
-            ->whereNotNull('sold_at')
-            ->orderBy('sold_at', 'desc')
-            ->take(10)
-            ->get();
+        $soldListings = cache()->rememberForever("item_{$item->id}_sold_listings", function () use ($item) {
+            return $item->listings()
+                ->whereNotNull('sold_at')
+                ->orderBy('sold_at', 'desc')
+                ->take(10)
+                ->get();
+        });
 
         return inertia('items/show/page', new ItemsShowPage(
             listingType: $listingType,
@@ -49,10 +53,7 @@ class ItemController
                 usernames: UsernameService::getAuthenticatedUsernames(),
             ),
             listings: ListingData::collect($listings, PaginatedDataCollection::class),
-            soldListings: ListingData::collect($soldListings->map(function ($listing) {
-                $listing->sold_at = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $listing->sold_at);
-                return $listing;
-            }), DataCollection::class),
+            soldListings: ListingData::collect($soldListings, DataCollection::class),
             usernames: UsernameService::getAuthenticatedUsernames()
         ));
     }

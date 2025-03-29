@@ -87,6 +87,12 @@ class Listing extends Model
     {
         event(new ListingEvent($this));
         Cache::tags('home_listings')->flush();
+        Cache::forget("item_{$this->item->id}_listings_{$this->type}");
+
+        // If the listing was sold, flush the item's sold listings cache
+        if ($this->sold_at) {
+            Cache::forget("item_{$this->item->id}_sold_listings");
+        }
     }
 
     protected $casts = [
