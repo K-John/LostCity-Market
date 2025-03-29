@@ -8,6 +8,7 @@ use App\Enums\HomeTabType;
 use App\Http\Traits\HandlesHomeTabType;
 use App\Pages\HomeIndexPage;
 use App\Services\HomeListingsService;
+use App\Services\UsernameService;
 use Illuminate\Http\Request;
 use Spatie\LaravelData\PaginatedDataCollection;
 use Illuminate\Support\Facades\Cache;
@@ -22,15 +23,22 @@ class HomeController
         $tab = $this->getTabType($request);
         $type = $this->getFavoritesListingType($request);
         $page = (int) $request->query('page', 1);
-        $cacheKey = "home_page_{$tab->value}_{$type?->value}_page_{$page}";
+        $cacheKey = "home_page_{$tab->value}_{$tab?->value}_page_{$page}";
 
-        $listings = Cache::remember($cacheKey, 30, function () use ($service, $tab, $type, $page) {
-            return $service->fetch($tab, $type, $page);
-        });
+        if (in_array($tab, [HomeTabType::Buy, HomeTabType::Sell])) {
+            $listings = Cache::tags('home_listings')->rememberForever($cacheKey, function () use ($service, $tab, $type, $page) {
+                return $service->fetch($tab, $type, $page);
+            });
+        } else {
+            // No caching for Favorites
+            $listings = $service->fetch($tab, $type, $page);
+        }
 
         // Get the signed in user's favorites if they are on favorites tab and they're signed in
         if ($tab === HomeTabType::Favorites && $request->user()) {
-            $favorites = ItemData::collect($request->user()->favorites()->latest()->get(), DataCollection::class);
+            $favorites = Cache::tags('user_favorites')->rememberForever("user_{$request->user()->id}_favorites", function () use ($request) {
+                return ItemData::collect($request->user()->favorites()->latest()->get(), DataCollection::class);
+            });
         }
 
         return inertia('home/index/page', new HomeIndexPage(
@@ -38,6 +46,7 @@ class HomeController
             listingType: $type,
             listings: ListingData::collect($listings, PaginatedDataCollection::class),
             favorites: $favorites ?? null,
+            usernames: UsernameService::getAuthenticatedUsernames()
         ));
     }
 }

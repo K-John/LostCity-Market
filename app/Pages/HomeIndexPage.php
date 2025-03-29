@@ -17,5 +17,6 @@ class HomeIndexPage extends Data
         public PaginatedDataCollection $listings,
         /** @var DataCollection<\App\Data\Item\ItemData> */
         public ?DataCollection $favorites = null,
+        public array $usernames
     ) {}
 }

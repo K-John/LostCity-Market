@@ -8,6 +8,8 @@ import {
 const props = defineProps<Pages.HomeIndexPage>();
 const auth = useAuth();
 
+const listings = ref<Data.Listing.ListingData[]>([...props.listings.data]);
+
 const tabTypes = computed((): Enums.HomeTabType[] => [
     "buy",
     "sell",
@@ -19,34 +21,93 @@ const favoritesListingTypes = computed((): Enums.FavoritesListingType[] => [
     "sell",
 ]);
 
-usePoll(30_000);
-
-const mostRecentUpdateDate = computed(() => {
-    if (!props.listings.data.length) return null;
-
-    return props.listings.data.reduce((latest, listing) => {
-        const listingDate = new Date(listing.updatedAt);
-        return listing.updatedAt && listingDate > new Date(latest)
-            ? listing.updatedAt
-            : latest;
-    }, props.listings.data[0].updatedAt);
-});
-
-watch(mostRecentUpdateDate, (newValue, oldValue) => {
-    if (newValue !== oldValue) {
-        const newHighlightIds = props.listings.data
-            .filter(
-                (listing) =>
-                    listing.updatedAt &&
-                    new Date(listing.updatedAt) > new Date(oldValue as string),
-            )
-            .map((listing) => listing.id);
-
-        highlightedIds.value.push(...newHighlightIds);
-    }
-});
-
 const highlightedIds = ref<number[]>([]);
+
+// Subscribe to the "listings" channel using Laravel Echo, filtering by the current item's id.
+onMounted(() => {
+    const channel = window.Echo.channel("listings");
+
+    channel.listen(
+        "ListingEvent",
+        (listingsEvent: Data.Listing.ListingData[]) => {
+            let listingEvent = listingsEvent[0];
+
+            if (auth) {
+                listingEvent.canManage =
+                    auth.value?.usernames
+                        ?.map((u) => u.username)
+                        .includes(listingEvent.username) || false;
+            }
+
+            // If the listing event is not for the current item or the listing type doesn't match, ignore it.
+            if (
+                !listingEvent.item ||
+                ((props.tab === "buy" || props.tab === "sell") &&
+                    listingEvent.type !== props.tab) ||
+                (props.tab === "favorites" &&
+                    (!props.favorites
+                        ?.map((f) => f.id)
+                        .includes(listingEvent.item.id) ||
+                        (props.listingType !== "all" &&
+                            listingEvent.type !== props.listingType)))
+            ) {
+                return;
+            }
+
+            // If the listingEvent has a sold or deleted timestamp, remove the listing from the list if it exists.
+            if (listingEvent.soldAt || listingEvent.deletedAt) {
+                const index = listings.value.findIndex(
+                    (l) => l.id === listingEvent.id,
+                );
+
+                if (index !== -1) {
+                    listings.value.splice(index, 1);
+                }
+            } else {
+                // Check if the listing already exists in the list.
+                const index = listings.value.findIndex(
+                    (l) => l.id === listingEvent.id,
+                );
+
+                if (index === -1) {
+                    // If it doesn't exist, add it to the front of the list.
+                    const usernameCount = listings.value
+                        .slice(0, 20)
+                        .filter(
+                            (l) => l.username === listingEvent.username,
+                        ).length;
+                    if (usernameCount < 3) {
+                        listings.value.unshift(listingEvent);
+                        // Add the id to the highlightedIds to highlight the new listing.
+                        highlightedIds.value.push(listingEvent.id);
+                    }
+
+                    // If the list is too long, remove the last listing.
+                    if (listings.value.length > 30) {
+                        listings.value.pop();
+                    }
+                } else {
+                    // If it exists, update the listing.
+                    const existingListing = listings.value[index];
+                    listings.value[index] = listingEvent;
+
+                    // If the updatedAt timestamp changed, move it to the front of the list.
+                    if (existingListing.updatedAt !== listingEvent.updatedAt) {
+                        listings.value.splice(index, 1);
+                        listings.value.unshift(listingEvent);
+                        // Add the id to the highlightedIds to highlight the updated listing.
+                        highlightedIds.value.push(listingEvent.id);
+                    }
+                }
+            }
+        },
+    );
+});
+
+// Cleanup the subscription when the component is unmounted.
+onUnmounted(() => {
+    window.Echo.leaveChannel("listings");
+});
 </script>
 
 <template>
@@ -193,7 +254,7 @@ const highlightedIds = ref<number[]>([]);
             <EmptyTableRow v-else-if="!props.listings.data.length" />
 
             <ListingTableRow
-                v-for="l in listings.data"
+                v-for="l in listings.slice(0, 20)"
                 :key="l.id"
                 :listing="l"
                 :highlighted="highlightedIds.includes(l.id)"
@@ -216,8 +277,8 @@ const highlightedIds = ref<number[]>([]);
                 </template>
             </ListingTableRow>
 
-            <template v-if="listings.data.length" #footer>
-                <Pagination :data="listings" />
+            <template v-if="props.listings.data.length" #footer>
+                <Pagination :data="props.listings" />
             </template>
         </ListingTable>
     </LayoutMain>
