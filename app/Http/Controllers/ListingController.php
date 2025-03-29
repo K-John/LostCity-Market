@@ -6,6 +6,7 @@ use App\Data\Item\ItemData;
 use App\Data\Listing\ListingData;
 use App\Data\Listing\ListingFormData;
 use App\Enums\ListingType;
+use App\Models\Item;
 use App\Models\Listing;
 use App\Models\User;
 use App\Pages\ListingsCreatePage;
@@ -55,7 +56,7 @@ class ListingController
                 quantity: null,
                 notes: '',
                 username: $latestUsername ?? '',
-                item: null,
+                item_id: null,
                 usernames: UsernameService::getAuthenticatedUsernames()
             )
         ));
@@ -63,27 +64,11 @@ class ListingController
 
     public function store(ListingFormData $data, Request $request)
     {
-        $blockedIps = explode(',', env('BLOCKED_IPS', ''));
-        $blockedIps = array_map('trim', $blockedIps);
-
-        if (in_array($request->ip(), $blockedIps)) {
-            return back()->error('You are not allowed to create listings');
-        }
-
-        // Allow only 1 attempt per 3 seconds
-        $key = $this->user->id;
-        if (RateLimiter::tooManyAttempts($key, 1)) {
-            throw new ThrottleRequestsException('Too many requests. Please wait a few seconds before submitting again.');
-        }
-        RateLimiter::hit($key, 3);
-
         $listingData = collect($data->toArray())->except(['item', 'usernames'])->toArray();
-        $listingData['item_id'] = $data->item->id;
-        $listingData['ip'] = $request->ip();
 
         Listing::create($listingData);
 
-        return to_route('items.show', $data->item->slug)->success('The listing has been created and will expire in 24 hours');
+        return to_route('items.show', Item::find($data->item_id)->slug)->success('The listing has been created and will expire in 24 hours');
     }
 
     public function edit(Listing $listing)
@@ -101,7 +86,7 @@ class ListingController
                 notes: $listing->notes,
                 username: $listing->username,
                 usernames: $usernames,
-                item: ItemData::from($listing->item),
+                item_id: $listing->item_id,
             ),
         ));
     }

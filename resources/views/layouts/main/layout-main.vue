@@ -74,7 +74,7 @@ const links = computed(() => [
                   action: () =>
                       router.delete(
                           route("logout", {
-                              login: auth.value.email,
+                              login: auth.value.name,
                               preserveScroll: true,
                           }),
                       ),
@@ -115,7 +115,7 @@ const links = computed(() => [
             <div
                 class="flex-1 bg-[url('@/img/assets/background-middle.jpg')] bg-contain bg-repeat-y"
             >
-                <Alert id="discord-enforced-notice" type="error">
+                <!-- <Alert id="discord-enforced-notice" type="error">
                     <h2 class="flex gap-2 font-bold">
                         <ExclamationTriangleIcon class="size-6 text-red-300" />
 
@@ -140,7 +140,7 @@ const links = computed(() => [
                             >the news article here</Link
                         >
                     </p>
-                </Alert>
+                </Alert>-->
 
                 <div
                     class="mx-auto mb-5 w-fit min-w-[250px] border-2 border-[#382418] bg-black p-1 text-center"

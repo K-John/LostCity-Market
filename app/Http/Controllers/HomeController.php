@@ -2,43 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Traits\HandlesListingType;
+use App\Data\Item\ItemData;
 use App\Data\Listing\ListingData;
-use App\Models\Listing;
+use App\Enums\HomeTabType;
+use App\Http\Traits\HandlesHomeTabType;
 use App\Pages\HomeIndexPage;
+use App\Services\HomeListingsService;
+use App\Services\UsernameService;
 use Illuminate\Http\Request;
 use Spatie\LaravelData\PaginatedDataCollection;
 use Illuminate\Support\Facades\Cache;
+use Spatie\LaravelData\DataCollection;
 
 class HomeController
 {
-    use HandlesListingType;
+    use HandlesHomeTabType;
 
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, HomeListingsService $service)
     {
-        $listingType = $this->getListingType($request);
-        $cacheKey = "home_page_{$listingType->name}_page_" . ($request->query('page', 1));
+        $tab = $this->getTabType($request);
+        $type = $this->getFavoritesListingType($request);
+        $page = (int) $request->query('page', 1);
+        $cacheKey = "home_page_{$tab->value}_page_{$page}";
 
-        // Cache only the query results
-        $listings = Cache::remember($cacheKey, 30, function () use ($listingType) {
-            $subQuery = Listing::active()
-                ->select('listings.id')
-                ->selectRaw('ROW_NUMBER() OVER (PARTITION BY username ORDER BY updated_at DESC) as row_num')
-                ->where('type', $listingType);
+        if (in_array($tab, [HomeTabType::Buy, HomeTabType::Sell])) {
+            $listings = Cache::tags('home_listings')->rememberForever($cacheKey, function () use ($service, $tab, $type, $page) {
+                return $service->fetch($tab, $type, $page);
+            });
+        } else {
+            // No caching for Favorites
+            $listings = $service->fetch($tab, $type, $page);
+        }
 
-            return Listing::with('item') // Eager load the related item model
-                ->joinSub($subQuery, 'filtered_listings', function ($join) {
-                    $join->on('listings.id', '=', 'filtered_listings.id');
-                })
-                ->where('row_num', '<=', 3)
-                ->orderBy('updated_at', 'desc')
-                ->paginate(20);
-        });
+        // Get the signed in user's favorites if they are on favorites tab and they're signed in
+        if ($tab === HomeTabType::Favorites && $request->user()) {
+            $favorites = Cache::tags('user_favorites')->rememberForever("user_{$request->user()->id}_favorites", function () use ($request) {
+                return ItemData::collect($request->user()->favorites()->latest()->get(), DataCollection::class);
+            });
+        }
 
-        // Return the Inertia response using the cached data
         return inertia('home/index/page', new HomeIndexPage(
-            listingType: $listingType,
-            listings: ListingData::collect($listings, PaginatedDataCollection::class)
+            tab: $tab,
+            listingType: $type,
+            listings: ListingData::collect($listings, PaginatedDataCollection::class),
+            favorites: $favorites ?? null,
+            usernames: UsernameService::getAuthenticatedUsernames()
         ));
     }
 }

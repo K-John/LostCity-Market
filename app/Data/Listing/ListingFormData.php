@@ -18,7 +18,7 @@ class ListingFormData extends Data
         public ?int $quantity,
         public ?string $notes,
         public string $username,
-        public ?ItemData $item,
+        public ?int $item_id,
         public ?array $usernames = []
     ) {}
 
@@ -50,7 +50,7 @@ class ListingFormData extends Data
                 }
             ],
             'notes' => ['nullable', 'string'],
-            'item.id' => ['required', 'integer', 'exists:items,id'],
+            'item_id' => ['required', 'integer', 'exists:items,id'],
             'type' => [
                 'required',
                 'string',

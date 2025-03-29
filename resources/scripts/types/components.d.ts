@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     ActionTableData: typeof import('./../../views/components/listings-table/action-table-data.vue')['default']
     Alert: typeof import('./../../views/components/alert.vue')['default']
+    BaseButton: typeof import('./../../views/components/base-button.vue')['default']
     DiscordLogo: typeof import('./../../views/components/discord-logo.vue')['default']
     DropdownItem: typeof import('./../../views/components/DropdownItem.vue')['default']
     DropdownMenu: typeof import('./../../views/components/DropdownMenu.vue')['default']

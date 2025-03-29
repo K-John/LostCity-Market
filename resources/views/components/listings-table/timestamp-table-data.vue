@@ -12,7 +12,7 @@ const props = withDefaults(
     }>(),
     {
         useColor: true,
-    }
+    },
 );
 
 dayjs.extend(relativeTime);

@@ -8,7 +8,7 @@ class UserData extends Data
 {
     public function __construct(
         public string $name,
-        public bool $is_admin,
+        public bool $is_admin
     ) {
     }
 }

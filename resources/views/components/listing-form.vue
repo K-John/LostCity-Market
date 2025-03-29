@@ -4,7 +4,7 @@ import { Tooltip } from "floating-vue";
 import "floating-vue/dist/style.css";
 
 const props = defineProps<{
-    listingForm: any;
+    listingForm: Data.Listing.ListingFormData;
     submitRoute: string;
     submitMethod?: "post" | "put" | "patch";
 }>();
@@ -16,7 +16,7 @@ const form = useForm({
 const listingTypes = computed((): Enums.ListingType[] => ["buy", "sell"]);
 
 const setItem = (item: Data.Item.ItemData) => {
-    form.item = item;
+    form.item_id = item.id;
 };
 
 const submit = () => {
@@ -46,7 +46,7 @@ const submit = () => {
 
         <!-- Conditionally Hide Item Select if form.item was Provided on Page Load -->
         <div
-            v-if="!props.listingForm.item"
+            v-if="!props.listingForm.item_id"
             class="flex flex-col gap-x-2 sm:flex-row sm:items-center"
         >
             <p>Search for an item:</p>

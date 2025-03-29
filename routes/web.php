@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\DiscordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BanController;
 use App\Http\Controllers\BumpController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ListingController;
@@ -25,6 +26,10 @@ Route::middleware('auth')->group(function () {
 
     Route::patch('usernames/update', [UsernameController::class, 'update'])
         ->name('usernames.update');
+
+    Route::resource('favorites', FavoriteController::class)
+        ->only(['index', 'store', 'destroy'])
+        ->names('favorites');
 
     Route::middleware(AuthorizeAdmin::class)->group(function () {
         Route::post('/ban/{username:username}', [BanController::class, 'store'])->name('ban.store');

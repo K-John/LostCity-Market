@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\ListingEvent;
 use ConsoleTVs\Profanity\Facades\Profanity;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class Listing extends Model
 {
@@ -26,12 +28,25 @@ class Listing extends Model
         parent::boot();
 
         static::creating(function ($listing) {
+            $listing->ip = request()->ip();
             $listing->user_id = Auth::id();
             $listing->filterProfanity();
         });
 
+        static::created(function ($listing) {
+            $listing->handleEvent();
+        });
+
         static::updating(function ($listing) {
             $listing->filterProfanity();
+        });
+
+        static::updated(function ($listing) {
+            $listing->handleEvent();
+        });
+
+        static::deleted(function ($listing) {
+            $listing->handleEvent();
         });
     }
 
@@ -64,4 +79,25 @@ class Listing extends Model
     {
         $this->notes = Profanity::blocker($this->notes)->filter();
     }
+
+    /**
+     * Handle the event after something happens to a listing.
+     */
+    public function handleEvent()
+    {
+        event(new ListingEvent($this));
+        Cache::tags('home_listings')->flush();
+        Cache::forget("item_{$this->item->id}_listings_{$this->type}");
+
+        // If the listing was sold, flush the item's sold listings cache
+        if ($this->sold_at) {
+            Cache::forget("item_{$this->item->id}_sold_listings");
+        }
+    }
+
+    protected $casts = [
+        'sold_at' => 'datetime',
+        'created_at' => 'datetime',
+        'deleted_at' => 'datetime',
+    ];
 }

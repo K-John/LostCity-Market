@@ -1,5 +1,6 @@
 declare namespace Data.Item {
 export type ItemData = {
+isFavorite: boolean;
 id: number;
 name: string;
 slug: string;
@@ -18,6 +19,7 @@ username: string;
 item: Data.Item.ItemData | null;
 updatedAt: string;
 soldAt: string | null;
+deletedAt: string | null;
 userId: number | null;
 };
 export type ListingFormData = {
@@ -27,7 +29,7 @@ price: string;
 quantity: number | null;
 notes: string | null;
 username: string;
-item: Data.Item.ItemData | null;
+item_id: number | null;
 usernames: Array<any> | null;
 };
 }
@@ -46,13 +48,21 @@ is_admin: boolean;
 };
 }
 declare namespace Enums {
+export type FavoritesListingType = 'all' | 'buy' | 'sell';
+export type HomeTabType = 'buy' | 'sell' | 'favorites';
 export type ListingType = 'buy' | 'sell';
 export type NotificationType = 'success' | 'error' | 'warning' | 'info' | 'default';
 }
 declare namespace Pages {
+export type FavoritesIndexPage = {
+items: {data:Array<Data.Item.ItemData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
+};
 export type HomeIndexPage = {
-listingType: Enums.ListingType;
+tab: Enums.HomeTabType;
+listingType: Enums.FavoritesListingType;
 listings: {data:Array<Data.Listing.ListingData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
+favorites: Array<Data.Item.ItemData> | null;
+usernames: Array<any>;
 };
 export type ItemsShowPage = {
 listingType: Enums.ListingType;
@@ -60,6 +70,7 @@ item: Data.Item.ItemData;
 listingForm: Data.Listing.ListingFormData;
 listings: {data:Array<Data.Listing.ListingData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
 soldListings: Array<Data.Listing.ListingData>;
+usernames: Array<any>;
 };
 export type ListingsCreatePage = {
 listingForm: Data.Listing.ListingFormData;

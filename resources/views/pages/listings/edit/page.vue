@@ -11,7 +11,7 @@ const form = useForm({
 
 const back = () => {
     window.history.back();
-}
+};
 </script>
 
 <template>
