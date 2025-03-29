@@ -166,46 +166,61 @@ onUnmounted(() => {
                 "
                 #header
             >
-                <div class="flex gap-2">
-                    <BaseButton
-                        as="link"
-                        variant="secondary"
-                        class="!px-3"
-                        :href="
-                            route('home', { type: favoritesListingTypes[0] })
-                        "
-                        :force-focus="
-                            props.listingType === favoritesListingTypes[0]
-                        "
-                    >
-                        All
-                    </BaseButton>
+                <div class="flex items-center justify-between gap-2">
+                    <div class="flex gap-2">
+                        <BaseButton
+                            as="link"
+                            variant="secondary"
+                            class="!px-3"
+                            :href="
+                                route('home', {
+                                    type: favoritesListingTypes[0],
+                                })
+                            "
+                            :force-focus="
+                                props.listingType === favoritesListingTypes[0]
+                            "
+                        >
+                            All
+                        </BaseButton>
 
-                    <BaseButton
-                        as="link"
-                        variant="secondary"
-                        :href="
-                            route('home', { type: favoritesListingTypes[1] })
-                        "
-                        :force-focus="
-                            props.listingType === favoritesListingTypes[1]
-                        "
-                    >
-                        Buy
-                    </BaseButton>
+                        <BaseButton
+                            as="link"
+                            variant="secondary"
+                            :href="
+                                route('home', {
+                                    type: favoritesListingTypes[1],
+                                })
+                            "
+                            :force-focus="
+                                props.listingType === favoritesListingTypes[1]
+                            "
+                        >
+                            Buy
+                        </BaseButton>
 
-                    <BaseButton
-                        as="link"
-                        variant="secondary"
-                        :href="
-                            route('home', { type: favoritesListingTypes[2] })
-                        "
-                        :force-focus="
-                            props.listingType === favoritesListingTypes[2]
-                        "
-                    >
-                        Sell
-                    </BaseButton>
+                        <BaseButton
+                            as="link"
+                            variant="secondary"
+                            :href="
+                                route('home', {
+                                    type: favoritesListingTypes[2],
+                                })
+                            "
+                            :force-focus="
+                                props.listingType === favoritesListingTypes[2]
+                            "
+                        >
+                            Sell
+                        </BaseButton>
+                    </div>
+
+                    <Link
+                        :href="route('favorites.index')"
+                        preserve-scroll
+                        class="text-[#90c040] hover:underline"
+                        >Manage Favorites
+                    </Link>
                 </div>
             </template>
 
