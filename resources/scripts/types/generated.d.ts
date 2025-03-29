@@ -44,6 +44,10 @@ notification: Data.Shared.NotificationData | null;
 export type UserData = {
 name: string;
 is_admin: boolean;
+usernames: Array<Data.Shared.UsernameData> | null;
+};
+export type UsernameData = {
+username: string;
 };
 }
 declare namespace Enums {
@@ -61,6 +65,7 @@ tab: Enums.HomeTabType;
 listingType: Enums.FavoritesListingType;
 listings: {data:Array<Data.Listing.ListingData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
 favorites: Array<Data.Item.ItemData> | null;
+usernames: Array<any>;
 };
 export type ItemsShowPage = {
 listingType: Enums.ListingType;
