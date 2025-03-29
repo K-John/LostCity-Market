@@ -74,7 +74,7 @@ const links = computed(() => [
                   action: () =>
                       router.delete(
                           route("logout", {
-                              login: auth.value.email,
+                              login: auth.value.name,
                               preserveScroll: true,
                           }),
                       ),
