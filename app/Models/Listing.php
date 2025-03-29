@@ -28,6 +28,7 @@ class Listing extends Model
         parent::boot();
 
         static::creating(function ($listing) {
+            $listing->ip = request()->ip();
             $listing->user_id = Auth::id();
             $listing->filterProfanity();
         });

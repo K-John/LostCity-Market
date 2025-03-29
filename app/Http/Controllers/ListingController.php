@@ -64,22 +64,7 @@ class ListingController
 
     public function store(ListingFormData $data, Request $request)
     {
-        $blockedIps = explode(',', env('BLOCKED_IPS', ''));
-        $blockedIps = array_map('trim', $blockedIps);
-
-        if (in_array($request->ip(), $blockedIps)) {
-            return back()->error('You are not allowed to create listings');
-        }
-
-        // Allow only 1 attempt per 3 seconds
-        $key = $this->user->id;
-        if (RateLimiter::tooManyAttempts($key, 1)) {
-            throw new ThrottleRequestsException('Too many requests. Please wait a few seconds before submitting again.');
-        }
-        RateLimiter::hit($key, 3);
-
         $listingData = collect($data->toArray())->except(['item', 'usernames'])->toArray();
-        $listingData['ip'] = $request->ip();
 
         Listing::create($listingData);
 
