@@ -6,6 +6,7 @@ use App\Models\Listing;
 use App\Models\User;
 use App\Models\Username;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -13,6 +14,8 @@ class UsernameService
 {
     public static function updateUsernamesForUser(User $user): void
     {
+        Cache::tags('usernames')->forget('usernames_' . $user->id);
+
         $jwtToken = JWTAuth::fromUser($user);
 
         $response = Http::withToken($jwtToken)
@@ -46,6 +49,8 @@ class UsernameService
 
     public static function getAuthenticatedUsernames(): array
     {
-        return Auth::user()?->usernames->pluck('username')->toArray() ?? [];
+        return Cache::tags('usernames')->rememberForever('usernames_' . Auth::id(), function () {
+            return Auth::user()?->usernames->pluck('username')->toArray() ?? [];
+        });
     }
 }
