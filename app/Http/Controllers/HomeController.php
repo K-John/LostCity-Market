@@ -26,7 +26,8 @@ class HomeController
         $cacheKey = "home_page_{$tab->value}_page_{$page}";
 
         if (in_array($tab, [HomeTabType::Buy, HomeTabType::Sell])) {
-            $listings = Cache::tags('home_listings')->rememberForever($cacheKey, function () use ($service, $tab, $type, $page) {
+            // $listings = Cache::tags('home_listings')->rememberForever($cacheKey, function () use ($service, $tab, $type, $page) {
+            $listings = Cache::tags('home_listings')->remember($cacheKey, now()->addMinutes(5), function () use ($service, $tab, $type, $page) {
                 return $service->fetch($tab, $type, $page);
             });
         } else {
