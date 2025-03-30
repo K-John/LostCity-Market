@@ -12,7 +12,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Auth;
 
-class ListingEvent implements ShouldBroadcastNow
+class ListingEvent implements ShouldBroadcast
 {
     use SerializesModels, Dispatchable, InteractsWithSockets;
 
