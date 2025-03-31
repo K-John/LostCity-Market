@@ -604,77 +604,7 @@
   {
     "id": 199,
     "debugname": "unidentified_guam_leaf",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
-  },
-  {
-    "id": 201,
-    "debugname": "unidentified_marrentill",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
-  },
-  {
-    "id": 203,
-    "debugname": "unidentified_tarromin",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
-  },
-  {
-    "id": 205,
-    "debugname": "unidentified_harralander",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
-  },
-  {
-    "id": 207,
-    "debugname": "unidentified_ranarr_weed",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
-  },
-  {
-    "id": 209,
-    "debugname": "unidentified_irit_leaf",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
-  },
-  {
-    "id": 211,
-    "debugname": "unidentified_avantoe",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
-  },
-  {
-    "id": 213,
-    "debugname": "unidentified_kwuarm",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
-  },
-  {
-    "id": 215,
-    "debugname": "unidentified_cadantine",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
-  },
-  {
-    "id": 217,
-    "debugname": "unidentified_dwarf_weed",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
-  },
-  {
-    "id": 219,
-    "debugname": "unidentified_torstol",
-    "name": "Herb",
+    "name": "Unidentified Herb",
     "desc": "I need a closer look to identify this.",
     "cost": 1
   },
@@ -7215,13 +7145,6 @@
     "name": "Unfinished potion",
     "desc": "I need another ingredient to finish this Lantadyme potion.",
     "cost": 68
-  },
-  {
-    "id": 2485,
-    "debugname": "unidentified_lantadyme",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
   },
   {
     "id": 2487,
