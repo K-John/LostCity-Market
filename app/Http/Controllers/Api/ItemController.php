@@ -21,9 +21,11 @@ class ItemController
             return response()->json([]);
         }
 
-        $items = Item::where('name', 'LIKE', "%{$search}%")
+        $items = Item::query()
+            ->where('name', 'LIKE', '%' . $search . '%')
+            ->orWhere('slug', 'LIKE', '%' . str_replace(' ', '_', $search) . '%')
             ->orderByRaw('CHAR_LENGTH(name)')
-            ->take(5)
+            ->limit(5)
             ->get();
 
         return response()->json(ItemData::collect($items));

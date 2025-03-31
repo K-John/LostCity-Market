@@ -26,7 +26,6 @@ class HomeController
         $cacheKey = "home_page_{$tab->value}_page_{$page}";
 
         if (in_array($tab, [HomeTabType::Buy, HomeTabType::Sell])) {
-            // $listings = Cache::tags('home_listings')->rememberForever($cacheKey, function () use ($service, $tab, $type, $page) {
             $listings = Cache::tags('home_listings')->remember($cacheKey, now()->addMinutes(5), function () use ($service, $tab, $type, $page) {
                 return $service->fetch($tab, $type, $page);
             });
@@ -37,7 +36,7 @@ class HomeController
 
         // Get the signed in user's favorites if they are on favorites tab and they're signed in
         if ($tab === HomeTabType::Favorites && $request->user()) {
-            $favorites = Cache::tags('user_favorites')->rememberForever("user_{$request->user()->id}_favorites", function () use ($request) {
+            $favorites = Cache::tags('user_favorites')->remember("user_{$request->user()->id}_favorites", now()->addHours(6), function () use ($request) {
                 return ItemData::collect($request->user()->favorites()->latest()->get(), DataCollection::class);
             });
         }
