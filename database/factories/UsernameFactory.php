@@ -12,9 +12,30 @@ class UsernameFactory extends Factory
 
     public function definition(): array
     {
+        $username = $this->generateValidUsername();
+
         return [
             'user_id' => User::inRandomOrder()->first()?->id ?? User::factory(),
-            'username' => strtolower($this->faker->regexify('[a-z1-9_]{3,12}')),
+            'username' => $username,
         ];
+    }
+
+    private function generateValidUsername(): string
+    {
+        $length = rand(1, 12);
+
+        $chars = 'abcdefghijklmnopqrstuvwxyz0123456789_';
+
+        do {
+            $username = '';
+            for ($i = 0; $i < $length; $i++) {
+                $username .= $chars[rand(0, strlen($chars) - 1)];
+            }
+        } while (
+            $username[0] === '_' ||
+            $username[strlen($username) - 1] === '_'
+        );
+
+        return $username;
     }
 }
