@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import {
-    WrenchIcon,
+    MegaphoneIcon,
     ExclamationTriangleIcon,
     MagnifyingGlassIcon,
     LockClosedIcon,
@@ -17,7 +17,7 @@ const status = computed(() => props.status ?? 404);
 
 const title = computed(() => {
     return {
-        503: "503: Service Unavailable",
+        503: "503: Under Maintenance",
         500: "500: Server Error",
         404: "404: Page Not Found",
         403: "403: Forbidden",
@@ -26,7 +26,7 @@ const title = computed(() => {
 
 const description = computed(() => {
     return {
-        503: "The servers are experiencing lag... please wait a few ticks.",
+        503: "We are undergoing maintenance. Please wait while the gnomes finish their repairs.",
         500: "Oh dear, you are dead! Our servers need to respawn...",
         404: "You search the area but find nothing of interest.",
         403: "Sorry, adventurer. You don't have the required level to access this page.",
@@ -36,7 +36,7 @@ const description = computed(() => {
 const iconComponent = computed(() => {
     return (
         {
-            503: WrenchIcon,
+            503: MegaphoneIcon,
             500: ExclamationTriangleIcon,
             404: MagnifyingGlassIcon,
             403: LockClosedIcon,
@@ -71,6 +71,7 @@ const back = () => {
             <hr class="w-72 border-stone-600" />
 
             <button
+                v-if="status !== 503"
                 type="button"
                 class="flex w-fit items-center gap-2 rounded-sm bg-green-800 px-3 py-2 text-white hover:bg-green-700"
                 @click="back()"
