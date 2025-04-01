@@ -58,7 +58,7 @@ watch(selected, (newValue) => {
 
         <template #option="option: Data.Item.ItemData">
             <div class="flex items-center gap-2">
-                <div class="border-2 sm:border-stone-600 sm:bg-stone-800">
+                <div class="border border-stone-600 bg-stone-700">
                     <img
                         class="min-h-[32px] min-w-[32px]"
                         :src="`/img/items/${option.slug}.webp`"
@@ -74,7 +74,7 @@ watch(selected, (newValue) => {
 
         <template #selected-option="option: Data.Item.ItemData">
             <div class="flex items-center gap-2 text-white">
-                <div class="border-2 sm:border-stone-600 sm:bg-stone-800">
+                <div class="border border-stone-600 bg-stone-700">
                     <img
                         class="min-h-[32px] min-w-[32px]"
                         :src="`/img/items/${option.slug}.webp`"
