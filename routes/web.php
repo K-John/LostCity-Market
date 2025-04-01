@@ -10,6 +10,9 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\UsernameController;
 use App\Http\Middleware\AuthorizeAdmin;
+use App\Http\Middleware\LocalOnly;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
@@ -62,3 +65,10 @@ Route::get('docs/adopt-legacy-accounts', function () {
 Route::get('news/discord-enforcement', function () {
     return inertia('news/discord-enforce/page');
 })->name('news.discord-enforce');
+
+Route::get('/dev/login', function () {
+    $user = User::where('name', 'root')->first();
+    Auth::login($user);
+
+    return redirect(route('home'));
+})->name('dev.login')->middleware(LocalOnly::class);

@@ -14,6 +14,11 @@ class UsernameFactory extends Factory
     {
         $username = $this->generateValidUsername();
 
+        // Ensure the username is unique
+        while (Username::where('username', $username)->exists()) {
+            $username = $this->generateValidUsername();
+        }
+
         return [
             'user_id' => User::inRandomOrder()->first()?->id ?? User::factory(),
             'username' => $username,

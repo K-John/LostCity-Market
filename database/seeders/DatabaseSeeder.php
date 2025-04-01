@@ -36,5 +36,18 @@ class DatabaseSeeder extends Seeder
                     });
                 }
             });
+
+        // Create a root user
+        User::factory()
+            ->create([
+                'name' => 'root',
+                'email' => 'root@example.com',
+                'is_admin' => 1
+            ])
+            ->each(function ($user) {
+                Username::factory()
+                    ->count(rand(1, 3))
+                    ->create(['user_id' => $user->id]);
+            });
     }
 }
