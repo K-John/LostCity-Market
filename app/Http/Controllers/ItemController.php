@@ -13,6 +13,7 @@ use Spatie\LaravelData\PaginatedDataCollection;
 use App\Http\Traits\HandlesListingType;
 use App\Services\UsernameService;
 use Illuminate\Support\Facades\Auth;
+use Spatie\LaravelData\Support\Lazy\ClosureLazy;
 
 class ItemController
 {
@@ -22,39 +23,59 @@ class ItemController
     {
         $listingType = $this->getListingType($request);
 
-        $latestUsername = Auth::user()?->listings()->latest()->value('username');
+        $listings = $this->getListings($item, $listingType);
 
-        $listings = cache()->remember("item_{$item->id}_listings_{$listingType->value}", now()->addMinutes(30), function () use ($item, $listingType) {
-            return $item->listings()
+        return inertia('items/show/page', new ItemsShowPage(
+            listings: ListingData::collect($listings, PaginatedDataCollection::class),
+            item: ClosureLazy::closure(fn() => ItemData::from($item)),
+            listingType: $listingType,
+            listingForm: ClosureLazy::closure(fn() => $this->getListingFormData($item, $listingType)),
+            soldListings: ClosureLazy::closure(fn() => ListingData::collect($this->getSoldListings($item), DataCollection::class)),
+            usernames: ClosureLazy::closure(fn() => UsernameService::getAuthenticatedUsernames()),
+        ));
+    }
+
+    protected function getListings(Item $item, $listingType)
+    {
+        return cache()->remember(
+            "item_{$item->id}_listings_{$listingType->value}",
+            now()->addMinutes(30),
+            fn() => $item->listings()
                 ->active()
                 ->where('type', $listingType)
-                ->paginate(20);
-        });
+                ->paginate(20)
+        );
+    }
 
-        $soldListings = cache()->remember("item_{$item->id}_sold_listings", now()->addMinutes(30), function () use ($item) {
-            return $item->listings()
+    protected function getSoldListings(Item $item)
+    {
+        return cache()->remember(
+            "item_{$item->id}_sold_listings",
+            now()->addMinutes(30),
+            fn() => $item->listings()
                 ->whereNotNull('sold_at')
                 ->orderBy('sold_at', 'desc')
                 ->take(10)
-                ->get();
-        });
+                ->get()
+        );
+    }
 
-        return inertia('items/show/page', new ItemsShowPage(
-            listingType: $listingType,
-            item: ItemData::from($item),
-            listingForm: new ListingFormData(
-                id: null,
-                type: $listingType,
-                price: '',
-                quantity: null,
-                notes: '',
-                username: $latestUsername ?? '',
-                item_id: $item->id,
-                usernames: UsernameService::getAuthenticatedUsernames(),
-            ),
-            listings: ListingData::collect($listings, PaginatedDataCollection::class),
-            soldListings: ListingData::collect($soldListings, DataCollection::class),
+    protected function getLatestUsername()
+    {
+        return Auth::user()?->listings()->latest()->value('username') ?? '';
+    }
+
+    protected function getListingFormData(Item $item, $listingType)
+    {
+        return new ListingFormData(
+            id: null,
+            type: $listingType,
+            price: '',
+            quantity: null,
+            notes: '',
+            username: $this->getLatestUsername(),
+            item_id: $item->id,
             usernames: UsernameService::getAuthenticatedUsernames()
-        ));
+        );
     }
 }

@@ -13,7 +13,7 @@ const form = useForm({
     ...props.listingForm,
 });
 
-usePoll(30_000);
+usePoll(30_000, {only: ["listings"]});
 
 const mostRecentUpdateDate = computed(() => {
     if (!props.listings.data.length) return null;
