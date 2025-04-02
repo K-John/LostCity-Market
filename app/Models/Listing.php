@@ -85,7 +85,6 @@ class Listing extends Model
      */
     public function handleEvent()
     {
-        // event(new ListingEvent($this));
         Cache::tags('home_listings')->flush();
         Cache::forget("item_{$this->item->id}_listings_{$this->type}");
 
