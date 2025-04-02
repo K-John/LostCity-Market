@@ -20,7 +20,7 @@ const favoritesListingTypes = computed((): Enums.FavoritesListingType[] => [
     "sell",
 ]);
 
-usePoll(30_000);
+// Disabled until I can upgrade server: usePoll(30_000);
 
 const mostRecentUpdateDate = computed(() => {
     if (!props.listings.data.length) return null;
