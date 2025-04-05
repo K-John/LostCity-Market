@@ -13,6 +13,7 @@
         "inertiajs/inertia-laravel": "2.0",
         "intervention/image": "^3.11",
         "laravel/framework": "^11.0",
+        "laravel/reverb": "^1.0",
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.18",
         "laravel/tinker": "^2.10",

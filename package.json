@@ -51,10 +51,12 @@
         "@vueuse/core": "^10.7.1",
         "dayjs": "^1.11.10",
         "floating-vue": "^5.2.2",
+        "laravel-echo": "^2.0.2",
         "lodash": "^4.17.21",
         "momentum-lock": "^0.1.2",
         "momentum-paginator": "^1.0.7",
         "momentum-trail": "^0.3.5",
+        "pusher-js": "^8.4.0",
         "query-string": "^8.1.0",
         "vue-select": "^4.0.0-beta.6",
         "vue-toastification": "^2.0.0-rc.5"
