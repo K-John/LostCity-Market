@@ -2,6 +2,7 @@
 import {
     ArrowLeftEndOnRectangleIcon,
     BookmarkSlashIcon,
+    Cog6ToothIcon,
 } from "@heroicons/vue/24/outline";
 
 const props = defineProps<Pages.HomeIndexPage>();
@@ -15,7 +16,6 @@ watch(
         listings.value = [...newListings];
     },
 );
-
 
 const tabTypes = computed((): Enums.HomeTabType[] => [
     "buy",
@@ -216,8 +216,13 @@ onUnmounted(() => {
                     <Link
                         :href="route('favorites.index')"
                         preserve-scroll
-                        class="text-[#90c040] hover:underline"
-                        >Manage Favorites
+                        class="flex items-center gap-1 text-[#90c040] hover:underline"
+                    >
+                        <Cog6ToothIcon class="size-5" />
+
+                        <span class="hidden sm:inline">Manage</span>
+
+                        Favorites
                     </Link>
                 </div>
             </template>
