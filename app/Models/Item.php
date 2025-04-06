@@ -24,4 +24,10 @@ class Item extends Model
         return $this->belongsToMany(User::class)
             ->withTimestamps();
     }
+
+    public function banners(): BelongsToMany
+    {
+        return $this->belongsToMany(Banner::class)
+            ->withTimestamps();
+    }
 }

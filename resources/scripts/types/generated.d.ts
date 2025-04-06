@@ -1,3 +1,13 @@
+declare namespace Data.Banner {
+export type BannerData = {
+id: number;
+type: Enums.BannerType;
+message: string;
+global: boolean;
+startAt: string | null;
+endAt: string | null;
+};
+}
 declare namespace Data.Item {
 export type ItemData = {
 isFavorite: boolean;
@@ -48,12 +58,16 @@ is_admin: boolean;
 };
 }
 declare namespace Enums {
+export type BannerType = 'default' | 'success' | 'info' | 'warning' | 'error';
 export type FavoritesListingType = 'all' | 'buy' | 'sell';
 export type HomeTabType = 'buy' | 'sell' | 'favorites';
 export type ListingType = 'buy' | 'sell';
 export type NotificationType = 'success' | 'error' | 'warning' | 'info' | 'default';
 }
 declare namespace Pages {
+export type BannersIndexPage = {
+banners: {data:Array<Data.Banner.BannerData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
+};
 export type FavoritesIndexPage = {
 items: {data:Array<Data.Item.ItemData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
 };
