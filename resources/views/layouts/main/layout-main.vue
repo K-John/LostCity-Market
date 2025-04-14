@@ -113,7 +113,7 @@ const links = computed(() => [
             ></div>
 
             <div
-                class="flex-1 bg-[url('@/img/assets/background-middle.jpg')] bg-contain bg-repeat-y"
+                class="min-w-0 flex-1 bg-[url('@/img/assets/background-middle.jpg')] bg-contain bg-repeat-y"
             >
                 <!-- <Alert id="discord-enforced-notice" type="error">
                     <h2 class="flex gap-2 font-bold">
