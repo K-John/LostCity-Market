@@ -9,8 +9,8 @@ class LocalOnly
 {
     public function handle(Request $request, Closure $next)
     {
-        if (app()->environment(['local', 'testing'])) {
-            return $next($request);
+        if (!app()->environment(['local', 'testing'])) {
+            abort(403);
         }
 
         return $next($request);
