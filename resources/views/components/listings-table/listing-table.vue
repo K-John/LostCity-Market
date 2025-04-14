@@ -1,4 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+interface Props {
+    tableClass?: string;
+}
+
+defineProps<Props>();
+</script>
 
 <template>
     <div class="flex flex-col border-2 border-[#382418] bg-black p-1">
@@ -8,7 +14,11 @@
             </div>
         </template>
 
-        <table class="w-full">
+        <table class="w-full" :class="[tableClass]">
+            <thead>
+                <slot name="table-header" />
+            </thead>
+            
             <tbody>
                 <slot />
             </tbody>
