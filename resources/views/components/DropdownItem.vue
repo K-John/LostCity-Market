@@ -3,7 +3,7 @@ import { MenuItem } from "@headlessui/vue";
 import { computed } from "vue";
 
 const props = defineProps<{
-    icon?: Object;
+    icon?: Object | Function;
     textColor?: string;
     href?: string;
 }>();
