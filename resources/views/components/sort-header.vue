@@ -55,9 +55,9 @@ const computedHref = computed(() => {
 </script>
 
 <template>
-    <Link :href="computedHref" class="flex items-center gap-1">
+    <Link :href="computedHref" class="flex items-center gap-1" preserve-scroll>
         <slot></slot>
-        
+
         <span v-if="sortOrder === 'asc'">
             <ArrowUpIcon class="size-4" />
         </span>
