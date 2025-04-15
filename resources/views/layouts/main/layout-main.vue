@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import {
-    HeartIcon,
-    ExclamationTriangleIcon,
-} from "@heroicons/vue/24/solid/index.js";
+import { HeartIcon, ChevronDownIcon } from "@heroicons/vue/24/solid/index.js";
 import { ref, onMounted, onBeforeUnmount, nextTick } from "vue";
 import chainImage from "@/img/assets/edge_chain.jpg";
 
+const page = usePage();
 const auth = useAuth();
 
 const topLeftChainContainer = ref<HTMLElement | null>(null);
@@ -115,32 +113,52 @@ const links = computed(() => [
             <div
                 class="min-w-0 flex-1 bg-[url('@/img/assets/background-middle.jpg')] bg-contain bg-repeat-y"
             >
-                <!-- <Alert id="discord-enforced-notice" type="error">
-                    <h2 class="flex gap-2 font-bold">
-                        <ExclamationTriangleIcon class="size-6 text-red-300" />
+                <div
+                    v-if="auth"
+                    class="-mt-2 mb-2 flex items-start justify-between gap-2"
+                >
+                    <Link
+                        v-if="auth.is_admin"
+                        :href="route('admin.banners.index')"
+                        class="text-[#90c040] hover:underline"
+                    >
+                        Admin Panel
+                    </Link>
 
-                        Discord Login Required
-                    </h2>
+                    <div class="flex grow items-center justify-end gap-2">
+                        <span class="hidden sm:block">
+                            Signed in as:
+                        </span>
 
-                    <p>
-                        As of March 18th, official username integration is now
-                        enforced. In order to create listings, you must
-                        <Link
-                            :href="route('login')"
-                            class="text-[#90c040] hover:underline"
-                            >login with Discord</Link
-                        >.
-                    </p>
+                        <DropdownMenu variant="secondary">
+                            <template #icon>
+                                <div class="flex items-center gap-1 pl-2 pr-1">
+                                    {{ auth.name }}
 
-                    <p>
-                        Read more about in
-                        <Link
-                            :href="route('news.discord-enforce')"
-                            class="text-[#90c040] hover:underline"
-                            >the news article here</Link
-                        >
-                    </p>
-                </Alert>-->
+                                    <ChevronDownIcon class="size-3" />
+                                </div>
+                            </template>
+
+                            <DropdownItem :href="route('listings.index')">
+                                My Listings
+                            </DropdownItem>
+
+                            <DropdownItem
+                                @click="
+                                    router.delete(
+                                        route('logout', {
+                                            login: auth.name,
+                                            preserveScroll: true,
+                                        }),
+                                    )
+                                "
+                            >
+                                Logout
+                            </DropdownItem>
+                        </DropdownMenu>
+                    </div>
+                </div>
+
 
                 <div
                     class="mx-auto mb-5 w-fit min-w-[250px] border-2 border-[#382418] bg-black p-1 text-center"
