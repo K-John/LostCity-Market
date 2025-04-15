@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\Banner\BannerData;
 use App\Data\Item\ItemData;
 use App\Data\Listing\ListingData;
 use App\Pages\ItemsShowPage;
@@ -32,6 +33,7 @@ class ItemController
             listingForm: ClosureLazy::closure(fn() => $this->getListingFormData($item, $listingType)),
             soldListings: ClosureLazy::closure(fn() => ListingData::collect($this->getSoldListings($item), DataCollection::class)),
             usernames: ClosureLazy::closure(fn() => UsernameService::getAuthenticatedUsernames()),
+            banners: ClosureLazy::closure(fn() => BannerData::collect($item->banners()->active()->get(), DataCollection::class)),
         ));
     }
 

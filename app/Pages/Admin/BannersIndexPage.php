@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Pages;
+namespace App\Pages\Admin;
 
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\PaginatedDataCollection;

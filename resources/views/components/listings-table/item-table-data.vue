@@ -3,7 +3,7 @@ import { Tooltip } from "floating-vue";
 import "floating-vue/dist/style.css";
 
 defineProps<{
-    item: Data.Item.ItemData | null;
+    item: Data.Item.ItemData | Data.Item.ItemFormData | null;
 }>();
 </script>
 

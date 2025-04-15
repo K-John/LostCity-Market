@@ -37,5 +37,11 @@ class ItemsShowPage extends Data
 
         #[AutoLazy]
         public ClosureLazy|array $usernames,
+
+        /**
+         * @var DataCollection<\App\Data\Banner\BannerData>
+         */
+        #[AutoLazy]
+        public ClosureLazy|DataCollection $banners,
     ) {}
 }

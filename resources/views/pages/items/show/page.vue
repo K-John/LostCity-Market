@@ -277,6 +277,12 @@ onUnmounted(() => {
                 </ListingTable>
             </div>
 
+            <Banner
+                v-for="banner in banners"
+                :key="banner.id"
+                v-bind="banner"
+            ></Banner>
+
             <UsernamesAlert v-if="auth && !listingForm?.usernames?.length" />
 
             <ListingForm

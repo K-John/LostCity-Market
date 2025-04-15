@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Auth\DiscordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BanController;
@@ -37,6 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::middleware(AuthorizeAdmin::class)->group(function () {
         Route::post('/ban/{username:username}', [BanController::class, 'store'])->name('ban.store');
         Route::delete('/ban/{username:username}', [BanController::class, 'destroy'])->name('ban.destroy');
+
+        Route::resource('admin/banners', BannerController::class)
+            ->names('admin.banners');
     });
 });
 

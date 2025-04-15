@@ -1,16 +1,34 @@
 declare namespace Data.Banner {
 export type BannerData = {
+displayScope: Enums.BannerDisplayScope;
 id: number;
 type: Enums.BannerType;
 message: string;
-global: boolean;
+isActive: boolean;
 startAt: string | null;
 endAt: string | null;
+items: Array<Data.Item.ItemData> | null;
+};
+export type BannerFormData = {
+id: number | null;
+type: Enums.BannerType;
+message: string;
+is_active: boolean;
+start_at: string | null;
+end_at: string | null;
+items: Array<Data.Item.ItemFormData> | null;
+display_scope: Enums.BannerDisplayScope | null;
 };
 }
 declare namespace Data.Item {
 export type ItemData = {
 isFavorite: boolean;
+id: number;
+name: string;
+slug: string;
+cost: number;
+};
+export type ItemFormData = {
 id: number;
 name: string;
 slug: string;
@@ -51,6 +69,7 @@ body: string;
 export type SharedData = {
 user: Data.Shared.UserData;
 notification: Data.Shared.NotificationData | null;
+globalBanners: Array<Data.Banner.BannerData> | null;
 };
 export type UserData = {
 name: string;
@@ -58,6 +77,7 @@ is_admin: boolean;
 };
 }
 declare namespace Enums {
+export type BannerDisplayScope = 'global' | 'item' | 'user';
 export type BannerType = 'default' | 'success' | 'info' | 'warning' | 'error';
 export type FavoritesListingType = 'all' | 'buy' | 'sell';
 export type HomeTabType = 'buy' | 'sell' | 'favorites';
@@ -65,9 +85,6 @@ export type ListingType = 'buy' | 'sell';
 export type NotificationType = 'success' | 'error' | 'warning' | 'info' | 'default';
 }
 declare namespace Pages {
-export type BannersIndexPage = {
-banners: {data:Array<Data.Banner.BannerData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
-};
 export type FavoritesIndexPage = {
 items: {data:Array<Data.Item.ItemData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
 };
@@ -85,6 +102,7 @@ listingForm: Data.Listing.ListingFormData;
 listings: {data:Array<Data.Listing.ListingData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
 soldListings: Array<Data.Listing.ListingData>;
 usernames: Array<any>;
+banners: Array<Data.Banner.BannerData>;
 };
 export type ListingsCreatePage = {
 listingForm: Data.Listing.ListingFormData;
@@ -101,5 +119,13 @@ export type UsersIndexPage = {
 username: string;
 is_banned: boolean;
 listings: {data:Array<Data.Listing.ListingData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
+};
+}
+declare namespace Pages.Admin {
+export type BannersCreatePage = {
+bannerForm: Data.Banner.BannerFormData;
+};
+export type BannersIndexPage = {
+banners: {data:Array<Data.Banner.BannerData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
 };
 }

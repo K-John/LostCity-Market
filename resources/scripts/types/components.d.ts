@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     ActionTableData: typeof import('./../../views/components/listings-table/action-table-data.vue')['default']
     Alert: typeof import('./../../views/components/alert.vue')['default']
+    Banner: typeof import('./../../views/components/banner.vue')['default']
     BaseButton: typeof import('./../../views/components/base-button.vue')['default']
     DiscordLogo: typeof import('./../../views/components/discord-logo.vue')['default']
     DropdownItem: typeof import('./../../views/components/DropdownItem.vue')['default']
@@ -19,6 +20,7 @@ declare module 'vue' {
     ItemSearch: typeof import('./../../views/components/item-search.vue')['default']
     ItemSelect: typeof import('./../../views/components/item-select.vue')['default']
     ItemTableData: typeof import('./../../views/components/listings-table/item-table-data.vue')['default']
+    LayoutAdmin: typeof import('@/views/layouts/admin/layout-admin.vue')['default']
     LayoutMain: typeof import('@/views/layouts/main/layout-main.vue')['default']
     Link: typeof import('@inertiajs/vue3')['Link']
     ListingForm: typeof import('./../../views/components/listing-form.vue')['default']

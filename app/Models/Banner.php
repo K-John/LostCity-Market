@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Cache;
 
 class Banner extends Model
 {
@@ -27,6 +28,31 @@ class Banner extends Model
         ];
     }
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($listing) {
+            $listing->handleEvent();
+        });
+
+        static::updated(function ($listing) {
+            $listing->handleEvent();
+        });
+
+        static::deleted(function ($listing) {
+            $listing->handleEvent();
+        });
+    }
+
+    /**
+     * Handle the event after something happens to a listing.
+     */
+    public function handleEvent()
+    {
+        Cache::forget("banners.global.active");
+    }
+
     public function scopeActive($query)
     {
         return $query->where(function ($query) {
@@ -36,5 +62,10 @@ class Banner extends Model
             $query->whereNull('end_at')
                 ->orWhere('end_at', '>=', now());
         });
+    }
+
+    public function scopeGlobal($query)
+    {
+        return $query->whereDoesntHave('items');
     }
 }

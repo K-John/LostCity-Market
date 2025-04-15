@@ -159,6 +159,11 @@ const links = computed(() => [
                     </div>
                 </div>
 
+                <Banner
+                    v-for="banner of page.props.globalBanners"
+                    :key="banner.id"
+                    v-bind="banner"
+                ></Banner>
 
                 <div
                     class="mx-auto mb-5 w-fit min-w-[250px] border-2 border-[#382418] bg-black p-1 text-center"
