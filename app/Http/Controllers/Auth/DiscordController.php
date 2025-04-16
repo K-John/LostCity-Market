@@ -41,7 +41,7 @@ class DiscordController extends Controller
             return to_route('listings.index')->success('You have successfully logged in');
 
         } catch (\Exception $e) {
-            return to_route('login.index')->error('An error occurred while logging in with Discord');
+            return to_route('login')->error('An error occurred while logging in with Discord');
         }
     }
 }
