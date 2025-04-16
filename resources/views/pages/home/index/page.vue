@@ -32,6 +32,10 @@ const highlightedIds = ref<number[]>([]);
 
 // Subscribe to the "listings" channel using Laravel Echo, filtering by the current item's id.
 onMounted(() => {
+    if (!window.Echo) {
+        return;
+    }
+
     const channel = window.Echo.channel("listings");
 
     channel.listen("ListingEvent", (listingEvent: Data.Listing.ListingData) => {
@@ -104,6 +108,10 @@ onMounted(() => {
 
 // Cleanup the subscription when the component is unmounted.
 onUnmounted(() => {
+    if (!window.Echo) {
+        return;
+    }
+    
     window.Echo.leaveChannel("listings");
 });
 </script>
