@@ -18,7 +18,16 @@ class ListingEvent implements ShouldBroadcast
 
     public function __construct(Listing $listing)
     {
-        $this->listing = collect(ListingData::from($listing->load('item'))->toArray())
+        // Ensure that the date properties are DateTime objects
+        foreach (['updated_at', 'sold_at', 'deleted_at'] as $dateField) {
+            if (! empty($listing->{$dateField}) && is_string($listing->{$dateField})) {
+                $listing->{$dateField} = new \DateTime($listing->{$dateField});
+            }
+        }
+
+        $listing->load('item');
+
+        $this->listing = collect(ListingData::from($listing)->toArray())
             ->except('canManage', 'item.isFavorite')
             ->all();
     }
