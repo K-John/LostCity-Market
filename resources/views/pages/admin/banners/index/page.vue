@@ -160,6 +160,10 @@ const props = defineProps<Pages.Admin.BannersIndexPage>();
                 </td>
             </tr>
 
+            <tr v-if="!props.banners.data.length">
+                <td class="text-center" colspan="8">No banners found.</td>
+            </tr>
+
             <template v-if="props.banners.data.length" #footer>
                 <Pagination :data="props.banners" />
             </template>
