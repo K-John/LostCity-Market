@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Auth\AccountController;
 use App\Http\Controllers\Auth\DiscordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BanController;
@@ -34,6 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('favorites', FavoriteController::class)
         ->only(['index', 'store', 'destroy'])
         ->names('favorites');
+
+    Route::get('account', AccountController::class)->name('account');
 
     Route::middleware(AuthorizeAdmin::class)->group(function () {
         Route::post('/ban/{username:username}', [BanController::class, 'store'])->name('ban.store');
