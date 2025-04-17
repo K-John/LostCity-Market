@@ -22,15 +22,12 @@ class BumpController
     {
         $listings = $this->user->listings()
             ->whereNull('sold_at')
-            ->where('updated_at', '<', now()->subMinutes(30))
-            ->where('updated_at', '>=', now()->subDays(1))
-            ->get();
+            ->whereBetween('updated_at', [now()->subDays(1), now()->subMinutes(30)])
+            ->update(['updated_at' => now()]);
 
-        if ($listings->isEmpty()) {
+        if ($listings === 0) {
             return back()->error('No listings were found to bump');
         }
-
-        $listings->each->touch();
 
         return back()->success('Listings bumped successfully');
     }
