@@ -43,7 +43,7 @@ const isCurrentRoute = (matchingRoutes: any) => {
 
                 <DropdownMenu variant="secondary" class="block sm:hidden">
                     <template #icon>
-                        <Bars3Icon class="size-5" />
+                        <Bars3Icon class="size-6" />
                     </template>
                     
                     <DropdownItem
