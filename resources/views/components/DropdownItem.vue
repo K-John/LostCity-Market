@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { Link } from "@inertiajs/vue3";
 import { MenuItem } from "@headlessui/vue";
-import { computed } from "vue";
 
 const props = defineProps<{
     icon?: Object | Function;
@@ -18,7 +18,7 @@ const isLink = computed(() => !!props.href);
 <template>
     <MenuItem v-slot="{ active }">
         <component
-            :is="isLink ? 'a' : 'button'"
+            :is="isLink ? Link : 'button'"
             :href="href"
             class="group flex w-full items-center rounded-md px-3 py-2 text-sm font-bold transition"
             :class="[textColor || 'text-slate-200', { 'bg-stone-600': active }]"
