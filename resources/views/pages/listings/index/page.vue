@@ -3,6 +3,7 @@ import { router, Head } from "@inertiajs/vue3";
 import { Tooltip } from "floating-vue";
 import "floating-vue/dist/style.css";
 import { ArrowTrendingUpIcon } from "@heroicons/vue/24/outline/index.js";
+import LayoutAccount from "@/views/layouts/account/layout-account.vue";
 
 const props = defineProps<Pages.ListingsIndexPage>();
 
@@ -17,7 +18,7 @@ const canBumpListings = computed(() =>
 </script>
 
 <template>
-    <LayoutMain>
+    <LayoutAccount>
         <Head title="My Listings" />
 
         <UsernamesAlert v-if="auth && !usernames?.length" />
@@ -157,5 +158,5 @@ const canBumpListings = computed(() =>
                 </template>
             </ListingTableRow>
         </ListingTable>
-    </LayoutMain>
+    </LayoutAccount>
 </template>

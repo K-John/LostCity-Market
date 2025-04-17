@@ -4,7 +4,7 @@ const props = defineProps<Pages.FavoritesIndexPage>();
 </script>
 
 <template>
-    <LayoutMain>
+    <LayoutAccount>
         <Head title="My Favorites" />
 
         <ListingTable>
@@ -40,5 +40,5 @@ const props = defineProps<Pages.FavoritesIndexPage>();
                 <Pagination :data="items" />
             </template>
         </ListingTable>
-    </LayoutMain>
+    </LayoutAccount>
 </template>

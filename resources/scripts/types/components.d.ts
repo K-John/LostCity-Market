@@ -20,6 +20,7 @@ declare module 'vue' {
     ItemSearch: typeof import('./../../views/components/item-search.vue')['default']
     ItemSelect: typeof import('./../../views/components/item-select.vue')['default']
     ItemTableData: typeof import('./../../views/components/listings-table/item-table-data.vue')['default']
+    LayoutAccount: typeof import('@/views/layouts/account/layout-account.vue')['default']
     LayoutAdmin: typeof import('@/views/layouts/admin/layout-admin.vue')['default']
     LayoutMain: typeof import('@/views/layouts/main/layout-main.vue')['default']
     Link: typeof import('@inertiajs/vue3')['Link']
