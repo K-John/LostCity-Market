@@ -2,7 +2,7 @@
 import { router, Head } from "@inertiajs/vue3";
 import { Tooltip } from "floating-vue";
 import "floating-vue/dist/style.css";
-import { ArrowTrendingUpIcon } from "@heroicons/vue/24/outline/index.js";
+import { ArrowTrendingUpIcon, ClockIcon } from "@heroicons/vue/24/outline/index.js";
 import LayoutAccount from "@/views/layouts/account/layout-account.vue";
 
 const props = defineProps<Pages.ListingsIndexPage>();
@@ -21,84 +21,42 @@ const canBumpListings = computed(() =>
     <LayoutAccount>
         <Head title="My Listings" />
 
-        <UsernamesAlert v-if="auth && !usernames?.length" />
+        <div class="flex justify-between">
+            <h1 class="mb-4 text-2xl font-semibold">Active Listings</h1>
 
-        <Alert v-if="auth">
-            <div class="flex items-center gap-2">
-                <h2 class="font-bold text-stone-200">My Usernames:</h2>
-
-                <div v-if="usernames.length" class="flex flex-wrap">
-                    <span
-                        v-for="(username, index) in usernames"
-                        :key="username"
-                        class="whitespace-pre text-stone-300"
-                    >
-                        {{ toDisplayName(username)
-                        }}<span v-if="index < usernames.length - 1">, </span>
-                    </span>
-                </div>
-
-                <span v-else class="text-stone-400">None</span>
-            </div>
-
-            <hr class="border-stone-700" />
-
-            <p class="text-sm text-stone-400">
-                Usernames not accurate?
+            <Tooltip>
                 <button
                     type="button"
-                    class="text-[#90c040] hover:underline"
+                    class="flex items-center gap-2 rounded-sm bg-stone-800 px-2 py-1 text-amber-400"
+                    :class="{
+                        'hover:bg-stone-900': canBumpListings,
+                        'cursor-not-allowed opacity-50': !canBumpListings,
+                    }"
+                    :disabled="!canBumpListings"
                     @click="
-                        router.patch(
-                            route('usernames.update', {
-                                preserveScroll: true,
-                            }),
-                        )
+                        router.patch(route('listings.bump'), {
+                            preserveScroll: true,
+                        })
                     "
                 >
-                    Click here
+                    <ArrowTrendingUpIcon class="size-5" /> Bump All
                 </button>
-                to get your latest usernames from Lost City.
-            </p>
-        </Alert>
 
-        <ListingTable class="mb-4">
-            <template #header>
-                <div class="flex justify-between">
-                    <h2 class="text-lg font-bold">My Listings:</h2>
+                <template #popper>
+                    <template v-if="!canBumpListings">
+                        You have no listings eligible for bumping
+                    </template>
 
-                    <Tooltip>
-                        <button
-                            type="button"
-                            class="flex items-center gap-2 rounded-sm bg-stone-800 px-2 py-1 text-amber-400"
-                            :class="{
-                                'hover:bg-stone-900': canBumpListings,
-                                'cursor-not-allowed opacity-50':
-                                    !canBumpListings,
-                            }"
-                            :disabled="!canBumpListings"
-                            @click="
-                                router.patch(route('listings.bump'), {
-                                    preserveScroll: true,
-                                })
-                            "
-                        >
-                            <ArrowTrendingUpIcon class="size-5" /> Bump All
-                        </button>
+                    <template v-else>
+                        Listings can be bumped every 30 mins
+                    </template>
+                </template>
+            </Tooltip>
+        </div>
 
-                        <template #popper>
-                            <template v-if="!canBumpListings">
-                                You have no listings eligible for bumping
-                            </template>
+        <UsernamesAlert v-if="auth && !usernames?.length" />
 
-                            <template v-else>
-                                Listings can be bumped every 30 mins
-                            </template>
-                        </template>
-                    </Tooltip>
-                </div>
-            </template>
-
+        <ListingTable class="mb-4 pt-2">
             <EmptyTableRow v-if="!props.listings.data.length" />
 
             <ListingTableRow
@@ -126,16 +84,22 @@ const canBumpListings = computed(() =>
             </template>
         </ListingTable>
 
-        <ListingTable class="border-yellow-800 bg-stone-950">
-            <template #header>
-                <h2 class="text-lg font-bold">Recently Expired:</h2>
+        <hr class="mb-5 mt-6 border-t-2 border-stone-700" />
 
-                <p>
-                    If you'd like to re-active a listing, you can bump or edit
+        <div class="mb-4 flex gap-2">
+            <ClockIcon class="size-7 text-amber-400" />
+
+            <div>
+                <h2 class="text-xl font-semibold leading-none">Recently Expired</h2>
+
+                <p class="text-stone-300">
+                    If you'd like to re-activate a listing, you can bump or edit
                     it's information.
                 </p>
-            </template>
+            </div>
+        </div>
 
+        <ListingTable class="border-yellow-900 bg-stone-950">
             <EmptyTableRow v-if="!expiredListings.length" />
 
             <ListingTableRow
