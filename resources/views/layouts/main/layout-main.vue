@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { HeartIcon, ChevronDownIcon } from "@heroicons/vue/24/solid/index.js";
+import { UserIcon, PresentationChartLineIcon, BookmarkIcon, ArrowLeftStartOnRectangleIcon } from "@heroicons/vue/24/outline/index.js";
 import { ref, onMounted, onBeforeUnmount, nextTick } from "vue";
 import chainImage from "@/img/assets/edge_chain.jpg";
 
@@ -139,11 +140,21 @@ const links = computed(() => [
                                 </div>
                             </template>
 
-                            <DropdownItem :href="route('listings.index')">
+                            <DropdownItem :icon="UserIcon" text-color="text-stone-200" :href="route('account')">
+                                Account
+                            </DropdownItem>
+
+                            <DropdownItem :icon="PresentationChartLineIcon" text-color="text-amber-400" :href="route('listings.index')">
                                 My Listings
                             </DropdownItem>
 
+                            <DropdownItem :icon="BookmarkIcon" text-color="text-emerald-500" :href="route('favorites.index')">
+                                Favorites
+                            </DropdownItem>
+
                             <DropdownItem
+                                :icon="ArrowLeftStartOnRectangleIcon"
+                                text-color="text-red-500"
                                 @click="
                                     router.delete(
                                         route('logout', {
