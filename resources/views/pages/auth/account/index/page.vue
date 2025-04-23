@@ -15,7 +15,7 @@ const auth = useAuth();
         <UsernamesAlert v-if="auth && !usernames?.length" />
 
         <div
-            class="grid grid-cols-1 gap-4 border-2 border-[#382418] bg-black p-4 sm:grid-cols-[auto_1fr]"
+            class="grid grid-cols-1 gap-3 border-2 border-[#382418] bg-black p-3 sm:grid-cols-[auto_1fr]"
         >
             <div class="col-span-full grid grid-cols-subgrid gap-x-4 gap-y-2">
                 <h2
