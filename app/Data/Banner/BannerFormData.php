@@ -27,7 +27,7 @@ class BannerFormData extends Data
     public static function rules(): array
     {
         return [
-            'message' => ['required', 'string', 'min:5', 'max:255'],
+            'message' => ['required', 'string', 'min:5', 'max:512'],
             'type' => ['required', 'string', 'in:default,warning,info,success,error'],
             'is_active' => ['required', 'boolean'],
             'start_at' => ['nullable', 'date'],
