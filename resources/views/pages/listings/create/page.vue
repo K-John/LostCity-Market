@@ -20,6 +20,7 @@ const form = useForm({
             :listing-form="form"
             :submit-route="route('listings.store')"
             submit-method="post"
+            include-banners
         />
     </LayoutMain>
 </template>

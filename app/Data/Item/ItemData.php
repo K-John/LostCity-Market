@@ -5,6 +5,7 @@ namespace App\Data\Item;
 use Illuminate\Support\Facades\Auth;
 use Spatie\LaravelData\Attributes\Computed;
 use Spatie\LaravelData\Data;
+use Spatie\LaravelData\DataCollection;
 
 class ItemData extends Data
 {
@@ -15,7 +16,9 @@ class ItemData extends Data
         public int $id,
         public string $name,
         public string $slug,
-        public int $cost
+        public int $cost,
+        /** @var DataCollection<\App\Data\Banner\BannerData> */
+        public ?DataCollection $banners,
     ) {
         $this->isFavorite = self::determineIsFavorite($id);
     }

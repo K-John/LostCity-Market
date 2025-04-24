@@ -27,6 +27,7 @@ id: number;
 name: string;
 slug: string;
 cost: number;
+banners: Array<Data.Banner.BannerData> | null;
 };
 export type ItemFormData = {
 id: number;

@@ -22,6 +22,9 @@ class ItemController
         }
 
         $items = Item::query()
+            ->when($request->query('include_banners', false), function ($query) {
+                $query->with('banners');
+            })
             ->where('name', 'LIKE', '%' . $search . '%')
             ->orWhere('slug', 'LIKE', '%' . str_replace(' ', '_', $search) . '%')
             ->orderByRaw('CHAR_LENGTH(name)')

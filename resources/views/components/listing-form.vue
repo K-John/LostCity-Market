@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { useForm } from "@inertiajs/vue3";
-import { Tooltip } from "floating-vue";
-import "floating-vue/dist/style.css";
 
 const props = defineProps<{
     listingForm: Data.Listing.ListingFormData;
     submitRoute: string;
     submitMethod?: "post" | "put" | "patch";
+    includeBanners?: boolean;
 }>();
 
 const form = useForm({
@@ -15,8 +14,11 @@ const form = useForm({
 
 const listingTypes = computed((): Enums.ListingType[] => ["buy", "sell"]);
 
+const selectedItemBanners = ref<Data.Banner.BannerData[]>([]);
+
 const setItem = (item: Data.Item.ItemData) => {
     form.item_id = item.id;
+    selectedItemBanners.value = item.banners ?? [];
 };
 
 const submit = () => {
@@ -44,6 +46,12 @@ const submit = () => {
             </p>
         </div>
 
+        <Banner
+            v-for="banner in selectedItemBanners"
+            :key="banner.id"
+            v-bind="banner"
+        ></Banner>
+
         <!-- Conditionally Hide Item Select if form.item was Provided on Page Load -->
         <div
             v-if="!props.listingForm.item_id"
@@ -51,7 +59,10 @@ const submit = () => {
         >
             <p>Search for an item:</p>
 
-            <ItemSelect @item-selected="setItem" />
+            <ItemSelect
+                :include-banners="includeBanners"
+                @item-selected="setItem"
+            />
         </div>
 
         <div class="flex flex-col gap-3">
