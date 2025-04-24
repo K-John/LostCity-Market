@@ -32,25 +32,25 @@ class Banner extends Model
     {
         parent::boot();
 
-        static::created(function ($listing) {
-            $listing->handleEvent();
+        static::created(function ($banner) {
+            $banner->handleEvent();
         });
 
-        static::updated(function ($listing) {
-            $listing->handleEvent();
+        static::updated(function ($banner) {
+            $banner->handleEvent();
         });
 
-        static::deleted(function ($listing) {
-            $listing->handleEvent();
+        static::deleted(function ($banner) {
+            $banner->handleEvent();
         });
     }
 
     /**
-     * Handle the event after something happens to a listing.
+     * Handle the event after something happens to a banner.
      */
     public function handleEvent()
     {
-        Cache::forget("banners.global.active");
+        Cache::forget("banners_global_active");
     }
 
     public function scopeActive($query)

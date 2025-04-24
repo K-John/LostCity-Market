@@ -24,7 +24,7 @@ class HandleInertiaRequests extends Middleware
     {
         $state = new SharedData(
             user: fn () => Auth::check() ? UserData::from(Auth::user()) : null,
-            globalBanners: fn () => cache()->remember('banners.global.active', 3600, function () {
+            globalBanners: fn () => cache()->remember('banners_global_active', 3600, function () {
                 return BannerData::collect(Banner::active()->global()->get(), DataCollection::class);
             })
         );
