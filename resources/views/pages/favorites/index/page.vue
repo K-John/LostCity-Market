@@ -25,7 +25,7 @@ watch(selectedItem, (item) => {
 
         <Alert type="info">
             <div class="flex items-center gap-2">
-                <InformationCircleIcon class="size-6 text-sky-200" />
+                <InformationCircleIcon class="size-6 shrink-0 text-sky-200" />
 
                 <p>
                     View listings of your favorite items by navigating to the
