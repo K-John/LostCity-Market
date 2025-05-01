@@ -25,6 +25,6 @@ class ItemData extends Data
 
     private static function determineIsFavorite(int $id): bool
     {
-        return Auth::check() && (Auth::user()->favorites->contains($id));
+        return Auth::check() && Auth::user()->favorites()->pluck('id')->contains($id);
     }
 }

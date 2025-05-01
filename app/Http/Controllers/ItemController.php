@@ -39,14 +39,10 @@ class ItemController
 
     protected function getListings(Item $item, $listingType)
     {
-        return cache()->remember(
-            "item_{$item->id}_listings_{$listingType->value}",
-            now()->addMinutes(30),
-            fn() => $item->listings()
-                ->active()
-                ->where('type', $listingType)
-                ->paginate(20)
-        );
+        return $item->listings()
+            ->active()
+            ->where('type', $listingType)
+            ->paginate(20);
     }
 
     protected function getSoldListings(Item $item)
