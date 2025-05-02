@@ -31,6 +31,19 @@ class Listing extends Model
             $listing->ip = request()->ip();
             $listing->user_id = Auth::id();
             $listing->filterProfanity();
+
+            // Prevent user from abusing the bump feature by deleting and recreating listings
+            $deletedListing = Listing::withTrashed()
+                ->where('user_id', $listing->user_id)
+                ->where('item_id', $listing->item_id)
+                ->where('type', $listing->type)
+                ->whereNotNull('deleted_at')
+                ->where('updated_at', '>=', now()->subMinutes(30))
+                ->first();
+                
+            if ($deletedListing) {
+                $listing->updated_at = $deletedListing->updated_at;
+            }
         });
 
         static::created(function ($listing) {
