@@ -24,7 +24,10 @@ class ItemController
     {
         $listingType = $this->getListingType($request);
 
-        $listings = $this->getListings($item, $listingType);
+        $listings = $item->listings()
+            ->active()
+            ->where('type', $listingType)
+            ->paginate(20);
 
         return inertia('items/show/page', new ItemsShowPage(
             listings: ListingData::collect($listings, PaginatedDataCollection::class),
@@ -35,14 +38,6 @@ class ItemController
             usernames: ClosureLazy::closure(fn() => UsernameService::getAuthenticatedUsernames()),
             banners: ClosureLazy::closure(fn() => BannerData::collect($item->banners()->active()->get(), DataCollection::class)),
         ));
-    }
-
-    protected function getListings(Item $item, $listingType)
-    {
-        return $item->listings()
-            ->active()
-            ->where('type', $listingType)
-            ->paginate(20);
     }
 
     protected function getSoldListings(Item $item)
