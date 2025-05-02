@@ -1,13 +1,26 @@
 <script setup lang="ts">
-import { XMarkIcon, ArrowUturnLeftIcon } from "@heroicons/vue/24/outline";
+import { XMarkIcon, ArrowUturnLeftIcon, ArrowLeftIcon } from "@heroicons/vue/24/outline";
 
 const props = defineProps<Pages.UsersIndexPage>();
 const auth = useAuth();
+
+const back = () => {
+    window.history.back();
+};
 </script>
 
 <template>
     <LayoutMain>
         <Head :title="`${toDisplayName(username)}'s Listings'`" />
+
+        <button
+            type="button"
+            class="mb-4 flex w-fit items-center gap-1 rounded-sm bg-stone-800 px-3 py-1 text-white hover:bg-stone-700"
+            @click="back()"
+        >
+            <ArrowLeftIcon class="size-5" />
+            Back
+        </button>
 
         <ListingTable>
             <EmptyTableRow v-if="!props.listings.data.length" />
