@@ -11,10 +11,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Listing extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, LogsActivity;
 
     public $guarded = [];
 
@@ -114,4 +116,11 @@ class Listing extends Model
         'created_at' => 'datetime',
         'deleted_at' => 'datetime',
     ];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['id', 'item_id', 'type', 'price', 'quantity', 'notes', 'username', 'updated_at', 'deleted_at', 'sold_at'])
+            ->logOnlyDirty();
+    }
 }

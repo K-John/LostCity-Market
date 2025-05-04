@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Cache;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Banner extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
 
     public $guarded = [];
 
@@ -68,5 +70,11 @@ class Banner extends Model
     public function scopeGlobal($query)
     {
         return $query->whereDoesntHave('items');
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnlyDirty();
     }
 }

@@ -20,6 +20,7 @@
         "laravel/tinker": "^2.10",
         "predis/predis": "^2.3",
         "socialiteproviders/discord": "^4.2",
+        "spatie/laravel-activitylog": "^4.10",
         "spatie/laravel-data": "^4.0",
         "spatie/laravel-typescript-transformer": "^2.5",
         "tymon/jwt-auth": "^2.1"
