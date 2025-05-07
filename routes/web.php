@@ -24,6 +24,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('listings', ListingController::class)
         ->names('listings');
 
+    Route::get('listings/{listing}/delete', [ListingController::class, 'delete'])
+        ->name('listings.delete');
+
     Route::prefix('listing/{listing}')->group(function () {
         Route::get('sell', [ListingSaleController::class, 'create'])->name('listing.sale.create');
         Route::post('sell', [ListingSaleController::class, 'store'])->name('listing.sale.store');

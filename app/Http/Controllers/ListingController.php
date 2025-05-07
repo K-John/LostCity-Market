@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\Item\ItemData;
 use App\Data\Listing\ListingData;
 use App\Data\Listing\ListingFormData;
 use App\Enums\ListingType;
@@ -10,14 +9,14 @@ use App\Models\Item;
 use App\Models\Listing;
 use App\Models\User;
 use App\Pages\ListingsCreatePage;
+use App\Pages\ListingsDeletePage;
 use App\Pages\ListingsEditPage;
 use App\Pages\ListingsIndexPage;
 use App\Services\UsernameService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\RateLimiter;
+use Inertia\Inertia;
 use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\PaginatedDataCollection;
 
@@ -105,17 +104,22 @@ class ListingController
         return to_route('listings.index')->success('The listing has been updated');
     }
 
+    public function delete(Listing $listing)
+    {
+        $this->authorize('delete', $listing);
+
+        return Inertia::modal('listings/delete/page', new ListingsDeletePage(
+            listing: ListingData::from($listing->load('item'))
+        ))
+            ->baseRoute('listings.index');
+    }
+
     public function destroy(Listing $listing, Request $request)
     {
         $this->authorize('delete', $listing);
 
-        if ($request->has('force')) {
-            $listing->delete();
-            return back()->success('The listing has been permanently deleted');
-        }
+        $listing->delete();
 
-        $listing->update(['sold_at' => now()]);
-
-        return back()->success('The listing has been marked as sold');
+        return back()->success('The listing has been permanently deleted');
     }
 }

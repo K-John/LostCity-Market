@@ -113,6 +113,9 @@ banners: Array<Data.Banner.BannerData>;
 export type ListingsCreatePage = {
 listingForm: Data.Listing.ListingFormData;
 };
+export type ListingsDeletePage = {
+listing: Data.Listing.ListingData;
+};
 export type ListingsEditPage = {
 listingForm: Data.Listing.ListingFormData;
 };

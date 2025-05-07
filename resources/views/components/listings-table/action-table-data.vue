@@ -55,15 +55,7 @@ const typeVerb = computed(() => {
                 <DropdownItem
                     :icon="XMarkIcon"
                     text-color="text-red-500"
-                    @click="
-                        router.delete(
-                            route('listings.destroy', {
-                                listing: listing.id,
-                                force: true,
-                            }),
-                            { preserveScroll: true },
-                        )
-                    "
+                    @click="router.visit(route('listings.delete', { listing }), { preserveScroll: true })"
                 >
                     Remove
                 </DropdownItem>
