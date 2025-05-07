@@ -32,10 +32,10 @@ const buttonClasses = computed(() => {
 const updateMenuPosition = () => {
     if (buttonRef.value) {
         const rect = buttonRef.value.getBoundingClientRect();
-        // Assuming dropdown width of ~144px (w-36)
+        // Assuming dropdown width of ~160px (w-40)
         menuStyles.value = {
             top: `${rect.bottom + 4}px`,
-            left: `${rect.right - 144}px`,
+            left: `${rect.right - 160}px`,
         };
     }
 };
@@ -79,7 +79,7 @@ onBeforeUnmount(() => {
             >
                 <MenuItems
                     :style="[menuStyles, { position: 'fixed' }]"
-                    class="z-10 mt-1 w-36 origin-top-right rounded-md bg-stone-700 p-1"
+                    class="z-10 mt-1 w-40 origin-top-right rounded-md bg-stone-700 p-1"
                 >
                     <slot />
                 </MenuItems>
