@@ -11,6 +11,7 @@ declare module 'vue' {
     Alert: typeof import('./../../views/components/alert.vue')['default']
     Banner: typeof import('./../../views/components/banner.vue')['default']
     BaseButton: typeof import('./../../views/components/base-button.vue')['default']
+    BaseModal: typeof import('./../../views/components/base-modal.vue')['default']
     DiscordLogo: typeof import('./../../views/components/discord-logo.vue')['default']
     DropdownItem: typeof import('./../../views/components/DropdownItem.vue')['default']
     DropdownMenu: typeof import('./../../views/components/DropdownMenu.vue')['default']

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4e3eff6380855ff3fc11316d7651115e",
+    "content-hash": "2b209a646b91f20f62c824347c6e9236",
     "packages": [
         {
             "name": "amphp/amp",
@@ -877,6 +877,69 @@
                 }
             ],
             "time": "2024-03-21T07:02:03+00:00"
+        },
+        {
+            "name": "based/momentum-modal",
+            "version": "v0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lepikhinb/momentum-modal.git",
+                "reference": "06224201c9aa0eaaedf20423992a71d01015b646"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lepikhinb/momentum-modal/zipball/06224201c9aa0eaaedf20423992a71d01015b646",
+                "reference": "06224201c9aa0eaaedf20423992a71d01015b646",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^8.24|^9.0|^10.0|^11.0|^12.0",
+                "inertiajs/inertia-laravel": "^0.6|^1.0|^2.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^0.1.3|^1.13",
+                "nunomaduro/larastan": "^1.0|^2.0",
+                "orchestra/testbench": "^6.9|^7.0|^8.0|^9.0",
+                "pestphp/pest": "^1.2|^2.34",
+                "pestphp/pest-plugin-laravel": "^1.0|^2.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Momentum\\Modal\\ModalServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Momentum\\Modal\\": "src/",
+                    "Momentum\\Modal\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Boris Lepikhin",
+                    "email": "boris@lepikhin.com"
+                }
+            ],
+            "description": "Build dynamic modal dialogs for your Inertia-powered Laravel apps",
+            "support": {
+                "issues": "https://github.com/lepikhinb/momentum-modal/issues",
+                "source": "https://github.com/lepikhinb/momentum-modal/tree/v0.5.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/lepikhinb",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-03-16T19:46:18+00:00"
         },
         {
             "name": "based/momentum-trail",

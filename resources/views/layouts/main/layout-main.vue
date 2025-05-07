@@ -2,6 +2,7 @@
 import { HeartIcon, ChevronDownIcon } from "@heroicons/vue/24/solid/index.js";
 import { UserIcon, PresentationChartLineIcon, BookmarkIcon, ArrowLeftStartOnRectangleIcon } from "@heroicons/vue/24/outline/index.js";
 import { ref, onMounted, onBeforeUnmount, nextTick } from "vue";
+import { Modal } from "momentum-modal";
 import chainImage from "@/img/assets/edge_chain.jpg";
 
 const page = usePage();
@@ -266,5 +267,7 @@ const links = computed(() => [
 
             <img class="h-[77px] w-[100px]" src="@/img/assets/edge_h2.jpg" />
         </div>
+
+        <Modal />
     </div>
 </template>
