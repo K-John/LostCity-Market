@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Tooltip } from "floating-vue";
 import "floating-vue/dist/style.css";
 import {
     PencilSquareIcon,
@@ -7,9 +8,13 @@ import {
     XMarkIcon,
 } from "@heroicons/vue/24/outline/index.js";
 
-defineProps<{
+const props = defineProps<{
     listing: Data.Listing.ListingData;
 }>();
+
+const typeVerb = computed(() => {
+    return props.listing.type === "buy" ? "Bought" : "Sold";
+});
 </script>
 
 <template>
@@ -34,16 +39,9 @@ defineProps<{
                 <DropdownItem
                     :icon="CheckIcon"
                     text-color="text-green-500"
-                    @click="
-                        router.delete(
-                            route('listings.destroy', {
-                                listing: listing.id,
-                            }),
-                            { preserveScroll: true },
-                        )
-                    "
+                    @click="router.visit(route('listing.sale.store', { listing }), { preserveScroll: true })"
                 >
-                    Mark Sold
+                    Mark {{ typeVerb }}
                 </DropdownItem>
 
                 <DropdownItem

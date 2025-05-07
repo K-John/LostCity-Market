@@ -10,6 +10,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\ListingSaleController;
 use App\Http\Controllers\UsernameController;
 use App\Http\Middleware\AuthorizeAdmin;
 use App\Http\Middleware\LocalOnly;
@@ -22,6 +23,11 @@ Route::get('/', HomeController::class)->name('home');
 Route::middleware('auth')->group(function () {
     Route::resource('listings', ListingController::class)
         ->names('listings');
+
+    Route::prefix('listing/{listing}')->group(function () {
+        Route::get('sell', [ListingSaleController::class, 'create'])->name('listing.sale.create');
+        Route::post('sell', [ListingSaleController::class, 'store'])->name('listing.sale.store');
+    });
 
     Route::patch('bump', [BumpController::class, 'index'])
         ->name('listings.bump');
