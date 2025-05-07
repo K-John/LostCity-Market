@@ -79,7 +79,7 @@ onBeforeUnmount(() => {
             >
                 <MenuItems
                     :style="[menuStyles, { position: 'fixed' }]"
-                    class="z-10 mt-1 w-40 origin-top-right rounded-md bg-stone-700 p-1"
+                    class="z-50 mt-1 w-40 origin-top-right rounded-md bg-stone-700 p-1"
                 >
                     <slot />
                 </MenuItems>

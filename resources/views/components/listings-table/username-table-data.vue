@@ -16,6 +16,7 @@ defineProps<{
                         route('usernames.show', { username: listing.username })
                     "
                     class="whitespace-pre text-sm sm:text-[medium]"
+                    preserve-scroll
                 >
                     {{ toDisplayName(listing.username) }}
                 </Link>

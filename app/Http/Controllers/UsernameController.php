@@ -8,6 +8,7 @@ use App\Models\Username;
 use App\Pages\UsersIndexPage;
 use App\Services\UsernameService;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 use Spatie\LaravelData\PaginatedDataCollection;
 
 class UsernameController
@@ -21,11 +22,12 @@ class UsernameController
 
         $is_banned = (bool) Username::where('username', $username)->first()?->user?->is_banned;
 
-        return inertia('users/index/page', new UsersIndexPage(
+        return Inertia::modal('users/index/page', new UsersIndexPage(
             username: $username,
             is_banned: $is_banned,
             listings: ListingData::collect($listings, PaginatedDataCollection::class)
-        ));
+        ))
+            ->baseRoute('home');
     }
 
     public function update()

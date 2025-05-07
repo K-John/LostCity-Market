@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { XMarkIcon, ArrowUturnLeftIcon, ArrowLeftIcon } from "@heroicons/vue/24/outline";
+import { XMarkIcon, ArrowUturnLeftIcon } from "@heroicons/vue/24/outline";
+import { Tooltip } from "floating-vue";
+import "floating-vue/dist/style.css";
 
 const props = defineProps<Pages.UsersIndexPage>();
 const auth = useAuth();
@@ -10,87 +12,96 @@ const back = () => {
 </script>
 
 <template>
-    <LayoutMain>
-        <Head :title="`${toDisplayName(username)}'s Listings'`" />
+    <BaseModal>
+        <template #default="{ close }">
+            <Head :title="`${toDisplayName(username)}'s Listings'`" />
 
-        <button
-            type="button"
-            class="mb-4 flex w-fit items-center gap-1 rounded-sm bg-stone-800 px-3 py-1 text-white hover:bg-stone-700"
-            @click="back()"
-        >
-            <ArrowLeftIcon class="size-5" />
-            Back
-        </button>
-
-        <ListingTable>
-            <EmptyTableRow v-if="!props.listings.data.length" />
-
-            <template #header>
-                <div class="flex justify-between">
-                    <h2 class="text-lg font-bold">
+            <div class="flex justify-between">
+                <div>
+                    <h1 class="text-xl font-semibold">
                         <span class="whitespace-pre text-stone-500">{{
                             toDisplayName(username)
                         }}</span
-                        >'s listings
-                    </h2>
+                        >'s Listings
+                    </h1>
 
-                    <template v-if="auth?.is_admin && !is_banned">
-                        <button
-                            type="button"
-                            class="flex items-center gap-2 rounded-sm bg-stone-800 px-2 py-1 text-red-500 hover:bg-stone-900"
-                            @click="
-                                router.post(
-                                    route('ban.store', { username: username }),
-                                    { preserveScroll: true },
-                                )
-                            "
+                    <Tooltip class="w-fit">
+                        <p
+                            class="whitespace-pre font-mono text-sm tracking-widest text-stone-300"
                         >
-                            <XMarkIcon class="size-5" /> Ban User
-                        </button>
-                    </template>
+                            ({{ username }})
+                        </p>
 
-                    <template v-if="auth?.is_admin && is_banned">
-                        <button
-                            type="button"
-                            class="flex items-center gap-2 rounded-sm bg-stone-800 px-2 py-1 text-green-500 hover:bg-stone-900"
-                            @click="
-                                router.delete(
-                                    route('ban.destroy', {
-                                        username,
-                                    }),
-                                    { preserveScroll: true },
-                                )
-                            "
-                        >
-                            <ArrowUturnLeftIcon class="size-5" /> Unban User
-                        </button>
-                    </template>
+                        <template #popper> Unformatted username </template>
+                    </Tooltip>
                 </div>
-            </template>
 
-            <ListingTableRow
-                v-for="l in listings.data"
-                :key="l.id"
-                :listing="l"
-            >
-                <template #default="{ listing }">
-                    <ItemTableData :item="listing.item" />
-
-                    <PriceTableData :listing="listing" />
-
-                    <UsernameTableData :listing="listing" />
-
-                    <TimestampTableData :timestamp="listing.updatedAt" />
-
-                    <NoteTableData :listing="listing" />
-
-                    <ActionTableData :listing="listing" />
+                <template v-if="auth?.is_admin && !is_banned">
+                    <button
+                        type="button"
+                        class="flex h-fit items-center gap-2 rounded-sm bg-stone-800 px-2 py-1 text-red-500 hover:bg-stone-900"
+                        @click="
+                            router.post(
+                                route('ban.store', { username: username }),
+                                { preserveScroll: true },
+                            )
+                        "
+                    >
+                        <XMarkIcon class="size-5" /> Ban User
+                    </button>
                 </template>
-            </ListingTableRow>
 
-            <template v-if="listings.data.length" #footer>
-                <Pagination :data="listings" />
-            </template>
-        </ListingTable>
-    </LayoutMain>
+                <template v-if="auth?.is_admin && is_banned">
+                    <button
+                        type="button"
+                        class="flex h-fit items-center gap-2 rounded-sm bg-stone-800 px-2 py-1 text-green-500 hover:bg-stone-900"
+                        @click="
+                            router.delete(
+                                route('ban.destroy', {
+                                    username,
+                                }),
+                                { preserveScroll: true },
+                            )
+                        "
+                    >
+                        <ArrowUturnLeftIcon class="size-5" /> Unban User
+                    </button>
+                </template>
+            </div>
+
+            <ListingTable class="border-none bg-transparent p-0">
+                <EmptyTableRow v-if="!props.listings.data.length" />
+
+                <ListingTableRow
+                    v-for="l in listings.data"
+                    :key="l.id"
+                    :listing="l"
+                >
+                    <template #default="{ listing }">
+                        <ItemTableData :item="listing.item" />
+
+                        <PriceTableData :listing="listing" />
+
+                        <UsernameTableData :listing="listing" />
+
+                        <TimestampTableData :timestamp="listing.updatedAt" />
+
+                        <NoteTableData :listing="listing" />
+
+                        <ActionTableData :listing="listing" />
+                    </template>
+                </ListingTableRow>
+
+                <template v-if="listings.data.length" #footer>
+                    <Pagination :data="listings" />
+                </template>
+            </ListingTable>
+
+            <div class="flex items-center justify-end gap-4">
+                <BaseButton variant="secondary" type="button" @click="close">
+                    Cancel
+                </BaseButton>
+            </div>
+        </template>
+    </BaseModal>
 </template>
