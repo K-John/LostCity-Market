@@ -75,6 +75,7 @@ class Banner extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
+            ->logAll()
             ->logOnlyDirty();
     }
 }

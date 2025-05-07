@@ -46,14 +46,22 @@ class BannerController
         ));
     }
 
-    public function store(BannerFormData $data)
+    public function store(BannerFormData $data, Request $request)
     {
         $bannerData = collect($data->toArray())->except(['items', 'display_scope'])->toArray();
-
         $banner = Banner::create($bannerData);
 
         if ($data->items) {
+            $itemIds = collect($data->items)->pluck('id')->toArray();
             $banner->items()->sync(collect($data->items)->pluck('id')->toArray());
+
+            activity()
+                ->performedOn($banner)
+                ->causedBy($request->user())
+                ->withProperties([
+                    'added_items' => $itemIds,
+                ])
+                ->log('create banner items');
         }
 
         return to_route('admin.banners.index')->success('Banner created successfully.');
@@ -74,16 +82,33 @@ class BannerController
         ));
     }
 
-    public function update(BannerFormData $data, Banner $banner)
+    public function update(BannerFormData $data, Banner $banner, Request $request)
     {
         $bannerData = collect($data->toArray())->except(['items', 'display_scope'])->toArray();
-
         $banner->update($bannerData);
 
+        $originalItemIds = $banner->items()->pluck('items.id')->toArray();
+
         if ($data->items) {
+            $newItemIds = collect($data->items)->pluck('id')->toArray();
             $banner->items()->sync(collect($data->items)->pluck('id')->toArray());
         } else {
             $banner->items()->detach();
+            $newItemIds = [];
+        }
+
+        $added = array_values(array_diff($newItemIds, $originalItemIds));
+        $removed = array_values(array_diff($originalItemIds, $newItemIds));
+
+        if (!empty($added) || !empty($removed)) {
+            activity()
+                ->performedOn($banner)
+                ->causedBy($request->user())
+                ->withProperties([
+                    'added_items' => $added,
+                    'removed_items' => $removed,
+                ])
+                ->log('update banner items');
         }
 
         return to_route('admin.banners.index')->success('Banner updated successfully.');
