@@ -117,6 +117,7 @@ export type ListingsDeletePage = {
 listing: Data.Listing.ListingData;
 };
 export type ListingsEditPage = {
+listing: Data.Listing.ListingData;
 listingForm: Data.Listing.ListingFormData;
 };
 export type ListingsIndexPage = {

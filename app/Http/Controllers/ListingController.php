@@ -76,7 +76,8 @@ class ListingController
 
         $usernames = User::find($listing->user_id)->usernames->pluck('username')->toArray();
 
-        return inertia('listings/edit/page', new ListingsEditPage(
+        return Inertia::modal('listings/edit/page', new ListingsEditPage(
+            listing: ListingData::from($listing->load('item')),
             listingForm: new ListingFormData(
                 id: $listing->id,
                 type: \App\Enums\ListingType::from($listing->type),
@@ -87,7 +88,8 @@ class ListingController
                 usernames: $usernames,
                 item_id: $listing->item_id,
             ),
-        ));
+        ))
+            ->baseRoute('listings.index');
     }
 
     public function update(ListingFormData $data, Listing $listing)
@@ -101,7 +103,7 @@ class ListingController
 
         $listing->update($data->getListingData());
 
-        return to_route('listings.index')->success('The listing has been updated');
+        return back()->success('The listing has been updated');
     }
 
     public function delete(Listing $listing)

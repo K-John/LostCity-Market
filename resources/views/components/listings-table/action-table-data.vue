@@ -47,7 +47,7 @@ const typeVerb = computed(() => {
                 <DropdownItem
                     :icon="PencilSquareIcon"
                     text-color="text-amber-500"
-                    :href="route('listings.edit', { listing })"
+                    @click="router.visit(route('listings.edit', { listing }), { preserveScroll: true })"
                 >
                     Edit
                 </DropdownItem>
