@@ -82,8 +82,6 @@ const back = () => {
 
                         <PriceTableData :listing="listing" />
 
-                        <UsernameTableData :listing="listing" />
-
                         <TimestampTableData :timestamp="listing.updatedAt" />
 
                         <NoteTableData :listing="listing" />
