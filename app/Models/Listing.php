@@ -133,7 +133,7 @@ class Listing extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['id', 'item_id', 'type', 'price', 'quantity', 'notes', 'username', 'updated_at', 'deleted_at', 'sold_at'])
+            ->logOnly(['id', 'item_id', 'type', 'price', 'quantity', 'notes', 'username', 'updated_at', 'deleted_at', 'sold_at', 'paused_at'])
             ->logOnlyDirty();
     }
 }
