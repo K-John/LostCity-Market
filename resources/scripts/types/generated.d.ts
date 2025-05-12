@@ -65,6 +65,7 @@ export type ListingSaleFormData = {
 id: number;
 price: string;
 quantity: number;
+redirect: string | null;
 };
 }
 declare namespace Data.Shared {
@@ -115,6 +116,7 @@ listingForm: Data.Listing.ListingFormData;
 };
 export type ListingsDeletePage = {
 listing: Data.Listing.ListingData;
+redirect: string | null;
 };
 export type ListingsEditPage = {
 listing: Data.Listing.ListingData;

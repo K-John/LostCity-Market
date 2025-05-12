@@ -15,6 +15,9 @@ const props = defineProps<{
 const typeVerb = computed(() => {
     return props.listing.type === "buy" ? "Bought" : "Sold";
 });
+
+const page = usePage();
+const currentUrl = page.url.split('?')[0];
 </script>
 
 <template>
@@ -39,7 +42,7 @@ const typeVerb = computed(() => {
                 <DropdownItem
                     :icon="CheckIcon"
                     text-color="text-green-500"
-                    @click="router.visit(route('listing.sale.store', { listing }), { preserveScroll: true })"
+                    @click="router.visit(route('listing.sale.store', { listing, redirect: currentUrl }), { preserveScroll: true })"
                 >
                     Mark {{ typeVerb }}
                 </DropdownItem>
@@ -55,7 +58,7 @@ const typeVerb = computed(() => {
                 <DropdownItem
                     :icon="XMarkIcon"
                     text-color="text-red-500"
-                    @click="router.visit(route('listings.delete', { listing }), { preserveScroll: true })"
+                    @click="router.visit(route('listings.delete', { listing, redirect: currentUrl }), { preserveScroll: true })"
                 >
                     Remove
                 </DropdownItem>

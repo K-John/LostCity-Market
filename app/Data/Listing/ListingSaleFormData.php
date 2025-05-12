@@ -12,6 +12,7 @@ class ListingSaleFormData extends Data
         public int $id,
         public string $price,
         public int $quantity,
+        public ?string $redirect = null,
     ) {}
 
     public static function rules(): array

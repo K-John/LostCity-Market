@@ -62,7 +62,7 @@ const submit = (close: () => void) => {
                         class="flex items-center gap-1"
                         @click="
                             router.visit(
-                                route('listing.sale.store', { listing }),
+                                route('listing.sale.store', { listing, redirect: redirect }),
                                 { preserveScroll: true },
                             )
                         "

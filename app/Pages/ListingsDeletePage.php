@@ -9,6 +9,7 @@ use Spatie\LaravelData\Data;
 class ListingsDeletePage extends Data
 {
     public function __construct(
-        public ListingData $listing
+        public ListingData $listing,
+        public ?string $redirect = null,
     ) {}
 }

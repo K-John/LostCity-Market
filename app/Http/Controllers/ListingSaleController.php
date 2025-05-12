@@ -14,9 +14,11 @@ class ListingSaleController
 {
     use AuthorizesRequests;
 
-    public function create(Listing $listing)
+    public function create(Listing $listing, Request $request)
     {
         $this->authorize('update', $listing);
+
+        $redirect = $request->query('redirect', route('listings.index'));
 
         return Inertia::modal('listings/sell/page', new ListingsSalePage(
             listing: ListingData::from($listing->load('item')),
@@ -24,6 +26,7 @@ class ListingSaleController
                 id: $listing->id,
                 price: $listing->price,
                 quantity: $listing->quantity,
+                redirect: $redirect,
             ),
         ))
             ->baseRoute('listings.index');
@@ -40,7 +43,9 @@ class ListingSaleController
             $this->markFullSale($listing, $data);
         }
 
-        return back()
+        $redirect = $data->redirect ?? route('listings.index');
+
+        return redirect($redirect)
             ->success('Listing sold successfully')
             ->with('listing', ListingData::from($listing));
     }

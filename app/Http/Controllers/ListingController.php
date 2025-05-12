@@ -106,12 +106,15 @@ class ListingController
         return back()->success('The listing has been updated');
     }
 
-    public function delete(Listing $listing)
+    public function delete(Listing $listing, Request $request)
     {
         $this->authorize('delete', $listing);
 
+        $redirect = $request->query('redirect', route('listings.index'));
+
         return Inertia::modal('listings/delete/page', new ListingsDeletePage(
-            listing: ListingData::from($listing->load('item'))
+            listing: ListingData::from($listing->load('item')),
+            redirect: $redirect,
         ))
             ->baseRoute('listings.index');
     }
