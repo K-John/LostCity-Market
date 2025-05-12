@@ -72,6 +72,7 @@ class Listing extends Model
     {
         return $query
             ->whereNull('sold_at')
+            ->whereNull('paused_at')
             ->where('updated_at', '>=', now()->subDays(1))
             ->orderBy('updated_at', 'desc');
     }
@@ -84,6 +85,17 @@ class Listing extends Model
         return $query
             ->whereNull('sold_at')
             ->whereBetween('updated_at', [now()->subDays(2), now()->subDay()])
+            ->orderBy('updated_at', 'desc');
+    }
+
+    /**
+     * Scope to filter listings that are paused.
+     */
+    public function scopePaused(Builder $query): Builder
+    {
+        return $query
+            ->whereNotNull('paused_at')
+            ->where('updated_at', '>=', now()->subDays(1))
             ->orderBy('updated_at', 'desc');
     }
 
@@ -115,6 +127,7 @@ class Listing extends Model
         'sold_at' => 'datetime',
         'created_at' => 'datetime',
         'deleted_at' => 'datetime',
+        'paused_at' => 'datetime',
     ];
 
     public function getActivitylogOptions(): LogOptions

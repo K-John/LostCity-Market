@@ -22,6 +22,7 @@ class BumpController
     {
         $listings = $this->user->listings()
             ->whereNull('sold_at')
+            ->whereNull('paused_at')
             ->whereBetween('updated_at', [now()->subDays(1), now()->subMinutes(30)])
             ->update(['updated_at' => now()]);
 

@@ -6,6 +6,8 @@ import {
     ArrowTrendingUpIcon,
     CheckIcon,
     XMarkIcon,
+    PauseIcon,
+    PlayIcon
 } from "@heroicons/vue/24/outline/index.js";
 
 const props = defineProps<{
@@ -17,7 +19,7 @@ const typeVerb = computed(() => {
 });
 
 const page = usePage();
-const currentUrl = page.url.split('?')[0];
+const currentUrl = page.url.split("?")[0];
 </script>
 
 <template>
@@ -40,9 +42,49 @@ const currentUrl = page.url.split('?')[0];
                 </DropdownItem>
 
                 <DropdownItem
+                    v-if="!listing.pausedAt"
+                    :icon="PauseIcon"
+                    text-color="text-rose-500"
+                    @click="
+                        router.post(
+                            route('listing.pause.store', {
+                                listing: listing,
+                            }),
+                            { preserveScroll: true },
+                        )
+                    "
+                >
+                    Pause
+                </DropdownItem>
+
+                <DropdownItem
+                    v-else
+                    :icon="PlayIcon"
+                    text-color="text-emerald-500"
+                    @click="
+                        router.delete(
+                            route('listing.pause.destroy', {
+                                listing: listing,
+                            }),
+                            { preserveScroll: true },
+                        )
+                    "
+                >
+                    Unpause
+                </DropdownItem>
+
+                <DropdownItem
                     :icon="CheckIcon"
                     text-color="text-green-500"
-                    @click="router.visit(route('listing.sale.store', { listing, redirect: currentUrl }), { preserveScroll: true })"
+                    @click="
+                        router.visit(
+                            route('listing.sale.store', {
+                                listing,
+                                redirect: currentUrl,
+                            }),
+                            { preserveScroll: true },
+                        )
+                    "
                 >
                     Mark {{ typeVerb }}
                 </DropdownItem>
@@ -50,7 +92,11 @@ const currentUrl = page.url.split('?')[0];
                 <DropdownItem
                     :icon="PencilSquareIcon"
                     text-color="text-amber-500"
-                    @click="router.visit(route('listings.edit', { listing }), { preserveScroll: true })"
+                    @click="
+                        router.visit(route('listings.edit', { listing }), {
+                            preserveScroll: true,
+                        })
+                    "
                 >
                     Edit
                 </DropdownItem>
@@ -58,7 +104,15 @@ const currentUrl = page.url.split('?')[0];
                 <DropdownItem
                     :icon="XMarkIcon"
                     text-color="text-red-500"
-                    @click="router.visit(route('listings.delete', { listing, redirect: currentUrl }), { preserveScroll: true })"
+                    @click="
+                        router.visit(
+                            route('listings.delete', {
+                                listing,
+                                redirect: currentUrl,
+                            }),
+                            { preserveScroll: true },
+                        )
+                    "
                 >
                     Remove
                 </DropdownItem>

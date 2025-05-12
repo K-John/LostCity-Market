@@ -13,6 +13,8 @@ class ListingsIndexPage extends Data
         public PaginatedDataCollection $listings,
         /** @var DataCollection<\App\Data\Listing\ListingData> */
         public DataCollection $expiredListings,
+        /** @var DataCollection<\App\Data\Listing\ListingData> */
+        public DataCollection $pausedListings,
         public array $usernames
     ) {}
 }

@@ -19,7 +19,7 @@ class ListingEvent implements ShouldBroadcast
     public function __construct(Listing $listing)
     {
         // Ensure that the date properties are DateTime objects
-        foreach (['updated_at', 'sold_at', 'deleted_at'] as $dateField) {
+        foreach (['updated_at', 'sold_at', 'deleted_at', 'paused_at'] as $dateField) {
             if (! empty($listing->{$dateField}) && is_string($listing->{$dateField})) {
                 $listing->{$dateField} = new \DateTime($listing->{$dateField});
             }

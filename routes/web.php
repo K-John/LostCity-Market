@@ -11,6 +11,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ListingSaleController;
+use App\Http\Controllers\PauseController;
+use App\Http\Controllers\UnpauseController;
 use App\Http\Controllers\UsernameController;
 use App\Http\Middleware\AuthorizeAdmin;
 use App\Http\Middleware\LocalOnly;
@@ -30,7 +32,16 @@ Route::middleware('auth')->group(function () {
     Route::prefix('listing/{listing}')->group(function () {
         Route::get('sell', [ListingSaleController::class, 'create'])->name('listing.sale.create');
         Route::post('sell', [ListingSaleController::class, 'store'])->name('listing.sale.store');
+
+        Route::post('pause', [PauseController::class, 'store'])->name('listing.pause.store');
+        Route::delete('unpause', [UnpauseController::class, 'destroy'])->name('listing.pause.destroy');
     });
+
+    Route::post('listings/pause', [PauseController::class, 'index'])
+        ->name('listings.pause.store');
+
+    Route::post('listings/unpause', [UnpauseController::class, 'index'])
+        ->name('listings.pause.destroy');
 
     Route::patch('bump', [BumpController::class, 'index'])
         ->name('listings.bump');

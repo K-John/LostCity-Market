@@ -49,6 +49,7 @@ item: Data.Item.ItemData | null;
 updatedAt: string;
 soldAt: string | null;
 deletedAt: string | null;
+pausedAt: string | null;
 userId: number | null;
 };
 export type ListingFormData = {
@@ -125,6 +126,7 @@ listingForm: Data.Listing.ListingFormData;
 export type ListingsIndexPage = {
 listings: {data:Array<Data.Listing.ListingData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
 expiredListings: Array<Data.Listing.ListingData>;
+pausedListings: Array<Data.Listing.ListingData>;
 usernames: Array<any>;
 };
 export type ListingsSalePage = {

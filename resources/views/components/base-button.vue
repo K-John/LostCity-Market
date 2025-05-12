@@ -51,7 +51,7 @@ const variantClasses = computed(() => {
         case "default":
             return "bg-stone-700 text-white hover:bg-stone-600 active:bg-stone-800 focus:ring-stone-500";
         default:
-            return "bg-stone-700 text-white hover:bg-stone-600 active:bg-stone-800 focus:ring-stone-500";
+            return "bg-stone-700 hover:bg-stone-600 active:bg-stone-800 focus:ring-stone-500";
     }
 });
 

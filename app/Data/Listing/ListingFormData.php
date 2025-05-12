@@ -60,14 +60,15 @@ class ListingFormData extends Data
                         return;
                     }
 
-                    $existingListings = Listing::active()
+                    $existingListings = Listing::whereNull('sold_at')
+                        ->where('updated_at', '>=', now()->subDays(1))
                         ->where('user_id', Auth::id())
                         ->where('type', $value)
                         ->where('id', '!=', request('id'))
                         ->count();
 
                     if ($existingListings >= 8) {
-                        $fail('You cannot have more than eight active listings of the same type.');
+                        $fail('You cannot have more than eight listings of the same type.');
                     }
                 },
                 function ($attribute, $value, $fail) {
@@ -75,9 +76,11 @@ class ListingFormData extends Data
                         return;
                     }
 
-                    $existingListing = Listing::active()->where('type', $value)
+                    $existingListing = Listing::whereNull('sold_at')
+                        ->where('updated_at', '>=', now()->subDays(1))
+                        ->where('type', $value)
                         ->where('user_id', Auth::id())
-                        ->where('item_id', request('item.id'))
+                        ->where('item_id', request('item_id'))
                         ->where('id', '!=', request('id'))
                         ->first();
 

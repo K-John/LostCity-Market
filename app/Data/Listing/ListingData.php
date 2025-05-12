@@ -26,6 +26,7 @@ class ListingData extends Data
         public DateTime $updatedAt,
         public ?DateTime $soldAt,
         public ?DateTime $deletedAt,
+        public ?DateTime $pausedAt,
         #[Hidden]
         public ?int $userId
     ) {

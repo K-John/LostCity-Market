@@ -35,10 +35,12 @@ class ListingController
     {
         $listings = $this->user->listings()->active()->with('item')->paginate(20);
         $expiredListings = $this->user->listings()->expired()->with('item');
+        $pausedListings = $this->user->listings()->paused()->with('item');
 
         return inertia('listings/index/page', new ListingsIndexPage(
             listings: ListingData::collect($listings, PaginatedDataCollection::class),
             expiredListings: ListingData::collect($expiredListings->get(), DataCollection::class),
+            pausedListings: ListingData::collect($pausedListings->get(), DataCollection::class),
             usernames: UsernameService::getAuthenticatedUsernames(),
         ));
     }
