@@ -12,6 +12,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ListingSaleController;
 use App\Http\Controllers\PauseController;
+use App\Http\Controllers\ReferralController;
 use App\Http\Controllers\UnpauseController;
 use App\Http\Controllers\UsernameController;
 use App\Http\Middleware\AuthorizeAdmin;
@@ -92,6 +93,12 @@ Route::get('docs/adopt-legacy-accounts', function () {
 Route::get('news/discord-enforcement', function () {
     return inertia('news/discord-enforce/page');
 })->name('news.discord-enforce');
+
+Route::get('/ref', [ReferralController::class, 'index'])
+    ->name('referral.index');
+
+Route::get('/ref/{code}', [ReferralController::class, 'create'])
+    ->name('referral.create');
 
 Route::get('/dev/login', function () {
     $user = User::where('name', 'root')->first();

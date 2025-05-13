@@ -69,6 +69,13 @@ quantity: number;
 redirect: string | null;
 };
 }
+declare namespace Data.Referral {
+export type ReferralData = {
+id: number;
+code: string;
+createdAt: string;
+};
+}
 declare namespace Data.Shared {
 export type NotificationData = {
 type: Enums.NotificationType;
@@ -132,6 +139,9 @@ usernames: Array<any>;
 export type ListingsSalePage = {
 listing: Data.Listing.ListingData;
 listingSaleForm: Data.Listing.ListingSaleFormData;
+};
+export type ReferralsIndexPage = {
+referrals: {data:Array<Data.Referral.ReferralData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
 };
 export type UsersIndexPage = {
 username: string;
