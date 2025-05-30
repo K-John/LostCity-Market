@@ -102,7 +102,7 @@ Route::get('/ref/{code}', [ReferralController::class, 'create'])
 
 Route::get('/dev/login', function () {
     $user = User::where('name', 'root')->first();
-    Auth::login($user);
+    Auth::login($user, true);
 
     return redirect(route('home'));
 })->name('dev.login')->middleware(LocalOnly::class);
