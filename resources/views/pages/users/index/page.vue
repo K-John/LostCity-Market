@@ -9,6 +9,10 @@ const props = defineProps<Pages.UsersIndexPage>();
 const auth = useAuth();
 
 const back = () => {
+    if (props.back) {
+        router.get(props.back);
+    }
+
     window.history.back();
 };
 </script>

@@ -5,6 +5,9 @@ import "floating-vue/dist/style.css";
 defineProps<{
     listing: Data.Listing.ListingData;
 }>();
+
+const page = usePage();
+const currentUrl = page.url.split("?")[0];
 </script>
 
 <template>
@@ -13,7 +16,7 @@ defineProps<{
             <Tooltip class="w-fit">
                 <Link
                     :href="
-                        route('usernames.show', { username: listing.username })
+                        route('usernames.show', { username: listing.username, back: currentUrl })
                     "
                     class="whitespace-pre text-sm sm:text-[medium]"
                     preserve-scroll

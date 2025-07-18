@@ -12,5 +12,6 @@ class UsersIndexPage extends Data
         public bool $is_banned,
         /** @var PaginatedDataCollection<\App\Data\Listing\ListingData> */
         public PaginatedDataCollection $listings,
+        public ?string $back = null
     ) {}
 }
