@@ -91,6 +91,18 @@ name: string;
 is_admin: boolean;
 };
 }
+declare namespace Data.User {
+export type AdminUserData = {
+id: number;
+name: string;
+email: string;
+discordId: string;
+createdAt: string;
+isAdmin: boolean;
+isBanned: boolean;
+bannedAt: string | null;
+};
+}
 declare namespace Enums {
 export type BannerDisplayScope = 'global' | 'item' | 'user';
 export type BannerType = 'default' | 'success' | 'info' | 'warning' | 'error';
