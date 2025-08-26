@@ -19,7 +19,11 @@ const typeVerb = computed(() => {
 });
 
 const page = usePage();
-const currentUrl = page.url.split("?")[0];
+const currentUrl = computed(() => {
+    const url = new URL(page.url, window.location.origin);
+    url.searchParams.delete("redirect");
+    return url.pathname + url.search + url.hash;
+});
 </script>
 
 <template>
