@@ -42,7 +42,7 @@ class Listing extends Model
                 ->whereNotNull('deleted_at')
                 ->where('updated_at', '>=', now()->subMinutes(30))
                 ->first();
-                
+
             if ($deletedListing) {
                 $listing->updated_at = $deletedListing->updated_at;
             }
@@ -84,7 +84,7 @@ class Listing extends Model
     {
         return $query
             ->whereNull('sold_at')
-            ->whereBetween('updated_at', [now()->subDays(2), now()->subDay()])
+            ->whereBetween('updated_at', [now()->subDays(7), now()->subDay()])
             ->orderBy('updated_at', 'desc');
     }
 
@@ -113,7 +113,7 @@ class Listing extends Model
     public function handleEvent()
     {
         event(new ListingEvent($this));
-        
+
         Cache::tags('home_listings')->flush();
         Cache::forget("item_{$this->item->id}_listings_{$this->type}");
 
