@@ -3,25 +3,22 @@ import "@/css/app.css";
 import { createSSRApp, h, DefineComponent } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
-import { modal } from 'momentum-modal'
+import { modal } from "momentum-modal";
 import { trail } from "momentum-trail";
 import Toast from "vue-toastification";
 import { notifications } from "./plugins/notifications";
 import routes from "./routes/routes.json";
-import Echo from 'laravel-echo';
-import Pusher from 'pusher-js';
+import Echo from "laravel-echo";
+import Pusher from "pusher-js";
 
-if (import.meta.env.VITE_REVERB_APP_KEY) {
+if (import.meta.env.VITE_PUSHER_APP_KEY) {
     window.Pusher = Pusher;
 
     window.Echo = new Echo({
-        broadcaster: 'reverb',
-        key: import.meta.env.VITE_REVERB_APP_KEY,
-        wsHost: import.meta.env.VITE_REVERB_HOST,
-        wsPort: import.meta.env.VITE_REVERB_PORT ?? 80,
-        wssPort: import.meta.env.VITE_REVERB_PORT ?? 443,
-        forceTLS: (import.meta.env.VITE_REVERB_SCHEME ?? 'https') === 'https',
-        enabledTransports: ['ws', 'wss'],
+        broadcaster: "pusher",
+        key: import.meta.env.VITE_PUSHER_APP_KEY,
+        cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+        forceTLS: true,
     });
 }
 
@@ -41,9 +38,11 @@ createInertiaApp({
                 resolve: (name: string) => {
                     return resolvePageComponent(
                         `../views/pages/${name}.vue`,
-                        import.meta.glob<DefineComponent>("../views/pages/**/*.vue"),
+                        import.meta.glob<DefineComponent>(
+                            "../views/pages/**/*.vue",
+                        ),
                     );
-                }
+                },
             })
             .use(plugin)
             .use(Toast)
