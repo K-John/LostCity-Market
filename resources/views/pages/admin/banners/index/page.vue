@@ -53,27 +53,40 @@ const props = defineProps<Pages.Admin.BannersIndexPage>();
             <template #table-header>
                 <tr class="bg-stone-950 text-left text-stone-300">
                     <th>
-                        <SortHeader field="id" default-sort="-id" class="py-2 font-semibold">ID</SortHeader>
+                        <SortHeader
+                            field="id"
+                            default-sort="-id"
+                            class="py-2 font-semibold"
+                            >ID</SortHeader
+                        >
                     </th>
 
                     <th></th>
 
                     <th>
-                        <SortHeader field="message" class="py-2 font-semibold">Message</SortHeader>
+                        <SortHeader field="message" class="py-2 font-semibold"
+                            >Message</SortHeader
+                        >
                     </th>
 
                     <th class="py-2 font-semibold">Type</th>
 
                     <th>
-                        <SortHeader field="type" class="py-2 font-semibold">Style</SortHeader>
+                        <SortHeader field="type" class="py-2 font-semibold"
+                            >Style</SortHeader
+                        >
                     </th>
 
                     <th>
-                        <SortHeader field="start_at" class="py-2 font-semibold">Start At</SortHeader>
+                        <SortHeader field="start_at" class="py-2 font-semibold"
+                            >Start At</SortHeader
+                        >
                     </th>
 
                     <th>
-                        <SortHeader field="end_at" class="py-2 font-semibold">End At</SortHeader>
+                        <SortHeader field="end_at" class="py-2 font-semibold"
+                            >End At</SortHeader
+                        >
                     </th>
 
                     <th></th>
@@ -136,7 +149,9 @@ const props = defineProps<Pages.Admin.BannersIndexPage>();
                         <DropdownItem
                             :icon="PencilSquareIcon"
                             text-color="text-amber-500"
-                            :href="route('admin.banners.edit', { id: banner.id })"
+                            :href="
+                                route('admin.banners.edit', { id: banner.id })
+                            "
                         >
                             Edit
                         </DropdownItem>

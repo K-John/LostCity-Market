@@ -7,7 +7,7 @@ import {
     CheckIcon,
     XMarkIcon,
     PauseIcon,
-    PlayIcon
+    PlayIcon,
 } from "@heroicons/vue/24/outline/index.js";
 
 const props = defineProps<{

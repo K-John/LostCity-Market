@@ -8,7 +8,9 @@ const typeVerb = computed(() => {
 });
 
 const submit = (close: () => void) => {
-    router.delete(route('listings.destroy', { listing: props.listing.id }), { preserveScroll: true });
+    router.delete(route("listings.destroy", { listing: props.listing.id }), {
+        preserveScroll: true,
+    });
     close();
 };
 </script>
@@ -62,7 +64,10 @@ const submit = (close: () => void) => {
                         class="flex items-center gap-1"
                         @click="
                             router.visit(
-                                route('listing.sale.store', { listing, redirect: redirect }),
+                                route('listing.sale.store', {
+                                    listing,
+                                    redirect: redirect,
+                                }),
                                 { preserveScroll: true },
                             )
                         "

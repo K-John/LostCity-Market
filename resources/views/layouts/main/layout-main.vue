@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { HeartIcon, ChevronDownIcon } from "@heroicons/vue/24/solid/index.js";
-import { UserIcon, PresentationChartLineIcon, BookmarkIcon, ArrowLeftStartOnRectangleIcon } from "@heroicons/vue/24/outline/index.js";
+import {
+    UserIcon,
+    PresentationChartLineIcon,
+    BookmarkIcon,
+    ArrowLeftStartOnRectangleIcon,
+} from "@heroicons/vue/24/outline/index.js";
 import { ref, onMounted, onBeforeUnmount, nextTick } from "vue";
 import { Modal } from "momentum-modal";
 import chainImage from "@/img/assets/edge_chain.jpg";
@@ -128,9 +133,7 @@ const links = computed(() => [
                     </Link>
 
                     <div class="flex grow items-center justify-end gap-2">
-                        <span class="hidden sm:block">
-                            Signed in as:
-                        </span>
+                        <span class="hidden sm:block"> Signed in as: </span>
 
                         <DropdownMenu variant="secondary">
                             <template #icon>
@@ -141,15 +144,27 @@ const links = computed(() => [
                                 </div>
                             </template>
 
-                            <DropdownItem :icon="UserIcon" text-color="text-stone-200" :href="route('account')">
+                            <DropdownItem
+                                :icon="UserIcon"
+                                text-color="text-stone-200"
+                                :href="route('account')"
+                            >
                                 Account
                             </DropdownItem>
 
-                            <DropdownItem :icon="PresentationChartLineIcon" text-color="text-amber-400" :href="route('listings.index')">
+                            <DropdownItem
+                                :icon="PresentationChartLineIcon"
+                                text-color="text-amber-400"
+                                :href="route('listings.index')"
+                            >
                                 My Listings
                             </DropdownItem>
 
-                            <DropdownItem :icon="BookmarkIcon" text-color="text-emerald-500" :href="route('favorites.index')">
+                            <DropdownItem
+                                :icon="BookmarkIcon"
+                                text-color="text-emerald-500"
+                                :href="route('favorites.index')"
+                            >
                                 Favorites
                             </DropdownItem>
 

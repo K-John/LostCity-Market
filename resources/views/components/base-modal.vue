@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useModal } from 'momentum-modal'
+import { useModal } from "momentum-modal";
 import {
     Dialog,
     DialogPanel,

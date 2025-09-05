@@ -18,7 +18,7 @@ defineProps<Props>();
             <thead>
                 <slot name="table-header" />
             </thead>
-            
+
             <tbody>
                 <slot />
             </tbody>

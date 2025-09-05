@@ -16,7 +16,10 @@ const currentUrl = page.url.split("?")[0];
             <Tooltip class="w-fit">
                 <Link
                     :href="
-                        route('usernames.show', { username: listing.username, back: currentUrl })
+                        route('usernames.show', {
+                            username: listing.username,
+                            back: currentUrl,
+                        })
                     "
                     class="whitespace-pre text-sm sm:text-[medium]"
                     preserve-scroll
@@ -25,7 +28,9 @@ const currentUrl = page.url.split("?")[0];
                 </Link>
 
                 <template #popper>
-                    <span class="whitespace-pre font-mono tracking-widest">{{ listing.username }}</span>
+                    <span class="whitespace-pre font-mono tracking-widest">{{
+                        listing.username
+                    }}</span>
                 </template>
             </Tooltip>
         </div>

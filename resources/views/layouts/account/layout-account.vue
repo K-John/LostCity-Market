@@ -10,7 +10,12 @@ const links = [
     {
         name: "Listings",
         route: route("listings.index"),
-        matchingRoutes: ["listings.index", "listings.edit", "listings.delete", "listing.sale.create"],
+        matchingRoutes: [
+            "listings.index",
+            "listings.edit",
+            "listings.delete",
+            "listing.sale.create",
+        ],
     },
     {
         name: "Favorites",

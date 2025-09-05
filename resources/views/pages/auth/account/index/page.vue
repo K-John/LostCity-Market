@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { register } from 'module';
+import { register } from "module";
 
 const props = defineProps<Pages.Auth.AccountIndexPage>();
 
@@ -79,7 +79,9 @@ const auth = useAuth();
 
             <div class="col-span-full grid grid-cols-subgrid gap-x-4 gap-y-2">
                 <div class="flex flex-col gap-1">
-                    <h2 class="size-fit border-b-2 border-stone-700 pb-1 text-lg font-semibold text-stone-300">
+                    <h2
+                        class="size-fit border-b-2 border-stone-700 pb-1 text-lg font-semibold text-stone-300"
+                    >
                         Date Registered
                     </h2>
 

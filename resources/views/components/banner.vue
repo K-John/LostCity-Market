@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import VueMarkdown from 'vue-markdown-render';
+import VueMarkdown from "vue-markdown-render";
 
 defineProps<Data.Banner.BannerData>();
 </script>

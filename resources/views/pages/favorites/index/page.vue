@@ -84,7 +84,8 @@ watch(selectedItem, (item) => {
                 </h2>
 
                 <p class="text-stone-300">
-                    You can add favorite items here or directly from an item's page.
+                    You can add favorite items here or directly from an item's
+                    page.
                 </p>
             </div>
         </div>

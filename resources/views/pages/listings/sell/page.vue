@@ -111,10 +111,7 @@ const submit = (close: () => void) => {
                 </div>
 
                 <div class="flex items-center justify-end gap-4">
-                    <BaseButton
-                        variant="success"
-                        type="submit"
-                    >
+                    <BaseButton variant="success" type="submit">
                         Submit
                     </BaseButton>
 

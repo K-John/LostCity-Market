@@ -5,7 +5,11 @@ const links = [
     {
         name: "Banners",
         route: route("admin.banners.index"),
-        matchingRoutes: ["admin.banners.index", "admin.banners.create", "admin.banners.edit"],
+        matchingRoutes: [
+            "admin.banners.index",
+            "admin.banners.create",
+            "admin.banners.edit",
+        ],
     },
 ];
 
@@ -36,7 +40,6 @@ const isCurrentRoute = (matchingRoutes: any) => {
                     variant="secondary"
                     :force-focus="isCurrentRoute(link.matchingRoutes)"
                     class="hidden sm:block"
-                    
                 >
                     {{ link.name }}
                 </BaseButton>
@@ -45,7 +48,7 @@ const isCurrentRoute = (matchingRoutes: any) => {
                     <template #icon>
                         <Bars3Icon class="size-6" />
                     </template>
-                    
+
                     <DropdownItem
                         v-for="(link, index) in links"
                         :key="index"
