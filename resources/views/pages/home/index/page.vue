@@ -59,8 +59,8 @@ onMounted(() => {
             return;
         }
 
-        // If the listingEvent has a sold or deleted timestamp, remove the listing from the list if it exists.
-        if (listingEvent.soldAt || listingEvent.deletedAt) {
+        // If the listingEvent has a sold, deleted, or is paused timestamp, remove the listing from the list if it exists.
+        if (listingEvent.soldAt || listingEvent.deletedAt || listingEvent.pausedAt) {
             const index = listings.value.findIndex(
                 (l) => l.id === listingEvent.id,
             );
@@ -111,7 +111,7 @@ onUnmounted(() => {
     if (!window.Echo) {
         return;
     }
-    
+
     window.Echo.leaveChannel("listings");
 });
 </script>
