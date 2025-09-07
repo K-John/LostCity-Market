@@ -47,7 +47,11 @@ onMounted(() => {
         }
 
         // If the listingEvent has a sold, deleted, or paused timestamp, remove the listing from the list if it exists.
-        if (listingEvent.soldAt || listingEvent.deletedAt || listingEvent.pausedAt) {
+        if (
+            listingEvent.soldAt ||
+            listingEvent.deletedAt ||
+            listingEvent.pausedAt
+        ) {
             const index = listings.value.findIndex(
                 (l) => l.id === listingEvent.id,
             );

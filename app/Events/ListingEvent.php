@@ -12,7 +12,7 @@ use Illuminate\Queue\SerializesModels;
 
 class ListingEvent implements ShouldBroadcast
 {
-    use SerializesModels, Dispatchable, InteractsWithSockets;
+    use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $listing;
 
