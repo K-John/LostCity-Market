@@ -8,28 +8,28 @@
   },
   {
     "id": 6,
-    "debugname": "twpart1",
+    "debugname": "cannon_base",
     "name": "Cannon base",
     "desc": "The cannon is built on this.",
     "cost": 187500
   },
   {
     "id": 8,
-    "debugname": "twpart2",
+    "debugname": "cannon_stand",
     "name": "Cannon stand",
     "desc": "The mounting for the muticannon.",
     "cost": 187500
   },
   {
     "id": 10,
-    "debugname": "twpart3",
+    "debugname": "cannon_barrels",
     "name": "Cannon barrels",
     "desc": "The barrels of the multicannon.",
     "cost": 187500
   },
   {
     "id": 12,
-    "debugname": "twpart4",
+    "debugname": "cannon_furnace",
     "name": "Cannon furnace",
     "desc": "Used to make the cannon's ammo.",
     "cost": 187500
@@ -57,7 +57,7 @@
   },
   {
     "id": 36,
-    "debugname": "unlit_candle",
+    "debugname": "candle",
     "name": "Candle",
     "desc": "A candle.",
     "cost": 3
@@ -120,7 +120,7 @@
   },
   {
     "id": 47,
-    "debugname": "barbed_bolttips",
+    "debugname": "Barb_bolttips",
     "name": "Barb bolttips",
     "desc": "I can make bolts with these.",
     "cost": 95
@@ -225,84 +225,84 @@
   },
   {
     "id": 91,
-    "debugname": "guamvial",
+    "debugname": "unf_guam_potion",
     "name": "Unfinished potion",
     "desc": "I need another ingredient to finish this Guam potion.",
     "cost": 3
   },
   {
     "id": 93,
-    "debugname": "marrentillvial",
+    "debugname": "unf_marrentill_potion",
     "name": "Unfinished potion",
     "desc": "I need another ingredient to finish this Marentill potion.",
     "cost": 5
   },
   {
     "id": 95,
-    "debugname": "tarrominvial",
+    "debugname": "unf_tarromin_potion",
     "name": "Unfinished potion",
     "desc": "I need another ingredient to finish this Tarromin potion.",
     "cost": 11
   },
   {
     "id": 97,
-    "debugname": "harralandervial",
+    "debugname": "unf_harralander_potion",
     "name": "Unfinished potion",
     "desc": "I need another ingredient to finish this Harralander potion.",
     "cost": 20
   },
   {
     "id": 99,
-    "debugname": "ranarrvial",
+    "debugname": "unf_ranarr_potion",
     "name": "Unfinished potion",
     "desc": "I need another ingredient to finish this Ranarr potion.",
     "cost": 25
   },
   {
     "id": 101,
-    "debugname": "iritvial",
+    "debugname": "unf_irit_potion",
     "name": "Unfinished potion",
     "desc": "I need another ingredient to finish this Irit potion.",
     "cost": 40
   },
   {
     "id": 103,
-    "debugname": "avantoevial",
+    "debugname": "unf_avantoe_potion",
     "name": "Unfinished potion",
     "desc": "I need another ingredient to finish this Avantoe potion.",
     "cost": 48
   },
   {
     "id": 105,
-    "debugname": "kwuarmvial",
+    "debugname": "unf_kwuarm_potion",
     "name": "Unfinished potion",
     "desc": "I need another ingredient to finish this Kwuarm potion.",
     "cost": 54
   },
   {
     "id": 107,
-    "debugname": "cadantinevial",
+    "debugname": "unf_cadantine_potion",
     "name": "Unfinished potion",
     "desc": "I need another ingredient to finish this Cadantine potion.",
     "cost": 65
   },
   {
     "id": 109,
-    "debugname": "dwarfweedvial",
+    "debugname": "unf_dwarf_weed_potion",
     "name": "Unfinished potion",
     "desc": "I need another ingredient to finish this Dwarf Weed potion.",
     "cost": 70
   },
   {
     "id": 111,
-    "debugname": "torstolvial",
+    "debugname": "unf_torstol_potion",
     "name": "Unfinished potion",
     "desc": "I need another ingredient to finish this Torstol potion.",
     "cost": 25
   },
   {
     "id": 113,
-    "debugname": "strength4",
+    "debugname": "4dose1strength",
     "name": "Strength potion(4)",
     "desc": "4 doses of strength potion.",
     "cost": 14
@@ -351,21 +351,21 @@
   },
   {
     "id": 127,
-    "debugname": "3dosestatrestore",
+    "debugname": "3dose1restore",
     "name": "Restore potion(3)",
     "desc": "3 doses of stat restoration potion.",
     "cost": 88
   },
   {
     "id": 129,
-    "debugname": "2dosestatrestore",
+    "debugname": "2dose1restore",
     "name": "Restore potion(2)",
     "desc": "2 doses of stat restoration potion.",
     "cost": 66
   },
   {
     "id": 131,
-    "debugname": "1dosestatrestore",
+    "debugname": "1dose1restore",
     "name": "Restore potion(1)",
     "desc": "1 dose of stat restoration potion.",
     "cost": 44
@@ -589,7 +589,7 @@
   },
   {
     "id": 195,
-    "debugname": "acne_potion",
+    "debugname": "potion",
     "name": "Potion",
     "desc": "This is meant to be good for spots.",
     "cost": 1
@@ -603,78 +603,8 @@
   },
   {
     "id": 199,
-    "debugname": "unidentified_guam",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
-  },
-  {
-    "id": 201,
-    "debugname": "unidentified_marrentill",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
-  },
-  {
-    "id": 203,
-    "debugname": "unidentified_tarromin",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
-  },
-  {
-    "id": 205,
-    "debugname": "unidentified_harralander",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
-  },
-  {
-    "id": 207,
-    "debugname": "unidentified_ranarr",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
-  },
-  {
-    "id": 209,
-    "debugname": "unidentified_irit",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
-  },
-  {
-    "id": 211,
-    "debugname": "unidentified_avantoe",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
-  },
-  {
-    "id": 213,
-    "debugname": "unidentified_kwuarm",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
-  },
-  {
-    "id": 215,
-    "debugname": "unidentified_cadantine",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
-  },
-  {
-    "id": 217,
-    "debugname": "unidentified_dwarf_weed",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
-  },
-  {
-    "id": 219,
-    "debugname": "unidentified_torstol",
-    "name": "Herb",
+    "debugname": "unidentified_guam_leaf",
+    "name": "Unidentified Herb",
     "desc": "I need a closer look to identify this.",
     "cost": 1
   },
@@ -869,14 +799,14 @@
   },
   {
     "id": 288,
-    "debugname": "goblin_armour",
+    "debugname": "goblin_mail",
     "name": "Goblin mail",
     "desc": "Armour designed to fit goblins.",
     "cost": 40
   },
   {
     "id": 299,
-    "debugname": "mithril_seed",
+    "debugname": "mithril_seeds",
     "name": "Mithril seeds",
     "desc": "Magical seeds in a mithril case.",
     "cost": 200
@@ -897,7 +827,7 @@
   },
   {
     "id": 305,
-    "debugname": "big_net",
+    "debugname": "net_big",
     "name": "Big fishing net",
     "desc": "Useful for catching lots of fish.",
     "cost": 20
@@ -939,14 +869,14 @@
   },
   {
     "id": 315,
-    "debugname": "shrimp",
+    "debugname": "shrimps",
     "name": "Shrimps",
     "desc": "Some nicely cooked fish.",
     "cost": 5
   },
   {
     "id": 317,
-    "debugname": "raw_shrimp",
+    "debugname": "raw_shrimps",
     "name": "Raw shrimps",
     "desc": "I should try cooking this.",
     "cost": 5
@@ -967,7 +897,7 @@
   },
   {
     "id": 323,
-    "debugname": "burntfish1",
+    "debugname": "burnt_shrimp_anchovies",
     "name": "Burnt fish",
     "desc": "Oops!",
     "cost": 1
@@ -1030,7 +960,7 @@
   },
   {
     "id": 343,
-    "debugname": "burntfish2",
+    "debugname": "burnt_salmon_trout_carp_cod_pike",
     "name": "Burnt fish",
     "desc": "Oops!",
     "cost": 1
@@ -1079,7 +1009,7 @@
   },
   {
     "id": 357,
-    "debugname": "burntfish3",
+    "debugname": "burnt_mackerel",
     "name": "Burnt fish",
     "desc": "Oops!",
     "cost": 1
@@ -1114,14 +1044,14 @@
   },
   {
     "id": 367,
-    "debugname": "burntfish4",
+    "debugname": "burnt_tuna_bass",
     "name": "Burnt fish",
     "desc": "Oops!",
     "cost": 1
   },
   {
     "id": 369,
-    "debugname": "burntfish5",
+    "debugname": "burnt_sardine",
     "name": "Burnt fish",
     "desc": "Oops!",
     "cost": 1
@@ -1191,42 +1121,42 @@
   },
   {
     "id": 389,
-    "debugname": "raw_mantaray",
+    "debugname": "raw_manta_ray",
     "name": "Raw manta ray",
     "desc": "A rare catch.",
     "cost": 500
   },
   {
     "id": 391,
-    "debugname": "mantaray",
+    "debugname": "manta_ray",
     "name": "Manta ray",
     "desc": "A rare catch.",
     "cost": 500
   },
   {
     "id": 393,
-    "debugname": "burnt_mantaray",
+    "debugname": "burnt_manta_ray",
     "name": "Burnt manta ray",
     "desc": "Oops!",
     "cost": 1
   },
   {
     "id": 395,
-    "debugname": "raw_seaturtle",
+    "debugname": "raw_sea_turtle",
     "name": "Raw sea turtle",
     "desc": "A rare catch.",
     "cost": 500
   },
   {
     "id": 397,
-    "debugname": "seaturtle",
+    "debugname": "sea_turtle",
     "name": "Sea turtle",
     "desc": "Tasty!",
     "cost": 500
   },
   {
     "id": 399,
-    "debugname": "burnt_seaturtle",
+    "debugname": "burnt_sea_turtle",
     "name": "Burnt sea turtle",
     "desc": "Oops!",
     "cost": 1
@@ -1254,42 +1184,42 @@
   },
   {
     "id": 407,
-    "debugname": "oystershell",
+    "debugname": "oyster",
     "name": "Oyster",
     "desc": "It's a rare oyster.",
     "cost": 200
   },
   {
     "id": 409,
-    "debugname": "oysterempty",
+    "debugname": "empty_oyster",
     "name": "Empty oyster",
     "desc": "It's empty.",
     "cost": 5
   },
   {
     "id": 411,
-    "debugname": "smalloysterpearls",
+    "debugname": "oyster_pearl",
     "name": "Oyster pearl",
     "desc": "I could work wonders with a chisel on this pearl.",
     "cost": 112
   },
   {
     "id": 413,
-    "debugname": "bigoysterpearls",
+    "debugname": "oyster_pearls",
     "name": "Oyster pearls",
     "desc": "I could work wonders with a chisel on these pearls.",
     "cost": 1400
   },
   {
     "id": 426,
-    "debugname": "priest_gown",
+    "debugname": "priest_gown_top",
     "name": "Priest gown",
     "desc": "Top half of a priest suit.",
     "cost": 5
   },
   {
     "id": 428,
-    "debugname": "priest_robe",
+    "debugname": "priest_gown_bottom",
     "name": "Priest gown",
     "desc": "Bottom half of a priest suit.",
     "cost": 5
@@ -1366,203 +1296,203 @@
   },
   {
     "id": 464,
-    "debugname": "macro_triffidfruit",
+    "debugname": "strange_fruit",
     "name": "Strange fruit",
     "desc": "I wonder what this tastes like?",
     "cost": 1
   },
   {
     "id": 466,
-    "debugname": "macro_pickaxehandle",
+    "debugname": "pickaxe_handle",
     "name": "Pickaxe handle",
     "desc": "Useless without the head.",
     "cost": 1
   },
   {
     "id": 468,
-    "debugname": "macro_broken_bronze_pickaxe",
+    "debugname": "bronze_pickaxe_broken",
     "name": "Broken pickaxe",
     "desc": "Nurmof can fix this for me.",
     "cost": 0
   },
   {
     "id": 470,
-    "debugname": "macro_broken_iron_pickaxe",
+    "debugname": "iron_pickaxe_broken",
     "name": "Broken pickaxe",
     "desc": "Nurmof can fix this for me.",
     "cost": 0
   },
   {
     "id": 472,
-    "debugname": "macro_broken_steel_pickaxe",
+    "debugname": "steel_pickaxe_broken",
     "name": "Broken pickaxe",
     "desc": "Nurmof can fix this for me.",
     "cost": 17
   },
   {
     "id": 474,
-    "debugname": "macro_broken_mithril_pickaxe",
+    "debugname": "mithril_pickaxe_broken",
     "name": "Broken pickaxe",
     "desc": "Nurmof can fix this for me.",
     "cost": 43
   },
   {
     "id": 476,
-    "debugname": "macro_broken_adamant_pickaxe",
+    "debugname": "adamant_pickaxe_broken",
     "name": "Broken pickaxe",
     "desc": "Nurmof can fix this for me.",
     "cost": 107
   },
   {
     "id": 478,
-    "debugname": "macro_broken_rune_pickaxe",
+    "debugname": "rune_pickaxe_broken",
     "name": "Broken pickaxe",
     "desc": "Nurmof can fix this for me.",
     "cost": 1100
   },
   {
     "id": 480,
-    "debugname": "macro_bronze_pickaxehead",
+    "debugname": "bronze_pickaxe_head",
     "name": "Pickaxe head",
     "desc": "It's missing a handle.",
     "cost": 1
   },
   {
     "id": 482,
-    "debugname": "macro_iron_pickaxehead",
+    "debugname": "iron_pickaxe_head",
     "name": "Pickaxe head",
     "desc": "It's missing a handle.",
     "cost": 139
   },
   {
     "id": 484,
-    "debugname": "macro_steel_pickaxehead",
+    "debugname": "steel_pickaxe_head",
     "name": "Pickaxe head",
     "desc": "It's missing a handle.",
     "cost": 499
   },
   {
     "id": 486,
-    "debugname": "macro_mithril_pickaxehead",
+    "debugname": "mithril_pickaxe_head",
     "name": "Pickaxe head",
     "desc": "It's missing a handle.",
     "cost": 1299
   },
   {
     "id": 488,
-    "debugname": "macro_adamant_pickaxehead",
+    "debugname": "adamant_pickaxe_head",
     "name": "Pickaxe head",
     "desc": "It's missing a handle.",
     "cost": 3199
   },
   {
     "id": 490,
-    "debugname": "macro_rune_pickaxehead",
+    "debugname": "rune_pickaxe_head",
     "name": "Pickaxe head",
     "desc": "It's missing a handle.",
     "cost": 31999
   },
   {
     "id": 492,
-    "debugname": "macro_hatchethandle",
+    "debugname": "axe_handle",
     "name": "Axe handle",
     "desc": "Useless without the head.",
     "cost": 1
   },
   {
     "id": 494,
-    "debugname": "macro_broken_bronze_hatchet",
+    "debugname": "bronze_axe_broken",
     "name": "Broken axe",
     "desc": "Bob can fix this for me.",
     "cost": 0
   },
   {
     "id": 496,
-    "debugname": "macro_broken_iron_hatchet",
+    "debugname": "iron_axe_broken",
     "name": "Broken axe",
     "desc": "Bob can fix this for me.",
     "cost": 0
   },
   {
     "id": 498,
-    "debugname": "macro_broken_steel_hatchet",
+    "debugname": "steel_axe_broken",
     "name": "Broken axe",
     "desc": "Bob can fix this for me.",
     "cost": 0
   },
   {
     "id": 500,
-    "debugname": "macro_broken_black_hatchet",
+    "debugname": "black_axe_broken",
     "name": "Broken axe",
     "desc": "Bob can fix this for me.",
     "cost": 10
   },
   {
     "id": 502,
-    "debugname": "macro_broken_mithril_hatchet",
+    "debugname": "mithril_axe_broken",
     "name": "Broken axe",
     "desc": "Bob can fix this for me.",
     "cost": 18
   },
   {
     "id": 504,
-    "debugname": "macro_broken_adamant_hatchet",
+    "debugname": "adamant_axe_broken",
     "name": "Broken axe",
     "desc": "Bob can fix this for me.",
     "cost": 43
   },
   {
     "id": 506,
-    "debugname": "macro_broken_rune_hatchet",
+    "debugname": "rune_axe_broken",
     "name": "Broken axe",
     "desc": "Bob can fix this for me.",
     "cost": 427
   },
   {
     "id": 508,
-    "debugname": "macro_bronze_hatchethead",
+    "debugname": "bronze_axe_head",
     "name": "Axe head",
     "desc": "It's missing a handle.",
     "cost": 15
   },
   {
     "id": 510,
-    "debugname": "macro_iron_hatchethead",
+    "debugname": "iron_axe_head",
     "name": "Axe head",
     "desc": "It's missing a handle.",
     "cost": 55
   },
   {
     "id": 512,
-    "debugname": "macro_steel_hatchethead",
+    "debugname": "steel_axe_head",
     "name": "Axe head",
     "desc": "It's missing a handle.",
     "cost": 199
   },
   {
     "id": 514,
-    "debugname": "macro_black_hatchethead",
+    "debugname": "black_axe_head",
     "name": "Axe head",
     "desc": "It's missing a handle.",
     "cost": 383
   },
   {
     "id": 516,
-    "debugname": "macro_mithril_hatchethead",
+    "debugname": "mithril_axe_head",
     "name": "Axe head",
     "desc": "It's missing a handle.",
     "cost": 519
   },
   {
     "id": 518,
-    "debugname": "macro_adamant_hatchethead",
+    "debugname": "adamant_axe_head",
     "name": "Axe head",
     "desc": "It's missing a handle.",
     "cost": 1279
   },
   {
     "id": 520,
-    "debugname": "macro_rune_hatchethead",
+    "debugname": "rune_axe_head",
     "name": "Axe head",
     "desc": "It's missing a handle.",
     "cost": 12799
@@ -1576,7 +1506,7 @@
   },
   {
     "id": 528,
-    "debugname": "bones_burnt",
+    "debugname": "burnt_bones",
     "name": "Burnt bones",
     "desc": "Bones are for burying!",
     "cost": 1
@@ -1611,42 +1541,42 @@
   },
   {
     "id": 538,
-    "debugname": "druidrobebottom",
+    "debugname": "druid_robe_bottom",
     "name": "Druid's robe",
     "desc": "Keeps a druids's knees nice and warm.",
     "cost": 30
   },
   {
     "id": 540,
-    "debugname": "druidrobetop",
+    "debugname": "druid_robe_top",
     "name": "Druid's robe",
     "desc": "I feel closer to the Gods when I am wearing this.",
     "cost": 40
   },
   {
     "id": 542,
-    "debugname": "monkrobebottom",
+    "debugname": "monk_robe_bottom",
     "name": "Monk's robe",
     "desc": "Keeps a monk's knees nice and warm.",
     "cost": 30
   },
   {
     "id": 544,
-    "debugname": "monkrobetop",
+    "debugname": "monk_robe_top",
     "name": "Monk's robe",
     "desc": "I feel closer to the Gods when I am wearing this.",
     "cost": 40
   },
   {
     "id": 546,
-    "debugname": "blackrobetop",
+    "debugname": "shade_robe_top",
     "name": "Black robe",
     "desc": "I feel closer to the Gods when I am wearing this.",
     "cost": 40
   },
   {
     "id": 548,
-    "debugname": "blackrobebottom",
+    "debugname": "shade_robe_bottom",
     "name": "Black robe",
     "desc": "Keeps a monk's knees nice and warm.",
     "cost": 30
@@ -1704,7 +1634,7 @@
     "id": 560,
     "debugname": "deathrune",
     "name": "Death rune",
-    "desc": "Used for medium level missile spells.",
+    "desc": "Used for high level missile spells.",
     "cost": 30
   },
   {
@@ -1793,28 +1723,28 @@
   },
   {
     "id": 579,
-    "debugname": "bluewizhat",
+    "debugname": "wizards_hat_blue",
     "name": "Wizards hat",
     "desc": "A silly pointed hat.",
     "cost": 2
   },
   {
     "id": 581,
-    "debugname": "black_robe",
+    "debugname": "wizards_robe_black",
     "name": "Black robe",
     "desc": "I can do magic better in this.",
     "cost": 13
   },
   {
     "id": 583,
-    "debugname": "bucket_bailing",
+    "debugname": "bailing_bucket_empty",
     "name": "Bailing bucket",
     "desc": "It's a bailing bucket.",
     "cost": 10
   },
   {
     "id": 585,
-    "debugname": "bucket_bailingfull",
+    "debugname": "bailing_bucket_full",
     "name": "Bailing bucket",
     "desc": "It's a bailing bucket full of salty water.",
     "cost": 10
@@ -1835,28 +1765,28 @@
   },
   {
     "id": 594,
-    "debugname": "torch_lit",
+    "debugname": "lit_torch",
     "name": "Torch",
     "desc": "A lit home-made torch.",
     "cost": 4
   },
   {
     "id": 596,
-    "debugname": "torch_unlit",
+    "debugname": "unlit_torch",
     "name": "Torch",
     "desc": "An unlit home-made torch.",
     "cost": 4
   },
   {
     "id": 619,
-    "debugname": "paramayaticket",
+    "debugname": "paramaya_ticket",
     "name": "Paramaya ticket",
     "desc": "Allows you to rest in the luxurious Paramayer Inn.",
     "cost": 5
   },
   {
     "id": 621,
-    "debugname": "shiloshipticket",
+    "debugname": "ship_ticket",
     "name": "Ship ticket",
     "desc": "Allows you passage on the 'Lady of the waves' ship.",
     "cost": 5
@@ -1898,70 +1828,70 @@
   },
   {
     "id": 636,
-    "debugname": "gnome_robetop_pink",
+    "debugname": "gnome_robe_top_pink",
     "name": "Robe top",
     "desc": "The ultimate in gnome design.",
     "cost": 180
   },
   {
     "id": 638,
-    "debugname": "gnome_robetop_green",
+    "debugname": "gnome_robe_top_green",
     "name": "Robe top",
     "desc": "The ultimate in gnome design.",
     "cost": 180
   },
   {
     "id": 640,
-    "debugname": "gnome_robetop_blue",
+    "debugname": "gnome_robe_top_blue",
     "name": "Robe top",
     "desc": "The ultimate in gnome design.",
     "cost": 180
   },
   {
     "id": 642,
-    "debugname": "gnome_robetop_cream",
+    "debugname": "gnome_robe_top_cream",
     "name": "Robe top",
     "desc": "The ultimate in gnome design.",
     "cost": 180
   },
   {
     "id": 644,
-    "debugname": "gnome_robetop_turquoise",
+    "debugname": "gnome_robe_top_turqoise",
     "name": "Robe top",
     "desc": "The ultimate in gnome design.",
     "cost": 180
   },
   {
     "id": 646,
-    "debugname": "gnome_robebottoms_pink",
+    "debugname": "gnome_robe_bottoms_pink",
     "name": "Robe bottoms",
     "desc": "Made by Tree Gnomes.",
     "cost": 180
   },
   {
     "id": 648,
-    "debugname": "gnome_robebottoms_green",
+    "debugname": "gnome_robe_bottoms_green",
     "name": "Robe bottoms",
     "desc": "Made by Tree Gnomes.",
     "cost": 180
   },
   {
     "id": 650,
-    "debugname": "gnome_robebottoms_blue",
+    "debugname": "robe_bottoms_blue",
     "name": "Robe bottoms",
     "desc": "Made by Tree Gnomes.",
     "cost": 180
   },
   {
     "id": 652,
-    "debugname": "gnome_robebottoms_craem",
+    "debugname": "gnome_robe_bottoms_cream",
     "name": "Robe bottoms",
     "desc": "Made by Tree Gnomes.",
     "cost": 180
   },
   {
     "id": 654,
-    "debugname": "gnome_robebottoms_turquoise",
+    "debugname": "gnome_robe_bottoms_turqoise",
     "name": "Robe bottoms",
     "desc": "Made by Tree Gnomes.",
     "cost": 180
@@ -2003,7 +1933,7 @@
   },
   {
     "id": 727,
-    "debugname": "reed_hollow",
+    "debugname": "hollow_reed",
     "name": "Hollow reed",
     "desc": "One of nature's pipes.",
     "cost": 2
@@ -2017,28 +1947,28 @@
   },
   {
     "id": 751,
-    "debugname": "ball_gnomeball_game",
+    "debugname": "gnomeball",
     "name": "Gnomeball",
     "desc": "A ball from the game Gnomeball",
     "cost": 1
   },
   {
     "id": 753,
-    "debugname": "cadavaberries",
+    "debugname": "cadaver_berries",
     "name": "Cadaver berries",
     "desc": "Poisonous berries.",
     "cost": 1
   },
   {
     "id": 759,
-    "debugname": "phoenixkey2",
+    "debugname": "weapon_store_key",
     "name": "Key",
     "desc": "The key to the Phoenix Gang's weapons store.",
     "cost": 1
   },
   {
     "id": 761,
-    "debugname": "intelligence_report",
+    "debugname": "blackarmgang_scroll",
     "name": "Scroll",
     "desc": "An intelligence report.",
     "cost": 5
@@ -2066,7 +1996,7 @@
   },
   {
     "id": 769,
-    "debugname": "arravcertificate",
+    "debugname": "arravcert_scroll",
     "name": "Certificate",
     "desc": "I can use this to claim a reward from the King.",
     "cost": 1
@@ -2101,7 +2031,7 @@
   },
   {
     "id": 804,
-    "debugname": "adamnt_thrownaxe",
+    "debugname": "adamant_thrownaxe",
     "name": "Adamnt thrownaxe",
     "desc": "A finely balanced throwing axe.",
     "cost": 176
@@ -2521,7 +2451,7 @@
   },
   {
     "id": 878,
-    "debugname": "poison_bolt",
+    "debugname": "bolt_p",
     "name": "Bolt(p)",
     "desc": "Vicious poisoned bolts.",
     "cost": 3
@@ -2633,14 +2563,14 @@
   },
   {
     "id": 942,
-    "debugname": "litarrow",
+    "debugname": "lit_arrows",
     "name": "Lit arrows",
     "desc": "These arrows are ablaze with fire.",
     "cost": 10
   },
   {
     "id": 943,
-    "debugname": "worm",
+    "debugname": "obj_943",
     "name": "Worm",
     "desc": "Ugh! It's wriggling!",
     "cost": 0
@@ -2696,7 +2626,7 @@
   },
   {
     "id": 960,
-    "debugname": "woodplank",
+    "debugname": "plank",
     "name": "Plank",
     "desc": "A plank of wood!",
     "cost": 1
@@ -2717,7 +2647,7 @@
   },
   {
     "id": 966,
-    "debugname": "rooftile",
+    "debugname": "tile",
     "name": "Tile",
     "desc": "A fraction of a roof.",
     "cost": 1
@@ -2745,14 +2675,14 @@
   },
   {
     "id": 975,
-    "debugname": "machette",
+    "debugname": "machete",
     "name": "Machete",
     "desc": "A jungle specific slashing device.",
     "cost": 40
   },
   {
     "id": 977,
-    "debugname": "cooking_pot",
+    "debugname": "obj_977",
     "name": "Cooking pot",
     "desc": null,
     "cost": 1
@@ -2773,21 +2703,21 @@
   },
   {
     "id": 983,
-    "debugname": "edgevilledungeonkey",
+    "debugname": "brass_key",
     "name": "Brass key",
     "desc": "A mysterious key made of brass.",
     "cost": 1
   },
   {
     "id": 985,
-    "debugname": "keyhalf1",
+    "debugname": "half_key1",
     "name": "Half of a key",
     "desc": "A very shiny key.",
     "cost": 1
   },
   {
     "id": 987,
-    "debugname": "keyhalf2",
+    "debugname": "half_key2",
     "name": "Half of a key",
     "desc": "A very shiny key.",
     "cost": 1
@@ -2864,7 +2794,7 @@
   },
   {
     "id": 1017,
-    "debugname": "blackwizhat",
+    "debugname": "wizards_hat_black",
     "name": "Wizards hat",
     "desc": "A silly pointed hat.",
     "cost": 2
@@ -2892,7 +2822,7 @@
   },
   {
     "id": 1025,
-    "debugname": "eye_patch",
+    "debugname": "eyepatch",
     "name": "Eye patch",
     "desc": "A black piece of cloth on a string.",
     "cost": 2
@@ -2920,14 +2850,14 @@
   },
   {
     "id": 1033,
-    "debugname": "zamrobebottom",
+    "debugname": "zamorak_monk_bottom",
     "name": "Robe of zamorak",
     "desc": "A robe worn by worshippers of Zamorak.",
     "cost": 30
   },
   {
     "id": 1035,
-    "debugname": "zamrobetop",
+    "debugname": "zamorak_monk_top",
     "name": "Robe of zamorak",
     "desc": "A robe worn by worshippers of Zamorak.",
     "cost": 40
@@ -2983,21 +2913,21 @@
   },
   {
     "id": 1053,
-    "debugname": "halloweenmask_green",
+    "debugname": "green_halloween_mask",
     "name": "Halloween mask",
     "desc": "Aaaarrrghhh ... i'm a monster.",
     "cost": 15
   },
   {
     "id": 1055,
-    "debugname": "halloweenmask_blue",
+    "debugname": "blue_halloween_mask",
     "name": "Halloween mask",
     "desc": "Aaaarrrghhh ... i'm a monster.",
     "cost": 15
   },
   {
     "id": 1057,
-    "debugname": "halloweenmask_red",
+    "debugname": "red_halloween_mask",
     "name": "Halloween mask",
     "desc": "Aaaarrrghhh ... i'm a monster.",
     "cost": 15
@@ -3025,7 +2955,7 @@
   },
   {
     "id": 1065,
-    "debugname": "dragon_vambraces",
+    "debugname": "dragonhide_vamb",
     "name": "Dragon vambraces",
     "desc": "Made from 100% real dragon hide.",
     "cost": 2500
@@ -3620,7 +3550,7 @@
   },
   {
     "id": 1235,
-    "debugname": "poisoned_dagger_p",
+    "debugname": "poisoned_dagger",
     "name": "Poisoned dagger(p)",
     "desc": "The blade is covered with poison.",
     "cost": 565
@@ -4005,7 +3935,7 @@
   },
   {
     "id": 1345,
-    "debugname": "adamnt_warhammer",
+    "debugname": "adamant_warhammer",
     "name": "Adamnt warhammer",
     "desc": "I don't think it's intended for joinery.",
     "cost": 4120
@@ -4229,28 +4159,28 @@
   },
   {
     "id": 1411,
-    "debugname": "farmers_fork",
+    "debugname": "obj_1411",
     "name": "Farmers fork",
     "desc": null,
     "cost": 1
   },
   {
     "id": 1413,
-    "debugname": "halberd",
+    "debugname": "obj_1413",
     "name": "Halberd",
     "desc": null,
     "cost": 1
   },
   {
     "id": 1415,
-    "debugname": "warhammer",
+    "debugname": "obj_1415",
     "name": "Warhammer",
     "desc": null,
     "cost": 1
   },
   {
     "id": 1417,
-    "debugname": "javelin",
+    "debugname": "obj_1417",
     "name": "Javelin",
     "desc": null,
     "cost": 1
@@ -4418,35 +4348,35 @@
   },
   {
     "id": 1470,
-    "debugname": "red_bead",
+    "debugname": "imp_red_bead",
     "name": "Red bead",
     "desc": "A small round red bead.",
     "cost": 4
   },
   {
     "id": 1472,
-    "debugname": "yellow_bead",
+    "debugname": "imp_yellow_bead",
     "name": "Yellow bead",
     "desc": "A small round yellow bead.",
     "cost": 4
   },
   {
     "id": 1474,
-    "debugname": "black_bead",
+    "debugname": "imp_black_bead",
     "name": "Black bead",
     "desc": "A small round black bead.",
     "cost": 4
   },
   {
     "id": 1476,
-    "debugname": "white_bead",
+    "debugname": "imp_white_bead",
     "name": "White bead",
     "desc": "A small round white bead.",
     "cost": 4
   },
   {
     "id": 1478,
-    "debugname": "amulet_of_accuracy",
+    "debugname": "amulet_accuracy",
     "name": "Amulet of accuracy",
     "desc": "It increases my aim.",
     "cost": 100
@@ -4509,7 +4439,7 @@
   },
   {
     "id": 1540,
-    "debugname": "antidragonbreathshield",
+    "debugname": "dragonfire_shield",
     "name": "Dragonfire shield",
     "desc": "This shield is said to have magical properties against dragon flames.",
     "cost": 20
@@ -4537,21 +4467,21 @@
   },
   {
     "id": 1575,
-    "debugname": "felinemedal",
+    "debugname": "cat_training_medal",
     "name": "Cat training medal",
     "desc": "For feline training expertise.",
     "cost": 350
   },
   {
     "id": 1577,
-    "debugname": "petecandlestick",
+    "debugname": "petes_candlestick",
     "name": "Pete's candlestick",
     "desc": "Scarface Pete's Candlestick.",
     "cost": 5
   },
   {
     "id": 1586,
-    "debugname": "misc_key",
+    "debugname": "miscellaneous_key",
     "name": "Miscellaneous key",
     "desc": "I wonder what this unlocks?",
     "cost": 1
@@ -4579,7 +4509,7 @@
   },
   {
     "id": 1599,
-    "debugname": "holy_symbol_mould",
+    "debugname": "holy_mould",
     "name": "Holy mould",
     "desc": "Used to make Holy Symbols of Saradomin.",
     "cost": 5
@@ -4831,42 +4761,42 @@
   },
   {
     "id": 1692,
-    "debugname": "strung_gold_amulet",
+    "debugname": "gold_amulet",
     "name": "Gold amulet",
     "desc": "I wonder if I can get this enchanted.",
     "cost": 350
   },
   {
     "id": 1694,
-    "debugname": "strung_sapphire_amulet",
+    "debugname": "sapphire_amulet",
     "name": "Sapphire amulet",
     "desc": "I wonder if I can get this enchanted.",
     "cost": 900
   },
   {
     "id": 1696,
-    "debugname": "strung_emerald_amulet",
+    "debugname": "emerald_amulet",
     "name": "Emerald amulet",
     "desc": "I wonder if I can get this enchanted.",
     "cost": 1275
   },
   {
     "id": 1698,
-    "debugname": "strung_ruby_amulet",
+    "debugname": "ruby_amulet",
     "name": "Ruby amulet",
     "desc": "I wonder if I can get this enchanted.",
     "cost": 2025
   },
   {
     "id": 1700,
-    "debugname": "strung_diamond_amulet",
+    "debugname": "diamond_amulet",
     "name": "Diamond amulet",
     "desc": "I wonder if I can get this enchanted.",
     "cost": 3525
   },
   {
     "id": 1702,
-    "debugname": "strung_dragonstone_amulet",
+    "debugname": "dragonstone_amulet",
     "name": "Dragonstoneamulet",
     "desc": "I wonder if I can get this enchanted.",
     "cost": 17625
@@ -4908,14 +4838,14 @@
   },
   {
     "id": 1714,
-    "debugname": "nostringstar",
+    "debugname": "unstrung_symbol",
     "name": "Unstrung symbol",
     "desc": "It needs a string so I can wear it.",
     "cost": 200
   },
   {
     "id": 1716,
-    "debugname": "stringstar",
+    "debugname": "unblessed_symbol",
     "name": "Unblessed symbol",
     "desc": "A symbol of Saradomin.",
     "cost": 200
@@ -4929,14 +4859,14 @@
   },
   {
     "id": 1720,
-    "debugname": "nostringsnake",
+    "debugname": "unstrung_emblem",
     "name": "Unstrung emblem",
     "desc": "It needs a string so I can wear it.",
     "cost": 200
   },
   {
     "id": 1722,
-    "debugname": "stringsnake",
+    "debugname": "unpowered_symbol",
     "name": "Unpowered symbol",
     "desc": "An unholy symbol of Zamorak.",
     "cost": 200
@@ -5013,7 +4943,7 @@
   },
   {
     "id": 1743,
-    "debugname": "hard_leather",
+    "debugname": "hardleather",
     "name": "Hard leather",
     "desc": "It's a piece of hard leather.",
     "cost": 1
@@ -5076,49 +5006,49 @@
   },
   {
     "id": 1761,
-    "debugname": "softclay",
+    "debugname": "soft_clay",
     "name": "Soft clay",
     "desc": "Clay soft enough to mould.",
     "cost": 2
   },
   {
     "id": 1763,
-    "debugname": "reddye",
+    "debugname": "red_dye",
     "name": "Red dye",
     "desc": "A little bottle of red dye.",
     "cost": 5
   },
   {
     "id": 1765,
-    "debugname": "yellowdye",
+    "debugname": "yellow_dye",
     "name": "Yellow dye",
     "desc": "A little bottle of yellow dye.",
     "cost": 5
   },
   {
     "id": 1767,
-    "debugname": "bluedye",
+    "debugname": "blue_dye",
     "name": "Blue dye",
     "desc": "A little bottle of blue dye.",
     "cost": 5
   },
   {
     "id": 1769,
-    "debugname": "orangedye",
+    "debugname": "orange_dye",
     "name": "Orange dye",
     "desc": "A little bottle of orange dye.",
     "cost": 5
   },
   {
     "id": 1771,
-    "debugname": "greendye",
+    "debugname": "green_dye",
     "name": "Green dye",
     "desc": "A little bottle of green dye.",
     "cost": 5
   },
   {
     "id": 1773,
-    "debugname": "purpledye",
+    "debugname": "purple_dye",
     "name": "Purple dye",
     "desc": "A little bottle of purple dye.",
     "cost": 5
@@ -5160,42 +5090,42 @@
   },
   {
     "id": 1785,
-    "debugname": "glassblowingpipe",
+    "debugname": "glassblowing_pipe",
     "name": "Glassblowing pipe",
     "desc": null,
     "cost": 2
   },
   {
     "id": 1787,
-    "debugname": "pot_unfired",
+    "debugname": "unfired_pot",
     "name": "Unfired pot",
     "desc": "I need to put this in a pottery oven.",
     "cost": 1
   },
   {
     "id": 1789,
-    "debugname": "piedish_unfired",
+    "debugname": "unfired_piedish",
     "name": "Unfired pie dish",
     "desc": "I need to put this in a pottery oven.",
     "cost": 3
   },
   {
     "id": 1791,
-    "debugname": "bowl_unfired",
+    "debugname": "unfired_bowl",
     "name": "Unfired bowl",
     "desc": "I need to put this in a pottery oven.",
     "cost": 2
   },
   {
     "id": 1793,
-    "debugname": "woadleaf",
+    "debugname": "woad_leaf",
     "name": "Woad leaf",
     "desc": "A slightly bluish leaf.",
     "cost": 1
   },
   {
     "id": 1794,
-    "debugname": "bronzecraftwire",
+    "debugname": "bronze_wire",
     "name": "Bronze wire",
     "desc": "Useful for crafting items.",
     "cost": 20
@@ -5272,7 +5202,7 @@
   },
   {
     "id": 1861,
-    "debugname": "cooked_ugthanki_meat",
+    "debugname": "ugthanki_meat",
     "name": "Ugthanki meat",
     "desc": "Freshly cooked ugthanki meat.",
     "cost": 5
@@ -5300,56 +5230,56 @@
   },
   {
     "id": 1869,
-    "debugname": "bowl_tomato",
+    "debugname": "chopped_tomato",
     "name": "Chopped tomato",
     "desc": "A mixture of tomatoes in a bowl.",
     "cost": 3
   },
   {
     "id": 1871,
-    "debugname": "bowl_onion",
+    "debugname": "chopped_onion",
     "name": "Chopped onion",
     "desc": "A mixture of onions in a bowl.",
     "cost": 3
   },
   {
     "id": 1873,
-    "debugname": "bowl_ugthanki",
+    "debugname": "chopped_ugthanki",
     "name": "Chopped ugthanki",
     "desc": "Strips of ugthanki meat in a bowl.",
     "cost": 5
   },
   {
     "id": 1875,
-    "debugname": "bowl_oniontomato",
+    "debugname": "chopped_onion_tomato",
     "name": "Onion & tomato",
     "desc": "A mixture of chopped onions and tomatoes in a bowl.",
     "cost": 5
   },
   {
     "id": 1877,
-    "debugname": "bowl_ugthankionion",
+    "debugname": "chopped_ugthanki_onion",
     "name": "Ugthanki & onion",
     "desc": "A mixture of chopped onions and ugthanki meat in a bowl.",
     "cost": 7
   },
   {
     "id": 1879,
-    "debugname": "bowl_ugthankitomato",
+    "debugname": "chopped_ugthanki_tomato",
     "name": "Ugthanki & tomato",
     "desc": "A mixture of chopped tomatoes and ugthanki meat in a bowl.",
     "cost": 7
   },
   {
     "id": 1881,
-    "debugname": "bowl_oniontomugthanki",
+    "debugname": "kebab_mix",
     "name": "Kebab mix",
     "desc": "A mixture of chopped tomatoes, onions and ugthanki meat in a bowl.",
     "cost": 9
   },
   {
     "id": 1883,
-    "debugname": "ugthanki_kebab_bad",
+    "debugname": "dodgy_ugthanki_kebab",
     "name": "Ugthanki kebab",
     "desc": "A strange smelling kebab made from ugthanki meat.",
     "cost": 20
@@ -5391,7 +5321,7 @@
   },
   {
     "id": 1895,
-    "debugname": "cake_slice",
+    "debugname": "slice_of_cake",
     "name": "Slice of cake",
     "desc": "I'd rather have a whole cake.",
     "cost": 10
@@ -5524,7 +5454,7 @@
   },
   {
     "id": 1933,
-    "debugname": "pot_flour",
+    "debugname": "pot_of_flour",
     "name": "Pot of flour",
     "desc": "There is flour in this pot.",
     "cost": 10
@@ -5538,7 +5468,7 @@
   },
   {
     "id": 1937,
-    "debugname": "jug_water",
+    "debugname": "jug_of_water",
     "name": "Jug of water",
     "desc": "It's full of water.",
     "cost": 1
@@ -5552,14 +5482,14 @@
   },
   {
     "id": 1940,
-    "debugname": "rawswamppaste",
+    "debugname": "raw_swamp_paste",
     "name": "Raw swamp paste",
     "desc": "A thick tar like substance mixed with flour.",
     "cost": 1
   },
   {
     "id": 1941,
-    "debugname": "swamppaste",
+    "debugname": "swamp_paste",
     "name": "Swamp paste",
     "desc": "A tar like substance mixed with flour and warmed.",
     "cost": 30
@@ -5650,7 +5580,7 @@
   },
   {
     "id": 1967,
-    "debugname": "magic_cabbage",
+    "debugname": "cabbage_draynor",
     "name": "Cabbage",
     "desc": "Yuck I don't like cabbage.",
     "cost": 1
@@ -5727,7 +5657,7 @@
   },
   {
     "id": 1991,
-    "debugname": "jug_bad_wine",
+    "debugname": "jug_of_bad_wine",
     "name": "Jug of bad wine",
     "desc": "Oh dear, this wine is terrible!",
     "cost": 1
@@ -5741,21 +5671,21 @@
   },
   {
     "id": 1995,
-    "debugname": "jug_unfermented_wine",
+    "debugname": "unfermented_wine",
     "name": "Unfermented wine",
     "desc": "This wine needs to ferment before it can be drunk.",
     "cost": 10
   },
   {
     "id": 1997,
-    "debugname": "stew1",
+    "debugname": "incomplete_stew_potato",
     "name": "Incomplete stew",
     "desc": "I need to add some meat too.",
     "cost": 4
   },
   {
     "id": 1999,
-    "debugname": "stew2",
+    "debugname": "incomplete_stew_meat",
     "name": "Incomplete stew",
     "desc": "I need to add some potato too.",
     "cost": 4
@@ -5783,7 +5713,7 @@
   },
   {
     "id": 2007,
-    "debugname": "spicespot",
+    "debugname": "spice",
     "name": "Spice",
     "desc": "This could liven up an otherwise bland stew.",
     "cost": 230
@@ -5846,7 +5776,7 @@
   },
   {
     "id": 2026,
-    "debugname": "cocktail_glass_empty",
+    "debugname": "cocktail_glass",
     "name": "Cocktail glass",
     "desc": "For sipping cocktails.",
     "cost": 1
@@ -5888,7 +5818,7 @@
   },
   {
     "id": 2038,
-    "debugname": "premade_sgg",
+    "debugname": "premade_short_green_guy",
     "name": "Sgg",
     "desc": "A Short Green Guy... looks good.",
     "cost": 30
@@ -6021,21 +5951,21 @@
   },
   {
     "id": 2076,
-    "debugname": "unfinished_sgg1",
+    "debugname": "unfinished_short_green_guy1",
     "name": "Unfinished cocktail",
     "desc": "This cocktail is just missing those little finishing touches.",
     "cost": 2
   },
   {
     "id": 2078,
-    "debugname": "unfinished_sgg2",
+    "debugname": "unfinished_short_green_guy2",
     "name": "Unfinished cocktail",
     "desc": "This cocktail is just missing those little finishing touches.",
     "cost": 2
   },
   {
     "id": 2080,
-    "debugname": "sgg",
+    "debugname": "short_green_guy",
     "name": "Sgg",
     "desc": "A Short Green Guy... looks good.",
     "cost": 30
@@ -6084,28 +6014,28 @@
   },
   {
     "id": 2094,
-    "debugname": "spoilt_cocktail",
+    "debugname": "odd_cocktail1",
     "name": "Odd cocktail",
     "desc": "I'm not completely sure what this contains.",
     "cost": 2
   },
   {
     "id": 2096,
-    "debugname": "spoilt_cocktail_fruity",
+    "debugname": "odd_cocktail2",
     "name": "Odd cocktail",
     "desc": "I'm not completely sure what this contains.",
     "cost": 2
   },
   {
     "id": 2098,
-    "debugname": "spoilt_cocktail_creamy",
+    "debugname": "odd_cocktail3",
     "name": "Odd cocktail",
     "desc": "I'm not completely sure what this contains.",
     "cost": 2
   },
   {
     "id": 2100,
-    "debugname": "spoilt_cocktail_slice",
+    "debugname": "odd_cocktail4",
     "name": "Odd cocktail",
     "desc": "I'm not completely sure what this contains.",
     "cost": 2
@@ -6280,28 +6210,28 @@
   },
   {
     "id": 2152,
-    "debugname": "toads_legs",
+    "debugname": "toad_legs",
     "name": "Toad's legs",
     "desc": "They're a gnome delicacy apparently.",
     "cost": 2
   },
   {
     "id": 2154,
-    "debugname": "equa_toads_legs",
+    "debugname": "equa_toad_legs",
     "name": "Equa toad's legs",
     "desc": "They're a gnome delicacy apparently.",
     "cost": 2
   },
   {
     "id": 2156,
-    "debugname": "spicy_toads_legs",
+    "debugname": "spicy_toad_legs",
     "name": "Spicy toad's legs",
     "desc": "They're a gnome delicacy apparently.",
     "cost": 2
   },
   {
     "id": 2158,
-    "debugname": "seasoned_toads_legs",
+    "debugname": "seasoned_toad_legs",
     "name": "Seasoned legs",
     "desc": "They're a gnome delicacy apparently.",
     "cost": 2
@@ -6322,7 +6252,7 @@
   },
   {
     "id": 2167,
-    "debugname": "giannes_cook_book",
+    "debugname": "gianne_cook_book",
     "name": "Gianne's cook book",
     "desc": "Aluft Gianne's favorite dishes.",
     "cost": 2
@@ -6343,7 +6273,7 @@
   },
   {
     "id": 2173,
-    "debugname": "spoilt_gnomebowl",
+    "debugname": "odd_gnomebowl",
     "name": "Odd gnomebowl",
     "desc": "This gnome bowl doesn't look very appetising.",
     "cost": 2
@@ -6392,7 +6322,7 @@
   },
   {
     "id": 2189,
-    "debugname": "unfinished_worm_hole",
+    "debugname": "unfinished_worm_hole1",
     "name": "Unfinished bowl",
     "desc": "This dish is just missing those little finishing touches.",
     "cost": 1
@@ -6406,7 +6336,7 @@
   },
   {
     "id": 2193,
-    "debugname": "unfinished_veg_ball",
+    "debugname": "unfinished_veg_ball1",
     "name": "Unfinished bowl",
     "desc": "This dish is just missing those little finishing touches.",
     "cost": 1
@@ -6420,7 +6350,7 @@
   },
   {
     "id": 2197,
-    "debugname": "spoilt_crunchies",
+    "debugname": "odd_crunchies",
     "name": "Odd crunchies",
     "desc": "These crunchies don't look very appetising.",
     "cost": 2
@@ -6434,7 +6364,7 @@
   },
   {
     "id": 2203,
-    "debugname": "unfinished_worm_crunchies",
+    "debugname": "unfinished_worm_crunchies1",
     "name": "Unfinished crunchy",
     "desc": "These crunchies are just missing those little finishing touches.",
     "cost": 1
@@ -6448,21 +6378,21 @@
   },
   {
     "id": 2207,
-    "debugname": "unfinished_chocchip_crunchies",
+    "debugname": "unfinished_choc_chip_crunchies1",
     "name": "Unfinished crunchy",
     "desc": "These crunchies are just missing those little finishing touches.",
     "cost": 1
   },
   {
     "id": 2209,
-    "debugname": "chocchip_crunchies",
+    "debugname": "choc_chip_crunchies",
     "name": "Chocchip crunchies",
     "desc": "Yum... smells good.",
     "cost": 2
   },
   {
     "id": 2211,
-    "debugname": "unfinished_spicy_crunchies",
+    "debugname": "unfinished_spicy_crunchies1",
     "name": "Unfinished crunchy",
     "desc": "These crunchies are just missing those little finishing touches.",
     "cost": 1
@@ -6476,7 +6406,7 @@
   },
   {
     "id": 2215,
-    "debugname": "unfinished_toad_crunchies",
+    "debugname": "unfinished_toad_crunchies1",
     "name": "Unfinished crunchy",
     "desc": "These crunchies are just missing those little finishing touches.",
     "cost": 1
@@ -6560,7 +6490,7 @@
   },
   {
     "id": 2239,
-    "debugname": "premade_chocchip_crunchies",
+    "debugname": "premade_choc_chip_crunchies",
     "name": "Chocchip crunchies",
     "desc": "Yum... smells good.",
     "cost": 85
@@ -6581,7 +6511,7 @@
   },
   {
     "id": 2245,
-    "debugname": "spoilt_batta",
+    "debugname": "odd_batta",
     "name": "Odd batta",
     "desc": "This batta doesn't look very appetising.",
     "cost": 2
@@ -6595,7 +6525,7 @@
   },
   {
     "id": 2251,
-    "debugname": "unfinished_worm_batta",
+    "debugname": "unfinished_worm_batta1",
     "name": "Unfinished batta",
     "desc": "This batta is just missing those little finishing touches.",
     "cost": 1
@@ -6630,56 +6560,56 @@
   },
   {
     "id": 2261,
-    "debugname": "fruitless_batta",
+    "debugname": "unfinished_fruit_batta1",
     "name": "Unfinished batta",
     "desc": "This batta is just missing those little finishing touches.",
     "cost": 1
   },
   {
     "id": 2263,
-    "debugname": "fruit_batta_lime",
+    "debugname": "unfinished_fruit_batta2",
     "name": "Unfinished batta",
     "desc": "This batta is just missing those little finishing touches.",
     "cost": 1
   },
   {
     "id": 2265,
-    "debugname": "fruit_batta_orange",
+    "debugname": "unfinished_fruit_batta3",
     "name": "Unfinished batta",
     "desc": "This batta is just missing those little finishing touches.",
     "cost": 1
   },
   {
     "id": 2267,
-    "debugname": "fruit_batta_pineapple",
+    "debugname": "unfinished_fruit_batta4",
     "name": "Unfinished batta",
     "desc": "This batta is just missing those little finishing touches.",
     "cost": 1
   },
   {
     "id": 2269,
-    "debugname": "fruit_batta_limeorange",
+    "debugname": "unfinished_fruit_batta5",
     "name": "Unfinished batta",
     "desc": "This batta is just missing those little finishing touches.",
     "cost": 1
   },
   {
     "id": 2271,
-    "debugname": "fruit_batta_limepineapple",
+    "debugname": "unfinished_fruit_batta6",
     "name": "Unfinished batta",
     "desc": "This batta is just missing those little finishing touches.",
     "cost": 1
   },
   {
     "id": 2273,
-    "debugname": "fruit_batta_orangepineapple",
+    "debugname": "unfinished_fruit_batta7",
     "name": "Unfinished batta",
     "desc": "This batta is just missing those little finishing touches.",
     "cost": 1
   },
   {
     "id": 2275,
-    "debugname": "unfinished_fruit_batta",
+    "debugname": "unfinished_fruit_batta8",
     "name": "Unfinished batta",
     "desc": "This batta is just missing those little finishing touches.",
     "cost": 1
@@ -6693,7 +6623,7 @@
   },
   {
     "id": 2279,
-    "debugname": "unfinished_vegetable_batta",
+    "debugname": "unfinished_vegetable_batta1",
     "name": "Unfinished batta",
     "desc": "This batta is just missing those little finishing touches.",
     "cost": 1
@@ -6735,7 +6665,7 @@
   },
   {
     "id": 2291,
-    "debugname": "half_plain_pizza",
+    "debugname": "obj_2291",
     "name": "1/2 plain pizza",
     "desc": "Half of this pizza has been eaten.",
     "cost": 20
@@ -6749,21 +6679,21 @@
   },
   {
     "id": 2295,
-    "debugname": "half_meat_pizza",
+    "debugname": "obj_2295",
     "name": "1/2 meat pizza",
     "desc": "Half of this pizza has been eaten.",
     "cost": 25
   },
   {
     "id": 2297,
-    "debugname": "anchovie_pizza",
+    "debugname": "anchovy_pizza",
     "name": "Anchovy pizza",
     "desc": "A pizza with anchovies.",
     "cost": 60
   },
   {
     "id": 2299,
-    "debugname": "half_anchovie_pizza",
+    "debugname": "obj_2299",
     "name": "1/2 anchovy pizza",
     "desc": "Half of this pizza has been eaten.",
     "cost": 30
@@ -6777,7 +6707,7 @@
   },
   {
     "id": 2303,
-    "debugname": "half_pineapple_pizza",
+    "debugname": "obj_2303",
     "name": "1/2pineapple pizza",
     "desc": "Half of this pizza has been eaten.",
     "cost": 50
@@ -6875,14 +6805,14 @@
   },
   {
     "id": 2331,
-    "debugname": "half_a_meat_pie",
+    "debugname": "obj_2331",
     "name": "Half a meat pie",
     "desc": "Half of it is suitable for vegetarians.",
     "cost": 8
   },
   {
     "id": 2333,
-    "debugname": "half_a_redberry_pie",
+    "debugname": "obj_2333",
     "name": "Half a redberry pie",
     "desc": "So tasty I kept some for later.",
     "cost": 6
@@ -6917,14 +6847,14 @@
   },
   {
     "id": 2343,
-    "debugname": "cooked_oomlie",
+    "debugname": "cooked_wrapped_oomlie",
     "name": "Cooked oomlie wrap",
     "desc": "Deliciously cooked oomlie meat in a palm leaf pouch.",
     "cost": 35
   },
   {
     "id": 2345,
-    "debugname": "burnt_oomlie",
+    "debugname": "burnt_wrapped_oomlie",
     "name": "Burnt oomlie wrap",
     "desc": "Burnt oomlie meat in a palm leaf pouch.",
     "cost": 1
@@ -6994,21 +6924,21 @@
   },
   {
     "id": 2366,
-    "debugname": "dragonshield_a",
+    "debugname": "shield_left_half",
     "name": "Shield left half",
     "desc": "The left half of a dragon square shield.",
     "cost": 110000
   },
   {
     "id": 2368,
-    "debugname": "dragonshield_b",
+    "debugname": "shield_right_half",
     "name": "Shield right half",
     "desc": "The right half of a dragon square shield.",
     "cost": 500000
   },
   {
     "id": 2370,
-    "debugname": "studs",
+    "debugname": "steel_studs",
     "name": "Steel studs",
     "desc": "A set of studs for leather armour.",
     "cost": 150
@@ -7022,7 +6952,7 @@
   },
   {
     "id": 2426,
-    "debugname": "burnt_uw_oomlie",
+    "debugname": "burnt_oomlie",
     "name": "Burnt oomlie",
     "desc": "Oh dear, it's totally burnt!",
     "cost": 1
@@ -7036,7 +6966,7 @@
   },
   {
     "id": 2430,
-    "debugname": "4dosestatrestore",
+    "debugname": "4dose1restore",
     "name": "Restore potion(4)",
     "desc": "4 doses of stat restoration potion.",
     "cost": 110
@@ -7141,63 +7071,63 @@
   },
   {
     "id": 2460,
-    "debugname": "flowers_waterfall_quest",
+    "debugname": "assorted_flowers",
     "name": "Flowers",
     "desc": "A posy of flowers.",
     "cost": 100
   },
   {
     "id": 2462,
-    "debugname": "flowers_waterfall_quest_red",
+    "debugname": "red_flowers",
     "name": "Flowers",
     "desc": "A posy of flowers.",
     "cost": 100
   },
   {
     "id": 2464,
-    "debugname": "flowers_waterfall_quest_blue",
+    "debugname": "blue_flowers",
     "name": "Flowers",
     "desc": "A posy of flowers.",
     "cost": 100
   },
   {
     "id": 2466,
-    "debugname": "flowers_waterfall_quest_yellow",
+    "debugname": "yellow_flowers",
     "name": "Flowers",
     "desc": "A posy of flowers.",
     "cost": 100
   },
   {
     "id": 2468,
-    "debugname": "flowers_waterfall_quest_purple",
+    "debugname": "purple_flowers",
     "name": "Flowers",
     "desc": "A posy of flowers.",
     "cost": 100
   },
   {
     "id": 2470,
-    "debugname": "flowers_waterfall_quest_orange",
+    "debugname": "orange_flowers",
     "name": "Flowers",
     "desc": "A posy of flowers.",
     "cost": 100
   },
   {
     "id": 2472,
-    "debugname": "flowers_waterfall_quest_mixed",
+    "debugname": "mixed_flowers",
     "name": "Flowers",
     "desc": "A posy of flowers.",
     "cost": 100
   },
   {
     "id": 2474,
-    "debugname": "flowers_waterfall_quest_white",
+    "debugname": "white_flowers",
     "name": "Flowers",
     "desc": "A posy of flowers.",
     "cost": 100
   },
   {
     "id": 2476,
-    "debugname": "flowers_waterfall_quest_black",
+    "debugname": "black_flowers",
     "name": "Flowers",
     "desc": "A posy of flowers.",
     "cost": 100
@@ -7211,80 +7141,73 @@
   },
   {
     "id": 2483,
-    "debugname": "lantadymevial",
+    "debugname": "unf_lantadyme_potion",
     "name": "Unfinished potion",
     "desc": "I need another ingredient to finish this Lantadyme potion.",
     "cost": 68
   },
   {
-    "id": 2485,
-    "debugname": "unidentified_lantadyme",
-    "name": "Herb",
-    "desc": "I need a closer look to identify this.",
-    "cost": 1
-  },
-  {
     "id": 2487,
-    "debugname": "blue_dragon_vambraces",
+    "debugname": "blue_dragonhide_vambraces",
     "name": "Dragon vambraces",
     "desc": "Made from 100% real dragon hide.",
-    "cost": 3000
+    "cost": 2500
   },
   {
     "id": 2489,
-    "debugname": "red_dragon_vambraces",
+    "debugname": "red_dragonhide_vambraces",
     "name": "Dragon vambraces",
     "desc": "Made from 100% real dragon hide.",
-    "cost": 3600
+    "cost": 2500
   },
   {
     "id": 2491,
-    "debugname": "black_dragon_vambraces",
+    "debugname": "black_dragonhide_vambraces",
     "name": "Dragon vambraces",
     "desc": "Made from 100% real dragon hide.",
-    "cost": 4320
+    "cost": 2500
   },
   {
     "id": 2493,
     "debugname": "blue_dragonhide_chaps",
     "name": "Dragonhide chaps",
     "desc": "Made from 100% real dragon hide.",
-    "cost": 4320
+    "cost": 3900
   },
   {
     "id": 2495,
     "debugname": "red_dragonhide_chaps",
     "name": "Dragonhide chaps",
     "desc": "Made from 100% real dragon hide.",
-    "cost": 5180
+    "cost": 3900
   },
   {
     "id": 2497,
     "debugname": "black_dragonhide_chaps",
     "name": "Dragonhide chaps",
     "desc": "Made from 100% real dragon hide.",
-    "cost": 6220
+    "cost": 3900
   },
   {
     "id": 2499,
     "debugname": "blue_dragonhide_body",
     "name": "Dragonhide body",
     "desc": "Made from 100% real dragon hide.",
-    "cost": 9360
+    "cost": 7800
   },
   {
     "id": 2501,
     "debugname": "red_dragonhide_body",
     "name": "Dragonhide body",
     "desc": "Made from 100% real dragon hide.",
-    "cost": 11230
+    "cost": 7800
   },
   {
     "id": 2503,
     "debugname": "black_dragonhide_body",
     "name": "Dragonhide body",
     "desc": "Made from 100% real dragon hide.",
-    "cost": 13480
+    "cost": 7800
   },
   {
     "id": 2505,
@@ -7309,14 +7232,14 @@
   },
   {
     "id": 2514,
-    "debugname": "newbieraw_shrimp",
+    "debugname": "tutorial_raw_shrimps",
     "name": "Raw shrimps",
     "desc": "I should try cooking this.",
     "cost": 5
   },
   {
     "id": 2516,
-    "debugname": "newbie_pot_flour",
+    "debugname": "tutorial_pot_of_flour",
     "name": "Pot of flour",
     "desc": "There is flour in this pot.",
     "cost": 10
@@ -7330,105 +7253,105 @@
   },
   {
     "id": 2520,
-    "debugname": "horsey_brown",
+    "debugname": "toy_horsey_brown",
     "name": "Toy horsey",
     "desc": "A brown toy horse.",
     "cost": 100
   },
   {
     "id": 2522,
-    "debugname": "horsey_white",
+    "debugname": "toy_horsey_white",
     "name": "Toy horsey",
     "desc": "A white toy horse.",
     "cost": 100
   },
   {
     "id": 2524,
-    "debugname": "horsey_black",
+    "debugname": "toy_horsey_black",
     "name": "Toy horsey",
     "desc": "A black toy horse.",
     "cost": 100
   },
   {
     "id": 2526,
-    "debugname": "horsey_grey",
+    "debugname": "toy_horsey_grey",
     "name": "Toy horsey",
     "desc": "A grey toy horse.",
     "cost": 100
   },
   {
     "id": 2530,
-    "debugname": "newbiebones",
+    "debugname": "tutorial_bones",
     "name": "Bones",
     "desc": "Bones are for burying!",
     "cost": 1
   },
   {
     "id": 2532,
-    "debugname": "iron_unlitarrow",
+    "debugname": "iron_fire_arrows_unlit",
     "name": "Iron fire arrows",
     "desc": "Arrows with iron heads and oil soaked cloth.",
     "cost": 3
   },
   {
     "id": 2533,
-    "debugname": "iron_litarrow",
+    "debugname": "iron_fire_arrows",
     "name": "Iron fire arrows",
     "desc": "These iron headed arrows are ablaze with fire.",
     "cost": 10
   },
   {
     "id": 2534,
-    "debugname": "steel_unlitarrow",
+    "debugname": "steel_fire_arrows_unlit",
     "name": "Steel fire arrows",
     "desc": "Arrows with steel heads and oil soaked cloth.",
     "cost": 3
   },
   {
     "id": 2535,
-    "debugname": "steel_litarrow",
+    "debugname": "steel_fire_arrows",
     "name": "Steel fire arrows",
     "desc": "These steel headed arrows are ablaze with fire.",
     "cost": 10
   },
   {
     "id": 2536,
-    "debugname": "mithril_unlitarrow",
+    "debugname": "mithril_fire_arrows_unlit",
     "name": "Mithril fire arrows",
     "desc": "Arrows with mithril heads and oil soaked cloth.",
     "cost": 3
   },
   {
     "id": 2537,
-    "debugname": "mithril_litarrow",
+    "debugname": "mithril_fire_arrows",
     "name": "Mithril fire arrows",
     "desc": "These mithril headed arrows are ablaze with fire.",
     "cost": 10
   },
   {
     "id": 2538,
-    "debugname": "adamant_unlitarrow",
+    "debugname": "adamant_fire_arrows_unlit",
     "name": "Adamnt fire arrows",
     "desc": "Arrows with adamant heads and oil soaked cloth.",
     "cost": 3
   },
   {
     "id": 2539,
-    "debugname": "adamant_litarrow",
+    "debugname": "adamant_fire_arrows",
     "name": "Adamnt fire arrows",
     "desc": "These adamant headed arrows are ablaze with fire.",
     "cost": 10
   },
   {
     "id": 2540,
-    "debugname": "rune_unlitarrow",
+    "debugname": "rune_fire_arrows_unlit",
     "name": "Rune fire arrows",
     "desc": "Arrows with rune heads and oil soaked cloth.",
     "cost": 3
   },
   {
     "id": 2541,
-    "debugname": "rune_litarrow",
+    "debugname": "rune_fire_arrows",
     "name": "Rune fire arrows",
     "desc": "These rune headed arrows are ablaze with fire.",
     "cost": 10
@@ -7442,56 +7365,56 @@
   },
   {
     "id": 2552,
-    "debugname": "ring_of_dueling_8",
+    "debugname": "ring_of_duel_8",
     "name": "Ring of dueling(8)",
     "desc": "An enchanted ring.",
     "cost": 1275
   },
   {
     "id": 2554,
-    "debugname": "ring_of_dueling_7",
+    "debugname": "ring_of_duel_7",
     "name": "Ring of dueling(7)",
     "desc": "An enchanted ring.",
     "cost": 1275
   },
   {
     "id": 2556,
-    "debugname": "ring_of_dueling_6",
+    "debugname": "ring_of_duel_6",
     "name": "Ring of dueling(6)",
     "desc": "An enchanted ring.",
     "cost": 1275
   },
   {
     "id": 2558,
-    "debugname": "ring_of_dueling_5",
+    "debugname": "ring_of_duel_5",
     "name": "Ring of dueling(5)",
     "desc": "An enchanted ring.",
     "cost": 1275
   },
   {
     "id": 2560,
-    "debugname": "ring_of_dueling_4",
+    "debugname": "ring_of_duel_4",
     "name": "Ring of dueling(4)",
     "desc": "An enchanted ring.",
     "cost": 1275
   },
   {
     "id": 2562,
-    "debugname": "ring_of_dueling_3",
+    "debugname": "ring_of_duel_3",
     "name": "Ring of dueling(3)",
     "desc": "An enchanted ring.",
     "cost": 1275
   },
   {
     "id": 2564,
-    "debugname": "ring_of_dueling_2",
+    "debugname": "ring_of_duel_2",
     "name": "Ring of dueling(2)",
     "desc": "An enchanted ring.",
     "cost": 1275
   },
   {
     "id": 2566,
-    "debugname": "ring_of_dueling_1",
+    "debugname": "ring_of_duel_1",
     "name": "Ring of dueling(1)",
     "desc": "An enchanted ring.",
     "cost": 1275
@@ -7519,21 +7442,21 @@
   },
   {
     "id": 2577,
-    "debugname": "boots_ranger",
+    "debugname": "trail_ranger_boots",
     "name": "Ranger boots",
     "desc": "Lightweight boots ideal for rangers.",
     "cost": 200
   },
   {
     "id": 2579,
-    "debugname": "boots_wizard",
+    "debugname": "wizards_boots",
     "name": "Wizard's boots",
     "desc": "Slightly magical boots.",
     "cost": 200
   },
   {
     "id": 2581,
-    "debugname": "robinhoodhat",
+    "debugname": "trail_robin_hood_hat",
     "name": "Robin hood hat",
     "desc": "Endorsed by Robin Hood.",
     "cost": 450
@@ -7708,77 +7631,77 @@
   },
   {
     "id": 2631,
-    "debugname": "highwaymanmask",
+    "debugname": "trail_highwayman_mask",
     "name": "Highwayman mask",
     "desc": "Your money or your life!",
     "cost": 40
   },
   {
     "id": 2633,
-    "debugname": "berret_blue",
+    "debugname": "trail_berret_blue",
     "name": "Berret",
     "desc": "Pouvez-vous parler francais?",
     "cost": 80
   },
   {
     "id": 2635,
-    "debugname": "berret_black",
+    "debugname": "trail_berret_black",
     "name": "Berret",
     "desc": "Pouvez-vous parler francais?",
     "cost": 80
   },
   {
     "id": 2637,
-    "debugname": "berret_white",
+    "debugname": "trail_berret_white",
     "name": "Berret",
     "desc": "Pouvez-vous parler francais?",
     "cost": 80
   },
   {
     "id": 2639,
-    "debugname": "cavalier_brown",
+    "debugname": "trail_cavalier_tan",
     "name": "Cavalier",
     "desc": "All for one and one for all!",
     "cost": 200
   },
   {
     "id": 2641,
-    "debugname": "cavalier_dark",
+    "debugname": "trail_cavalier_brown",
     "name": "Cavalier",
     "desc": "All for one and one for all!",
     "cost": 200
   },
   {
     "id": 2643,
-    "debugname": "cavalier_black",
+    "debugname": "trail_cavalier_black",
     "name": "Cavalier",
     "desc": "All for one and one for all!",
     "cost": 200
   },
   {
     "id": 2645,
-    "debugname": "headband_red",
+    "debugname": "trail_headband_red",
     "name": "Headband",
     "desc": "A minimilist's hat.",
     "cost": 40
   },
   {
     "id": 2647,
-    "debugname": "headband_black",
+    "debugname": "trail_headband_black",
     "name": "Headband",
     "desc": "A minimilist's hat.",
     "cost": 40
   },
   {
     "id": 2649,
-    "debugname": "headband_brown",
+    "debugname": "trail_headband_brown",
     "name": "Headband",
     "desc": "A minimilist's hat.",
     "cost": 40
   },
   {
     "id": 2651,
-    "debugname": "piratehat",
+    "debugname": "trail_pirates_hat",
     "name": "Pirate's hat",
     "desc": "Shiver me timbers!",
     "cost": 180
@@ -7883,7 +7806,7 @@
   },
   {
     "id": 2862,
-    "debugname": "achey_tree_logs",
+    "debugname": "achey_logs",
     "name": "Achey tree logs",
     "desc": "These logs are longer than normal.",
     "cost": 4
@@ -7897,7 +7820,7 @@
   },
   {
     "id": 2865,
-    "debugname": "ogre_headless_arrow",
+    "debugname": "flighted_ogre_arrow",
     "name": "Flighted ogre arrow",
     "desc": "A wooden arrow shaft with four flights attached.",
     "cost": 1
@@ -7936,12 +7859,5 @@
     "name": "Chompy bird obj",
     "desc": null,
     "cost": 1
-  },
-  {
-    "id": 2890,
-    "debugname": "elemental_shield",
-    "name": "Elemental shield",
-    "desc": "A magic shield.",
-    "cost": 20
   }
 ]
