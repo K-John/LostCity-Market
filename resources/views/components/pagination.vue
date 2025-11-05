@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Link } from "@inertiajs/vue3";
+import { Link, usePage } from "@inertiajs/vue3";
 import { usePaginator } from "momentum-paginator";
 
 import {
@@ -12,11 +12,53 @@ const props = defineProps<{
 }>();
 const { first, last, previous, next, pages } = usePaginator(props.data);
 
+// Local types to narrow the pages union
+type RawPage = {
+    url?: string | null;
+    label: string;
+    isActive?: boolean;
+    isPrevious?: boolean;
+    isNext?: boolean;
+    isCurrent?: boolean;
+    isSeparator?: boolean;
+};
+
+type EllipsisItem = { label: '...'; isPage: false };
+type PageItem = (RawPage & { isPage: true }) | EllipsisItem;
+
 const visibleRange = 2; // Number of pages to show on either side of current page
 
-const filteredPages = computed(() => {
-    const currentPage = Number(pages.find((p) => p.isCurrent)?.label);
-    if (!currentPage) return pages;
+// Helper: merge current query params (filters/sort) into the page url
+function buildUrl(pageUrl?: string | null): string {
+    if (!pageUrl) return "#";
+
+    // Create absolute URL from possibly-relative pageUrl
+    const urlObj = new URL(pageUrl, window.location.origin);
+    const pageParams = new URLSearchParams(urlObj.search);
+    const currentParams = new URLSearchParams(window.location.search);
+
+    // Copy current query params (except `page`) into page params so filters/sorts persist
+    for (const [key, value] of currentParams.entries()) {
+        if (key === "page") continue;
+        pageParams.set(key, value);
+    }
+
+    const qs = pageParams.toString();
+    return urlObj.pathname + (qs ? `?${qs}` : "");
+}
+
+// Type guard used after mapping to filter out nulls
+function isPageItem(val: PageItem | null): val is PageItem {
+    return val !== null;
+}
+
+const filteredPages = computed<PageItem[]>(() => {
+    const currentPageLabel = pages.find((p) => p.isCurrent)?.label;
+    const currentPage = Number(currentPageLabel);
+    if (Number.isNaN(currentPage)) {
+        // No current page found - return all pages (mapped to isPage)
+        return pages.map((p) => ({ ...p, isPage: true })) as PageItem[];
+    }
 
     const firstPageNumber = Number(pages[0]?.label);
     const lastPageNumber = Number(pages[pages.length - 1]?.label);
@@ -36,23 +78,23 @@ const filteredPages = computed(() => {
 
     // Insert ellipses where gaps exist
     let result: (string | number)[] = [];
-    let prevNum = null;
+    let prevNum: number | null = null;
 
     for (let num of filtered) {
         if (prevNum !== null && num - prevNum > 1) {
             result.push("..."); // Add ellipsis if there's a gap
         }
         result.push(num);
-        prevNum = num;
+        prevNum = Number(num);
     }
 
     return result
         .map((num) => {
-            if (num === "...") return { label: "...", isPage: false }; // Format ellipses
-            const page = pages.find((p) => Number(p.label) === num);
-            return page ? { ...page, isPage: true } : null;
+            if (num === "...") return { label: "...", isPage: false } as EllipsisItem;
+            const page = pages.find((p) => Number(p.label) === Number(num));
+            return page ? ({ ...(page as RawPage), isPage: true } as PageItem) : null;
         })
-        .filter(Boolean); // Remove nulls
+        .filter(isPageItem); // Narrow type to PageItem[]
 });
 </script>
 
@@ -69,7 +111,7 @@ const filteredPages = computed(() => {
 
             <Component
                 :is="previous.isActive ? Link : 'span'"
-                :href="previous.url!"
+                :href="buildUrl(previous.url)"
                 class="inline-flex items-center gap-3 py-3 text-sm font-bold transition"
                 :class="[
                     previous.isActive
@@ -97,7 +139,7 @@ const filteredPages = computed(() => {
                     ></div>
 
                     <Link
-                        :href="page.url!"
+                        :href="buildUrl(page.url)"
                         class="block px-4 py-3 text-sm font-bold transition"
                         :class="[
                             page.isCurrent ? 'text-stone-500' : 'text-white',
@@ -120,7 +162,7 @@ const filteredPages = computed(() => {
 
             <Component
                 :is="next.isActive ? Link : 'span'"
-                :href="next.url!"
+                :href="buildUrl(next.url)"
                 class="inline-flex items-center gap-3 py-3 text-sm font-bold transition"
                 :class="[
                     next.isActive
