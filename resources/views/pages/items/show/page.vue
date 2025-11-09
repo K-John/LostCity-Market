@@ -292,7 +292,7 @@ onUnmounted(() => {
             <Banner
                 v-for="banner in banners"
                 :key="banner.id"
-                v-bind="banner"
+                :banner="banner"
             ></Banner>
 
             <UsernamesAlert v-if="auth && !listingForm?.usernames?.length" />

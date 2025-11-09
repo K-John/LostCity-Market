@@ -23,13 +23,12 @@ class BannerData extends Data
         public ?DateTime $endAt,
         /** @var DataCollection<\App\Data\Item\ItemData> */
         public ?DataCollection $items = null,
-        
     ) {
         $this->displayScope = $this->determineDisplayScope($id);
     }
 
     private function determineDisplayScope(): BannerDisplayScope
     {
-        return (!empty($this->items) && $this->items->count() > 0 ? BannerDisplayScope::Item : BannerDisplayScope::Global);
+        return ! empty($this->items) && $this->items->count() > 0 ? BannerDisplayScope::Item : BannerDisplayScope::Global;
     }
 }

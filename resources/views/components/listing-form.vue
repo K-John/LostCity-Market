@@ -63,7 +63,7 @@ const submit = () => {
             <Banner
                 v-for="banner in selectedItemBanners"
                 :key="banner.id"
-                v-bind="banner"
+                :banner="banner"
             ></Banner>
 
             <!-- Conditionally Hide Item Select if form.item was Provided on Page Load -->
