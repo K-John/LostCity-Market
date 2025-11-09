@@ -127,6 +127,10 @@ class ListingController
 
         $listing->delete();
 
-        return back()->success('The listing has been permanently deleted');
+        $back = $request->session()->pull('background_url'); // read + forget
+
+        return $back
+            ? redirect()->to($back)->success('The listing has been permanently deleted.')
+            : redirect()->route('listings.index')->success('The listing has been permanently deleted.');
     }
 }

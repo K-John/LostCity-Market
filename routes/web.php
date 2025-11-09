@@ -17,6 +17,7 @@ use App\Http\Controllers\UnpauseController;
 use App\Http\Controllers\UsernameController;
 use App\Http\Middleware\AuthorizeAdmin;
 use App\Http\Middleware\LocalOnly;
+use App\Http\Middleware\StoreBackgroundUrl;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +29,8 @@ Route::middleware('auth')->group(function () {
         ->names('listings');
 
     Route::get('listings/{listing}/delete', [ListingController::class, 'delete'])
-        ->name('listings.delete');
+        ->name('listings.delete')
+        ->middleware(StoreBackgroundUrl::class);
 
     Route::prefix('listing/{listing}')->group(function () {
         Route::get('sell', [ListingSaleController::class, 'create'])->name('listing.sale.create');
