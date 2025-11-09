@@ -8,7 +8,9 @@ class BanController
 {
     public function store(Username $username)
     {
-        $username->user()->update([
+        $user = $username->user;
+
+        $user->update([
             'is_banned' => true,
             'banned_at' => now(),
         ]);
@@ -18,7 +20,9 @@ class BanController
 
     public function destroy(Username $username)
     {
-        $username->user()->update([
+        $user = $username->user;
+
+        $user->update([
             'is_banned' => false,
             'banned_at' => null,
         ]);
