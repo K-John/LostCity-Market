@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use App\Data\Banner\BannerData;
 use App\Data\Item\ItemData;
 use App\Data\Listing\ListingData;
-use App\Pages\ItemsShowPage;
-use App\Models\Item;
 use App\Data\Listing\ListingFormData;
+use App\Http\Traits\HandlesListingType;
+use App\Models\Item;
+use App\Pages\ItemsShowPage;
+use App\Services\UsernameService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\PaginatedDataCollection;
-use App\Http\Traits\HandlesListingType;
-use App\Services\UsernameService;
-use Illuminate\Support\Facades\Auth;
 use Spatie\LaravelData\Support\Lazy\ClosureLazy;
 
 class ItemController
@@ -22,6 +22,10 @@ class ItemController
 
     public function show(Request $request, Item $item)
     {
+        if (! $item->is_active) {
+            abort(404);
+        }
+
         $listingType = $this->getListingType($request);
 
         $listings = $item->listings()
@@ -31,12 +35,12 @@ class ItemController
 
         return inertia('items/show/page', new ItemsShowPage(
             listings: ListingData::collect($listings, PaginatedDataCollection::class),
-            item: ClosureLazy::closure(fn() => ItemData::from($item)),
+            item: ClosureLazy::closure(fn () => ItemData::from($item)),
             listingType: $listingType,
-            listingForm: ClosureLazy::closure(fn() => $this->getListingFormData($item, $listingType)),
-            soldListings: ClosureLazy::closure(fn() => ListingData::collect($this->getSoldListings($item), DataCollection::class)),
-            usernames: ClosureLazy::closure(fn() => UsernameService::getAuthenticatedUsernames()),
-            banners: ClosureLazy::closure(fn() => BannerData::collect($item->banners()->active()->get(), DataCollection::class)),
+            listingForm: ClosureLazy::closure(fn () => $this->getListingFormData($item, $listingType)),
+            soldListings: ClosureLazy::closure(fn () => ListingData::collect($this->getSoldListings($item), DataCollection::class)),
+            usernames: ClosureLazy::closure(fn () => UsernameService::getAuthenticatedUsernames()),
+            banners: ClosureLazy::closure(fn () => BannerData::collect($item->banners()->active()->get(), DataCollection::class)),
         ));
     }
 
@@ -45,7 +49,7 @@ class ItemController
         return cache()->remember(
             "item_{$item->id}_sold_listings",
             now()->addMinutes(30),
-            fn() => $item->listings()
+            fn () => $item->listings()
                 ->whereNotNull('sold_at')
                 ->orderBy('sold_at', 'desc')
                 ->take(10)

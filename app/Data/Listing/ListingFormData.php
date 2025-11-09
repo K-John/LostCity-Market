@@ -7,6 +7,7 @@ use App\Enums\ListingType;
 use App\Models\Listing;
 use App\Models\Username;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Spatie\LaravelData\Data;
 
 class ListingFormData extends Data
@@ -36,7 +37,7 @@ class ListingFormData extends Data
                     if (Auth::user()->is_admin) {
                         return;
                     }
-                    
+
                     if (!in_array($value, Auth::user()->usernames->pluck('username')->toArray())) {
                         $fail('The selected username is invalid.');
                     }
@@ -50,7 +51,7 @@ class ListingFormData extends Data
                 }
             ],
             'notes' => ['nullable', 'string'],
-            'item_id' => ['required', 'integer', 'exists:items,id'],
+            'item_id' => ['required', 'integer', Rule::exists('items', 'id')->where('is_active', true)],
             'type' => [
                 'required',
                 'string',
