@@ -7,6 +7,7 @@ const links = [
         route: route("admin.users.index"),
         matchingRoutes: [
             "admin.users.index",
+            "admin.users.show",
         ],
     },
     {
