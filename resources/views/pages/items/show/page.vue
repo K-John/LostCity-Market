@@ -325,6 +325,8 @@ onUnmounted(() => {
                             :timestamp="listing.soldAt || ''"
                             :use-color="false"
                         />
+
+                        <NoteTableData :listing="listing" />
                     </template>
                 </ListingTableRow>
             </ListingTable>
