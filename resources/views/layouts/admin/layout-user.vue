@@ -19,6 +19,13 @@ const links = [
         route: route("admin.users.show", { id: props.selectedUser.id }),
         matchingRoutes: ["admin.users.show"],
     },
+    {
+        name: "Listings",
+        route: route("admin.users.listings.index", {
+            id: props.selectedUser.id,
+        }),
+        matchingRoutes: ["admin.users.listings.index"],
+    },
 ];
 
 const isCurrentRoute = (matchingRoutes: any) => {

@@ -51,6 +51,22 @@ cost: number;
 };
 }
 declare namespace Data.Listing {
+export type AdminListingData = {
+status: string;
+id: number;
+type: Enums.ListingType;
+price: number;
+quantity: number;
+notes: string | null;
+userId: number | null;
+username: string;
+item: Data.Item.ItemData | null;
+createdAt: string;
+updatedAt: string;
+soldAt: string | null;
+deletedAt: string | null;
+pausedAt: string | null;
+};
 export type ListingData = {
 canManage: boolean;
 id: number;
@@ -202,6 +218,15 @@ search: string | null;
 is_banned: boolean | null;
 is_admin: boolean | null;
 sort: string | null;
+};
+export type UserListingFiltersData = {
+item: string | null;
+sort: string | null;
+};
+export type UserListingsIndexPage = {
+selected_user: Data.User.AdminUserData;
+listings: {data:Array<Data.Listing.AdminListingData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
+filters: Pages.Admin.UserListingFiltersData;
 };
 export type UsersIndexPage = {
 users: {data:Array<Data.User.AdminUserData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};

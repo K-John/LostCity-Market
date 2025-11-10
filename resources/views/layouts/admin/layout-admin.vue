@@ -8,6 +8,7 @@ const links = [
         matchingRoutes: [
             "admin.users.index",
             "admin.users.show",
+            "admin.users.listings.index",
         ],
     },
     {
