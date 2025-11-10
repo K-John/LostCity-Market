@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\PromoteController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AccountController;
 use App\Http\Controllers\Auth\DiscordController;
@@ -65,6 +66,9 @@ Route::middleware('auth')->group(function () {
     Route::middleware(AuthorizeAdmin::class)->group(function () {
         Route::post('/ban/{username:username}', [BanController::class, 'store'])->name('ban.store');
         Route::delete('/ban/{username:username}', [BanController::class, 'destroy'])->name('ban.destroy');
+
+        Route::post('/promote/{user}', [PromoteController::class, 'store'])->name('promote.store');
+        Route::delete('/demote/{user}', [PromoteController::class, 'destroy'])->name('promote.destroy');
 
         Route::resource('admin/banners', BannerController::class)
             ->names('admin.banners');

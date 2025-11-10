@@ -92,6 +92,40 @@ const isCurrentRoute = (matchingRoutes: any) => {
                         <ArrowUturnLeftIcon class="size-5" />
                         Unban User
                     </button>
+
+                    <button
+                        v-if="!selectedUser.isAdmin"
+                        type="button"
+                        class="flex items-center gap-2 rounded-sm bg-stone-800 px-2 py-1 text-yellow-500 hover:bg-stone-900"
+                        @click="
+                            router.post(
+                                route('promote.store', {
+                                    user: selectedUser
+                                }),
+                                { preserveScroll: true },
+                            )
+                        "
+                    >
+                        <KeyIcon class="size-5" />
+                        Promote to Admin
+                    </button>
+
+                    <button
+                        v-if="selectedUser.isAdmin"
+                        type="button"
+                        class="flex items-center gap-2 rounded-sm bg-stone-800 px-2 py-1 text-yellow-500 hover:bg-stone-900"
+                        @click="
+                            router.delete(
+                                route('promote.destroy', {
+                                    user: selectedUser
+                                }),
+                                { preserveScroll: true },
+                            )
+                        "
+                    >
+                        <FaceFrownIcon class="size-5" />
+                        Demote to Noob
+                    </button>
                 </div>
             </div>
 
