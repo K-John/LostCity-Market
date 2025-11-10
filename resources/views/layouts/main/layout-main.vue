@@ -126,7 +126,7 @@ const links = computed(() => [
                 >
                     <Link
                         v-if="auth.is_admin"
-                        :href="route('admin.banners.index')"
+                        :href="route('admin.users.index')"
                         class="text-[#90c040] hover:underline"
                     >
                         Admin Panel
@@ -189,7 +189,7 @@ const links = computed(() => [
                 <Banner
                     v-for="banner of page.props.globalBanners"
                     :key="banner.id"
-                    v-bind="banner"
+                    :banner="banner"
                 ></Banner>
 
                 <div

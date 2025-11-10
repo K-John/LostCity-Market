@@ -21,6 +21,20 @@ display_scope: Enums.BannerDisplayScope | null;
 };
 }
 declare namespace Data.Item {
+export type AdminItemData = {
+id: number;
+name: string;
+slug: string;
+cost: number;
+isActive: boolean;
+};
+export type AdminItemFormData = {
+id: number;
+name: string;
+slug: string;
+cost: number;
+is_active: boolean;
+};
 export type ItemData = {
 isFavorite: boolean;
 id: number;
@@ -168,6 +182,19 @@ bannerForm: Data.Banner.BannerFormData;
 };
 export type BannersIndexPage = {
 banners: {data:Array<Data.Banner.BannerData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
+};
+export type ItemFiltersData = {
+search: string | null;
+is_active: boolean | null;
+sort: string | null;
+};
+export type ItemsEditPage = {
+item: Data.Item.AdminItemData;
+itemForm: Data.Item.AdminItemFormData;
+};
+export type ItemsIndexPage = {
+items: {data:Array<Data.Item.AdminItemData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
+filters: Pages.Admin.ItemFiltersData;
 };
 }
 declare namespace Pages.Auth {

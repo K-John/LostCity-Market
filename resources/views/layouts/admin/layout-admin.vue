@@ -11,6 +11,15 @@ const links = [
             "admin.banners.edit",
         ],
     },
+    {
+        name: "Items",
+        route: route("admin.items.index"),
+        matchingRoutes: [
+            "admin.items.index",
+            "admin.items.create",
+            "admin.items.edit",
+        ],
+    },
 ];
 
 const isCurrentRoute = (matchingRoutes: any) => {
