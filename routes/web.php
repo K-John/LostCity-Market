@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AccountController;
 use App\Http\Controllers\Auth\DiscordController;
 use App\Http\Controllers\Auth\LoginController;
@@ -67,6 +68,12 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('admin/banners', BannerController::class)
             ->names('admin.banners');
+
+        Route::resource('admin/users', UserController::class)
+            ->names('admin.users');
+
+        Route::resource('admin/items', App\Http\Controllers\Admin\ItemController::class)
+            ->names('admin.items');
     });
 });
 

@@ -3,6 +3,13 @@ import { Bars3Icon } from "@heroicons/vue/24/outline";
 
 const links = [
     {
+        name: "Users",
+        route: route("admin.users.index"),
+        matchingRoutes: [
+            "admin.users.index",
+        ],
+    },
+    {
         name: "Banners",
         route: route("admin.banners.index"),
         matchingRoutes: [

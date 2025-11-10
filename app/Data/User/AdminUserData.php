@@ -15,7 +15,23 @@ class AdminUserData extends Data
         public DateTime $createdAt,
         public bool $isAdmin,
         public bool $isBanned,
-        public ?DateTime $bannedAt
-    ) {
+        public ?DateTime $bannedAt,
+        /** @var string[] */
+        public array $usernames = []
+    ) {}
+
+    public static function fromModel(\App\Models\User $user): self
+    {
+        return new self(
+            id: $user->id,
+            name: $user->name,
+            email: $user->email,
+            discordId: $user->discord_id,
+            createdAt: $user->created_at,
+            isAdmin: $user->is_admin,
+            isBanned: $user->is_banned,
+            bannedAt: $user->banned_at,
+            usernames: $user->usernames->pluck('username')->toArray()
+        );
     }
 }
