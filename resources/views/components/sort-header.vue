@@ -4,6 +4,7 @@ import { computed } from "vue";
 
 interface Props {
     field: string;
+    currentSort?: string;
     defaultSort?: string;
 }
 
@@ -17,7 +18,9 @@ const currentQuery = computed(() => {
 });
 
 const activeSort = computed(() => {
-    return currentQuery.value.sort || props.defaultSort || "";
+    return (
+        props.currentSort || currentQuery.value.sort || props.defaultSort || ""
+    );
 });
 
 const sortOrder = computed((): "asc" | "desc" | null => {

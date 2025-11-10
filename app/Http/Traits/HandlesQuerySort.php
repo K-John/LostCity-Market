@@ -29,7 +29,7 @@ trait HandlesQuerySort
             if (in_array($sortField, $allowedSorts, true)) {
                 $builder->orderBy($sortField, $order);
             }
-            
+
         } elseif ($defaultSort) {
             $defaultSortField = ltrim($defaultSort, '-');
             $defaultSortOrder = $defaultSort[0] === '-' ? 'desc' : 'asc';

@@ -23,7 +23,7 @@ type RawPage = {
     isSeparator?: boolean;
 };
 
-type EllipsisItem = { label: '...'; isPage: false };
+type EllipsisItem = { label: "..."; isPage: false };
 type PageItem = (RawPage & { isPage: true }) | EllipsisItem;
 
 const visibleRange = 2; // Number of pages to show on either side of current page
@@ -90,9 +90,12 @@ const filteredPages = computed<PageItem[]>(() => {
 
     return result
         .map((num) => {
-            if (num === "...") return { label: "...", isPage: false } as EllipsisItem;
+            if (num === "...")
+                return { label: "...", isPage: false } as EllipsisItem;
             const page = pages.find((p) => Number(p.label) === Number(num));
-            return page ? ({ ...(page as RawPage), isPage: true } as PageItem) : null;
+            return page
+                ? ({ ...(page as RawPage), isPage: true } as PageItem)
+                : null;
         })
         .filter(isPageItem); // Narrow type to PageItem[]
 });
