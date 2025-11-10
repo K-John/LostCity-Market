@@ -9,6 +9,7 @@ const links = [
             "admin.users.index",
             "admin.users.show",
             "admin.users.listings.index",
+            "admin.users.logs.index",
         ],
     },
     {

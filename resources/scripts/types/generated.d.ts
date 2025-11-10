@@ -1,3 +1,21 @@
+declare namespace Data.ActivityLog {
+export type ActivityLogData = {
+id: number;
+logName: string | null;
+event: string | null;
+description: string | null;
+subjectType: string | null;
+subjectId: number | null;
+causerType: string | null;
+causerId: number | null;
+oldValue: Array<any>;
+newValue: Array<any>;
+createdAt: any;
+createdHuman: string | null;
+subject: Array<any> | null;
+causer: Array<any> | null;
+};
+}
 declare namespace Data.Banner {
 export type BannerData = {
 displayScope: Enums.BannerDisplayScope;
@@ -227,6 +245,11 @@ export type UserListingsIndexPage = {
 selected_user: Data.User.AdminUserData;
 listings: {data:Array<Data.Listing.AdminListingData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
 filters: Pages.Admin.UserListingFiltersData;
+};
+export type UserLogsIndexPage = {
+selected_user: Data.User.AdminUserData;
+logs: {data:Array<Data.ActivityLog.ActivityLogData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};
+filters: Pages.Admin.UserFiltersData;
 };
 export type UsersIndexPage = {
 users: {data:Array<Data.User.AdminUserData>;links:Array<{url:string | null;label:string;active:boolean;}>;meta:{current_page:number;first_page_url:string;from:number | null;last_page:number;last_page_url:string;next_page_url:string | null;path:string;per_page:number;prev_page_url:string | null;to:number | null;total:number;};};

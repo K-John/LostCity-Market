@@ -26,6 +26,11 @@ const links = [
         }),
         matchingRoutes: ["admin.users.listings.index"],
     },
+    {
+        name: "Logs",
+        route: route("admin.users.logs.index", { id: props.selectedUser.id }),
+        matchingRoutes: ["admin.users.logs.index"],
+    },
 ];
 
 const isCurrentRoute = (matchingRoutes: any) => {
