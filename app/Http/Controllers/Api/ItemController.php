@@ -23,7 +23,9 @@ class ItemController
 
         $items = Item::active()
             ->when($request->query('include_banners', false), function ($query) {
-                $query->with('banners');
+                $query->with(['banners' => function ($q) {
+                    $q->active();
+                }]);
             })
             ->where(function ($q) use ($search) {
                 $q->where('name', 'LIKE', '%' . $search . '%')
