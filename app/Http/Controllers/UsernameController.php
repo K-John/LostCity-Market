@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
+use App\Data\Listing\ListingData;
 use App\Models\Listing;
 use App\Models\Username;
-use Illuminate\Http\Request;
 use App\Pages\UsersIndexPage;
-use App\Data\Listing\ListingData;
 use App\Services\UsernameService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\LaravelData\PaginatedDataCollection;
 
 class UsernameController
 {
-    public function show(String $username, Request $request)
+    public function show(string $username, Request $request)
     {
         $listings = Listing::active()
-            ->with('item')
+            ->with('item', 'offers.items.item')
             ->where('username', $username)
             ->paginate(20);
 
@@ -35,7 +34,7 @@ class UsernameController
 
     public function update()
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return back()->error('You must be logged in to update your usernames');
         }
 
@@ -44,10 +43,12 @@ class UsernameController
         if ($user instanceof \App\Models\User) {
             try {
                 UsernameService::updateUsernamesForUser($user);
+
                 return back()->success('Usernames updated from Lost City');
 
             } catch (\Exception $e) {
                 dd($e);
+
                 return back()->error('An error occurred while updating your usernames');
             }
         } else {
