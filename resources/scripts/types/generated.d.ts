@@ -45,6 +45,7 @@ name: string;
 slug: string;
 cost: number;
 isActive: boolean;
+isListable: boolean;
 };
 export type AdminItemFormData = {
 id: number;
@@ -52,6 +53,7 @@ name: string;
 slug: string;
 cost: number;
 is_active: boolean;
+is_listable: boolean;
 };
 export type ItemData = {
 isFavorite: boolean;
@@ -73,12 +75,13 @@ export type AdminListingData = {
 status: string;
 id: number;
 type: Enums.ListingType;
-price: number;
+price: number | null;
 quantity: number;
 notes: string | null;
 userId: number | null;
 username: string;
 item: Data.Item.ItemData | null;
+offers: Array<Data.Listing.ListingOfferData>;
 createdAt: string;
 updatedAt: string;
 soldAt: string | null;
@@ -89,11 +92,12 @@ export type ListingData = {
 canManage: boolean;
 id: number;
 type: Enums.ListingType;
-price: number;
+price: number | null;
 quantity: number;
 notes: string | null;
 username: string;
 item: Data.Item.ItemData | null;
+offers: Array<Data.Listing.ListingOfferData>;
 updatedAt: string;
 soldAt: string | null;
 deletedAt: string | null;
@@ -103,17 +107,31 @@ userId: number | null;
 export type ListingFormData = {
 id: number | null;
 type: Enums.ListingType;
-price: string;
 quantity: number | null;
 notes: string | null;
 username: string;
 item_id: number | null;
+offers: Array<Data.Listing.ListingOfferData>;
 usernames: Array<any> | null;
+};
+export type ListingOfferData = {
+id: number | null;
+listingId: number | null;
+title: string;
+items: Array<Data.Listing.ListingOfferItemData>;
+};
+export type ListingOfferItemData = {
+id: number | null;
+listingOfferId: number | null;
+quantity: number;
+item_id: number | null;
+item: Data.Item.ItemFormData;
 };
 export type ListingSaleFormData = {
 id: number;
-price: string;
+price: string | null;
 quantity: number;
+offers: Array<Data.Listing.ListingOfferData>;
 redirect: string | null;
 };
 }
@@ -221,6 +239,7 @@ banners: {data:Array<Data.Banner.BannerData>;links:Array<{url:string | null;labe
 export type ItemFiltersData = {
 search: string | null;
 is_active: boolean | null;
+is_listable: boolean | null;
 sort: string | null;
 };
 export type ItemsEditPage = {

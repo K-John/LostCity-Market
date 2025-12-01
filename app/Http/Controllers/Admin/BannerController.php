@@ -36,8 +36,8 @@ class BannerController
         return inertia('admin/banners/create/page', new BannersCreatePage(
             bannerForm: new BannerFormData(
                 id: null,
-                message: '',
                 type: BannerType::Default,
+                message: '',
                 is_active: true,
                 start_at: null,
                 end_at: null,
@@ -72,8 +72,8 @@ class BannerController
         return inertia('admin/banners/create/page', new BannersCreatePage(
             bannerForm: new BannerFormData(
                 id: $banner->id,
-                message: $banner->message,
                 type: BannerType::from($banner->type),
+                message: $banner->message,
                 is_active: $banner->is_active,
                 start_at: $banner->start_at,
                 end_at: $banner->end_at,

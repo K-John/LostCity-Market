@@ -7,6 +7,7 @@ use App\Enums\ListingType;
 use DateTime;
 use Spatie\LaravelData\Attributes\Computed;
 use Spatie\LaravelData\Data;
+use Spatie\LaravelData\DataCollection;
 
 class AdminListingData extends Data
 {
@@ -16,12 +17,14 @@ class AdminListingData extends Data
     public function __construct(
         public int $id,
         public ListingType $type,
-        public int $price,
+        public ?int $price,
         public int $quantity,
         public ?string $notes,
         public ?int $userId,
         public string $username,
         public ?ItemData $item,
+        /** @var DataCollection<ListingOfferData> */
+        public DataCollection $offers,
         public DateTime $createdAt,
         public DateTime $updatedAt,
         public ?DateTime $soldAt,

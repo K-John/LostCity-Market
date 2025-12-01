@@ -13,17 +13,23 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Item extends Model
 {
-    use HasFactory, LogsActivity;
+    use LogsActivity;
 
     public $guarded = [];
 
     /**
-     * Scope to filter only recent and active listings.
+     * Scope to filter only active items.
      */
     public function scopeActive(Builder $query): Builder
     {
         return $query
             ->where('is_active', true);
+    }
+
+    public function scopeListable(Builder $query): Builder
+    {
+        return $query
+            ->where('is_listable', true);
     }
 
     public function listings(): HasMany

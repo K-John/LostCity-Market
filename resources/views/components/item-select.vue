@@ -6,6 +6,7 @@ import { ref, watch, defineEmits } from "vue";
 
 const props = defineProps<{
     includeBanners?: boolean;
+    includeUnlisted?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -25,7 +26,7 @@ const onSearch = (searchTerm: string, loading: (state: boolean) => void) => {
 const fetchItems = _.debounce(
     (search: string, loading: (state: boolean) => void) => {
         fetch(
-            `${route("items.index")}?q=${search}${props.includeBanners ? "&include_banners=true" : ""}`,
+            `${route("items.index")}?q=${search}${props.includeBanners ? "&include_banners=true" : ""}${props.includeUnlisted ? "&include_unlisted=true" : ""}`,
         )
             .then((response) => response.json())
             .then((data) => {

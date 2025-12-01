@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { CheckIcon } from "@heroicons/vue/24/outline";
+import { Tooltip } from "floating-vue";
+import { PlusIcon, XMarkIcon } from "@heroicons/vue/24/solid";
 
 const props = defineProps<Pages.ListingsSalePage>();
 
@@ -10,6 +12,64 @@ const form = useForm({
 const typeVerb = computed(() => {
     return props.listing.type === "buy" ? "bought" : "sold";
 });
+
+// Track last added offer index to auto-open its ItemSelect in the child
+const lastAutoOpenIndex = ref<number | null>(null);
+const addOffer = () => {
+    if (!Array.isArray(form.offers)) form.offers = [];
+    form.offers.push({
+        id: null,
+        listingId: null,
+        title: "For each item:",
+        items: [],
+    });
+    lastAutoOpenIndex.value = form.offers.length - 1;
+    nextTick(() => (lastAutoOpenIndex.value = null));
+};
+const removeOffer = (offerIndex: number) => {
+    form.offers.splice(offerIndex, 1);
+    if (form.offers.length === 0)
+        form.offers.push({
+            id: null,
+            listingId: null,
+            title: "For each item:",
+            items: [],
+        });
+};
+
+watch(
+    () => form.quantity,
+    (quantity) => {
+        if (quantity === null) return;
+
+        const quantityString = quantity.toString();
+
+        const trimmed = quantityString.trim().toLowerCase();
+
+        const match = trimmed.match(/^([0-9]*\.?[0-9]+)\s*([kmb])?$/);
+
+        if (!match) return null;
+
+        const value = parseFloat(match[1]);
+        const suffix = match[2];
+
+        let multiplier = 1;
+
+        switch (suffix) {
+            case "k":
+                multiplier = 1_000;
+                break;
+            case "m":
+                multiplier = 1_000_000;
+                break;
+            case "b":
+                multiplier = 1_000_000_000;
+                break;
+        }
+
+        form.quantity = value * multiplier;
+    },
+);
 
 const submit = (close: () => void) => {
     form.post(route("listing.sale.store", { listing: props.listing.id }), {
@@ -42,7 +102,7 @@ const submit = (close: () => void) => {
                 </div>
 
                 <p class="text-stone-200">
-                    Please confirm the quantity and price {{ typeVerb }}.
+                    Please confirm the quantity and offer {{ typeVerb }}.
                 </p>
 
                 <div v-if="listing.item" class="flex items-center gap-2">
@@ -91,7 +151,10 @@ const submit = (close: () => void) => {
                     </div>
                 </div>
 
-                <div class="flex flex-col gap-2">
+                <div
+                    v-if="form.offers === null || form.offers.length === 0"
+                    class="flex flex-col gap-2"
+                >
                     <label for="price" class="font-semibold text-stone-300"
                         >Price:</label
                     >
@@ -108,6 +171,66 @@ const submit = (close: () => void) => {
 
                         <p class="text-stone-300">GP ea.</p>
                     </div>
+                </div>
+
+                <div v-else class="flex flex-col gap-2">
+                    <span class="font-semibold text-stone-300"
+                        >What did you {{ listing.type }}
+                        {{ form.quantity > 1 ? "them" : "it" }} for?</span
+                    >
+
+                    <div class="flex w-fit flex-col gap-3">
+                        <div
+                            v-for="(offer, offerIndex) in form.offers"
+                            :key="offerIndex"
+                            class="flex flex-col gap-2"
+                        >
+                            <div
+                                class="flex w-fit flex-col gap-2 border-2 border-stone-700 bg-stone-950 p-2"
+                            >
+                                <ListingOffer
+                                    v-model="form.offers[offerIndex]"
+                                    :listing-type="listing.type"
+                                    :auto-open="
+                                        lastAutoOpenIndex === offerIndex
+                                    "
+                                />
+                            </div>
+
+                            <div v-if="form.offers.length > 1" class="w-fit">
+                                <Tooltip>
+                                    <BaseButton
+                                        variant="custom"
+                                        class="flex h-fit items-center gap-1 bg-stone-800 !px-3 text-sm text-red-500"
+                                        @click="removeOffer(offerIndex)"
+                                    >
+                                        <XMarkIcon class="size-4" />
+                                    </BaseButton>
+
+                                    <template #popper> Remove Offer</template>
+                                </Tooltip>
+                            </div>
+
+                            <div
+                                v-if="offerIndex !== form.offers.length - 1"
+                                class="flex items-center gap-2"
+                            >
+                                <div class="h-px grow bg-stone-700"></div>
+
+                                <div class="text-sm font-medium">OR</div>
+
+                                <div class="h-px grow bg-stone-700"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <BaseButton
+                        class="my-2 flex size-fit items-center gap-1 text-sm"
+                        @click="addOffer"
+                    >
+                        <PlusIcon class="size-4" />
+                        Add Another Offer
+                    </BaseButton>
                 </div>
 
                 <div class="flex items-center justify-end gap-4">

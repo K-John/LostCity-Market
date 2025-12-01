@@ -39,7 +39,7 @@ class UserListingController extends Controller
 
         $allowedSorts = ['id', 'item', 'updated_at', 'created_at'];
 
-        $listings = $this->applyFilterSort($request, Listing::where('user_id', $user->id)->with('item')->withTrashed(), $allowedSorts, defaultSort: '-updated_at')
+        $listings = $this->applyFilterSort($request, Listing::where('user_id', $user->id)->with('item', 'offers.items.item')->withTrashed(), $allowedSorts, defaultSort: '-updated_at')
             ->with('item');
 
         if (! is_null($filters['item']) && $filters['item'] !== '') {

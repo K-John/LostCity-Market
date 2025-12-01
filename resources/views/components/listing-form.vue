@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { useForm } from "@inertiajs/vue3";
+import { computed, ref, nextTick } from "vue";
+import { XMarkIcon, PlusIcon } from "@heroicons/vue/24/solid";
+import { Tooltip } from "floating-vue";
 
 const props = defineProps<{
     listingForm: Data.Listing.ListingFormData;
@@ -9,12 +12,12 @@ const props = defineProps<{
     footerOutside?: boolean;
 }>();
 
-const emit = defineEmits<{
-    (event: "success"): void;
-}>();
+const emit = defineEmits<{ (event: "success"): void }>();
 
 const form = useForm({
     ...props.listingForm,
+    // Ensure we always have at least one offer array
+    offers: props.listingForm.offers?.length ? props.listingForm.offers : [[]],
 });
 
 const listingTypes = computed((): Enums.ListingType[] => ["buy", "sell"]);
@@ -26,7 +29,66 @@ const setItem = (item: Data.Item.ItemData) => {
     selectedItemBanners.value = item.banners ?? [];
 };
 
+// Track last added offer index to auto-open its ItemSelect in the child
+const lastAutoOpenIndex = ref<number | null>(null);
+const addOffer = () => {
+    if (!Array.isArray(form.offers)) form.offers = [];
+    form.offers.push({
+        id: null,
+        listingId: null,
+        title: "For each item:",
+        items: [],
+    });
+    lastAutoOpenIndex.value = form.offers.length - 1;
+    nextTick(() => (lastAutoOpenIndex.value = null));
+};
+const removeOffer = (offerIndex: number) => {
+    form.offers.splice(offerIndex, 1);
+    if (form.offers.length === 0)
+        form.offers.push({
+            id: null,
+            listingId: null,
+            title: "For each item:",
+            items: [],
+        });
+};
+
+watch(
+    () => form.quantity,
+    (quantity) => {
+        if (quantity === null) return;
+
+        const quantityString = quantity.toString();
+
+        const trimmed = quantityString.trim().toLowerCase();
+
+        const match = trimmed.match(/^([0-9]*\.?[0-9]+)\s*([kmb])?$/);
+
+        if (!match) return null;
+
+        const value = parseFloat(match[1]);
+        const suffix = match[2];
+
+        let multiplier = 1;
+
+        switch (suffix) {
+            case "k":
+                multiplier = 1_000;
+                break;
+            case "m":
+                multiplier = 1_000_000;
+                break;
+            case "b":
+                multiplier = 1_000_000_000;
+                break;
+        }
+
+        form.quantity = value * multiplier;
+    },
+);
+
 const submit = () => {
+    // form.offers already in expected shape: Array<Array<{ item_id, quantity }>>
     form[props.submitMethod ?? "post"](props.submitRoute, {
         preserveScroll: true,
         onSuccess: () => {
@@ -106,19 +168,6 @@ const submit = () => {
                             placeholder="Qty"
                         />
                     </div>
-
-                    <div class="flex items-center gap-2">
-                        <p>for</p>
-
-                        <input
-                            v-model="form.price"
-                            type="number"
-                            class="w-28 border-slate-900 bg-stone-700 py-0 pl-1"
-                            placeholder="Price"
-                        />
-
-                        <p>GP ea.</p>
-                    </div>
                 </div>
 
                 <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
@@ -156,6 +205,67 @@ const submit = () => {
                             class="w-48 border-slate-900 bg-stone-700 py-0 pl-1"
                             placeholder="Optional, ex: w1 varrock"
                         />
+                    </div>
+                </div>
+
+                <!-- Offers Section -->
+                <div class="flex flex-col gap-2">
+                    <p>
+                        {{ form.type === "buy" ? `I'm offering` : "I expect" }}:
+                    </p>
+
+                    <div class="flex w-fit flex-col gap-3">
+                        <div
+                            v-for="(offer, offerIndex) in form.offers"
+                            :key="offerIndex"
+                            class="flex flex-col gap-2"
+                        >
+                            <div
+                                class="flex w-fit flex-col gap-2 border-2 border-stone-700 bg-stone-900 p-2"
+                            >
+                                <ListingOffer
+                                    v-model="form.offers[offerIndex]"
+                                    :listing-type="form.type"
+                                    :auto-open="
+                                        lastAutoOpenIndex === offerIndex
+                                    "
+                                />
+                            </div>
+
+                            <div v-if="form.offers.length > 1" class="w-fit">
+                                <Tooltip>
+                                    <BaseButton
+                                        variant="custom"
+                                        class="flex h-fit items-center gap-1 bg-stone-800 !px-3 text-sm text-red-500"
+                                        @click="removeOffer(offerIndex)"
+                                    >
+                                        <XMarkIcon class="size-4" />
+                                    </BaseButton>
+
+                                    <template #popper> Remove Offer </template>
+                                </Tooltip>
+                            </div>
+
+                            <div
+                                v-if="offerIndex !== form.offers.length - 1"
+                                class="flex items-center gap-2"
+                            >
+                                <div class="h-px grow bg-stone-700"></div>
+
+                                <div class="text-sm font-medium">OR</div>
+
+                                <div class="h-px grow bg-stone-700"></div>
+                            </div>
+                        </div>
+
+                        <BaseButton
+                            variant="secondary"
+                            class="my-2 flex size-fit items-center gap-1 text-sm"
+                            @click="addOffer"
+                        >
+                            <PlusIcon class="size-4" />
+                            Add Another Offer
+                        </BaseButton>
                     </div>
                 </div>
 

@@ -22,6 +22,9 @@ class ItemController
         }
 
         $items = Item::active()
+            ->when(! $request->query('include_unlisted', false), function ($query) {
+                $query->listable();
+            })
             ->when($request->query('include_banners', false), function ($query) {
                 $query->with(['banners' => function ($q) {
                     $q->active();

@@ -25,7 +25,7 @@ class ListingEvent implements ShouldBroadcast
             }
         }
 
-        $listing->load('item');
+        $listing->load('item', 'offers.items.item');
 
         $this->listing = collect(ListingData::from($listing)->toArray())
             ->except('canManage', 'item.isFavorite')

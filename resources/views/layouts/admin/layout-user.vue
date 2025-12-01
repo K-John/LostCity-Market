@@ -6,7 +6,7 @@ import {
     ArrowUturnLeftIcon,
     XMarkIcon,
     KeyIcon,
-    FaceFrownIcon
+    FaceFrownIcon,
 } from "@heroicons/vue/24/outline";
 
 const props = defineProps<{
@@ -112,7 +112,7 @@ const isCurrentRoute = (matchingRoutes: any) => {
                         @click="
                             router.post(
                                 route('promote.store', {
-                                    user: selectedUser
+                                    user: selectedUser,
                                 }),
                                 { preserveScroll: true },
                             )
@@ -129,7 +129,7 @@ const isCurrentRoute = (matchingRoutes: any) => {
                         @click="
                             router.delete(
                                 route('promote.destroy', {
-                                    user: selectedUser
+                                    user: selectedUser,
                                 }),
                                 { preserveScroll: true },
                             )

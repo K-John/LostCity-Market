@@ -14,7 +14,8 @@ class AdminItemFormData extends Data
         public string $name,
         public string $slug,
         public int $cost,
-        public bool $is_active
+        public bool $is_active,
+        public bool $is_listable
     ) {}
 
     public static function rules(): array

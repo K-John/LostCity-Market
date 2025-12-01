@@ -22,6 +22,7 @@ class HomeListingsService
             ->selectRaw('ROW_NUMBER() OVER (PARTITION BY username ORDER BY updated_at DESC) as row_num');
 
         return Listing::with('item')
+            ->with('offers.items.item')
             ->joinSub($subQuery, 'filtered_listings', function ($join) {
                 $join->on('listings.id', '=', 'filtered_listings.id');
             })
@@ -32,7 +33,7 @@ class HomeListingsService
 
     protected function buildFavoritesQuery(FavoritesListingType $filterType)
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return Listing::whereRaw('0 = 1'); // Return empty query
         }
 

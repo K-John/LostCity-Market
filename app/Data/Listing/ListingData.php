@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\LaravelData\Attributes\Computed;
 use Spatie\LaravelData\Attributes\Hidden;
 use Spatie\LaravelData\Data;
+use Spatie\LaravelData\DataCollection;
 
 class ListingData extends Data
 {
@@ -18,11 +19,13 @@ class ListingData extends Data
     public function __construct(
         public int $id,
         public ListingType $type,
-        public int $price,
+        public ?int $price,
         public int $quantity,
         public ?string $notes,
         public string $username,
         public ?ItemData $item,
+        /** @var DataCollection<ListingOfferData> */
+        public DataCollection $offers,
         public DateTime $updatedAt,
         public ?DateTime $soldAt,
         public ?DateTime $deletedAt,

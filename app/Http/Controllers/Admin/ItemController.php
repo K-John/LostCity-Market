@@ -25,6 +25,7 @@ class ItemController extends Controller
             'page' => 1,
             'search' => '',
             'is_active' => true,
+            'is_listable' => true,
             'sort' => '-id',
         ];
 
@@ -39,7 +40,7 @@ class ItemController extends Controller
         $request->query->set('sort', $filters['sort']);
         $request->query->set('page', $filters['page']);
 
-        $allowedSorts = ['id', 'name', 'is_active', 'created_at'];
+        $allowedSorts = ['id', 'name', 'is_active', 'is_listable', 'created_at'];
 
         $items = $this->applyFilterSort($request, Item::query(), $allowedSorts, defaultSort: '-id');
 
@@ -54,11 +55,16 @@ class ItemController extends Controller
             $items = $items->where('is_active', filter_var($filters['is_active'] ?? null, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE));
         }
 
+        if (! is_null($filters['is_listable'])) {
+            $items = $items->where('is_listable', filter_var($filters['is_listable'] ?? null, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE));
+        }
+
         return inertia('admin/items/index/page', new ItemsIndexPage(
             items: AdminItemData::collect($items->paginate(20)->withQueryString(), PaginatedDataCollection::class),
             filters: new ItemFiltersData(
                 search: $filters['search'] ?? null,
                 is_active: filter_var($filters['is_active'] ?? null, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE),
+                is_listable: filter_var($filters['is_listable'] ?? null, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE),
                 sort: $filters['sort'] ?? null,
             )
         ));
@@ -73,7 +79,8 @@ class ItemController extends Controller
                 name: $item->name,
                 slug: $item->slug,
                 cost: $item->cost,
-                is_active: $item->is_active
+                is_active: $item->is_active,
+                is_listable: $item->is_listable
             ),
         ))
             ->baseRoute('admin.items.index');

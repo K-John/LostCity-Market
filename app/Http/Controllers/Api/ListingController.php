@@ -20,7 +20,7 @@ class ListingController
 
         $listings = cache()->remember($cacheKey, 30, function () use ($listingType, $since) {
             return Listing::active()
-                ->with('item')
+                ->with('item', 'offers.items.item')
                 ->where('type', $listingType)
                 ->when($since, function ($query, $since) {
                     return $query->where('created_at', '>', $since);

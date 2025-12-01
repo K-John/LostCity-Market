@@ -9,6 +9,7 @@ class ItemFiltersData extends Data
     public function __construct(
         public ?string $search,
         public ?bool $is_active,
+        public ?bool $is_listable,
         public ?string $sort,
     ) {}
 }

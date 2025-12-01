@@ -2,12 +2,10 @@
 import {
     BuildingStorefrontIcon,
     XMarkIcon,
-    CheckIcon,
     PencilSquareIcon,
     CheckCircleIcon,
     XCircleIcon,
 } from "@heroicons/vue/24/outline";
-import { Tooltip } from "floating-vue";
 import { pickBy } from "lodash";
 
 const props = defineProps<Pages.Admin.ItemsIndexPage>();
@@ -15,6 +13,7 @@ const props = defineProps<Pages.Admin.ItemsIndexPage>();
 const form = ref({
     search: props.filters.search || "",
     is_active: props.filters.is_active || false,
+    is_listable: props.filters.is_listable || false,
 });
 
 const submitFilter = () => {
@@ -62,19 +61,35 @@ const submitFilter = () => {
                     />
 
                     <label
-                        for="is_admin"
+                        for="is_active"
                         class="flex items-center space-x-2 text-stone-300"
                     >
                         <input
-                            id="is_admin"
+                            id="is_active"
                             v-model="form.is_active"
-                            name="is_admin"
+                            name="is_active"
                             type="checkbox"
                             class="form-checkbox size-4 rounded border-stone-600 bg-stone-700 text-blue-600"
                             @change="submitFilter"
                         />
 
                         <span>Active</span>
+                    </label>
+
+                    <label
+                        for="is_listable"
+                        class="flex items-center space-x-2 text-stone-300"
+                    >
+                        <input
+                            id="is_listable"
+                            v-model="form.is_listable"
+                            name="is_listable"
+                            type="checkbox"
+                            class="form-checkbox size-4 rounded border-stone-600 bg-stone-700 text-blue-600"
+                            @change="submitFilter"
+                        />
+
+                        <span>Listable</span>
                     </label>
 
                     <BaseButton

@@ -8,9 +8,9 @@ import {
     ClockIcon,
     NoSymbolIcon,
 } from "@heroicons/vue/24/outline";
-import {Tooltip} from "floating-vue";
+import { Tooltip } from "floating-vue";
 import "floating-vue/dist/style.css";
-import {pickBy} from "lodash";
+import { pickBy } from "lodash";
 import LayoutUser from "@/views/layouts/admin/layout-user.vue";
 
 const props = defineProps<Pages.Admin.UserListingsIndexPage>();
@@ -21,7 +21,7 @@ const form = ref({
 
 const submitFilter = () => {
     router.get(
-        route("admin.users.listings.index", {user: props.selected_user}),
+        route("admin.users.listings.index", { user: props.selected_user }),
         pickBy(form.value),
         {
             preserveScroll: true,
@@ -40,7 +40,7 @@ const currentUrl = computed(() => {
 
 <template>
     <LayoutUser :selected-user="props.selected_user">
-        <Head :title="`${props.selected_user.name} Listings`"/>
+        <Head :title="`${props.selected_user.name} Listings`" />
 
         <ListingTable
             class="relative overflow-x-auto"
@@ -62,7 +62,12 @@ const currentUrl = computed(() => {
 
                     <BaseButton
                         variant="danger"
-                        :href="route('admin.users.listings.index', { user: props.selected_user, reset: 1 })"
+                        :href="
+                            route('admin.users.listings.index', {
+                                user: props.selected_user,
+                                reset: 1,
+                            })
+                        "
                         as="link"
                     >
                         <XMarkIcon class="size-4" />
@@ -78,7 +83,7 @@ const currentUrl = computed(() => {
                             field="id"
                             default-sort="-id"
                             class="py-2 font-semibold"
-                        >ID
+                            >ID
                         </SortHeader>
                     </th>
 
@@ -89,7 +94,7 @@ const currentUrl = computed(() => {
                             :current-sort="props.filters.sort || '-updated_at'"
                             field="item"
                             class="py-2 font-semibold"
-                        >Item
+                            >Item
                         </SortHeader>
                     </th>
 
@@ -102,7 +107,7 @@ const currentUrl = computed(() => {
                             :current-sort="props.filters.sort || '-updated_at'"
                             field="created_at"
                             class="py-2 font-semibold"
-                        >Created
+                            >Created
                         </SortHeader>
                     </th>
 
@@ -130,9 +135,7 @@ const currentUrl = computed(() => {
                             class="size-6 text-emerald-500"
                         />
 
-                        <template #popper>
-                            Sold
-                        </template>
+                        <template #popper> Sold </template>
                     </Tooltip>
 
                     <Tooltip>
@@ -141,9 +144,7 @@ const currentUrl = computed(() => {
                             class="size-6 text-red-500"
                         />
 
-                        <template #popper>
-                            Deleted
-                        </template>
+                        <template #popper> Deleted </template>
                     </Tooltip>
 
                     <Tooltip>
@@ -152,43 +153,39 @@ const currentUrl = computed(() => {
                             class="size-6 text-rose-500"
                         />
 
-                        <template #popper>
-                            Paused
-                        </template>
+                        <template #popper> Paused </template>
                     </Tooltip>
 
                     <Tooltip>
                         <ClockIcon
                             v-if="listing.status === 'Expiring'"
-                            class="size-6 text-amber-500"/>
+                            class="size-6 text-amber-500"
+                        />
 
-                        <template #popper>
-                            Expiring
-                        </template>
+                        <template #popper> Expiring </template>
                     </Tooltip>
 
                     <Tooltip>
                         <NoSymbolIcon
                             v-if="listing.status === 'Expired'"
-                            class="size-6 text-red-500"/>
+                            class="size-6 text-red-500"
+                        />
 
-                        <template #popper>
-                            Expired
-                        </template>
+                        <template #popper> Expired </template>
                     </Tooltip>
                 </td>
 
                 <ItemTableData :item="listing.item"></ItemTableData>
 
-                <PriceTableData :listing="listing"/>
+                <PriceTableData :listing="listing" />
 
-                <NoteTableData :listing="listing"/>
+                <NoteTableData :listing="listing" />
 
                 <td>
                     <Tooltip>
                         <span>{{
-                                new Date(listing.createdAt).toLocaleDateString()
-                            }}</span>
+                            new Date(listing.createdAt).toLocaleDateString()
+                        }}</span>
 
                         <template #popper>
                             {{ new Date(listing.createdAt).toLocaleString() }}
@@ -199,8 +196,8 @@ const currentUrl = computed(() => {
                 <td>
                     <Tooltip>
                         <span>{{
-                                new Date(listing.updatedAt).toLocaleDateString()
-                            }}</span>
+                            new Date(listing.updatedAt).toLocaleDateString()
+                        }}</span>
 
                         <template #popper>
                             {{ new Date(listing.updatedAt).toLocaleString() }}
@@ -212,7 +209,11 @@ const currentUrl = computed(() => {
                     <div class="flex flex-nowrap justify-end gap-1">
                         <DropdownMenu>
                             <DropdownItem
-                                v-if="(listing.status === 'Active' || listing.status === 'Expiring') && !listing.pausedAt"
+                                v-if="
+                                    (listing.status === 'Active' ||
+                                        listing.status === 'Expiring') &&
+                                    !listing.pausedAt
+                                "
                                 :icon="PauseIcon"
                                 text-color="text-rose-500"
                                 @click="
@@ -228,7 +229,10 @@ const currentUrl = computed(() => {
                             </DropdownItem>
 
                             <DropdownItem
-                                v-if="listing.status === 'Paused' && listing.pausedAt"
+                                v-if="
+                                    listing.status === 'Paused' &&
+                                    listing.pausedAt
+                                "
                                 :icon="PlayIcon"
                                 text-color="text-emerald-500"
                                 @click="
@@ -244,7 +248,10 @@ const currentUrl = computed(() => {
                             </DropdownItem>
 
                             <DropdownItem
-                                v-if="listing.status === 'Active' || listing.status === 'Expiring'"
+                                v-if="
+                                    listing.status === 'Active' ||
+                                    listing.status === 'Expiring'
+                                "
                                 :icon="CheckIcon"
                                 text-color="text-green-500"
                                 @click="
@@ -302,7 +309,7 @@ const currentUrl = computed(() => {
             </tr>
 
             <template v-if="props.listings.data.length" #footer>
-                <Pagination :data="props.listings"/>
+                <Pagination :data="props.listings" />
             </template>
         </ListingTable>
     </LayoutUser>

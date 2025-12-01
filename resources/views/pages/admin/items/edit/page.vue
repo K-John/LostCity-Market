@@ -118,6 +118,21 @@ const submit = (close: () => void) => {
                             class="size-4 border-slate-900 bg-stone-700 py-0 pl-1"
                         />
                     </div>
+
+                    <div>
+                        <label
+                            for="isListable"
+                            class="font-semibold text-stone-300"
+                        >
+                            Is Listable
+                        </label>
+
+                        <input
+                            v-model="form.is_listable"
+                            type="checkbox"
+                            class="size-4 border-slate-900 bg-stone-700 py-0 pl-1"
+                        />
+                    </div>
                 </div>
 
                 <div class="flex flex-wrap justify-end gap-3">
