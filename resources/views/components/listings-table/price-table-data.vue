@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Tooltip } from "floating-vue";
+import {Tooltip} from "floating-vue";
 import "floating-vue/dist/style.css";
 import PopoverMenu from "@/views/components/PopoverMenu.vue";
 
@@ -79,20 +79,31 @@ const showEach = computed(() => {
 
             <span class="hidden sm:inline">for</span>
 
-            <Tooltip
-                v-if="listing.price !== null"
-                class="flex items-center gap-1"
-            >
-                <p class="text-sm sm:text-[medium]">
-                    {{ formatGold(listing.price) }}GP
-                </p>
+            <div v-if="listing.price !== null" class="flex flex-items-center gap-1">
+                <Tooltip
+                    class="flex items-center border border-stone-700 bg-stone-800"
+                >
+                    <ItemImage
+                        :item="{ id: 1, name: 'Coins', cost: 1, slug: 'gold_pieces', game_id: 995 }"
+                        :quantity="listing.price"
+                        class="size-full object-cover"
+                    />
 
-                <p class="text-xs sm:text-[medium]">ea.</p>
+                    <p class="text-sm sm:text-[medium] px-1">
+                        {{ formatGold(listing.price) }}
+                    </p>
 
-                <template #popper>
-                    {{ listing.price.toLocaleString() }}
-                </template>
-            </Tooltip>
+                    <template #popper>
+                        {{ listing.price.toLocaleString() }}
+                    </template>
+                </Tooltip>
+
+                <span
+                    class="flex items-center ml-0.5 truncate text-sm text-stone-300"
+                >
+                    ea.
+                </span>
+            </div>
 
             <PopoverMenu v-if="listing.offers && listing.offers.length > 0">
                 <template #button>
