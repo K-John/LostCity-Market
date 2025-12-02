@@ -105,15 +105,20 @@ const showEach = computed(() => {
                 </span>
             </div>
 
-            <PopoverMenu v-if="listing.offers && listing.offers.length > 0">
+            <PopoverMenu v-if="listing.offers && listing.offers.length > 0" class="flex">
                 <template #button>
                     <Tooltip>
                         <div class="flex flex-col">
                             <div class="flex items-center gap-1">
-                                <div
+                                <template
                                     v-for="(offerItem, index) in previewItems"
                                     :key="index"
                                 >
+                                    <div
+                                        v-if="index > 0 && offerItem.offerIndex !== previewItems[index - 1].offerIndex"
+                                        class="mx-0.5 h-4 w-px bg-stone-700"
+                                    />
+
                                     <div
                                         v-if="previewItems.length > 1"
                                         class="relative size-8 shrink-0 border border-stone-700 bg-stone-800"
@@ -149,7 +154,7 @@ const showEach = computed(() => {
                                             }}
                                         </p>
                                     </div>
-                                </div>
+                                </template>
 
                                 <span
                                     v-if="remainingItemsCount > 0"
@@ -168,7 +173,7 @@ const showEach = computed(() => {
 
                             <span
                                 v-if="listing.offers.length > 1"
-                                class="mb-0.5 block truncate text-[10px] text-stone-400"
+                                class="block truncate text-[10px] leading-none text-stone-400"
                             >
                                 {{ listing.offers.length }} offers
                             </span>
@@ -188,9 +193,7 @@ const showEach = computed(() => {
                         <div
                             class="flex flex-col gap-2 border-2 border-stone-700 bg-stone-900 p-2"
                         >
-                            <p
-                                class="align-top text-sm leading-none text-stone-200"
-                            >
+                            <p class="align-top text-sm leading-none text-stone-200">
                                 {{ offer.title }}
                             </p>
 
