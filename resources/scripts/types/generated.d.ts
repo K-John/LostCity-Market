@@ -58,6 +58,7 @@ is_listable: boolean;
 export type ItemData = {
 isFavorite: boolean;
 id: number;
+game_id: number;
 name: string;
 slug: string;
 cost: number;
@@ -65,6 +66,7 @@ banners: Array<Data.Banner.BannerData> | null;
 };
 export type ItemFormData = {
 id: number;
+game_id: number;
 name: string;
 slug: string;
 cost: number;

@@ -94,9 +94,7 @@ const showEach = computed(() => {
                 </template>
             </Tooltip>
 
-            <PopoverMenu
-                v-if="listing.offers && listing.offers.length > 0"
-            >
+            <PopoverMenu v-if="listing.offers && listing.offers.length > 0">
                 <template #button>
                     <Tooltip>
                         <div class="flex flex-col">
@@ -104,20 +102,42 @@ const showEach = computed(() => {
                                 <div
                                     v-for="(offerItem, index) in previewItems"
                                     :key="index"
-                                    class="relative size-8 shrink-0 border border-stone-700 bg-stone-800"
                                 >
-                                    <img
-                                        v-if="offerItem.item"
-                                        class="size-full object-cover"
-                                        :src="`/img/items/${offerItem.item.slug}.webp`"
-                                        :alt="offerItem.item.name"
-                                    />
-
-                                    <span
-                                        class="absolute -left-1 -top-1 rounded bg-black/80 px-0.5 text-sm leading-none"
+                                    <div
+                                        v-if="previewItems.length > 1"
+                                        class="relative size-8 shrink-0 border border-stone-700 bg-stone-800"
                                     >
-                                        {{ formatGold(offerItem.quantity) }}
-                                    </span>
+                                        <ItemImage
+                                            :item="offerItem.item"
+                                            :quantity="offerItem.quantity"
+                                            class="size-full object-cover"
+                                        />
+
+                                        <span
+                                            class="absolute -left-1 -top-1 rounded bg-black/80 px-0.5 text-sm leading-none"
+                                        >
+                                            {{ formatGold(offerItem.quantity) }}
+                                        </span>
+                                    </div>
+
+                                    <div
+                                        v-else
+                                        class="flex items-center border border-stone-700 bg-stone-800"
+                                    >
+                                        <ItemImage
+                                            :item="offerItem.item"
+                                            :quantity="offerItem.quantity"
+                                            class="size-full object-cover"
+                                        />
+
+                                        <p class="text-sm sm:text-[medium] px-1">
+                                            {{
+                                                formatGold(
+                                                    offerItem.quantity,
+                                                )
+                                            }}
+                                        </p>
+                                    </div>
                                 </div>
 
                                 <span
@@ -143,7 +163,7 @@ const showEach = computed(() => {
                             </span>
                         </div>
 
-                        <template #popper> Click to view full offer </template>
+                        <template #popper> Click to view full offer</template>
                     </Tooltip>
                 </template>
 
@@ -184,11 +204,10 @@ const showEach = computed(() => {
                                                     })
                                                 "
                                             >
-                                                <img
-                                                    v-if="offerItem.item"
+                                                <ItemImage
+                                                    :item="offerItem.item"
+                                                    :quantity="offerItem.quantity"
                                                     class="size-full object-cover"
-                                                    :src="`/img/items/${offerItem.item.slug}.webp`"
-                                                    :alt="offerItem.item.name"
                                                 />
                                             </Link>
 

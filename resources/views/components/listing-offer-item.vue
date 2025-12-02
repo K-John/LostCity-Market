@@ -58,10 +58,9 @@ const onInput = (e: Event) => {
     <div
         class="flex items-center gap-2 border border-stone-700 bg-stone-800 px-2 py-1"
     >
-        <img
-            :src="`/img/items/${offerItem.item.slug}.webp`"
-            :alt="`${offerItem.item.name} Icon`"
-            class="min-h-[24px] min-w-[24px]"
+        <ItemImage
+            :item="offerItem.item"
+            :quantity="offerItem.quantity"
         />
 
         <input
