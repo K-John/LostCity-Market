@@ -52,7 +52,7 @@ const showEach = computed(() => {
 </script>
 
 <template>
-    <td class="px-1">
+    <td class="px-1 py-0.5">
         <div class="flex flex-col gap-x-1 sm:flex-row sm:items-center">
             <div class="flex gap-1 leading-none sm:items-center">
                 <span
