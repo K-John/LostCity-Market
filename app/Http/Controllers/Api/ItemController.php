@@ -46,6 +46,7 @@ class ItemController
         $listingType = $this->getListingType($request);
 
         $listings = $item->listings()
+            ->with('offers.items.item')
             ->active()
             ->where('type', $listingType)
             ->paginate(20);
