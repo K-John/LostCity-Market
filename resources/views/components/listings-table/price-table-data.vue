@@ -105,7 +105,7 @@ const showEach = computed(() => {
                 </span>
             </div>
 
-            <PopoverMenu v-if="listing.offers && listing.offers.length > 0" class="flex">
+            <PopoverMenu v-if="listing.offers && listing.offers.length > 0">
                 <template #button>
                     <Tooltip>
                         <div class="flex flex-col">
