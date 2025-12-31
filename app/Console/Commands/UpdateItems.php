@@ -43,6 +43,18 @@ class UpdateItems extends Command
                 $this->info("Updating item: {$newItem['slug']}");
                 DB::table('items')->upsert($newItem, ['game_id']);
             }
+
+            if ($newItem['description'] !== $oldItem['description']) {
+
+                $this->info("Updating item description: {$newItem['slug']}");
+                DB::table('items')->upsert($newItem, ['game_id']);
+            }
+
+            if ($newItem['name'] !== $oldItem['name']) {
+
+                $this->info("Updating item name: {$newItem['slug']}");
+                DB::table('items')->upsert($newItem, ['game_id']);
+            }
         }
     }
 
