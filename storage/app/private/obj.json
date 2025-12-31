@@ -1640,14 +1640,14 @@
   {
     "id": 546,
     "debugname": "blackrobetop",
-    "name": "Black robe",
+    "name": "Shade robe",
     "cost": 40,
     "desc": "I feel closer to the Gods when I am wearing this."
   },
   {
     "id": 548,
     "debugname": "blackrobebottom",
-    "name": "Black robe",
+    "name": "Shade robe",
     "cost": 30,
     "desc": "Keeps a monk's knees nice and warm."
   },
@@ -3679,49 +3679,49 @@
     "debugname": "bronze_spear_p",
     "name": "Bronze spear(p)",
     "cost": 26,
-    "desc": "A bronze tipped spear."
+    "desc": "A poisoned bronze tipped spear."
   },
   {
     "id": 1253,
     "debugname": "iron_spear_p",
     "name": "Iron spear(p)",
     "cost": 91,
-    "desc": "An iron tipped spear."
+    "desc": "A poisoned iron tipped spear."
   },
   {
     "id": 1255,
     "debugname": "steel_spear_p",
     "name": "Steel spear(p)",
     "cost": 325,
-    "desc": "A steel tipped spear."
+    "desc": "A poisoned steel tipped spear."
   },
   {
     "id": 1257,
     "debugname": "mithril_spear_p",
     "name": "Mithril spear(p)",
     "cost": 845,
-    "desc": "A mithril tipped spear."
+    "desc": "A poisoned mithril tipped spear."
   },
   {
     "id": 1259,
     "debugname": "adamant_spear_p",
     "name": "Adamant spear(p)",
     "cost": 2080,
-    "desc": "An adamantite tipped spear."
+    "desc": "A poisoned adamantite tipped spear."
   },
   {
     "id": 1261,
     "debugname": "rune_spear_p",
     "name": "Rune spear(p)",
     "cost": 20800,
-    "desc": "A rune tipped spear."
+    "desc": "A poisoned rune tipped spear."
   },
   {
     "id": 1263,
     "debugname": "dragon_spear_p",
     "name": "Dragon spear(p)",
     "cost": 62400,
-    "desc": "A dragon tipped spear."
+    "desc": "A poisoned dragon tipped spear."
   },
   {
     "id": 1265,
@@ -4385,13 +4385,6 @@
     "id": 1456,
     "debugname": "death_talisman",
     "name": "Death talisman",
-    "cost": 4,
-    "desc": "A mysterious power emanates from the talisman..."
-  },
-  {
-    "id": 1458,
-    "debugname": "law_talisman",
-    "name": "Law talisman",
     "cost": 4,
     "desc": "A mysterious power emanates from the talisman..."
   },
@@ -8174,5 +8167,481 @@
     "name": "Sickle mould",
     "cost": 10,
     "desc": "Used to make sickles"
+  },
+  {
+    "id": 2997,
+    "debugname": "piratehook",
+    "name": "Pirate's hook",
+    "cost": 89,
+    "desc": "You should see the shark..."
+  },
+  {
+    "id": 2998,
+    "debugname": "toadflax",
+    "name": "Toadflax",
+    "cost": 48,
+    "desc": "A useful herb."
+  },
+  {
+    "id": 3000,
+    "debugname": "snapdragon",
+    "name": "Snapdragon",
+    "cost": 59,
+    "desc": "A powerful herb."
+  },
+  {
+    "id": 3002,
+    "debugname": "toadflaxvial",
+    "name": "Unfinished potion",
+    "cost": 48,
+    "desc": "I need another ingredient to finish this Toadflax potion."
+  },
+  {
+    "id": 3004,
+    "debugname": "snapdragonvial",
+    "name": "Unfinished potion",
+    "cost": 59,
+    "desc": "I need another ingredient to finish this Snapdragon potion."
+  },
+  {
+    "id": 3006,
+    "debugname": "firework",
+    "name": "Firework",
+    "cost": 60,
+    "desc": "A firework potion, this'll look pretty!"
+  },
+  {
+    "id": 3008,
+    "debugname": "4dose1energy",
+    "name": "Energy potion(4)",
+    "cost": 146,
+    "desc": "4 doses of energy potion."
+  },
+  {
+    "id": 3010,
+    "debugname": "3dose1energy",
+    "name": "Energy potion(3)",
+    "cost": 110,
+    "desc": "3 doses of energy potion."
+  },
+  {
+    "id": 3012,
+    "debugname": "2dose1energy",
+    "name": "Energy potion(2)",
+    "cost": 72,
+    "desc": "2 doses of energy potion."
+  },
+  {
+    "id": 3014,
+    "debugname": "1dose1energy",
+    "name": "Energy potion(1)",
+    "cost": 36,
+    "desc": "1 dose of energy potion."
+  },
+  {
+    "id": 3016,
+    "debugname": "4dose2energy",
+    "name": "Super energy(4)",
+    "cost": 300,
+    "desc": "4 doses of super energy potion."
+  },
+  {
+    "id": 3018,
+    "debugname": "3dose2energy",
+    "name": "Super energy(3)",
+    "cost": 230,
+    "desc": "3 doses of super energy potion."
+  },
+  {
+    "id": 3020,
+    "debugname": "2dose2energy",
+    "name": "Super energy(2)",
+    "cost": 160,
+    "desc": "2 doses of super energy potion."
+  },
+  {
+    "id": 3022,
+    "debugname": "1dose2energy",
+    "name": "Super energy(1)",
+    "cost": 90,
+    "desc": "1 dose of super energy potion."
+  },
+  {
+    "id": 3024,
+    "debugname": "4dose2restore",
+    "name": "Super restore(4)",
+    "cost": 300,
+    "desc": "4 doses of super restore potion."
+  },
+  {
+    "id": 3026,
+    "debugname": "3dose2restore",
+    "name": "Super restore(3)",
+    "cost": 240,
+    "desc": "3 doses of super restore potion."
+  },
+  {
+    "id": 3028,
+    "debugname": "2dose2restore",
+    "name": "Super restore(2)",
+    "cost": 180,
+    "desc": "2 doses of super restore potion."
+  },
+  {
+    "id": 3030,
+    "debugname": "1dose2restore",
+    "name": "Super restore(1)",
+    "cost": 120,
+    "desc": "1 dose of super restore potion."
+  },
+  {
+    "id": 3032,
+    "debugname": "4dose1agility",
+    "name": "Agility potion(4)",
+    "cost": 200,
+    "desc": "4 doses of agility potion."
+  },
+  {
+    "id": 3034,
+    "debugname": "3dose1agility",
+    "name": "Agility potion(3)",
+    "cost": 150,
+    "desc": "3 doses of agility potion."
+  },
+  {
+    "id": 3036,
+    "debugname": "2dose1agility",
+    "name": "Agility potion(2)",
+    "cost": 50,
+    "desc": "2 doses of agility potion."
+  },
+  {
+    "id": 3038,
+    "debugname": "1dose1agility",
+    "name": "Agility potion(1)",
+    "cost": 50,
+    "desc": "1 dose of agility potion."
+  },
+  {
+    "id": 3040,
+    "debugname": "4dose1magic",
+    "name": "Magic potion(4)",
+    "cost": 300,
+    "desc": "4 doses of magic potion."
+  },
+  {
+    "id": 3042,
+    "debugname": "3dose1magic",
+    "name": "Magic potion(3)",
+    "cost": 250,
+    "desc": "3 doses of magic potion."
+  },
+  {
+    "id": 3044,
+    "debugname": "2dose1magic",
+    "name": "Magic potion(2)",
+    "cost": 200,
+    "desc": "2 doses of magic potion."
+  },
+  {
+    "id": 3046,
+    "debugname": "1dose1magic",
+    "name": "Magic potion(1)",
+    "cost": 150,
+    "desc": "1 dose of magic potion."
+  },
+  {
+    "id": 3049,
+    "debugname": "unidentified_toadflax",
+    "name": "Herb",
+    "cost": 1,
+    "desc": "I need a closer look to identify this."
+  },
+  {
+    "id": 3051,
+    "debugname": "unidentified_snapdragon",
+    "name": "Herb",
+    "cost": 1,
+    "desc": "I need a closer look to identify this."
+  },
+  {
+    "id": 3053,
+    "debugname": "lava_battlestaff",
+    "name": "Lava battlestaff",
+    "cost": 17000,
+    "desc": "It's a slightly magical stick."
+  },
+  {
+    "id": 3054,
+    "debugname": "mystic_lava_staff",
+    "name": "Mystic lava staff",
+    "cost": 45000,
+    "desc": "It's a slightly magical stick."
+  },
+  {
+    "id": 3063,
+    "debugname": "macro_cube_redtriangle",
+    "name": "Cube part",
+    "cost": 1,
+    "desc": null
+  },
+  {
+    "id": 3065,
+    "debugname": "macro_cube_bluetriangle",
+    "name": "Cube part",
+    "cost": 1,
+    "desc": null
+  },
+  {
+    "id": 3067,
+    "debugname": "macro_cube_yellowtriangle",
+    "name": "Cube part",
+    "cost": 1,
+    "desc": null
+  },
+  {
+    "id": 3069,
+    "debugname": "macro_cube_redsquare",
+    "name": "Cube part",
+    "cost": 1,
+    "desc": null
+  },
+  {
+    "id": 3071,
+    "debugname": "macro_cube_bluesquare",
+    "name": "Cube part",
+    "cost": 1,
+    "desc": null
+  },
+  {
+    "id": 3073,
+    "debugname": "macro_cube_yellowsquare",
+    "name": "Cube part",
+    "cost": 1,
+    "desc": null
+  },
+  {
+    "id": 3075,
+    "debugname": "macro_cube_redcircle",
+    "name": "Cube part",
+    "cost": 1,
+    "desc": null
+  },
+  {
+    "id": 3077,
+    "debugname": "macro_cube_bluecircle",
+    "name": "Cube part",
+    "cost": 1,
+    "desc": null
+  },
+  {
+    "id": 3079,
+    "debugname": "macro_cube_yellowcircle",
+    "name": "Cube part",
+    "cost": 1,
+    "desc": null
+  },
+  {
+    "id": 3081,
+    "debugname": "macro_cube_redstar",
+    "name": "Cube part",
+    "cost": 1,
+    "desc": null
+  },
+  {
+    "id": 3083,
+    "debugname": "macro_cube_bluestar",
+    "name": "Cube part",
+    "cost": 1,
+    "desc": null
+  },
+  {
+    "id": 3085,
+    "debugname": "macro_cube_yellowstar",
+    "name": "Cube part",
+    "cost": 1,
+    "desc": null
+  },
+  {
+    "id": 3087,
+    "debugname": "macro_cube_redhalfmoon",
+    "name": "Cube part",
+    "cost": 1,
+    "desc": null
+  },
+  {
+    "id": 3089,
+    "debugname": "macro_cube_bluehalfmoon",
+    "name": "Cube part",
+    "cost": 1,
+    "desc": null
+  },
+  {
+    "id": 3091,
+    "debugname": "macro_cube_yellowhalfmoon",
+    "name": "Cube part",
+    "cost": 1,
+    "desc": null
+  },
+  {
+    "id": 3093,
+    "debugname": "black_dart",
+    "name": "Black dart",
+    "cost": 18,
+    "desc": "A deadly throwing dart with a black tip."
+  },
+  {
+    "id": 3094,
+    "debugname": "black_dart_p",
+    "name": "Black dart(p)",
+    "cost": 18,
+    "desc": "A deadly poisoned dart with a black tip."
+  },
+  {
+    "id": 3095,
+    "debugname": "bronze_claws",
+    "name": "Bronze claws",
+    "cost": 15,
+    "desc": "A set of fighting claws."
+  },
+  {
+    "id": 3096,
+    "debugname": "iron_claws",
+    "name": "Iron claws",
+    "cost": 50,
+    "desc": "A set of fighting claws."
+  },
+  {
+    "id": 3097,
+    "debugname": "steel_claws",
+    "name": "Steel claws",
+    "cost": 175,
+    "desc": "A set of fighting claws."
+  },
+  {
+    "id": 3098,
+    "debugname": "black_claws",
+    "name": "Black claws",
+    "cost": 360,
+    "desc": "A set of fighting claws."
+  },
+  {
+    "id": 3099,
+    "debugname": "mithril_claws",
+    "name": "Mithril claws",
+    "cost": 475,
+    "desc": "A set of fighting claws."
+  },
+  {
+    "id": 3100,
+    "debugname": "adamant_claws",
+    "name": "Adamant claws",
+    "cost": 1200,
+    "desc": "A set of fighting claws."
+  },
+  {
+    "id": 3101,
+    "debugname": "rune_claws",
+    "name": "Rune claws",
+    "cost": 12000,
+    "desc": "A set of fighting claws."
+  },
+  {
+    "id": 3105,
+    "debugname": "death_climbingboots",
+    "name": "Climbing boots",
+    "cost": 12,
+    "desc": "Boots made for climbing."
+  },
+  {
+    "id": 3107,
+    "debugname": "death_spikedboots",
+    "name": "Spiked boots",
+    "cost": 30,
+    "desc": "Climbing boots with spikes."
+  },
+  {
+    "id": 3122,
+    "debugname": "granite_shield",
+    "name": "Granite shield",
+    "cost": 56000,
+    "desc": "A solid stone shield."
+  },
+  {
+    "id": 3123,
+    "debugname": "tbwt_beast_bones",
+    "name": "Shaikahan bones",
+    "cost": 1,
+    "desc": "Large glistening bones which glow with a pale yellow aura."
+  },
+  {
+    "id": 3125,
+    "debugname": "tbwt_jogre_bones",
+    "name": "Jogre bones",
+    "cost": 1,
+    "desc": "Fairly big bones which smell distinctly of Jogre."
+  },
+  {
+    "id": 3127,
+    "debugname": "tbwt_burnt_jogre_bones",
+    "name": "Burnt jogre bones",
+    "cost": 1,
+    "desc": "These blackened Jogre bones have been somehow burnt."
+  },
+  {
+    "id": 3128,
+    "debugname": "tbwt_burnt_jogre_bones_in_raw_karambwanji_paste",
+    "name": "Pasty jogre bones",
+    "cost": 1,
+    "desc": "Burnt Jogre bones smothered with raw Karambwanji Paste."
+  },
+  {
+    "id": 3129,
+    "debugname": "tbwt_burnt_jogre_bones_in_cooked_karambwanji_paste",
+    "name": "Pasty jogre bones",
+    "cost": 1,
+    "desc": "Burnt Jogre bones smothered with cooked Karambwanji paste."
+  },
+  {
+    "id": 3130,
+    "debugname": "tbwt_burnt_jogre_bones_marinated_in_karambwanji",
+    "name": "Marinated j' bones",
+    "cost": 1,
+    "desc": "Burnt Jogre bones marinated in a lovely Karambwanji sauce. Perfect."
+  },
+  {
+    "id": 3131,
+    "debugname": "tbwt_jogre_bones_in_raw_karambwanji_paste",
+    "name": "Pasty jogre bones",
+    "cost": 1,
+    "desc": "Jogre bones smothered with raw Karambwanji paste."
+  },
+  {
+    "id": 3132,
+    "debugname": "tbwt_jogre_bones_in_cooked_karambwanji_paste",
+    "name": "Pasty jogre bones",
+    "cost": 1,
+    "desc": "Jogre bones smothered with cooked Karambwanji paste."
+  },
+  {
+    "id": 3133,
+    "debugname": "tbwt_jogre_bones_marinated_in_karambwanji",
+    "name": "Marinated j' bones",
+    "cost": 1,
+    "desc": "Jogre Bones marinated in Karambwanji sauce. Not quite right."
+  },
+  {
+    "id": 3138,
+    "debugname": "cactus_potato",
+    "name": "Potato cactus",
+    "cost": 1,
+    "desc": "How am I supposed to eat that?!"
+  },
+  {
+    "id": 3140,
+    "debugname": "dragon_chainbody",
+    "name": "Dragon chainbody",
+    "cost": 250000,
+    "desc": "A series of connected metal rings."
   }
 ]
