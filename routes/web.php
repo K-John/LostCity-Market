@@ -111,6 +111,10 @@ Route::get('docs/adopt-legacy-accounts', function () {
     return inertia('docs/adopt/page');
 })->name('docs.adopt');
 
+Route::get('docs/api', function () {
+    return inertia('docs/api/page');
+})->name('docs.api');
+
 Route::get('news/discord-enforcement', function () {
     return inertia('news/discord-enforce/page');
 })->name('news.discord-enforce');
